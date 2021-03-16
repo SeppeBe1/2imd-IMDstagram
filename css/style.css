@@ -1,0 +1,12 @@
+body{
+  background-color: rgb(231, 231, 231);
+}
+
+.formLayout{
+  text-align: center;
+  padding: 2em;
+}
+
+.form-title{
+    margin-bottom: 0.5em;
+}
