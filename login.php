@@ -22,7 +22,7 @@
     <title>Login</title>
   </head>
   <body>
-    <div class="container-fluid ">
+    <div class="container-fluid">
       <div class="row ">
         <div class="col-sm ">
           <div class="formLayout">
@@ -42,12 +42,20 @@
               <div class="form-group">
                   <input type="submit" value="Log In" class="btn btn-primary">
               </div>
+              
           </form>
         </div>
       </div>
     </div>
+
+    <div class="col-sm formLayout border-line">
+      <div>Don't have an account yet?</div>
+      <button type="button" class="btn btn-info"><a href="#">Register</a></button>
+    </div>
+
   </div>
-    
+
+
 
 
     
