@@ -1,8 +1,7 @@
 <?php 
-include_once(__DIR__ . "/classes/User.php");
+//include_once(__DIR__ . "/classes/User.php");
 
-
-    if(!empty($_POST)){
+    /* if(!empty($_POST)){
         try {
             $user = new User();
             $user->setUsername();
@@ -15,7 +14,7 @@ include_once(__DIR__ . "/classes/User.php");
         }catch(\Throwable $thr) {
             $error = $thr->getMessage(); //error laten printen
         }
-    }
+    } */
 
 
 ?>
@@ -51,6 +50,11 @@ include_once(__DIR__ . "/classes/User.php");
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" id="password" name="password" placeholder="Password">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Confirm Password</label>
+                        <input type="password" id="password" name="confirmpassword" placeholder="Confirm password">
                     </div>
 
                     <div class="form-group">
