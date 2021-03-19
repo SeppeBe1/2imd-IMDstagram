@@ -14,7 +14,7 @@
             if($_POST['password'] === $_POST['confirmPassword'] ) { // if password equals the second input password set password
                 $user->setPassword($_POST['password']);
                 $user->setConfirmPassword($_POST['confirmPassword']);
-                $count = strlen($_POST['password']);
+                //$count = strlen($_POST['password']); checken of het meer dan ... karakters heeft
                 
                 // register user in database & start session & redirect to FEED 
                 $user->registerUser();

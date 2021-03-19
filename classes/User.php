@@ -83,12 +83,11 @@ class User {
         $statement = $conn->prepare("insert into users (username, email, password) values (:username, :email, :password)");
         $username = $this->getUsername();
         $email = $this->getEmail();
-        $password = password_hash($this->getConfirmPassword(), PASSWORD_DEFAULT, $options); // moet nog gehasht worden
-            
+        $password = password_hash($this->getConfirmPassword(), PASSWORD_DEFAULT, $options);
+        
         $statement->bindValue(":username", $username);
         $statement->bindValue(":email", $email);
         $statement->bindValue(":password", $password);
-
         $results = $statement->execute();
             
         return $results;

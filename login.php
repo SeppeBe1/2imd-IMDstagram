@@ -16,10 +16,10 @@
         $user->setPassword($password);
       
           if($user->canLogin($username, $password)){
-            $crypt = password_hash($password, PASSWORD_DEFAULT, $options);
-            setcookie("helloCookie", $crypt, time()+60*60*24*7);
+            $crypt = password_hash($password, PASSWORD_DEFAULT, $options); //hash password
+            setcookie("helloCookie", $crypt, time() + 60 * 60 * 24 * 7);//sets cookie for a week
             $_SESSION["user"] = $username;
-            header("location: index.html");
+            header("location: index.html"); // redirect moet nog aangepast w
           } else {
             $error = true;
           }
@@ -32,10 +32,8 @@
 ?> <!DOCTYPE html>
 <html lang="en">
   <head>
-  
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <title>Login</title>
