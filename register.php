@@ -1,25 +1,37 @@
 <?php 
-//include_once(__DIR__ . "/classes/User.php");
+ include_once(__DIR__ . "/classes/Db.php");
 
-    /* if(!empty($_POST)){
-        try {
+    if(!empty($_POST)){
+        try {        
+            include_once(__DIR__ . "/classes/User.php");
+            // creates a new user object
             $user = new User();
-            $user->setUsername();
-            $user->setEmail();
-            $user->setPassword();
 
-            $user->saveUser();
-            $regComplete = "Registration completed!"; //nog laten printen
-
-        }catch(\Throwable $thr) {
-            $error = $thr->getMessage(); //error laten printen
+            // set data for user
+            $user->setEmail($_POST['email']);
+            $user->setUsername($_POST['username']);
+            
+            if($_POST['password'] === $_POST['confirmPassword'] ) { // if password equals the second input password set password
+                $user->setPassword($_POST['password']);
+                $user->setConfirmPassword($_POST['confirmPassword']);
+                $count = strlen($_POST['password']);
+                
+                // register user in database & start session & redirect to FEED 
+                $user->registerUser();
+                session_start(); 
+                //setcookie("CHECK", "", time() + 60 * 60 * 24 * 7); //SET COOKIE moet nog aangepast worden later eens login is aangepast
+                $_SESSION['email'] = $user->getEmail();
+                //header("Location: login.php"); // moet nog aangepast worden van locatie (tenzij...)
+            }else{
+                $error = true;
+            }
         }
-    } */
+        catch(Throwable $error) {
+            $error = $error->getMessage();
+        }  
+    }
 
-
-?>
-
-<!DOCTYPE html>
+?> <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -35,40 +47,39 @@
                 <div class="col-sm ">
                 <div class="formLayout">
                     <form  action="" method="post">
-                    <h1 class="form-title">Register on Instagram</h1>
+                        <h1 class="form-title">Register on Instagram</h1>
 
-                    <div class="form-group">
-                        <label for="username">Email</label>
-                        <input type="text" id="email" name="email" placeholder="email@example.com">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" id="username" name="username" placeholder="Username">
-                    </div>
+                        <div class="form-group">
+                            <input type="text" id="email" name="email" placeholder="Email" class="form-control" aria-describedby="emailHelp">
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" id="username" name="username" placeholder="Username">
+                        </div>
 
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" name="password" placeholder="Password">
-                    </div>
+                        <div class="form-group">
+                            <input type="password" id="password" name="password" placeholder="Password">
+                        </div>
 
-                    <div class="form-group">
-                        <label for="password">Confirm Password</label>
-                        <input type="password" id="password" name="confirmpassword" placeholder="Confirm password">
-                    </div>
+                        <div class="form-group">
+                            <input type="password" id="password" name="confirmPassword" placeholder="Confirm password">
+                        </div>
 
-                    <div class="form-group">
-                        <input type="submit" value="Register" class="btn btn-info">
-                    </div>
-                    
-                </form>
+                        <div class="form-group">
+                            <input type="submit" value="Register" class="btn btn-primary">
+                        </div>
+
+                        <?php if(isset($error)):?>
+                            <div class="alert alert-danger">Sorry, your password or email is incorrect, please try again.</div>
+                        <?php endif; ?>
+                    </form>
                 </div>
             </div>
             </div>
 
             <div class="col-sm formLayout border-line">
                 <div>Already have an account on Instagram?</div>
-                <div><button type="button" class="btn btn-primary"><a href="#">Login</a></button></div>
+                <div><button type="button" class="btn btn-primary"><a href="">Login</a></button></div>
             </div>
 
         </div>

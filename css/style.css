@@ -1,18 +1,20 @@
-body{
-  background-color: rgb(231, 231, 231);
+body {
+    background-color: rgb(231, 231, 231);
 }
 
-.formLayout{
-  text-align: center;
-  padding: 2em;
+.formLayout {
+    text-align: center;
+    padding: 2em;
 }
 
-.form-title{
+.form-title {
     margin-bottom: 0.5em;
-
 }
 
+.border-line {
+    background-color: azure;
+}
 
-.border-line{
-  background-color: azure;
+.alert-danger {
+    margin-top: 1em;
 }

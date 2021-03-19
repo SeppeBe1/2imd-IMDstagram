@@ -1,15 +1,35 @@
 <?php
-    include_once(__DIR__ . "/connection.php");
+    include_once(__DIR__ . "/classes/User.php");
+    include_once(__DIR__ . "/classes/Db.php");
     session_start();
 
-    /* //test connection
-    $conn = \Database::getConn();
-    $statement = $conn->prepare("select * from users");
-    $statement->execute();
-    $users = $statement->fetchAll(PDO::FETCH_ASSOC);
-    var_dump($users); */
-?> 
-<!doctype html>
+    $options = [
+      'cost' => 15
+    ];
+
+    try {
+      if(!empty($_POST)){
+        $user = new User();
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $user->setUsername($username);
+        $user->setPassword($password);
+      
+          if($user->canLogin($username, $password)){
+            $crypt = password_hash($password, PASSWORD_DEFAULT, $options);
+            setcookie("helloCookie", $crypt, time()+60*60*24*7);
+            $_SESSION["user"] = $username;
+            header("location: index.html");
+          } else {
+            $error = true;
+          }
+      }
+    } catch(Throwable $error) {
+      $error = $error->getMessage();
+    }
+
+
+?> <!DOCTYPE html>
 <html lang="en">
   <head>
   
@@ -25,23 +45,26 @@
       <div class="row ">
         <div class="col-sm ">
           <div class="formLayout">
-            <form  action="" method="post">
-              <h1 class="form-title">Log in</h1>
+
+            <form method="post" action="" >
+              <h1 class="form-title">Instagram</h1>
               
               <div class="form-group">
-                  <label for="username">Username</label>
-                  <input type="text" id="username" name="username">
+                  <input type="text" id="username" name="username" placeholder="Username">
               </div>
 
               <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" id="password" name="password">
+                  <input type="password" id="password" name="password" placeholder="Password">
               </div>
 
               <div class="form-group">
                   <input type="submit" value="Log In" class="btn btn-primary">
               </div>
               
+              <?php if(isset($error)):?>
+                  <div class="alert alert-danger">Sorry, your password or email is incorrect, please try again.</div>
+              <?php endif; ?>
+
           </form>
         </div>
       </div>
@@ -49,7 +72,7 @@
 
     <div class="col-sm formLayout border-line">
       <div>Don't have an account yet?</div>
-      <button type="button" class="btn btn-info"><a href="#">Register</a></button>
+      <button type="button" class="btn btn-primary"><a href="register.php">Register</a></button>
     </div>
 
   </div>
