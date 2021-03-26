@@ -15,6 +15,42 @@ body {
     background-color: azure;
 }
 
-.alert-danger {
+.alert-danger{
     margin-top: 1em;
+}
+
+/*POST PAGE*/
+
+/* NAV */
+.logo-insta img{
+    width: 120px;
+}
+.navigation-feed{
+    padding: 20px;
+    background-color: white;
+}
+
+.post-square{
+    border: 1px solid #DBDBDB;
+    background-color: white;
+    width: 100%;
+}
+
+
+.profile{
+    border-radius: 50%;
+    height: 1.5em;
+}
+
+i{
+
+    padding-right: 10px;
+}
+
+/* STORIES ROW */
+
+.stories-img{
+    border-radius: 50%;
+    width: 60px;
+
 }
