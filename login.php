@@ -40,41 +40,38 @@
   </head>
   <body>
     <div class="container-fluid">
-      <div class="row ">
-        <div class="col-sm ">
-          <div class="formLayout">
-
-            <form method="post" action="" >
-              <h1 class="form-title">Instagram</h1>
-              
-              <div class="form-group">
-                  <input type="text" id="username" name="username" placeholder="Username">
+          <div class="login-form">
+            <form action="" method="post">
+              <div class="formLayout">
+                <h1 class="text-center form-title">Instagram</h2>       
+                  <div class="form-group">
+                      <label for="username">Username</label>
+                      <input type="text" class="form-control" id="username" name="username"  required="required">
+                  </div>
+                  <div class="form-group">
+                      <label for="password">Password</label>
+                      <input type="password" class="form-control" id="password" name="password"  required="required">
+                  </div>
+                  <div class="form-group btn-submit">
+                      <input  type="submit" value="Login"class="btn btn-primary"></button>
+                  </div>
+                  <div class="text-center">
+                      <label class="checkbox-inline"><input type="checkbox"> Remember me</label>
+                  </div> 
               </div>
 
-              <div class="form-group">
-                  <input type="password" id="password" name="password" placeholder="Password">
-              </div>
-
-              <div class="form-group">
-                  <input type="submit" value="Log In" class="btn btn-primary">
-              </div>
-              
               <?php if(isset($error)):?>
                   <div class="alert alert-danger">Sorry, your password or email is incorrect, please try again.</div>
               <?php endif; ?>
-
-          </form>
+              
+            </form>
+        <div>
+          <p class="text-center">Don't have an account yet?</p>
+          <a href="register.php"><button class="btn btn-register btn-primary">Register</button></a>
         </div>
       </div>
-    </div>
-
-    <div class="col-sm formLayout border-line">
-      <div>Don't have an account yet?</div>
-      <button type="button" class="btn btn-primary"><a href="register.php">Register</a></button>
-    </div>
-
-  </div>
-    
+              
+ 
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
