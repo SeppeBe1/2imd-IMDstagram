@@ -42,47 +42,49 @@
     <title>Register</title>
 </head>
 <body>
-        <div class="container-fluid ">
-            <div class="row ">
-                <div class="col-sm ">
+    <div class="container-fluid ">
+        <div class="register-form">
+            <form action="" method="post">
                 <div class="formLayout">
-                    <form  action="" method="post">
-                        <h1 class="form-title">Register on Instagram</h1>
-
-                        <div class="form-group">
-                            <input type="text" id="email" name="email" placeholder="Email" class="form-control" aria-describedby="emailHelp">
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="text" id="username" name="username" placeholder="Username">
-                        </div>
-
-                        <div class="form-group">
-                            <input type="password" id="password" name="password" placeholder="Password">
-                        </div>
-
-                        <div class="form-group">
-                            <input type="password" id="password" name="confirmPassword" placeholder="Confirm password">
-                        </div>
-
-                        <div class="form-group">
-                            <input type="submit" value="Register" class="btn btn-primary">
-                        </div>
-
-                        <?php if(isset($error)):?>
-                            <div class="alert alert-danger">Sorry, your password or email is incorrect, please try again.</div>
-                        <?php endif; ?>
-                    </form>
+                <h2 class="text-center">Register on Instagram</h2> 
+    
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email" name="email" required="required">
                 </div>
-            </div>
-            </div>
+                
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="username"  required="required">
+                </div>
 
-            <div class="col-sm formLayout border-line">
-                <div>Already have an account on Instagram?</div>
-                <div><button type="button" class="btn btn-primary"><a href="">Login</a></button></div>
-            </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password"  required="required">
+                </div>
 
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirm-password" name="confirmPassword"  required="required">
+                </div>
+
+                <div class="form-group btn-submit">
+                    <input  type="submit" value="Registreer"class="btn btn-primary"></button>
+                </div>
+                
+                </div>
+
+                <?php if(isset($error)):?>
+                    <div class="alert alert-danger">Sorry, your password or email is incorrect, please try again.</div>
+                <?php endif; ?>       
+            </form>
+
+            <div>
+                <p class="text-center">Already have an account on Instagram?</p>
+                <a href="login.php"><button class="btn btn-register btn-primary">Login</button></a>
+            </div>
         </div>
+    </div>  
     
 </body>
 </html>
