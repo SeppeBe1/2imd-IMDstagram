@@ -3,10 +3,6 @@
     include_once(__DIR__ . "/classes/Db.php");
     session_start();
 
-    $options = [
-      'cost' => 15
-    ];
-
     try {
       if(!empty($_POST)){
         $user = new User();
@@ -16,10 +12,7 @@
         $user->setPassword($password);
       
           if($user->canLogin($username, $password)){
-            $crypt = password_hash($password, PASSWORD_DEFAULT, $options); //hash password
-            setcookie("helloCookie", $crypt, time() + 60 * 60 * 24 * 7);//sets cookie for a week
-            $_SESSION["user"] = $username;
-            header("location: index.html"); // redirect moet nog aangepast w
+            return true;
           } else {
             $error = true;
           }
@@ -27,7 +20,6 @@
     } catch(Throwable $error) {
       $error = $error->getMessage();
     }
-
 
 ?> <!DOCTYPE html>
 <html lang="en">

@@ -6,22 +6,20 @@
             include_once(__DIR__ . "/classes/User.php");
             // creates a new user object
             $user = new User();
-
+            var_dump($user);
             // set data for user
             $user->setEmail($_POST['email']);
             $user->setUsername($_POST['username']);
             
-            if($_POST['password'] === $_POST['confirmPassword'] ) { // if password equals the second input password set password
+            // if password equals the second input password set password
+            if($_POST['password'] === $_POST['confirmPassword'] ) { 
                 $user->setPassword($_POST['password']);
                 $user->setConfirmPassword($_POST['confirmPassword']);
                 //$count = strlen($_POST['password']); checken of het meer dan ... karakters heeft
                 
                 // register user in database & start session & redirect to FEED 
                 $user->registerUser();
-                session_start(); 
-                //setcookie("CHECK", "", time() + 60 * 60 * 24 * 7); //SET COOKIE moet nog aangepast worden later eens login is aangepast
-                $_SESSION['email'] = $user->getEmail();
-                //header("Location: login.php"); // moet nog aangepast worden van locatie (tenzij...)
+                
             }else{
                 $error = true;
             }
