@@ -69,7 +69,7 @@
                 </div>
 
                 <div class="form-group btn-submit">
-                    <input  type="submit" value="Registreer"class="btn btn-primary"></button>
+                    <input  type="submit" value="Register"class="btn btn-primary"></button>
                 </div>
                 
                 </div>
