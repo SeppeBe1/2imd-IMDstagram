@@ -12,42 +12,60 @@ body {
     background-color: azure;
 }
 
-.alert-danger{
+.alert-danger {
     margin-top: 1em;
 }
 
-/*POST PAGE*/
+.login-form {
+    width: 340px;
+      margin: 50px auto;
+  }
 
-/* NAV */
-.logo-insta img{
-    width: 120px;
+.login-form form {
+    margin-bottom: 20px;
+    background: #f7f7f7;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+    padding: 30px;
 }
-.navigation-feed{
-    padding: 20px;
-    background-color: white;
+.login-form h2 {
+    margin: 0 0 15px;
+}
+.form-control, .btn {
+    min-height: 38px;
+    border-radius: 2px;
+}
+.btn {
+    width: 100%; 
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+
 }
 
-.post-square{
-    border: 1px solid #DBDBDB;
-    background-color: white;
-    width: 100%;
+.btn-submit{
+text-align: center;
+margin: 0.5em 0em 0.5em 0em; 
 }
 
 
-.profile{
-    border-radius: 50%;
-    height: 1.5em;
+.btn a{
+color: white;
+text-decoration: none;
 }
 
-i{
 
-    padding-right: 10px;
+.register-form {
+    width: 340px;
+    margin: 50px auto;
+}
+.register-form form {
+    margin-bottom: 20px;
+    background: #f7f7f7;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+    padding: 30px;
 }
 
-/* STORIES ROW */
-
-.stories-img{
-    border-radius: 50%;
-    width: 60px;
-
+.register-form h2 {
+    margin: 0 0 15px;
 }
