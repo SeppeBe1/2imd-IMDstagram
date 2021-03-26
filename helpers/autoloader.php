@@ -1,7 +1,7 @@
 <?php
 
-function autoloader($class) { // KLOPT NIET. check laatste video van goodbytes
-include 'classes/' . $class . '.php';
+function autoloader($class) { 
+    include 'classes/' . $class . '.php';
 }
 
 ?>

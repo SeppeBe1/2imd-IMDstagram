@@ -102,9 +102,6 @@ class User {
             return false;
         }
         
-        
-        
-        
         return $results;
     }
 }
