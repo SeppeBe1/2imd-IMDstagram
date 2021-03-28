@@ -72,7 +72,7 @@ class User {
         if(password_verify($this->getPassword(), $hash)) {
             setcookie("loggedIn", "dareal" . $this->getUsername() . "748", time() + 60 * 60 * 24 * 7); //sets cookie for a week
             $_SESSION["user"] = $this->getUsername();
-            header("location: index.html"); // redirect moet nog aangepast w
+            header("location: feed.php"); // redirect moet nog aangepast w
             return true;
         }else{
             return false;
