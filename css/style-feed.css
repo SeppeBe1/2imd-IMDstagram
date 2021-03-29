@@ -1,10 +1,134 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 .feed-header{
     /* height: 100px; */
-    background-color: #EAC9C1;
+    background-color: #F1C8BF
 }
 
 .plant-logo{
     width: 40%;
+}
+body{
+    font-family: 'Montserrat', sans-serif;
+    color: #5A5A5A;
+}
+
+/* NAVIGATION */
+.navigation{
+    /* background-color: green; */
+    padding: 15px;
+    padding-left: 25px;
+    box-shadow: 10px 5px 5px rgb(219, 219, 219);
+    overflow: hidden;
+    display: block;
+}
+
+
+.profile-pic{
+    border-radius: 50%;
+    width: 40px;
+    margin-right: 10px;
+}
+
+.icon-nav{
+    margin-right: 10px;
+    width: 30px;
+
+}
+
+.search-input{
+    border-radius: 30px;
+
+}
+.search-input:focus{
+    box-shadow: 0 0 7px #E9C9C1;
+    border: 1px solid #E9C9C1;
+    color: #5A5A5A;
+}
+.search-input::placeholder{
+    color: gainsboro;
+}
+
+.post-feed{
+    background-color: palegreen;
+    height: 500px;
+    padding: 50px;
+}
+
+.row-first{
+    margin-bottom: 10px;
+}
+
+.profile-name{
+    color: #5A5A5A;
+    font-weight: bold;
+}
+.profile-location{
+    color: #5A5A5A;
+}
+.profile-name:hover, .profile-location:hover{
+    text-decoration: underline;
+    color: #5A5A5A;
+}
+
+
+/* IMAGES FEED */
+.post-post{
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 10px 5px 15px #c2c2c2;
+    margin-bottom: 30px;
+}
+main{
+    padding: 20px;
+}
+
+.unfollow-button{
+    border: 1px solid #CD847B;
+    border-radius: 20px;
+    padding: 10px;
+    color: #5A5A5A;
+    font-weight: 500; 
+}
+.unfollow-button:hover{
+    text-decoration: underline;
+    color: #5A5A5A;
+}
+.follow-button{
+    background-color: #CD847B;
+    border-radius: 20px;
+    padding: 10px;
+    color: white;
+    font-weight: 500; 
+}
+.follow-button:hover{
+    text-decoration: underline;
+    color: white;
+}
+
+.profile-pic-feed{
+    width: 60px;
+    border-radius: 50px;
+}
+
+.picture-feed{
+
+    width: 100%;
+}
+
+.icon-feed{
+    width: 30px;
+}
+
+.row-third{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.number-feed{
+    font-weight: bold;
+}
+
+.timing-feed{
+    font-size: 0.8em;
 }
