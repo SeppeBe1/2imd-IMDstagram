@@ -6,7 +6,6 @@
             include_once(__DIR__ . "/classes/User.php");
             // creates a new user object
             $user = new User();
-            var_dump($user);
             // set data for user
             $user->setEmail($_POST['email']);
             $user->setUsername($_POST['username']);
@@ -18,8 +17,11 @@
                 //$count = strlen($_POST['password']); checken of het meer dan ... karakters heeft
                 
                 // register user in database & start session & redirect to FEED 
-                $user->registerUser();
-                
+               if($user->userExists() == true) {
+                    $user->registerUser();
+               }else{
+                    $errorExists = true;
+               }                
             }else{
                 $error = true;
             }
@@ -72,8 +74,12 @@
                 
                 </div>
 
+                <?php if(isset($errorExists)):?>
+                    <div class="alert alert-danger">Sorry, the email or username is already taken, please try again.</div>
+                <?php endif; ?> <!-- aparte errors voor email en username -->
+
                 <?php if(isset($error)):?>
-                    <div class="alert alert-danger">Sorry, your password or email is incorrect, please try again.</div>
+                    <div class="alert alert-danger">Sorry, your password is incorrect, please try again.</div>
                 <?php endif; ?>       
             </form>
 

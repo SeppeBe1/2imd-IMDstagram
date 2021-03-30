@@ -72,7 +72,25 @@ class User {
         if(password_verify($this->getPassword(), $hash)) {
             setcookie("loggedIn", "dareal" . $this->getUsername() . "748", time() + 60 * 60 * 24 * 7); //sets cookie for a week
             $_SESSION["user"] = $this->getUsername();
-            header("location: feed.php"); // redirect moet nog aangepast w
+            header("location: feed.php");
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function userExists() { //2 APARTE Functies schrijven
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare("select email, username from users where email = :email or username = :username");
+        $email = $this->getEmail();
+        $username = $this->getUsername();
+        $statement->bindValue(":email", $email);
+        $statement->bindValue(":username", $username);
+        $results = $statement->execute();
+        $exists = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if($exists["email"] == null || $exists["username"] == null){
             return true;
         }else{
             return false;
@@ -95,9 +113,9 @@ class User {
             $results = $statement->execute();
 
             session_start(); 
-            setcookie("loggedIn", $this->getUsername(), time() + 60 * 60 * 24 * 7); //SET COOKIE moet nog aangepast worden later eens login is aangepast
+            setcookie("loggedIn", $this->getUsername(), time() + 60 * 60 * 24 * 7);
             $_SESSION['email'] = $this->getUsername();
-            header("Location: login.php"); // moet nog aangepast worden van locatie (tenzij...)
+            header("Location: feed.php"); 
         }else {
             return false;
         }
