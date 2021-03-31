@@ -79,18 +79,32 @@ class User {
         }
     }
 
-    public function userExists() { //2 APARTE Functies schrijven
+    public function emailExists() {
         $conn = Db::getInstance();
 
-        $statement = $conn->prepare("select email, username from users where email = :email or username = :username");
+        $statement = $conn->prepare("select email from users where email = :email");
         $email = $this->getEmail();
-        $username = $this->getUsername();
         $statement->bindValue(":email", $email);
-        $statement->bindValue(":username", $username);
         $results = $statement->execute();
         $exists = $statement->fetch(PDO::FETCH_ASSOC);
 
-        if($exists["email"] == null || $exists["username"] == null){
+        if($exists["email"] == null){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function usernameExists() {
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare("select username from users where username = :username");
+        $username = $this->getUsername();
+        $statement->bindValue(":username", $username);
+        $results = $statement->execute();
+        $usernameExists = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if($usernameExists["username"] == null){
             return true;
         }else{
             return false;
@@ -119,7 +133,6 @@ class User {
         }else {
             return false;
         }
-        
         return $results;
     }
 }

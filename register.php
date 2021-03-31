@@ -9,21 +9,27 @@
             // set data for user
             $user->setEmail($_POST['email']);
             $user->setUsername($_POST['username']);
-            
-            // if password equals the second input password set password
-            if($_POST['password'] === $_POST['confirmPassword'] ) { 
-                $user->setPassword($_POST['password']);
-                $user->setConfirmPassword($_POST['confirmPassword']);
-                //$count = strlen($_POST['password']); checken of het meer dan ... karakters heeft
-                
-                // register user in database & start session & redirect to FEED 
-               if($user->userExists() == true) {
-                    $user->registerUser();
-               }else{
-                    $errorExists = true;
-               }                
+            $lengthPassword = strlen($_POST['password']);
+
+            // if password equals the second input password = set password
+            if($_POST['password'] === $_POST['confirmPassword']) {
+                if($lengthPassword >= 6) {
+                    $user->setPassword($_POST['password']);
+                    $user->setConfirmPassword($_POST['confirmPassword']);
+                    
+                    /* checks if email or username is taken + register user */
+                    if($user->emailExists() == false) {
+                            $errorEmailExists = true;
+                    }elseif($user->usernameExists() == false){
+                            $errorUsernameExists = true;
+                    }else{
+                            $user->registerUser(); 
+                    }
+                }else{
+                    $errorLengthPw = true;
+                }       
             }else{
-                $error = true;
+                $errorPassword = true;
             }
         }
         catch(Throwable $error) {
@@ -74,13 +80,23 @@
                 
                 </div>
 
-                <?php if(isset($errorExists)):?>
-                    <div class="alert alert-danger">Sorry, the email or username is already taken, please try again.</div>
-                <?php endif; ?> <!-- aparte errors voor email en username -->
+                <!--errors-->
+                <?php if(isset($errorEmailExists)):?>
+                    <div class="alert alert-danger">Sorry, the email you've entered is already taken.</div>
+                <?php endif; ?>
 
-                <?php if(isset($error)):?>
+                <?php if(isset($errorUsernameExists)):?>
+                    <div class="alert alert-danger">The username you've entered is already taken.</div>
+                <?php endif; ?>
+
+                <?php if(isset($errorLengthPw)):?>
+                    <div class="alert alert-danger">Password must contain more than 5 characters.</div>
+                <?php endif; ?>
+
+                <?php if(isset($errorPassword)):?>
                     <div class="alert alert-danger">Sorry, your password is incorrect, please try again.</div>
-                <?php endif; ?>       
+                <?php endif; ?>
+
             </form>
 
             <div>
