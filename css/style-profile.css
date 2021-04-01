@@ -1,0 +1,168 @@
+body {
+    background-color: white;
+}
+/* NAVIGATION */
+.menu-links a {
+    text-decoration: none;
+}
+
+.navigation{
+    background-color: white;
+    
+}
+
+/* PROFILE */
+.container-profile{
+    width: 100%;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 10px 5px 15px #c2c2c2;
+    background-color: white;
+   
+}
+
+.profile-pic-profile{
+    width: 100%;
+    border-radius: 100%;
+    
+}
+.profile-about{
+   margin-top: 5px;
+}
+.bio {
+    margin-top: -3.5em;
+    font-size: 0.6em;
+}
+
+.edit-btn{
+    
+    background-color: #CD847B;
+    border-radius: 40px;
+    padding: 10px;
+    color: white;
+    font-weight: 500;
+    font-size: 10px;
+    margin-bottom: 20px;
+}
+
+.container-follow{
+    margin-top: 20px;
+}
+
+.follow {
+    margin:auto;
+    font-size: 0.8em
+}
+
+.btn-follow{
+    background-color: #CD847B;
+    border-radius: 40px;
+    padding: 10px;
+    color: white;
+    font-weight: 500;
+    font-size: 12px;
+    margin-top: 12px;
+}
+
+.number-profile{
+    font-weight: bold;
+}
+
+/* GALLERY */
+.container-gallery{
+    width: 100%;
+    padding: 25px;
+}
+
+.container-gallery .row>*{
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.img-thumbnail{
+    text-decoration: none;
+    border: none;
+    width: 100%;
+    padding-left: 4px;
+    border-radius: 0;
+}
+
+@media(min-width: 650px){
+    .container-profile{
+        width: 80%;
+        padding: 25px;
+    }
+
+    .navigation .row{
+        width:100%;
+        justify-content: center;
+        margin: auto
+    }
+
+    .feed-header img{
+        width: 40%;
+    }
+
+    .container-follow{
+        width:75%;
+        margin-top: 20px;
+        float: right;
+    }
+
+    .bio {
+        margin-top: -2.5em;
+        font-size: 0.8em;
+    }
+
+    .profile-name{
+        font-size: 1.2em;
+    }
+
+    .edit-btn{
+        font-size: 12px;
+       
+    }
+
+    .profile-pic-profile{
+        width: 90%;
+    }
+
+    .container-gallery{
+        width: 80%;
+    }
+}
+
+@media(min-width: 1200px){
+    .container-profile{
+        width: 60%;
+       
+    }
+
+    .navigation .row{
+        width:80%;
+        justify-content: center;
+        margin: auto
+    }
+
+    .feed-header img{
+        width: 15%;
+    }
+
+    .container-gallery{
+        width: 60%;
+    }
+
+    .row>*{
+        padding-right: 1;
+        padding-left: 1;
+    }
+
+    .img-thumbnail{
+        text-decoration: none;
+        border: none;
+        width: 100%;
+        padding: 10px;
+        border-radius: 0;
+    
+    }
+}
