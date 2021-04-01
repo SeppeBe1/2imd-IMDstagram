@@ -31,10 +31,10 @@
         <div class="container-fluid navigation">
             <div class="row">
                 <div class="col-7">
-                    <a href="#">
+                    <a href="profile.php">
                         <img src="./img/profile-pic.png" class="profile-pic">
                     </a>
-                    <a href="#">
+                    <a href="feed.php">
                         <img src="./img/icons/home.svg" class="icon-nav">
                     </a>
                     <a href="#">
