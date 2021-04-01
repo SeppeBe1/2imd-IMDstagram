@@ -10,3 +10,60 @@ body {
     background-color: white;
     
 }
+
+/* PROFILE */
+.container-profile{
+    width: 100%;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 10px 5px 15px #c2c2c2;
+    background-color: white;
+   
+}
+
+.profile-pic-profile{
+    width: 100%;
+    border-radius: 100%;
+    
+}
+.profile-about{
+   margin-top: 5px;
+}
+.bio {
+    margin-top: -3.5em;
+    font-size: 0.6em;
+}
+
+.edit-btn{
+    
+    background-color: #CD847B;
+    border-radius: 40px;
+    padding: 10px;
+    color: white;
+    font-weight: 500;
+    font-size: 10px;
+    margin-bottom: 20px;
+}
+
+.container-follow{
+    margin-top: 20px;
+}
+
+.follow {
+    margin:auto;
+    font-size: 0.8em
+}
+
+.btn-follow{
+    background-color: #CD847B;
+    border-radius: 40px;
+    padding: 10px;
+    color: white;
+    font-weight: 500;
+    font-size: 12px;
+    margin-top: 12px;
+}
+
+.number-profile{
+    font-weight: bold;
+}

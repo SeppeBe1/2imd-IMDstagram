@@ -53,3 +53,52 @@
             </div>
         </div>
     </header>
+
+    <main>
+        <div class="container container-profile clearfix">
+            <!-- EDIT BTN WEG WANNEER IK KIJK NAAR ANDER PROFIEL -->
+            <div class="row flex-row-reverse">
+                <div class="col-5 col-lg-4">
+                    <a href="#" class="btn edit-btn">Edit profile</a>
+                </div>
+            </div>
+
+            <div class="row row-first">
+                <div class="col-3">
+                    <a href="#">
+                        <img src="https://images.pexels.com/photos/3101767/pexels-photo-3101767.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" class="profile-pic-profile">
+                    </a>
+                </div>
+
+                <div class="col-9 profile-about">
+                    <p><span class="profile-name">James Ensor</span></p><br>
+                    <p class="bio">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor soluta fugit nulla sint in natus inventore debitis exercitationem enim! Sapiente tenetur accusamus doloribus consequatur ut sequi voluptatibus nostrum consectetur deleniti.</p>
+                </div>
+            </div>
+            
+
+            <div class="container-follow ">
+                <div class="row ">
+                    
+                    <div class="col-4  text-center follow">
+                        <h7 class="number-profile mb-0 d-block">10</h7><small class="text-muted">
+                            Posts</small>
+                    </div>
+
+                    <div class="col-4  text-center follow">
+                        <h7 class="number-profile mb-0 d-block">182</h7><small class="text-muted">Followers</small>
+                    </div>
+
+                    <div class="col-4  text-center follow">
+                        <h7 class="number-profile mb-0 d-block">320</h7><small class="text-muted">Following</small>
+                    </div>
+                </div>
+                
+                <div class="row ">
+                    <div class="col-sm-12  text-center follow">
+                        <!-- FOLLOW BTN WEG WANNEER IK KIJK NAAR EIGEN PROFIEL -->
+                        <a href="#" class="float-left btn btn-follow ">Follow</a>
+                    </div>
+                </div>
+            </div>     
+        </div>
