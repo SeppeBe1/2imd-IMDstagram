@@ -59,7 +59,7 @@
             <!-- EDIT BTN WEG WANNEER IK KIJK NAAR ANDER PROFIEL -->
             <div class="row flex-row-reverse">
                 <div class="col-5 col-lg-4">
-                    <a href="#" class="btn edit-btn">Edit profile</a>
+                    <a href="profileEdit.php" class="btn edit-btn">Edit profile</a>
                 </div>
             </div>
 
