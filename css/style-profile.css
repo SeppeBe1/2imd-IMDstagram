@@ -67,3 +67,22 @@ body {
 .number-profile{
     font-weight: bold;
 }
+
+/* GALLERY */
+.container-gallery{
+    width: 100%;
+    padding: 25px;
+}
+
+.container-gallery .row>*{
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.img-thumbnail{
+    text-decoration: none;
+    border: none;
+    width: 100%;
+    padding-left: 4px;
+    border-radius: 0;
+}
