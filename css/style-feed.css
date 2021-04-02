@@ -132,3 +132,23 @@ main{
 .timing-feed{
     font-size: 0.8em;
 }
+
+@media(min-width: 750px){
+    .post-post{
+        /* background-color: hotpink ; */
+        max-width: 700px;
+    }
+    .navigation .row{
+        width:700px;
+        justify-content: center;
+        margin: auto;
+    }
+    
+}
+
+@media(min-width: 1000px){
+
+    .plant-logo{
+        width: 20%;
+    }
+}
