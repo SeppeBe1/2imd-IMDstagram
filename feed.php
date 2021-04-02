@@ -64,11 +64,11 @@
                                 <img src="./img/image-12.png" class="profile-pic-feed">
                             </a>
                         </div>
-                        <div class="col-6">
+                        <div class="col-7">
                             <a href="#"><span class="profile-name">James Ensor</span></a><br>
                             <a href="#" class="profile-location">Cacun, Mexico</a>
                         </div>
-                        <div class="col-2">
+                        <div class="col-1">
                             <a href="#" class="unfollow-button">Unfollow</a>
                         </div>
                     </div>
@@ -127,11 +127,11 @@
                                 <img src="./img/image-7.png" class="profile-pic-feed">
                             </a>
                         </div>
-                        <div class="col-6">
+                        <div class="col-7">
                             <a href="#"><span class="profile-name">Claude Monet</span></a><br>
                             <a href="#" class="profile-location">Lyon, France</a>
                         </div>
-                        <div class="col-2">
+                        <div class="col-1">
                             <a href="#" class="follow-button">Follow</a>
                         </div>
                     </div>
@@ -168,6 +168,1088 @@
                     <div class="row row-fifth">
                         <div class="col-12">
                             <p class="reaction"><span class="profile-name">Eduard Manet </span>Proin ullamcorper feugiat eros, sit amet accumsan tellus cursus vitae. Etiam feugiat tristique ante, luctus feugiat risus ultrices ut!</p>
+                        </div>  
+                    </div>
+
+                    <div class="row row-sixth">
+                        <div class="col-12">
+                            <p class="timing-feed">14 minutes ago</p>
+                        </div>
+                    </div>
+
+
+            </div>
+
+         <!-- HIER KOMEN VOLGENDE POSTS, ALLEMAAL DEZELFDE -->
+            <div class="container post-post">
+                    <div class="row row-first">
+                        <div class="col-2">
+                            <a href="#">
+                                <img src="./img/image-12.png" class="profile-pic-feed">
+                            </a>
+                        </div>
+                        <div class="col-7">
+                            <a href="#"><span class="profile-name">James Ensor</span></a><br>
+                            <a href="#" class="profile-location">Cacun, Mexico</a>
+                        </div>
+                        <div class="col-1">
+                            <a href="#" class="unfollow-button">Unfollow</a>
+                        </div>
+                    </div>
+
+                    <div class="row row-second">
+                        <div class="col-12">
+                            <img src="./img/unsplash1.jpg" class="picture-feed">
+                        </div>
+                        
+                    </div>
+
+                    <div class="row row-third">
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/heart.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">91</p>
+                        </div>
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/chat.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">1</p>
+                        </div>
+
+                    </div>
+
+                    <div class="row row-fourth">
+                        <div class="col-12">
+                            <p><span class="profile-name">James Ensor</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis justo sit amet augue tristique viverra quis sit amet tortor. Nulla justo elit, dictum vitae magna consectetur, ultricies ultricies velit. Pellentesque leo odio, egestas sit amet elementum et, consectetur ut ipsum. #kitchen #home #lovemyplants</p>
+                        </div>
+                    </div>
+
+                    <div class="row row-fifth">
+                        <div class="col-12">
+                            <p class="reaction"><span class="profile-name">Paul Delvaux </span>Proin ullamcorper feugiat eros, sit amet accumsan tellus cursus vitae. Etiam feugiat tristique ante, luctus feugiat risus ultrices ut!</p>
+                        </div>  
+                    </div>
+
+                    <div class="row row-sixth">
+                        <div class="col-12">
+                            <p class="timing-feed">14 minutes ago</p>
+                        </div>
+                    </div>
+
+
+            </div>
+
+            <div class="container post-post">
+                    <div class="row row-first">
+                        <div class="col-2">
+                            <a href="#">
+                                <img src="./img/image-12.png" class="profile-pic-feed">
+                            </a>
+                        </div>
+                        <div class="col-7">
+                            <a href="#"><span class="profile-name">James Ensor</span></a><br>
+                            <a href="#" class="profile-location">Cacun, Mexico</a>
+                        </div>
+                        <div class="col-1">
+                            <a href="#" class="unfollow-button">Unfollow</a>
+                        </div>
+                    </div>
+
+                    <div class="row row-second">
+                        <div class="col-12">
+                            <img src="./img/unsplash1.jpg" class="picture-feed">
+                        </div>
+                        
+                    </div>
+
+                    <div class="row row-third">
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/heart.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">91</p>
+                        </div>
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/chat.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">1</p>
+                        </div>
+
+                    </div>
+
+                    <div class="row row-fourth">
+                        <div class="col-12">
+                            <p><span class="profile-name">James Ensor</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis justo sit amet augue tristique viverra quis sit amet tortor. Nulla justo elit, dictum vitae magna consectetur, ultricies ultricies velit. Pellentesque leo odio, egestas sit amet elementum et, consectetur ut ipsum. #kitchen #home #lovemyplants</p>
+                        </div>
+                    </div>
+
+                    <div class="row row-fifth">
+                        <div class="col-12">
+                            <p class="reaction"><span class="profile-name">Paul Delvaux </span>Proin ullamcorper feugiat eros, sit amet accumsan tellus cursus vitae. Etiam feugiat tristique ante, luctus feugiat risus ultrices ut!</p>
+                        </div>  
+                    </div>
+
+                    <div class="row row-sixth">
+                        <div class="col-12">
+                            <p class="timing-feed">14 minutes ago</p>
+                        </div>
+                    </div>
+
+
+            </div>
+
+            <div class="container post-post">
+                    <div class="row row-first">
+                        <div class="col-2">
+                            <a href="#">
+                                <img src="./img/image-12.png" class="profile-pic-feed">
+                            </a>
+                        </div>
+                        <div class="col-7">
+                            <a href="#"><span class="profile-name">James Ensor</span></a><br>
+                            <a href="#" class="profile-location">Cacun, Mexico</a>
+                        </div>
+                        <div class="col-1">
+                            <a href="#" class="unfollow-button">Unfollow</a>
+                        </div>
+                    </div>
+
+                    <div class="row row-second">
+                        <div class="col-12">
+                            <img src="./img/unsplash1.jpg" class="picture-feed">
+                        </div>
+                        
+                    </div>
+
+                    <div class="row row-third">
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/heart.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">91</p>
+                        </div>
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/chat.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">1</p>
+                        </div>
+
+                    </div>
+
+                    <div class="row row-fourth">
+                        <div class="col-12">
+                            <p><span class="profile-name">James Ensor</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis justo sit amet augue tristique viverra quis sit amet tortor. Nulla justo elit, dictum vitae magna consectetur, ultricies ultricies velit. Pellentesque leo odio, egestas sit amet elementum et, consectetur ut ipsum. #kitchen #home #lovemyplants</p>
+                        </div>
+                    </div>
+
+                    <div class="row row-fifth">
+                        <div class="col-12">
+                            <p class="reaction"><span class="profile-name">Paul Delvaux </span>Proin ullamcorper feugiat eros, sit amet accumsan tellus cursus vitae. Etiam feugiat tristique ante, luctus feugiat risus ultrices ut!</p>
+                        </div>  
+                    </div>
+
+                    <div class="row row-sixth">
+                        <div class="col-12">
+                            <p class="timing-feed">14 minutes ago</p>
+                        </div>
+                    </div>
+
+
+            </div>
+
+            <div class="container post-post">
+                    <div class="row row-first">
+                        <div class="col-2">
+                            <a href="#">
+                                <img src="./img/image-12.png" class="profile-pic-feed">
+                            </a>
+                        </div>
+                        <div class="col-7">
+                            <a href="#"><span class="profile-name">James Ensor</span></a><br>
+                            <a href="#" class="profile-location">Cacun, Mexico</a>
+                        </div>
+                        <div class="col-1">
+                            <a href="#" class="unfollow-button">Unfollow</a>
+                        </div>
+                    </div>
+
+                    <div class="row row-second">
+                        <div class="col-12">
+                            <img src="./img/unsplash1.jpg" class="picture-feed">
+                        </div>
+                        
+                    </div>
+
+                    <div class="row row-third">
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/heart.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">91</p>
+                        </div>
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/chat.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">1</p>
+                        </div>
+
+                    </div>
+
+                    <div class="row row-fourth">
+                        <div class="col-12">
+                            <p><span class="profile-name">James Ensor</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis justo sit amet augue tristique viverra quis sit amet tortor. Nulla justo elit, dictum vitae magna consectetur, ultricies ultricies velit. Pellentesque leo odio, egestas sit amet elementum et, consectetur ut ipsum. #kitchen #home #lovemyplants</p>
+                        </div>
+                    </div>
+
+                    <div class="row row-fifth">
+                        <div class="col-12">
+                            <p class="reaction"><span class="profile-name">Paul Delvaux </span>Proin ullamcorper feugiat eros, sit amet accumsan tellus cursus vitae. Etiam feugiat tristique ante, luctus feugiat risus ultrices ut!</p>
+                        </div>  
+                    </div>
+
+                    <div class="row row-sixth">
+                        <div class="col-12">
+                            <p class="timing-feed">14 minutes ago</p>
+                        </div>
+                    </div>
+
+
+            </div>
+
+            <div class="container post-post">
+                    <div class="row row-first">
+                        <div class="col-2">
+                            <a href="#">
+                                <img src="./img/image-12.png" class="profile-pic-feed">
+                            </a>
+                        </div>
+                        <div class="col-7">
+                            <a href="#"><span class="profile-name">James Ensor</span></a><br>
+                            <a href="#" class="profile-location">Cacun, Mexico</a>
+                        </div>
+                        <div class="col-1">
+                            <a href="#" class="unfollow-button">Unfollow</a>
+                        </div>
+                    </div>
+
+                    <div class="row row-second">
+                        <div class="col-12">
+                            <img src="./img/unsplash1.jpg" class="picture-feed">
+                        </div>
+                        
+                    </div>
+
+                    <div class="row row-third">
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/heart.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">91</p>
+                        </div>
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/chat.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">1</p>
+                        </div>
+
+                    </div>
+
+                    <div class="row row-fourth">
+                        <div class="col-12">
+                            <p><span class="profile-name">James Ensor</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis justo sit amet augue tristique viverra quis sit amet tortor. Nulla justo elit, dictum vitae magna consectetur, ultricies ultricies velit. Pellentesque leo odio, egestas sit amet elementum et, consectetur ut ipsum. #kitchen #home #lovemyplants</p>
+                        </div>
+                    </div>
+
+                    <div class="row row-fifth">
+                        <div class="col-12">
+                            <p class="reaction"><span class="profile-name">Paul Delvaux </span>Proin ullamcorper feugiat eros, sit amet accumsan tellus cursus vitae. Etiam feugiat tristique ante, luctus feugiat risus ultrices ut!</p>
+                        </div>  
+                    </div>
+
+                    <div class="row row-sixth">
+                        <div class="col-12">
+                            <p class="timing-feed">14 minutes ago</p>
+                        </div>
+                    </div>
+
+
+            </div>
+
+            <div class="container post-post">
+                    <div class="row row-first">
+                        <div class="col-2">
+                            <a href="#">
+                                <img src="./img/image-12.png" class="profile-pic-feed">
+                            </a>
+                        </div>
+                        <div class="col-7">
+                            <a href="#"><span class="profile-name">James Ensor</span></a><br>
+                            <a href="#" class="profile-location">Cacun, Mexico</a>
+                        </div>
+                        <div class="col-1">
+                            <a href="#" class="unfollow-button">Unfollow</a>
+                        </div>
+                    </div>
+
+                    <div class="row row-second">
+                        <div class="col-12">
+                            <img src="./img/unsplash1.jpg" class="picture-feed">
+                        </div>
+                        
+                    </div>
+
+                    <div class="row row-third">
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/heart.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">91</p>
+                        </div>
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/chat.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">1</p>
+                        </div>
+
+                    </div>
+
+                    <div class="row row-fourth">
+                        <div class="col-12">
+                            <p><span class="profile-name">James Ensor</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis justo sit amet augue tristique viverra quis sit amet tortor. Nulla justo elit, dictum vitae magna consectetur, ultricies ultricies velit. Pellentesque leo odio, egestas sit amet elementum et, consectetur ut ipsum. #kitchen #home #lovemyplants</p>
+                        </div>
+                    </div>
+
+                    <div class="row row-fifth">
+                        <div class="col-12">
+                            <p class="reaction"><span class="profile-name">Paul Delvaux </span>Proin ullamcorper feugiat eros, sit amet accumsan tellus cursus vitae. Etiam feugiat tristique ante, luctus feugiat risus ultrices ut!</p>
+                        </div>  
+                    </div>
+
+                    <div class="row row-sixth">
+                        <div class="col-12">
+                            <p class="timing-feed">14 minutes ago</p>
+                        </div>
+                    </div>
+
+
+            </div>
+
+            <div class="container post-post">
+                    <div class="row row-first">
+                        <div class="col-2">
+                            <a href="#">
+                                <img src="./img/image-12.png" class="profile-pic-feed">
+                            </a>
+                        </div>
+                        <div class="col-7">
+                            <a href="#"><span class="profile-name">James Ensor</span></a><br>
+                            <a href="#" class="profile-location">Cacun, Mexico</a>
+                        </div>
+                        <div class="col-1">
+                            <a href="#" class="unfollow-button">Unfollow</a>
+                        </div>
+                    </div>
+
+                    <div class="row row-second">
+                        <div class="col-12">
+                            <img src="./img/unsplash1.jpg" class="picture-feed">
+                        </div>
+                        
+                    </div>
+
+                    <div class="row row-third">
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/heart.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">91</p>
+                        </div>
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/chat.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">1</p>
+                        </div>
+
+                    </div>
+
+                    <div class="row row-fourth">
+                        <div class="col-12">
+                            <p><span class="profile-name">James Ensor</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis justo sit amet augue tristique viverra quis sit amet tortor. Nulla justo elit, dictum vitae magna consectetur, ultricies ultricies velit. Pellentesque leo odio, egestas sit amet elementum et, consectetur ut ipsum. #kitchen #home #lovemyplants</p>
+                        </div>
+                    </div>
+
+                    <div class="row row-fifth">
+                        <div class="col-12">
+                            <p class="reaction"><span class="profile-name">Paul Delvaux </span>Proin ullamcorper feugiat eros, sit amet accumsan tellus cursus vitae. Etiam feugiat tristique ante, luctus feugiat risus ultrices ut!</p>
+                        </div>  
+                    </div>
+
+                    <div class="row row-sixth">
+                        <div class="col-12">
+                            <p class="timing-feed">14 minutes ago</p>
+                        </div>
+                    </div>
+
+
+            </div>
+
+            <div class="container post-post">
+                    <div class="row row-first">
+                        <div class="col-2">
+                            <a href="#">
+                                <img src="./img/image-12.png" class="profile-pic-feed">
+                            </a>
+                        </div>
+                        <div class="col-7">
+                            <a href="#"><span class="profile-name">James Ensor</span></a><br>
+                            <a href="#" class="profile-location">Cacun, Mexico</a>
+                        </div>
+                        <div class="col-1">
+                            <a href="#" class="unfollow-button">Unfollow</a>
+                        </div>
+                    </div>
+
+                    <div class="row row-second">
+                        <div class="col-12">
+                            <img src="./img/unsplash1.jpg" class="picture-feed">
+                        </div>
+                        
+                    </div>
+
+                    <div class="row row-third">
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/heart.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">91</p>
+                        </div>
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/chat.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">1</p>
+                        </div>
+
+                    </div>
+
+                    <div class="row row-fourth">
+                        <div class="col-12">
+                            <p><span class="profile-name">James Ensor</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis justo sit amet augue tristique viverra quis sit amet tortor. Nulla justo elit, dictum vitae magna consectetur, ultricies ultricies velit. Pellentesque leo odio, egestas sit amet elementum et, consectetur ut ipsum. #kitchen #home #lovemyplants</p>
+                        </div>
+                    </div>
+
+                    <div class="row row-fifth">
+                        <div class="col-12">
+                            <p class="reaction"><span class="profile-name">Paul Delvaux </span>Proin ullamcorper feugiat eros, sit amet accumsan tellus cursus vitae. Etiam feugiat tristique ante, luctus feugiat risus ultrices ut!</p>
+                        </div>  
+                    </div>
+
+                    <div class="row row-sixth">
+                        <div class="col-12">
+                            <p class="timing-feed">14 minutes ago</p>
+                        </div>
+                    </div>
+
+
+            </div>
+            
+
+            <div class="container post-post">
+                    <div class="row row-first">
+                        <div class="col-2">
+                            <a href="#">
+                                <img src="./img/image-12.png" class="profile-pic-feed">
+                            </a>
+                        </div>
+                        <div class="col-7">
+                            <a href="#"><span class="profile-name">James Ensor</span></a><br>
+                            <a href="#" class="profile-location">Cacun, Mexico</a>
+                        </div>
+                        <div class="col-1">
+                            <a href="#" class="unfollow-button">Unfollow</a>
+                        </div>
+                    </div>
+
+                    <div class="row row-second">
+                        <div class="col-12">
+                            <img src="./img/unsplash1.jpg" class="picture-feed">
+                        </div>
+                        
+                    </div>
+
+                    <div class="row row-third">
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/heart.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">91</p>
+                        </div>
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/chat.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">1</p>
+                        </div>
+
+                    </div>
+
+                    <div class="row row-fourth">
+                        <div class="col-12">
+                            <p><span class="profile-name">James Ensor</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis justo sit amet augue tristique viverra quis sit amet tortor. Nulla justo elit, dictum vitae magna consectetur, ultricies ultricies velit. Pellentesque leo odio, egestas sit amet elementum et, consectetur ut ipsum. #kitchen #home #lovemyplants</p>
+                        </div>
+                    </div>
+
+                    <div class="row row-fifth">
+                        <div class="col-12">
+                            <p class="reaction"><span class="profile-name">Paul Delvaux </span>Proin ullamcorper feugiat eros, sit amet accumsan tellus cursus vitae. Etiam feugiat tristique ante, luctus feugiat risus ultrices ut!</p>
+                        </div>  
+                    </div>
+
+                    <div class="row row-sixth">
+                        <div class="col-12">
+                            <p class="timing-feed">14 minutes ago</p>
+                        </div>
+                    </div>
+
+
+            </div>
+
+            <div class="container post-post">
+                    <div class="row row-first">
+                        <div class="col-2">
+                            <a href="#">
+                                <img src="./img/image-12.png" class="profile-pic-feed">
+                            </a>
+                        </div>
+                        <div class="col-7">
+                            <a href="#"><span class="profile-name">James Ensor</span></a><br>
+                            <a href="#" class="profile-location">Cacun, Mexico</a>
+                        </div>
+                        <div class="col-1">
+                            <a href="#" class="unfollow-button">Unfollow</a>
+                        </div>
+                    </div>
+
+                    <div class="row row-second">
+                        <div class="col-12">
+                            <img src="./img/unsplash1.jpg" class="picture-feed">
+                        </div>
+                        
+                    </div>
+
+                    <div class="row row-third">
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/heart.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">91</p>
+                        </div>
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/chat.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">1</p>
+                        </div>
+
+                    </div>
+
+                    <div class="row row-fourth">
+                        <div class="col-12">
+                            <p><span class="profile-name">James Ensor</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis justo sit amet augue tristique viverra quis sit amet tortor. Nulla justo elit, dictum vitae magna consectetur, ultricies ultricies velit. Pellentesque leo odio, egestas sit amet elementum et, consectetur ut ipsum. #kitchen #home #lovemyplants</p>
+                        </div>
+                    </div>
+
+                    <div class="row row-fifth">
+                        <div class="col-12">
+                            <p class="reaction"><span class="profile-name">Paul Delvaux </span>Proin ullamcorper feugiat eros, sit amet accumsan tellus cursus vitae. Etiam feugiat tristique ante, luctus feugiat risus ultrices ut!</p>
+                        </div>  
+                    </div>
+
+                    <div class="row row-sixth">
+                        <div class="col-12">
+                            <p class="timing-feed">14 minutes ago</p>
+                        </div>
+                    </div>
+
+
+            </div>
+            
+            <div class="container post-post">
+                    <div class="row row-first">
+                        <div class="col-2">
+                            <a href="#">
+                                <img src="./img/image-12.png" class="profile-pic-feed">
+                            </a>
+                        </div>
+                        <div class="col-7">
+                            <a href="#"><span class="profile-name">James Ensor</span></a><br>
+                            <a href="#" class="profile-location">Cacun, Mexico</a>
+                        </div>
+                        <div class="col-1">
+                            <a href="#" class="unfollow-button">Unfollow</a>
+                        </div>
+                    </div>
+
+                    <div class="row row-second">
+                        <div class="col-12">
+                            <img src="./img/unsplash1.jpg" class="picture-feed">
+                        </div>
+                        
+                    </div>
+
+                    <div class="row row-third">
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/heart.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">91</p>
+                        </div>
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/chat.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">1</p>
+                        </div>
+
+                    </div>
+
+                    <div class="row row-fourth">
+                        <div class="col-12">
+                            <p><span class="profile-name">James Ensor</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis justo sit amet augue tristique viverra quis sit amet tortor. Nulla justo elit, dictum vitae magna consectetur, ultricies ultricies velit. Pellentesque leo odio, egestas sit amet elementum et, consectetur ut ipsum. #kitchen #home #lovemyplants</p>
+                        </div>
+                    </div>
+
+                    <div class="row row-fifth">
+                        <div class="col-12">
+                            <p class="reaction"><span class="profile-name">Paul Delvaux </span>Proin ullamcorper feugiat eros, sit amet accumsan tellus cursus vitae. Etiam feugiat tristique ante, luctus feugiat risus ultrices ut!</p>
+                        </div>  
+                    </div>
+
+                    <div class="row row-sixth">
+                        <div class="col-12">
+                            <p class="timing-feed">14 minutes ago</p>
+                        </div>
+                    </div>
+
+
+            </div>
+
+            <div class="container post-post">
+                    <div class="row row-first">
+                        <div class="col-2">
+                            <a href="#">
+                                <img src="./img/image-12.png" class="profile-pic-feed">
+                            </a>
+                        </div>
+                        <div class="col-7">
+                            <a href="#"><span class="profile-name">James Ensor</span></a><br>
+                            <a href="#" class="profile-location">Cacun, Mexico</a>
+                        </div>
+                        <div class="col-1">
+                            <a href="#" class="unfollow-button">Unfollow</a>
+                        </div>
+                    </div>
+
+                    <div class="row row-second">
+                        <div class="col-12">
+                            <img src="./img/unsplash1.jpg" class="picture-feed">
+                        </div>
+                        
+                    </div>
+
+                    <div class="row row-third">
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/heart.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">91</p>
+                        </div>
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/chat.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">1</p>
+                        </div>
+
+                    </div>
+
+                    <div class="row row-fourth">
+                        <div class="col-12">
+                            <p><span class="profile-name">James Ensor</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis justo sit amet augue tristique viverra quis sit amet tortor. Nulla justo elit, dictum vitae magna consectetur, ultricies ultricies velit. Pellentesque leo odio, egestas sit amet elementum et, consectetur ut ipsum. #kitchen #home #lovemyplants</p>
+                        </div>
+                    </div>
+
+                    <div class="row row-fifth">
+                        <div class="col-12">
+                            <p class="reaction"><span class="profile-name">Paul Delvaux </span>Proin ullamcorper feugiat eros, sit amet accumsan tellus cursus vitae. Etiam feugiat tristique ante, luctus feugiat risus ultrices ut!</p>
+                        </div>  
+                    </div>
+
+                    <div class="row row-sixth">
+                        <div class="col-12">
+                            <p class="timing-feed">14 minutes ago</p>
+                        </div>
+                    </div>
+
+
+            </div>
+
+            <div class="container post-post">
+                    <div class="row row-first">
+                        <div class="col-2">
+                            <a href="#">
+                                <img src="./img/image-12.png" class="profile-pic-feed">
+                            </a>
+                        </div>
+                        <div class="col-7">
+                            <a href="#"><span class="profile-name">James Ensor</span></a><br>
+                            <a href="#" class="profile-location">Cacun, Mexico</a>
+                        </div>
+                        <div class="col-1">
+                            <a href="#" class="unfollow-button">Unfollow</a>
+                        </div>
+                    </div>
+
+                    <div class="row row-second">
+                        <div class="col-12">
+                            <img src="./img/unsplash1.jpg" class="picture-feed">
+                        </div>
+                        
+                    </div>
+
+                    <div class="row row-third">
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/heart.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">91</p>
+                        </div>
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/chat.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">1</p>
+                        </div>
+
+                    </div>
+
+                    <div class="row row-fourth">
+                        <div class="col-12">
+                            <p><span class="profile-name">James Ensor</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis justo sit amet augue tristique viverra quis sit amet tortor. Nulla justo elit, dictum vitae magna consectetur, ultricies ultricies velit. Pellentesque leo odio, egestas sit amet elementum et, consectetur ut ipsum. #kitchen #home #lovemyplants</p>
+                        </div>
+                    </div>
+
+                    <div class="row row-fifth">
+                        <div class="col-12">
+                            <p class="reaction"><span class="profile-name">Paul Delvaux </span>Proin ullamcorper feugiat eros, sit amet accumsan tellus cursus vitae. Etiam feugiat tristique ante, luctus feugiat risus ultrices ut!</p>
+                        </div>  
+                    </div>
+
+                    <div class="row row-sixth">
+                        <div class="col-12">
+                            <p class="timing-feed">14 minutes ago</p>
+                        </div>
+                    </div>
+
+
+            </div>
+
+            <div class="container post-post">
+                    <div class="row row-first">
+                        <div class="col-2">
+                            <a href="#">
+                                <img src="./img/image-12.png" class="profile-pic-feed">
+                            </a>
+                        </div>
+                        <div class="col-7">
+                            <a href="#"><span class="profile-name">James Ensor</span></a><br>
+                            <a href="#" class="profile-location">Cacun, Mexico</a>
+                        </div>
+                        <div class="col-1">
+                            <a href="#" class="unfollow-button">Unfollow</a>
+                        </div>
+                    </div>
+
+                    <div class="row row-second">
+                        <div class="col-12">
+                            <img src="./img/unsplash1.jpg" class="picture-feed">
+                        </div>
+                        
+                    </div>
+
+                    <div class="row row-third">
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/heart.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">91</p>
+                        </div>
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/chat.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">1</p>
+                        </div>
+
+                    </div>
+
+                    <div class="row row-fourth">
+                        <div class="col-12">
+                            <p><span class="profile-name">James Ensor</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis justo sit amet augue tristique viverra quis sit amet tortor. Nulla justo elit, dictum vitae magna consectetur, ultricies ultricies velit. Pellentesque leo odio, egestas sit amet elementum et, consectetur ut ipsum. #kitchen #home #lovemyplants</p>
+                        </div>
+                    </div>
+
+                    <div class="row row-fifth">
+                        <div class="col-12">
+                            <p class="reaction"><span class="profile-name">Paul Delvaux </span>Proin ullamcorper feugiat eros, sit amet accumsan tellus cursus vitae. Etiam feugiat tristique ante, luctus feugiat risus ultrices ut!</p>
+                        </div>  
+                    </div>
+
+                    <div class="row row-sixth">
+                        <div class="col-12">
+                            <p class="timing-feed">14 minutes ago</p>
+                        </div>
+                    </div>
+
+
+            </div>
+
+            <div class="container post-post">
+                    <div class="row row-first">
+                        <div class="col-2">
+                            <a href="#">
+                                <img src="./img/image-12.png" class="profile-pic-feed">
+                            </a>
+                        </div>
+                        <div class="col-7">
+                            <a href="#"><span class="profile-name">James Ensor</span></a><br>
+                            <a href="#" class="profile-location">Cacun, Mexico</a>
+                        </div>
+                        <div class="col-1">
+                            <a href="#" class="unfollow-button">Unfollow</a>
+                        </div>
+                    </div>
+
+                    <div class="row row-second">
+                        <div class="col-12">
+                            <img src="./img/unsplash1.jpg" class="picture-feed">
+                        </div>
+                        
+                    </div>
+
+                    <div class="row row-third">
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/heart.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">91</p>
+                        </div>
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/chat.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">1</p>
+                        </div>
+
+                    </div>
+
+                    <div class="row row-fourth">
+                        <div class="col-12">
+                            <p><span class="profile-name">James Ensor</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis justo sit amet augue tristique viverra quis sit amet tortor. Nulla justo elit, dictum vitae magna consectetur, ultricies ultricies velit. Pellentesque leo odio, egestas sit amet elementum et, consectetur ut ipsum. #kitchen #home #lovemyplants</p>
+                        </div>
+                    </div>
+
+                    <div class="row row-fifth">
+                        <div class="col-12">
+                            <p class="reaction"><span class="profile-name">Paul Delvaux </span>Proin ullamcorper feugiat eros, sit amet accumsan tellus cursus vitae. Etiam feugiat tristique ante, luctus feugiat risus ultrices ut!</p>
+                        </div>  
+                    </div>
+
+                    <div class="row row-sixth">
+                        <div class="col-12">
+                            <p class="timing-feed">14 minutes ago</p>
+                        </div>
+                    </div>
+
+
+            </div>
+
+            <div class="container post-post">
+                    <div class="row row-first">
+                        <div class="col-2">
+                            <a href="#">
+                                <img src="./img/image-12.png" class="profile-pic-feed">
+                            </a>
+                        </div>
+                        <div class="col-7">
+                            <a href="#"><span class="profile-name">James Ensor</span></a><br>
+                            <a href="#" class="profile-location">Cacun, Mexico</a>
+                        </div>
+                        <div class="col-1">
+                            <a href="#" class="unfollow-button">Unfollow</a>
+                        </div>
+                    </div>
+
+                    <div class="row row-second">
+                        <div class="col-12">
+                            <img src="./img/unsplash1.jpg" class="picture-feed">
+                        </div>
+                        
+                    </div>
+
+                    <div class="row row-third">
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/heart.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">91</p>
+                        </div>
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/chat.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">1</p>
+                        </div>
+
+                    </div>
+
+                    <div class="row row-fourth">
+                        <div class="col-12">
+                            <p><span class="profile-name">James Ensor</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis justo sit amet augue tristique viverra quis sit amet tortor. Nulla justo elit, dictum vitae magna consectetur, ultricies ultricies velit. Pellentesque leo odio, egestas sit amet elementum et, consectetur ut ipsum. #kitchen #home #lovemyplants</p>
+                        </div>
+                    </div>
+
+                    <div class="row row-fifth">
+                        <div class="col-12">
+                            <p class="reaction"><span class="profile-name">Paul Delvaux </span>Proin ullamcorper feugiat eros, sit amet accumsan tellus cursus vitae. Etiam feugiat tristique ante, luctus feugiat risus ultrices ut!</p>
+                        </div>  
+                    </div>
+
+                    <div class="row row-sixth">
+                        <div class="col-12">
+                            <p class="timing-feed">14 minutes ago</p>
+                        </div>
+                    </div>
+
+
+            </div>
+
+            <div class="container post-post">
+                    <div class="row row-first">
+                        <div class="col-2">
+                            <a href="#">
+                                <img src="./img/image-12.png" class="profile-pic-feed">
+                            </a>
+                        </div>
+                        <div class="col-7">
+                            <a href="#"><span class="profile-name">James Ensor</span></a><br>
+                            <a href="#" class="profile-location">Cacun, Mexico</a>
+                        </div>
+                        <div class="col-1">
+                            <a href="#" class="unfollow-button">Unfollow</a>
+                        </div>
+                    </div>
+
+                    <div class="row row-second">
+                        <div class="col-12">
+                            <img src="./img/unsplash1.jpg" class="picture-feed">
+                        </div>
+                        
+                    </div>
+
+                    <div class="row row-third">
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/heart.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">91</p>
+                        </div>
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/chat.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">1</p>
+                        </div>
+
+                    </div>
+
+                    <div class="row row-fourth">
+                        <div class="col-12">
+                            <p><span class="profile-name">James Ensor</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis justo sit amet augue tristique viverra quis sit amet tortor. Nulla justo elit, dictum vitae magna consectetur, ultricies ultricies velit. Pellentesque leo odio, egestas sit amet elementum et, consectetur ut ipsum. #kitchen #home #lovemyplants</p>
+                        </div>
+                    </div>
+
+                    <div class="row row-fifth">
+                        <div class="col-12">
+                            <p class="reaction"><span class="profile-name">Paul Delvaux </span>Proin ullamcorper feugiat eros, sit amet accumsan tellus cursus vitae. Etiam feugiat tristique ante, luctus feugiat risus ultrices ut!</p>
+                        </div>  
+                    </div>
+
+                    <div class="row row-sixth">
+                        <div class="col-12">
+                            <p class="timing-feed">14 minutes ago</p>
+                        </div>
+                    </div>
+
+
+            </div>
+
+            <div class="container post-post">
+                    <div class="row row-first">
+                        <div class="col-2">
+                            <a href="#">
+                                <img src="./img/image-12.png" class="profile-pic-feed">
+                            </a>
+                        </div>
+                        <div class="col-7">
+                            <a href="#"><span class="profile-name">James Ensor</span></a><br>
+                            <a href="#" class="profile-location">Cacun, Mexico</a>
+                        </div>
+                        <div class="col-1">
+                            <a href="#" class="unfollow-button">Unfollow</a>
+                        </div>
+                    </div>
+
+                    <div class="row row-second">
+                        <div class="col-12">
+                            <img src="./img/unsplash1.jpg" class="picture-feed">
+                        </div>
+                        
+                    </div>
+
+                    <div class="row row-third">
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/heart.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">91</p>
+                        </div>
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/chat.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">1</p>
+                        </div>
+
+                    </div>
+
+                    <div class="row row-fourth">
+                        <div class="col-12">
+                            <p><span class="profile-name">James Ensor</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis justo sit amet augue tristique viverra quis sit amet tortor. Nulla justo elit, dictum vitae magna consectetur, ultricies ultricies velit. Pellentesque leo odio, egestas sit amet elementum et, consectetur ut ipsum. #kitchen #home #lovemyplants</p>
+                        </div>
+                    </div>
+
+                    <div class="row row-fifth">
+                        <div class="col-12">
+                            <p class="reaction"><span class="profile-name">Paul Delvaux </span>Proin ullamcorper feugiat eros, sit amet accumsan tellus cursus vitae. Etiam feugiat tristique ante, luctus feugiat risus ultrices ut!</p>
                         </div>  
                     </div>
 
