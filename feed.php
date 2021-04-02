@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <div class="container-fluid navigation">
+        <div class="container-fluid navigation sticky-top">
             <div class="row">
                 <div class="col-7">
                     <a href="#">
