@@ -1,8 +1,7 @@
 <?php
 include_once(__DIR__ . "../Db.php");
 
-class Post 
-{
+class Post  {
     protected $image;
     protected $description;
     protected $location;
