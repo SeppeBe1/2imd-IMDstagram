@@ -98,11 +98,24 @@
                             <p class="number-feed">1</p>
                         </div>
 
+                        <div class="col-6">
+
+                        </div>
+
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/flag.svg" class="icon-feed"></a>
+                        </div>
+
                     </div>
 
                     <div class="row row-fourth">
                         <div class="col-12">
-                            <p><span class="profile-name">James Ensor</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis justo sit amet augue tristique viverra quis sit amet tortor. Nulla justo elit, dictum vitae magna consectetur, ultricies ultricies velit. Pellentesque leo odio, egestas sit amet elementum et, consectetur ut ipsum. #kitchen #home #lovemyplants</p>
+                            <p><span class="profile-name">James Ensor</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis justo sit amet augue tristique viverra quis sit amet tortor. Nulla justo elit, dictum vitae magna consectetur, ultricies ultricies velit. Pellentesque leo odio, egestas sit amet elementum et, consectetur ut ipsum. 
+                                <a href="#">#kitchen </a>
+                                <a href="#">#home</a>
+                                <a href="#">#lovemyplants</a>
+                            </p>
+                            
                         </div>
                     </div>
 
@@ -161,11 +174,24 @@
                             <p class="number-feed">1</p>
                         </div>
 
+                        <div class="col-6">
+
+                        </div>
+
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/flag.svg" class="icon-feed"></a>
+                        </div>
+
                     </div>
 
                     <div class="row row-fourth">
                         <div class="col-12">
-                            <p><span class="profile-name">Claude Monet</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis justo sit amet augue tristique viverra quis sit amet tortor. Nulla justo elit, dictum vitae magna consectetur, ultricies ultricies velit. Pellentesque leo odio, egestas sit amet elementum et, consectetur ut ipsum. #kitchen #home #lovemyplants</p>
+                            <p><span class="profile-name">Claude Monet</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis justo sit amet augue tristique viverra quis sit amet tortor. Nulla justo elit, dictum vitae magna consectetur, ultricies ultricies velit. Pellentesque leo odio, egestas sit amet elementum et, consectetur ut ipsum.
+                                <a href="#">#kitchen </a>
+                                <a href="#">#home</a>
+                                <a href="#">#lovemyplants</a>
+                            </p>
+
                         </div>
                     </div>
 
