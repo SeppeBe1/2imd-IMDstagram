@@ -1,0 +1,73 @@
+/* NAVIGATION */
+.navigation{
+    /* background-color: green; */
+    padding: 15px;
+    padding-left: 25px;
+    box-shadow: 10px 5px 5px rgb(219, 219, 219);
+    overflow: hidden;
+    display: block;
+}
+
+
+.profile-pic{
+    border-radius: 50%;
+    width: 40px;
+    margin-right: 10px;
+}
+
+.icon-nav{
+    margin-right: 10px;
+    width: 30px;
+
+}
+
+.search-input{
+    border-radius: 30px;
+
+}
+.search-input:focus{
+    box-shadow: 0 0 7px #E9C9C1;
+    border: 1px solid #E9C9C1;
+    color: #5A5A5A;
+}
+.search-input::placeholder{
+    color: gainsboro;
+}
+
+.post-feed{
+    background-color: palegreen;
+    height: 500px;
+    padding: 50px;
+}
+
+.row-first{
+    margin-bottom: 10px;
+}
+
+.profile-name{
+    color: #5A5A5A;
+    font-weight: bold;
+}
+.profile-location{
+    color: #5A5A5A;
+}
+.profile-name:hover, .profile-location:hover{
+    text-decoration: underline;
+    color: #5A5A5A;
+}
+
+
+@media(min-width: 750px){
+    .navigation .row{
+        width: 700px;
+        justify-content: center;
+        margin: auto;
+    } 
+}
+
+@media(min-width: 1000px){
+    .plant-logo{
+        width: 20%;
+    }
+}
+
