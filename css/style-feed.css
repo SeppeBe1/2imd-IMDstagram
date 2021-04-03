@@ -2,7 +2,7 @@
 
 .feed-header{
     /* height: 100px; */
-    background-color: #F1C8BF
+    background-color: #F1C8BF;
 }
 
 .plant-logo{
@@ -78,4 +78,33 @@ main{
         /* background-color: hotpink ; */
         max-width: 700px;
     }    
+}
+
+/* COMMENT PART*/
+.row-seventh{
+    padding: 20px;
+    border-top: 1px solid #d9d9d9;
+
+}
+#comment-input{
+    border-width:0px;
+    border:none;
+}
+
+
+#comment-input:focus{
+    outline: none;
+}
+#comment-input::placeholder{
+    color: gainsboro;
+}
+
+.comment-button{
+    color: #CC847B;
+    font-weight: 600;
+}
+.comment-button:hover{
+    color: #CC847B;
+    font-weight: 600;
+    text-decoration: none;
 }

@@ -131,6 +131,17 @@
                         </div>
                     </div>
 
+                    <div class="row row-seventh">
+                        <div class="col-10">
+                            <form action="feed.php">
+                                <input type="text" id="comment-input" name="comment-input" placeholder="Place a comment" size='35'>
+                            </form>
+                        </div>
+                        <div class="col-2">
+                                <a href="#" class="comment-button">Place</a>
+                        </div>
+
+                    </div>
 
             </div>
 
@@ -206,7 +217,6 @@
                             <p class="timing-feed">14 minutes ago</p>
                         </div>
                     </div>
-
 
             </div>
 
