@@ -1,5 +1,5 @@
 <?php 
-include_once(__DIR__ . "/helpers/autoloader.php");
+include_once(__DIR__ . "/../helpers/autoloader.php");
 
 class User {
     protected $username; 
