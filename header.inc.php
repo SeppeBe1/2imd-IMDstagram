@@ -1,5 +1,13 @@
 <?php
+    include_once(__DIR__ . "/helpers/autoloader.php");
     // echo "Test - this is the header";
+
+    /* function searchParam($param) {
+        if(isset($_POST['searchParam'])) {
+            echo $_POST['searchParam'];
+        }
+    } */
+
 ?>
 
 <!DOCTYPE html>
@@ -39,9 +47,9 @@
                     
                 </div>
 
-                <div class="col-4">    
+                <div class="col-4"> <!-- ER MOET HIER EEN VORM VAN SUBMIT KOMEN, ZODAT IK EEN POST KAN VERSTUREN FORM? -->
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control search-input" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
+                        <input type="text" class="form-control search-input" placeholder="Search" aria-label="Search" aria-describedby="button-addon2" name="searchParam">
                         <!-- <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button> -->
                     </div>
                 </div>
