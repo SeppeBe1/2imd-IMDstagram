@@ -1,11 +1,10 @@
 <?php
-
-    // echo "Hello World";
     include_once("../2imd-IMDstagram/header.inc.php");
-
-    include_once("./helpers/Security.php");
-
+    include_once(__DIR__ . "/helpers/autoloader.php");
     Security::onlyLoggedInUsers();
+
+    // TEST SEARCH FUNCTION HERE and delete search.php
+
 
 ?>
 
