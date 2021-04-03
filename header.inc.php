@@ -48,7 +48,7 @@
 
                 <div class="col-1 logout-button">
                     <div>
-                    <a href="#">
+                    <a href="logout.php">
                         <img src="./img/icons/logout.svg" class="icon-nav">
                     </a>
                     </div>
