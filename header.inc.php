@@ -36,18 +36,26 @@
                     <a href="#">
                         <img src="./img/icons/+.svg" class="icon-nav">
                     </a>
-                </div>
-                <div class="col-5">
                     
+                </div>
+
+                <div class="col-4">    
                     <div class="input-group mb-3">
                         <input type="text" class="form-control search-input" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
                         <!-- <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button> -->
                     </div>
                 </div>
+
+                <div class="col-1 logout-button">
+                    <div>
+                    <a href="#">
+                        <img src="./img/icons/logout.svg" class="icon-nav">
+                    </a>
+                    </div>
+                </div>
                 
             </div>
         </div>
-
     </header>
     
 </body>
