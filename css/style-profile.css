@@ -99,9 +99,9 @@ body {
         margin: auto
     }
 
-    .feed-header img{
+    /* .feed-header img{
         width: 40%;
-    }
+    } */
 
     .container-follow{
         width:75%;
@@ -134,7 +134,7 @@ body {
 
 @media(min-width: 1200px){
     .container-profile{
-        width: 60%;
+        width: 700px;
        
     }
 
@@ -144,12 +144,12 @@ body {
         margin: auto
     }
 
-    .feed-header img{
+    /* .feed-header img{
         width: 15%;
-    }
+    } */
 
     .container-gallery{
-        width: 60%;
+        width: 700px;
     }
 
     .row>*{

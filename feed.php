@@ -1,6 +1,7 @@
 <?php
 
     // echo "Hello World";
+    include_once("../2imd-IMDstagram/header.inc.php");
 
 ?>
 
@@ -14,14 +15,17 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="css/style-feed.css">     
+    <link rel="stylesheet" href="css/style-feed.css">
+    <link rel="stylesheet" href="css/style-header.css">
+
     <script src="https://kit.fontawesome.com/a7dc01cef9.js" crossorigin="anonymous"></script>
     <title>Plantstagram - feed</title>
 </head>
 <body>
 
 
-    <header>
+
+    <!-- <header>
         <div class="container-fluid feed-header">
             <div class="row justify-content-center">
                 <img src="img/plantstagram-logo.png" class="plant-logo justify-content-center">
@@ -45,14 +49,14 @@
                     
                     <div class="input-group mb-3">
                         <input type="text" class="form-control search-input" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
-                        <!-- <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button> -->
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
                     </div>
                 </div>
                 
             </div>
         </div>
 
-    </header>
+    </header> -->
 
     <main>
 
