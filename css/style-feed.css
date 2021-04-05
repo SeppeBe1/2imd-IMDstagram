@@ -80,6 +80,17 @@ main{
     }    
 }
 
+/* TAGS */
+.tags-post{
+    color: #B2CB94;
+    font-weight: 600;
+}
+.tags-post:hover{
+    color: #B2CB94;
+
+}
+
+
 /* COMMENT PART*/
 .row-seventh{
     padding: 20px;
@@ -107,4 +118,19 @@ main{
     color: #CC847B;
     font-weight: 600;
     text-decoration: none;
+}
+
+/* LOAD MORE BUTTON */
+.load-more{
+    padding: 25px;
+    background-color: #B2CB94;
+    border-radius: 30px;
+    color: white;
+    font-weight: 800;
+    box-shadow: 10px 5px 15px #c2c2c2;
+    margin-bottom: 30px;
+}
+.load-more:hover{
+    color: white;
+    /* text-decoration: underline; */
 }

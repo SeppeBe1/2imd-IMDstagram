@@ -130,9 +130,9 @@
                             <p><span class="profile-name"><?php echo $post['username']?> </span>
                                 <?php echo $post['description']?>
 
-                                <a href="#">#kitchen </a>
-                                <a href="#">#home</a>
-                                <a href="#">#lovemyplants</a>
+                                <a href="#" class="tags-post">#kitchen </a>
+                                <a href="#" class="tags-post">#home</a>
+                                <a href="#" class="tags-post">#lovemyplants</a>
                             </p>
                             
                         </div>
@@ -165,7 +165,14 @@
             </div>
     <?php endforeach; ?>
 
+
+    <div class="row d-flex justify-content-center">
+        <a href="#" class="load-more">Load more...</a>
+    </div>
+    
+
     <!-- HIER LOOPEN DOOR VERSCHILLENDE POSTS -->
+    <!-- DIT ZIJN POSTS TER ILLSTRATIE VAN HOE ZE ERUIT MOETEN ZIEN-->
             <div class="container post-post">
                     <div class="row row-first">
                         <div class="col-2">

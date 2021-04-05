@@ -97,7 +97,7 @@ class Post  {
 
     public static function getAllPosts(){
         $conn = Db::getInstance();
-        $statement = $conn->prepare("select * from posts INNER JOIN users ON posts.user_id = users.id LIMIT 2");
+        $statement = $conn->prepare("select * from posts INNER JOIN users ON posts.user_id = users.id ORDER BY postedDate DESC LIMIT 2");
         $result = $statement->execute();
         // var_dump($result);
 
