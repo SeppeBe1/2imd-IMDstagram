@@ -1,6 +1,5 @@
 <?php 
-
-    include_once("../2imd-IMDstagram/header.inc.php");
+include_once("./header.inc.php");
 
 ?>
 <!DOCTYPE html>
