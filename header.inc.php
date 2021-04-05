@@ -1,5 +1,5 @@
 <?php
-    include_once(__DIR__ . "/helpers/autoloader.php");
+    spl_autoload_register();
     // echo "Test - this is the header";
 
     /* function searchParam($param) {

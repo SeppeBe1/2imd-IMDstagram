@@ -1,15 +1,16 @@
 <?php
-    include_once(__DIR__ . "/helpers/autoloader.php");
+    namespace src;
+    spl_autoload_register(); 
     session_start();
-
+    
     try {
       if(!empty($_POST)){
-        $user = new User();
+        $user = new classes\User();
         $username = $_POST['username'];
         $password = $_POST['password'];
         $user->setUsername($username);
         $user->setPassword($password);
-      
+        
           if($user->canLogin($username, $password)){
             return true;
           } else {

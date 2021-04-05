@@ -1,10 +1,11 @@
 <?php 
-    include_once(__DIR__ . "/helpers/autoloader.php");
+    namespace src;
+    spl_autoload_register(); 
 
     if(!empty($_POST)){
         try {        
             // creates a new user object
-            $user = new User();
+            $user = new classes\User(); 
             // set data for user
             $user->setEmail($_POST['email']);
             $user->setUsername($_POST['username']);

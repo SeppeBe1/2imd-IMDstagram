@@ -1,10 +1,12 @@
 <?php
-    include_once("../2imd-IMDstagram/header.inc.php");
-    include_once(__DIR__ . "/helpers/autoloader.php");
-    Security::onlyLoggedInUsers();
+    namespace src;
+    include_once("./header.inc.php");
+    spl_autoload_register(); 
+
+    $security = new classes\User();
+    $security->onlyLoggedInUsers();
 
     // TEST SEARCH FUNCTION HERE and delete search.php
-
 
 ?>
 
