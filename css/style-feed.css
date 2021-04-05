@@ -1,13 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-.feed-header{
-    /* height: 100px; */
-    background-color: #F1C8BF
-}
-
-.plant-logo{
-    width: 40%;
-}
 body{
     font-family: 'Montserrat', sans-serif;
     color: #5A5A5A;
@@ -51,14 +43,37 @@ main{
     width: 60px;
     border-radius: 50px;
 }
+.profile-name{
+    font-size: 20px;
+    color: #5A5A5A;
+    font-weight: bold;
+}
+
+.profile-location{
+    color: #5A5A5A;
+}
+
+a{
+    text-decoration: none;
+}
+
+
+.profile-name:hover, .profile-location:hover{
+    text-decoration: underline;
+    color: #5A5A5A;
+}
 
 .picture-feed{
-
     width: 100%;
 }
 
 .icon-feed{
     width: 30px;
+}
+
+.row-second{
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 .row-third{
@@ -73,9 +88,39 @@ main{
 .timing-feed{
     font-size: 0.8em;
 }
+
 @media(min-width: 750px){
     .post-post{
         /* background-color: hotpink ; */
         max-width: 700px;
     }    
+}
+
+/* COMMENT PART*/
+.row-seventh{
+    padding: 20px;
+    border-top: 1px solid #d9d9d9;
+
+}
+#comment-input{
+    border-width:0px;
+    border:none;
+}
+
+
+#comment-input:focus{
+    outline: none;
+}
+#comment-input::placeholder{
+    color: gainsboro;
+}
+
+.comment-button{
+    color: #CC847B;
+    font-weight: 600;
+}
+.comment-button:hover{
+    color: #CC847B;
+    font-weight: 600;
+    text-decoration: none;
 }
