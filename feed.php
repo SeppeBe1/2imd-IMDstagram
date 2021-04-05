@@ -9,7 +9,7 @@
     Security::onlyLoggedInUsers();
 
     $posts = Post::getAllPosts();
-    var_dump($posts);
+    // var_dump($posts);
     
 
 ?>
@@ -82,11 +82,11 @@
                     <div class="row row-first">
                         <div class="col-2">
                             <a href="#">
-                                <img src="./img/image-12.png" class="profile-pic-feed">
+                                <img src="<?php echo $post['avatar']?>" class="profile-pic-feed">
                             </a>
                         </div>
                         <div class="col-7">
-                            <a href="#"><span class="profile-name"><?php echo $post['user_id']?> (User-name)</span></a><br>
+                            <a href="#"><span class="profile-name"><?php echo $post['username']?></span></a><br>
                             <a href="#" class="profile-location"><?php echo $post['location']?></a>
                         </div>
                         <div class="col-1">
@@ -127,7 +127,7 @@
 
                     <div class="row row-fourth">
                         <div class="col-12">
-                            <p><span class="profile-name"><?php echo $post['user_id']?> (User-name)</span>
+                            <p><span class="profile-name"><?php echo $post['username']?> </span>
                                 <?php echo $post['description']?>
 
                                 <a href="#">#kitchen </a>

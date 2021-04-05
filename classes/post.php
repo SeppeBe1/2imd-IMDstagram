@@ -97,14 +97,13 @@ class Post  {
 
     public static function getAllPosts(){
         $conn = Db::getInstance();
-        $statement = $conn->prepare("select * from posts INNER JOIN users ON posts.user_id = users.id");
+        $statement = $conn->prepare("select * from posts INNER JOIN users ON posts.user_id = users.id LIMIT 2");
         $result = $statement->execute();
-        var_dump($result);
+        // var_dump($result);
 
         $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $posts;
     }
-
 }
 
 ?>
