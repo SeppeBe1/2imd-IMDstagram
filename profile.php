@@ -13,7 +13,6 @@
     <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style-feed.css"> 
     <link rel="stylesheet" href="css/style-profile.css"> 
-    <link rel="stylesheet" href="css/style-header.css">
 
     <script src="https://kit.fontawesome.com/a7dc01cef9.js" crossorigin="anonymous"></script>
 
