@@ -1,6 +1,10 @@
 <?php 
 
-    include_once("../2imd-IMDstagram/header.inc.php");
+include_once("./helpers/Security.php");
+    
+
+Security::onlyLoggedInUsers();
+    
 
 ?>
 <!DOCTYPE html>
@@ -22,6 +26,11 @@
 </head>
 
 <body>
+
+<?php
+    include_once("../2imd-IMDstagram/header.inc.php");
+
+?>
 
 
     <main>
