@@ -1,5 +1,6 @@
 <?php
-include_once(__DIR__ . "/helpers/autoloader.php");
+namespace src\classes;
+// include_once(__DIR__ . "/helpers/autoloader.php");
 
 class Post  {
     protected $image;
@@ -95,14 +96,15 @@ class Post  {
         return $this->filters;
     }
 
-    public static function getAllPosts(){
-        $conn = Db::getInstance();
-        $statement = $conn->prepare("select * from posts INNER JOIN users ON posts.user_id = users.id ORDER BY postedDate DESC LIMIT 2");
-        $result = $statement->execute();
-        // var_dump($result);
+    // public static function getAllPosts(){
+    //     $db = new Db();
+    //     $conn = $db->getInstance();
+    //     $statement = $conn->prepare("select * from posts INNER JOIN users ON posts.user_id = users.id ORDER BY postedDate DESC LIMIT 2");
+    //     $result = $statement->execute();
+    //     // var_dump($result);
 
-        $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $posts;
-    }
+    //     $posts = $statement->fetchAll(\PDO::FETCH_ASSOC);
+    //     return $posts;
+    // }
 }
 ?>
