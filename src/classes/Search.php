@@ -29,16 +29,19 @@ class Search {
             return $results;
         }
 
-        public function searchTags(){
+        public function searchTags($tag){
             // als klikt op die tag -> resultaten met die tag
             // select * from posts where description like %:tag%
             $db = new Db();
             $conn = $db->getInstance();
         
             $statement = $conn->prepare("select * from posts where description like %:tag%");
-            $statement->bindValue(":tag", $this->param); //get clicked tag
+            $searchTag = "%#".$tag."%";
+            $statement->bindValue(":tag", $searchTag, \PDO::PARAM_STR); //get clicked tag
             $results = $statement->execute();
-            $paramSearch = $statement->fetchAll();
+            $resultsTag = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+            return $resultsTag;
         }
 
 }
