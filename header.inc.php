@@ -1,12 +1,15 @@
 <?php
+    namespace src; 
     spl_autoload_register();
-    // echo "Test - this is the header";
 
-    /* function searchParam($param) {
-        if(isset($_POST['searchParam'])) {
-            echo $_POST['searchParam'];
+    if(isset($_POST['keyword'])) {
+        $keyword = $_POST['keyword'];
+        $search = new classes\Search();
+        $results = $search->searchParam($keyword);
+        foreach($results as $key) {
+            echo $key['username'] . " " . $key['description'] . '<br>'; //nog aan te passen voor resultaten weer te geven
         }
-    } */
+    }
 
 ?>
 
@@ -20,7 +23,6 @@
     <link rel="stylesheet" href="css/style-feed.css"> 
     <link rel="stylesheet" href="css/style-profile.css">
     <link rel="stylesheet" href="css/style-header.css">
-
     <title>Header</title>
 </head>
 <body>
@@ -44,14 +46,21 @@
                     <a href="#">
                         <img src="./img/icons/+.svg" class="icon-nav">
                     </a>
-                    
                 </div>
-
-                <div class="col-4"> <!-- ER MOET HIER EEN VORM VAN SUBMIT KOMEN, ZODAT IK EEN POST KAN VERSTUREN FORM? -->
+                
+                <!-- <div class="col-5">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control search-input" placeholder="Search" aria-label="Search" aria-describedby="button-addon2" name="searchParam">
-                        <!-- <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button> -->
                     </div>
+                </div> -->
+
+                <div class="col-4"> 
+                    <form method="POST" action="">
+                        <div class="form-inline">
+                            <input type="search" class="form-control search-input" name="keyword" value="<?php echo isset($_POST['keyword']) ? $_POST['keyword'] : '' ?>" placeholder="Search" aria-label="Search" aria-describedby="button-addon2" required=""/>
+                            <!-- <button class="btn btn-success" name="search">Search</button> -->
+                        </div>
+                    </form>
                 </div>
 
                 <div class="col-1 logout-button">
@@ -65,6 +74,6 @@
             </div>
         </div>
     </header>
-    
+    <!-- <script src="scripts/keyEnter.js"></script> -->
 </body>
 </html>

@@ -6,7 +6,12 @@
     $security = new classes\User();
     $security->onlyLoggedInUsers();
 
+    /* if(isset($_POST['paramSearch'])){
+        echo $search = $_POST['paramSearch'] . " check";
+    } */
+
     // TEST SEARCH FUNCTION HERE and delete search.php
+    
 
 ?>
 
