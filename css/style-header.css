@@ -7,7 +7,6 @@ body{
 /* NAVIGATION */
 .navigation{
     padding: 15px;
-    padding-bottom: 0px;
     margin-bottom: 3px;
     box-shadow: 10px 5px 5px rgb(219, 219, 219);
     overflow: hidden;
@@ -41,17 +40,13 @@ body{
     width: 32px;
 }
 
-.input-group .form-control{
+.input-group .form-control .search-input{
     border-radius: 30px;
     
 }
 .input-group .form-control::placeholder{
     color: gainsboro;
     
-}
-
-.search-input{
-    border-radius: 30px;
 }
 
 .search-input:focus{
