@@ -1,6 +1,5 @@
 <?php 
-
-    include_once("../2imd-IMDstagram/header.inc.php");
+include_once("./header.inc.php");
 
 ?>
 <!DOCTYPE html>
@@ -13,7 +12,6 @@
     <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style-feed.css"> 
     <link rel="stylesheet" href="css/style-profile.css"> 
-    <link rel="stylesheet" href="css/style-header.css">
 
     <script src="https://kit.fontawesome.com/a7dc01cef9.js" crossorigin="anonymous"></script>
 
