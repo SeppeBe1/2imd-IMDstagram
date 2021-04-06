@@ -105,5 +105,4 @@ class Post  {
         return $posts;
     }
 }
-
 ?>

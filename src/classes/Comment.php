@@ -1,5 +1,6 @@
 <?php
-include_once(__DIR__ . "/helpers/autoloader.php");
+//include_once(__DIR__ . "/helpers/autoloader.php");
+namespace src\classes;
 
 class Comment{
     protected $totalLikes;

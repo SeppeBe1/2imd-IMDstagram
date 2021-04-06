@@ -1,5 +1,8 @@
 <?php
-    abstract class Db {
+    namespace src\classes;
+    use \PDO;
+
+     class Db {
         private static $conn;
 
         public static function getInstance(){

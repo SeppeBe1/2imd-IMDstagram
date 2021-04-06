@@ -1,10 +1,17 @@
 <?php
-    include_once("../2imd-IMDstagram/header.inc.php");
-    include_once(__DIR__ . "/helpers/autoloader.php");
-    Security::onlyLoggedInUsers();
+    namespace src;
+    include_once("./header.inc.php");
+    spl_autoload_register(); 
+
+    $security = new classes\User();
+    $security->onlyLoggedInUsers();
+
+    /* if(isset($_POST['paramSearch'])){
+        echo $search = $_POST['paramSearch'] . " check";
+    } */
 
     // TEST SEARCH FUNCTION HERE and delete search.php
-
+    
 
     $posts = Post::getAllPosts();
     // var_dump($posts);
@@ -19,11 +26,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="css/style-feed.css">
-    <link rel="stylesheet" href="css/style-header.css">
 
     <script src="https://kit.fontawesome.com/a7dc01cef9.js" crossorigin="anonymous"></script>
     <title>Plantstagram - feed</title>
