@@ -1,7 +1,5 @@
 <?php
-    namespace src; 
-    spl_autoload_register();
-
+    
 ?>
 
 <!DOCTYPE html>
