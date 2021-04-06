@@ -1,16 +1,5 @@
 <?php
-    namespace src; 
-    spl_autoload_register();
-
-    if(isset($_POST['keyword'])) {
-        $keyword = $_POST['keyword'];
-        $search = new classes\Search();
-        $results = $search->searchParam($keyword);
-        foreach($results as $key) {
-            echo $key['username'] . " " . $key['description'] . '<br>'; //nog aan te passen voor resultaten weer te geven
-        }
-    }
-
+    
 ?>
 
 <!DOCTYPE html>
@@ -48,14 +37,14 @@
                     </a>
                 </div>
                 
-                <!-- <div class="col-5">
+                <!--<div class="col-5"> 
                     <div class="input-group mb-3">
                         <input type="text" class="form-control search-input" placeholder="Search" aria-label="Search" aria-describedby="button-addon2" name="searchParam">
                     </div>
                 </div> -->
 
                 <div class="col-4"> 
-                    <form method="POST" action="">
+                    <form method="POST" action="results.php">
                         <div class="form-inline">
                             <input type="search" class="form-control search-input" name="keyword" value="<?php echo isset($_POST['keyword']) ? $_POST['keyword'] : '' ?>" placeholder="Search" aria-label="Search" aria-describedby="button-addon2" required=""/>
                             <!-- <button class="btn btn-success" name="search">Search</button> -->
