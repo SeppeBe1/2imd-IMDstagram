@@ -19,24 +19,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style-feed.css"> 
-    <link rel="stylesheet" href="css/style-profile.css">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style-header.css">
     <title>Header</title>
 </head>
 <body>
 
     <header>
-        <div class="container-fluid feed-header">
-            <div class="row justify-content-center">
-                <img src="img/plantstagram-logo.png" class="plant-logo justify-content-center">
+        <div class="container-fluid header-logo">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <img src="img/plantstagram-logo.png" class="plant-logo ">
+                </div>
             </div>
         </div>
 
         <div class="container-fluid navigation sticky-top">
             <div class="row">
-                <div class="col-7">
+                <div class="col-6 ">
                     <a href="profile.php">
                         <img src="https://images.pexels.com/photos/3101767/pexels-photo-3101767.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" class="profile-pic">
                     </a>
@@ -66,7 +66,7 @@
                 <div class="col-1 logout-button">
                     <div>
                     <a href="logout.php">
-                        <img src="./img/icons/logout.svg" class="icon-nav">
+                        <img src="./img/icons/logout.svg" class="icon-nav icon-logout">
                     </a>
                     </div>
                 </div>
