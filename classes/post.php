@@ -1,5 +1,5 @@
 <?php
-include_once(__DIR__ . "/Db.php");
+include_once(__DIR__ . "/helpers/autoloader.php");
 
 class Post  {
     protected $image;

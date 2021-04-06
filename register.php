@@ -1,9 +1,8 @@
 <?php 
- include_once(__DIR__ . "/classes/Db.php");
+    include_once(__DIR__ . "/helpers/autoloader.php");
 
     if(!empty($_POST)){
         try {        
-            include_once(__DIR__ . "/classes/User.php");
             // creates a new user object
             $user = new User();
             // set data for user
