@@ -40,13 +40,17 @@ body{
     width: 32px;
 }
 
-.input-group .form-control .search-input{
-    border-radius: 30px;
+.input-group .form-control  {
+    border-radius: 30px ;
     
 }
+
+.search-input{
+    border-radius: 30px ;
+}
+
 .input-group .form-control::placeholder{
     color: gainsboro;
-    
 }
 
 .search-input:focus{

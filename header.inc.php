@@ -43,7 +43,7 @@
                     </div>
                 </div> -->
 
-                <div class="col-4"> 
+                <div class="col-5"> 
                     <form method="POST" action="results.php">
                         <div class="form-inline">
                             <input type="search" class="form-control search-input" name="keyword" value="<?php echo isset($_POST['keyword']) ? $_POST['keyword'] : '' ?>" placeholder="Search" aria-label="Search" aria-describedby="button-addon2" required=""/>
