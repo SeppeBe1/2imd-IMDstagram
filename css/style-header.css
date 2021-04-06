@@ -45,15 +45,15 @@ body{
     
 }
 
-.search-input{
+#search-input{
     border-radius: 30px ;
 }
 
-.input-group .form-control::placeholder{
+#search-input::placeholder{
     color: gainsboro;
 }
 
-.search-input:focus{
+#search-input:focus{
     box-shadow: 0 0 7px #E9C9C1;
     border: 1px solid #E9C9C1;
     color: #5A5A5A;

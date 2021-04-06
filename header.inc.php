@@ -46,7 +46,7 @@
                 <div class="col-5"> 
                     <form method="POST" action="results.php">
                         <div class="form-inline">
-                            <input type="search" class="form-control search-input" name="keyword" value="<?php echo isset($_POST['keyword']) ? $_POST['keyword'] : '' ?>" placeholder="Search" aria-label="Search" aria-describedby="button-addon2" required=""/>
+                            <input type="search" id ="search-input"class="form-control " name="keyword" value="<?php echo isset($_POST['keyword']) ? $_POST['keyword'] : '' ?>" placeholder="Search" aria-label="Search" aria-describedby="button-addon2" required=""/>
                             <!-- <button class="btn btn-success" name="search">Search</button> -->
                         </div>
                     </form>
