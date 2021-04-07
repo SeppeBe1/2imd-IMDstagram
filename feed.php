@@ -14,9 +14,9 @@
     
 
     $posts = new classes\Post();
-    // $posts->getAllPosts();
+    $posts->getAllPosts();
 
-    // var_dump($posts);
+    var_dump($posts);
     
 
 ?>
