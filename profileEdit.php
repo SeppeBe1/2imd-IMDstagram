@@ -1,5 +1,27 @@
 <?php 
+    namespace src;
+    spl_autoload_register();
     include_once("./header.inc.php");
+    session_start();
+
+
+    $email = $_POST['email'];
+    $username = $_SESSION['user'];
+
+    try{
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $user = new classes\User();
+            $user->changeEmail($email, $username);
+                
+        } else{
+            echo "geen bestaande email";
+        }
+    } catch(\Throwable $error) {
+        $error = $error->getMessage();
+    }
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
