@@ -6,18 +6,18 @@
     $security = new classes\User();
     $security->onlyLoggedInUsers();
 
-    /* if(isset($_POST['paramSearch'])){
-        echo $search = $_POST['paramSearch'] . " check";
-    } */
-
-    // TEST SEARCH FUNCTION HERE and delete search.php
-
+    // LOOP FOR POSTS
     $posts = new classes\Post();
     $resultsPosts = $posts->getAllPosts();
-
-    // var_dump($resultsPosts);
-
     // FOR DATE TO STRING "**AGO" -> https://stackoverflow.com/questions/1416697/converting-timestamp-to-time-ago-in-php-e-g-1-day-ago-2-days-ago
+
+    /* $tags = new classes\Search();
+    $searchTags = $tags->searchTags('a');
+    var_dump($searchTags); */
+
+    /* $tags = new classes\Search();
+    $resultsTags = $tags->extractTags(); */
+    
 
 ?>
 
@@ -128,10 +128,9 @@
                     <div class="col-12">
                         <p><span class="profile-name"><?php echo $post['username']?> </span>
                             <?php echo $post['description']?>
-
-                            <a href="#" class="tags-post">#kitchen </a>
-                            <a href="#" class="tags-post">#home</a>
-                            <a href="#" class="tags-post">#lovemyplants</a>
+                                <a href="#" class="tags-post">#kitchen</a>
+                                <a href="#" class="tags-post">#home</a>
+                                <a href="#" class="tags-post">#lovemyplants</a>
                         </p>
                         
                     </div>

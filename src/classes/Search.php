@@ -35,7 +35,7 @@ class Search {
             $db = new Db();
             $conn = $db->getInstance();
         
-            $statement = $conn->prepare("select * from posts where description like %:tag%");
+            $statement = $conn->prepare("select id, description from posts where description like %:tag%");
             $searchTag = "%#".$tag."%";
             $statement->bindValue(":tag", $searchTag, \PDO::PARAM_STR); //get clicked tag
             $results = $statement->execute();
@@ -43,6 +43,17 @@ class Search {
 
             return $resultsTag;
         }
+
+        /* public function extractTags() {
+            $db = new Db();
+            $conn = $db->getInstance();
+        
+            $statement = $conn->prepare("SELECT SUBSTRING(description, locate('#',description)-1 + length('#')) AS Tags from posts");
+            $results = $statement->execute();
+            $resultsTags = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+            return $resultsTags;
+        } */
 }
 
 ?>

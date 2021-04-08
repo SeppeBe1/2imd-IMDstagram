@@ -9,10 +9,16 @@
     if(isset($_POST['keyword'])) {
         $keyword = $_POST['keyword'];
         $search = new classes\Search();
-        $results = $search->searchParam($keyword);
+        $resultsSearch = $search->searchParam($keyword);
     }
 
-    // TAG RESULTS
+    /* if(isset($_POST['tag'])) {
+        $tag = $_POST['tag'];
+        $searchTag = new classes\Search();
+        $resultsTags = $searchTag->searchTags($tag);
+
+        var_dump($resultsTags);
+    } */
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -30,22 +36,25 @@
 </head>
 <body>
 
-    <main>
-    <!-- HIER RESULTS PRINTEN - NEEDS TWEAKING WITH HTML/CSS -->
-            <div class="container post-post">
-                <?php foreach($results as $key): ?>
-                        <div class="row row-first">
-                            <div class="col-2">
-                                <a href="#">
-                                    <img src="<?php echo $key['avatar']; ?>" class="profile-pic-feed">
-                                </a>
+        <main>
+        <!-- HIER RESULTS PRINTEN - NEEDS TWEAKING WITH HTML/CSS -->
+                <div class="container post-post">
+                    <?php foreach($resultsSearch as $key): ?>
+                            <div class="row row-first">
+                                <div class="col-2">
+                                    <a href="#">
+                                        <img src="<?php echo $key['avatar']; ?>" class="profile-pic-feed">
+                                    </a>
+                                </div>
+                                <div class="col-7">
+                                    <a href="#"><span class="profile-name"><?php echo $key['username']; ?></span></a><br>
+                                    <a href="#" class="profile-location"><?php echo $key['location']; ?></a>
+                                    <a href="#" class="profile-description"><?php echo $key['description']; ?></a>
+                                </div>
                             </div>
-                            <div class="col-7">
-                                <a href="#"><span class="profile-name"><?php echo $key['username']; ?></span></a><br>
-                                <a href="#" class="profile-location"><?php echo $key['location']; ?></a>
-                                <a href="#" class="profile-description"><?php echo $key['description']; ?></a>
-                            </div>
-                        </div>
-                <?php endforeach; ?>
-            </div>
+                    <?php endforeach; ?>
+                </div>
+        </main>
+    </body>
+</html>
 
