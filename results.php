@@ -6,19 +6,18 @@
     $security = new classes\User();
     $security->onlyLoggedInUsers();
 
-    if(isset($_POST['keyword'])) {
+   /* if(isset($_POST['keyword'])) { IS OK TO PUT IN HTML?
         $keyword = $_POST['keyword'];
         $search = new classes\Search();
         $resultsSearch = $search->searchParam($keyword);
-    }
-
-    /* if(isset($_POST['tag'])) {
-        $tag = $_POST['tag'];
-        $searchTag = new classes\Search();
-        $resultsTags = $searchTag->searchTags($tag);
-
-        var_dump($resultsTags);
     } */
+
+    if(isset($_GET['tag'])) {
+        $hashtag = $_GET['tag'];
+        $searchTag = new classes\Search();
+        $resultsTags = $searchTag->searchTags($hashtag);
+        var_dump($resultsTags);
+    }
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -38,6 +37,11 @@
 
         <main>
         <!-- HIER RESULTS PRINTEN - NEEDS TWEAKING WITH HTML/CSS -->
+        <?php if(isset($_POST['keyword'])): ?>
+            <?php $keyword = $_POST['keyword'];
+                $search = new classes\Search();
+                $resultsSearch = $search->searchParam($keyword); ?>
+        
                 <div class="container post-post">
                     <?php foreach($resultsSearch as $key): ?>
                             <div class="row row-first">
@@ -53,7 +57,10 @@
                                 </div>
                             </div>
                     <?php endforeach; ?>
+        <?php endif; ?>
                 </div>
+
+                <!-- RESULTS TAGS -->
         </main>
     </body>
 </html>

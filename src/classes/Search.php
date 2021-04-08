@@ -31,11 +31,10 @@ class Search {
 
         public function searchTags($tag){
             // als klikt op die tag -> resultaten met die tag
-            // select * from posts where description like %:tag%
             $db = new Db();
             $conn = $db->getInstance();
         
-            $statement = $conn->prepare("select id, description from posts where description like %:tag%");
+            $statement = $conn->prepare("select * from posts where description like :tag");
             $searchTag = "%#".$tag."%";
             $statement->bindValue(":tag", $searchTag, \PDO::PARAM_STR); //get clicked tag
             $results = $statement->execute();
@@ -43,6 +42,17 @@ class Search {
 
             return $resultsTag;
         }
+
+        /* public function getAllDescription() {
+            $db = new Db();
+            $conn = $db->getInstance();
+        
+            $statement = $conn->prepare("select description from posts");
+            $results = $statement->execute();
+            $resultsDescr = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+            return $resultsDescr;
+        } */
 
         /* public function extractTags() {
             $db = new Db();

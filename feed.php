@@ -11,17 +11,7 @@
     $resultsPosts = $posts->getAllPosts();
     // FOR DATE TO STRING "**AGO" -> https://stackoverflow.com/questions/1416697/converting-timestamp-to-time-ago-in-php-e-g-1-day-ago-2-days-ago
 
-    /* $tags = new classes\Search();
-    $searchTags = $tags->searchTags('a');
-    var_dump($searchTags); */
-
-    /* $tags = new classes\Search();
-    $resultsTags = $tags->extractTags(); */
-    
-
-?>
-
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -95,9 +85,8 @@
 
                 <div class="row row-second">
                     <div class="col-12">
-                        <img src="<?php echo $post['photo'] ?>" class="picture-feed">
+                        <img src="<?php echo  $post['photo'];?>" class="picture-feed">
                     </div>
-                    
                 </div>
 
                 <div class="row row-third">
@@ -126,13 +115,17 @@
 
                 <div class="row row-fourth">
                     <div class="col-12">
-                        <p><span class="profile-name"><?php echo $post['username']?> </span>
-                            <?php echo $post['description']?>
-                                <a href="#" class="tags-post">#kitchen</a>
-                                <a href="#" class="tags-post">#home</a>
-                                <a href="#" class="tags-post">#lovemyplants</a>
+                        <p><span class="profile-name"><?php echo $post['username'];?></span>
+                            <!--DESCRIPTION + HASHTAGS -->
+                            <?php $descrArray = explode(" ", $post['description']);?>
+                            <?php foreach($descrArray as $word): ?>
+                                <?php if($word[0] == "#"): ?>
+                                    <a href="results.php?tag=<?php echo str_replace("#", "", $word); ?>" name="tag" class="tags-post"><?php echo  $word;?></a>
+                                <?php else: ?>
+                                    <?php echo  $word; ?>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
                         </p>
-                        
                     </div>
                 </div>
 
