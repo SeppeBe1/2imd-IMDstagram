@@ -11,7 +11,6 @@
     } */
 
     // TEST SEARCH FUNCTION HERE and delete search.php
-    $user = new classes\User();
 
     $posts = new classes\Post();
     $resultsPosts = $posts->getAllPosts();
@@ -35,13 +34,6 @@
     <title>Plantstagram - feed</title>
 </head>
 <body>
-
-<?php
-    include_once("../2imd-IMDstagram/header.inc.php");
-
-?>
-
-
 
     <!-- <header>
         <div class="container-fluid feed-header">

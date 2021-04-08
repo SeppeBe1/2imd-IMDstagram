@@ -2,10 +2,12 @@
     namespace src;
     spl_autoload_register();
     include_once("./header.inc.php");
-    session_start();
 
+    $security = new classes\User();
+    $security->onlyLoggedInUsers();
 
-    $email = $_POST['email'];
+    $email = $_POST['email']; //AAN TE PASSEN
+    var_dump($email);
     $username = $_SESSION['user'];
 
     try{

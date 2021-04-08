@@ -3,6 +3,9 @@
     spl_autoload_register();
     include_once("./header.inc.php");
 
+    $security = new classes\User();
+    $security->onlyLoggedInUsers();
+
     if(isset($_POST['keyword'])) {
         $keyword = $_POST['keyword'];
         $search = new classes\Search();
