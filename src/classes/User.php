@@ -141,6 +141,15 @@ class User {
         return $results;
     }
 
+    // public static function getAvatar(){
+    //     $conn = Db::getInstance();
+    //     $statement = $conn->prepare("select avatar from users");
+    //     $result = $statement->execute();
+    //     var_dump($result);
+
+    //     $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+    //     return $users;
+    // }
     public function onlyLoggedInUsers() {
         session_start();
         if(!isset($_SESSION['user'])){

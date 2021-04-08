@@ -32,7 +32,7 @@
                     <a href="feed.php">
                         <img src="./img/icons/home.svg" class="icon-nav">
                     </a>
-                    <a href="#">
+                    <a href="addPost.php">
                         <img src="./img/icons/+.svg" class="icon-nav">
                     </a>
                 </div>

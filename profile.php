@@ -21,6 +21,11 @@ include_once("./header.inc.php");
 
 <body>
 
+<?php
+    include_once("../2imd-IMDstagram/header.inc.php");
+
+?>
+
 
     <main>
         <div class="container container-profile clearfix">

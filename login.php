@@ -28,14 +28,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style-feed.css"> 
+    <link rel="stylesheet" href="css/style-profile.css">
+    <link rel="stylesheet" href="css/style-header.css">
     <title>Login</title>
   </head>
   <body>
+
+    <div class="container-fluid feed-header">
+              <div class="row justify-content-center">
+                  <img src="img/plantstagram-logo.png" class="plant-logo justify-content-center">
+              </div>
+    </div>
+
     <div class="container-fluid">
           <div class="login-form">
             <form action="" method="post">
               <div class="formLayout">
-                <h1 class="text-center form-title">Instagram</h2>       
+                <h1 class="text-center form-title">Plantstagram</h2>       
                   <div class="form-group">
                       <label for="username">Username</label>
                       <input type="text" class="form-control" id="username" name="username"  required="required">
