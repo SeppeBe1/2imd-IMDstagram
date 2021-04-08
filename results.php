@@ -2,6 +2,10 @@
     namespace src;
     spl_autoload_register();
     include_once("./header.inc.php");
+    spl_autoload_register(); 
+
+    $security = new classes\User();
+    $security->onlyLoggedInUsers();
 
     if(isset($_POST['keyword'])) {
         $keyword = $_POST['keyword'];
