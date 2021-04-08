@@ -5,6 +5,9 @@
     include_once("./header.inc.php");
     spl_autoload_register(); 
 
+    $security = new classes\User();
+    $security->onlyLoggedInUsers();
+
     // echo "Make a new post";
 
 

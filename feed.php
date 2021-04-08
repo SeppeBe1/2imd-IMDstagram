@@ -37,13 +37,6 @@
 </head>
 <body>
 
-<?php
-    include_once("../2imd-IMDstagram/header.inc.php");
-
-?>
-
-
-
     <!-- <header>
         <div class="container-fluid feed-header">
             <div class="row justify-content-center">
