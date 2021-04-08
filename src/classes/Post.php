@@ -1,5 +1,6 @@
 <?php
 namespace src\classes;
+spl_autoload_register();
 // include_once(__DIR__ . "/helpers/autoloader.php");
 
 class Post  {
@@ -99,16 +100,12 @@ class Post  {
     public static function getAllPosts(){
         $db = new Db();
         $conn = $db->getInstance();
-        // $conn = Db::getInstance();
-        // $statement = $conn->prepare("select * from posts INNER JOIN users ON posts.user_id = users.id ORDER BY postedDate DESC LIMIT 2");
-        $statement = $conn->prepare("select * from posts");
-        var_dump($statement);
-        // $result = $statement->execute();
-        // var_dump($result);
-        // $posts = $statement->fetch(\PDO::FETCH_ASSOC);
+        $statement = $conn->prepare("select * from posts INNER JOIN users ON posts.user_id = users.id ORDER BY postedDate DESC LIMIT 20");
+        $statement->execute();
+        
+        $posts = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        return $posts;
 
-        // $posts = $result->fetchAll(\PDO::FETCH_ASSOC);
-        // return $posts;
     }
 }
 ?>

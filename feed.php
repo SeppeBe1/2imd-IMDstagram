@@ -11,13 +11,12 @@
     } */
 
     // TEST SEARCH FUNCTION HERE and delete search.php
-    
+    $user = new classes\User();
 
     $posts = new classes\Post();
-    $posts->getAllPosts();
+    $resultsPosts = $posts->getAllPosts();
 
-    var_dump($posts);
-    
+    // var_dump($resultsPosts);
 
 ?>
 
@@ -81,6 +80,95 @@
     <main>
 
     <!-- START VAN LOOP-->
+
+    <?php foreach($resultsPosts as $post): ?>
+
+    <div class="container post-post">
+                <div class="row row-first">
+                    <div class="col-2">
+                        <a href="#">
+                            <img src="<?php echo $post['avatar']?>" class="profile-pic-feed">
+                        </a>
+                    </div>
+                    <div class="col-7">
+                        <a href="#"><span class="profile-name"><?php echo $post['username']?></span></a><br>
+                        <a href="#" class="profile-location"><?php echo $post['location']?></a>
+                    </div>
+                    <div class="col-1">
+                        <a href="#" class="unfollow-button">Unfollow</a>
+                    </div>
+                </div>
+
+                <div class="row row-second">
+                    <div class="col-12">
+                        <img src="<?php echo $post['photo'] ?>" class="picture-feed">
+                    </div>
+                    
+                </div>
+
+                <div class="row row-third">
+                    <div class="col-1">
+                        <a href="#"><img src="./img/icons/heart.svg" class="icon-feed"></a>
+                    </div>
+                    <div class="col-1">
+                        <p class="number-feed">91</p>
+                    </div>
+                    <div class="col-1">
+                        <a href="#"><img src="./img/icons/chat.svg" class="icon-feed"></a>
+                    </div>
+                    <div class="col-1">
+                        <p class="number-feed">1</p>
+                    </div>
+
+                    <div class="col-6">
+
+                    </div>
+
+                    <div class="col-1">
+                        <a href="#"><img src="./img/icons/flag.svg" class="icon-feed"></a>
+                    </div>
+
+                </div>
+
+                <div class="row row-fourth">
+                    <div class="col-12">
+                        <p><span class="profile-name"><?php echo $post['username']?> </span>
+                            <?php echo $post['description']?>
+
+                            <a href="#" class="tags-post">#kitchen </a>
+                            <a href="#" class="tags-post">#home</a>
+                            <a href="#" class="tags-post">#lovemyplants</a>
+                        </p>
+                        
+                    </div>
+                </div>
+
+                <div class="row row-fifth">
+                    <div class="col-12">
+                        <p class="reaction"><span class="profile-name">Paul Delvaux </span>Proin ullamcorper feugiat eros, sit amet accumsan tellus cursus vitae. Etiam feugiat tristique ante, luctus feugiat risus ultrices ut!</p>
+                    </div>  
+                </div>
+
+                <div class="row row-sixth">
+                    <div class="col-12">
+                        <p class="timing-feed"><?php echo $post['postedDate']?></p>
+                    </div>
+                </div>
+
+                <div class="row row-seventh">
+                    <div class="col-10">
+                        <form action="feed.php">
+                            <input type="text" id="comment-input" name="comment-input" placeholder="Place a comment" size='35'>
+                        </form>
+                    </div>
+                    <div class="col-2">
+                            <a href="#" class="comment-button">Place</a>
+                    </div>
+
+                </div>
+
+        </div>
+    <?php endforeach; ?>
 
 
 
