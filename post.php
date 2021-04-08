@@ -1,5 +1,9 @@
 <?php
+    namespace src;
+    spl_autoload_register(); 
 
+    $security = new classes\User();
+    $security->onlyLoggedInUsers();
     // echo "Instagram feed posts";
 
 ?>
