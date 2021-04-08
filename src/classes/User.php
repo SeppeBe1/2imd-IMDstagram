@@ -150,6 +150,7 @@ class User {
     //     $users = $statement->fetchAll(PDO::FETCH_ASSOC);
     //     return $users;
     // }
+
     public function onlyLoggedInUsers() {
         session_start();
         if(!isset($_SESSION['user'])){
@@ -165,7 +166,7 @@ class User {
         $statement->bindValue(":email", $email);
         $statement->bindValue(":user", $username);
         $results = $statement->execute();
+        
         return $results;
-
     }
 }

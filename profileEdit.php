@@ -6,23 +6,22 @@
     $security = new classes\User();
     $security->onlyLoggedInUsers();
 
-    $email = $_POST['email']; //AAN TE PASSEN
-    var_dump($email);
-    $username = $_SESSION['user'];
+    if(isset($_POST['email'])){
+        $email = $_POST['email'];
+        $username = $_SESSION['user'];
 
-    try{
-        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $user = new classes\User();
-            $user->changeEmail($email, $username);
-                
-        } else{
-            echo "geen bestaande email";
+        try{
+            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $user = new classes\User();
+                $user->changeEmail($email, $username);
+                    
+            } else{
+                echo "geen bestaande email";
+            }
+        }catch(\Throwable $error) {
+            $error = $error->getMessage();
         }
-    } catch(\Throwable $error) {
-        $error = $error->getMessage();
     }
-
-
 
 ?>
 <!DOCTYPE html>

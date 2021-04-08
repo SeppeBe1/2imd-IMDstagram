@@ -17,6 +17,8 @@
 
     // var_dump($resultsPosts);
 
+    // FOR DATE TO STRING "**AGO" -> https://stackoverflow.com/questions/1416697/converting-timestamp-to-time-ago-in-php-e-g-1-day-ago-2-days-ago
+
 ?>
 
 <!DOCTYPE html>

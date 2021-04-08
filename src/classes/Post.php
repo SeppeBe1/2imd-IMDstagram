@@ -1,7 +1,6 @@
 <?php
 namespace src\classes;
 spl_autoload_register();
-// include_once(__DIR__ . "/helpers/autoloader.php");
 
 class Post  {
     protected $image;

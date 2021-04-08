@@ -43,7 +43,6 @@ class Search {
 
             return $resultsTag;
         }
-
 }
 
 ?>

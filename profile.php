@@ -1,5 +1,10 @@
 <?php 
-include_once("./header.inc.php");
+    namespace src;
+    spl_autoload_register();
+    include_once("./header.inc.php");
+
+    $security = new classes\User();
+    $security->onlyLoggedInUsers();
 
 ?>
 <!DOCTYPE html>
