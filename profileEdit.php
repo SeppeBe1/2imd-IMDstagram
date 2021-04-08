@@ -1,4 +1,9 @@
 <?php 
+    namespace src; 
+    spl_autoload_register(); 
+
+    $security = new classes\User();
+    $security->onlyLoggedInUsers();
 
 ?>
 <!DOCTYPE html>
