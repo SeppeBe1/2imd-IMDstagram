@@ -17,7 +17,7 @@
             $error = true;
           }
       }
-    } catch(Throwable $error) {
+    } catch(\Throwable $error) {
       $error = $error->getMessage();
     }
 

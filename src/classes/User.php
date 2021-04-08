@@ -25,7 +25,7 @@ class User {
     public function setPassword($password)
     {
         if(strlen($password) < 5){
-            throw new Exception("Passwords must be longer than 5 characters.");
+            throw new \Exception("Passwords must be longer than 5 characters.");
         }
 
         $this->password = $password;
@@ -155,5 +155,17 @@ class User {
         if(!isset($_SESSION['user'])){
             header("Location: login.php");
         }
+    }
+
+    public function changeEmail($email,$username){
+        $db = new Db();
+        $conn = $db->getInstance();
+
+        $statement = $conn->prepare("UPDATE users SET email = :email WHERE username = :user ");
+        $statement->bindValue(":email", $email);
+        $statement->bindValue(":user", $username);
+        $results = $statement->execute();
+        return $results;
+
     }
 }

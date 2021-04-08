@@ -1,5 +1,7 @@
 <?php
-include_once(__DIR__ . "/helpers/autoloader.php");
+
+namespace src\classes;
+
 
 class Admin extends User {
 
