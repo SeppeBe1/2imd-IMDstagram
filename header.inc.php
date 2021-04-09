@@ -17,7 +17,7 @@
     <header>
         <div class="container-fluid header-logo">
             <div class="row">
-                <div class="col-12 text-center">
+                <div class="col-12 text-center header-logo">
                     <img src="img/plantstagram-logo.png" class="plant-logo ">
                 </div>
             </div>

@@ -1,0 +1,22 @@
+/* body{
+    background-color: aqua;
+} */
+
+.tags-results{
+    background-color: brown;
+}
+
+.bold{
+    font-weight: 800;
+}
+
+.search-results-p{
+    border-bottom: 1px solid #D9D9D9;
+}
+
+@media(min-width: 1000px){
+    .search-results-con{
+        width: 700px;
+        /* background-color: brown; */
+    }
+}
