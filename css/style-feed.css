@@ -116,6 +116,7 @@ a{
 #comment-input{
     border-width:0px;
     border:none;
+    resize: none;
 }
 
 

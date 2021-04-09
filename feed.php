@@ -141,17 +141,20 @@
                     </div>
                 </div>
 
-                <div class="row row-seventh">
-                    <div class="col-10">
-                        <form action="feed.php">
-                            <input type="text" id="comment-input" name="comment-input" placeholder="Place a comment" size='35'>
-                        </form>
-                    </div>
-                    <div class="col-2">
-                            <a href="#" class="comment-button">Place</a>
-                    </div>
-
-                </div>
+                
+                    <form action="feed.php">
+                    <div class="row row-seventh">
+                        <div class="col-10">
+                            
+                                <!-- <input type="text" id="comment-input" name="comment-input" placeholder="Place a comment" size='35'> -->
+                                <textarea rows="auto" cols="45" class="comment-input" id="comment-input"  name="comment-input" placeholder="Place a comment"></textarea>
+                        </div>
+                        <div class="col-2">
+                                <a href="#" class="comment-button">Place</a>
+                        </div>
+                        </div>
+                    </form>
+                
 
         </div>
     <?php endforeach; ?>
