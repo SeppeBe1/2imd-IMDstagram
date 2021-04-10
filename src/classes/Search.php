@@ -42,7 +42,7 @@ class Search {
 
             return $resultsTag;
         }
-
+        
         /* public function getAllDescription() {
             $db = new Db();
             $conn = $db->getInstance();

@@ -129,19 +129,12 @@
                     </div>
                 </div>
 
-                <div class="row row-fifth">
-                    <div class="col-12">
-                        <p class="reaction"><span class="profile-name">Paul Delvaux </span>Proin ullamcorper feugiat eros, sit amet accumsan tellus cursus vitae. Etiam feugiat tristique ante, luctus feugiat risus ultrices ut!</p>
-                    </div>  
-                </div>
-
                 <div class="row row-sixth">
                     <div class="col-12">
                         <p class="timing-feed"><?php echo $post['postedDate']?></p>
                     </div>
                 </div>
 
-                
                     <form action="feed.php">
                     <div class="row row-seventh">
                         <div class="col-10">

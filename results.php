@@ -12,12 +12,12 @@
         $resultsSearch = $search->searchParam($keyword);
     } */
 
-    if(isset($_GET['tag'])) {
+    /* if(isset($_GET['tag'])) {
         $hashtag = $_GET['tag'];
         $searchTag = new classes\Search();
         $resultsTags = $searchTag->searchTags($hashtag);
         var_dump($resultsTags);
-    }
+    } */
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -39,90 +39,70 @@
 
         <main>
         <!-- HIER RESULTS PRINTEN - NEEDS TWEAKING WITH HTML/CSS -->
-        <?php if(isset($_POST['keyword'])): ?>
-            <?php $keyword = $_POST['keyword'];
-                $search = new classes\Search();
-                $resultsSearch = $search->searchParam($keyword); ?>
-        
-                <div class="container search-results-con">
-                    <h3>Search results for <span class="bold">"<?php echo $_POST['keyword'] ?>" </span>:</h3>
+            <?php if(isset($_POST['keyword'])): ?>
+                <?php $keyword = $_POST['keyword'];
+                    $search = new classes\Search();
+                    $resultsSearch = $search->searchParam($keyword);?>
+            
+                    <div class="container search-results-con">
+                        <h3>Search results for <span class="bold">"<?php echo $_POST['keyword'] ?>"</span>:</h3><br>
 
-                    <p class="search-results-p">Accounts</p>
-                    <p class="search-results-p">Posts</p>
-                    <p class="search-results-p">Tags</p>
-                    <p class="search-results-p">Locations</p>
+                        <!--  <p class="search-results-p">Accounts</p> -->
+                        <!-- if clause (if keyword == username) -->
+                        
+                        <!-- <p class="search-results-p">Posts</p> -->
+                        <!-- else -->
 
+                        <?php foreach($resultsSearch as $key): ?>
+                            <div class="container post-post">
+                                    <div class="row row-first">
+                                        <div class="col-2">
+                                            <a href="#">
+                                                <img src="<?php echo $key['avatar']; ?>" class="profile-pic-feed">
+                                            </a>
+                                        </div>
+                                        <div class="col-7">
+                                            <a href="#"><span class="profile-name"><?php echo $key['username']; ?></span></a><br>
+                                            <a href="#" class="profile-location"><?php echo $key['location']; ?></a>
+                                            <br>
+                                            <a href="#"><img src="<?php echo  $key['photo'];?>" class="picture-feed"></a><br><!--a href aanpassen param meegeven naar de detailpg van de foto-->
+                                            <br>
 
-                    <?php foreach($resultsSearch as $key): ?>
-                        <div class="container post-post">
-                                <div class="row row-first">
-                                    <div class="col-2">
-                                        <a href="#">
-                                            <img src="<?php echo $key['avatar']; ?>" class="profile-pic-feed">
-                                        </a>
+                                            <?php $descrArray = explode(" ", $key['description']);?>
+                                            <?php foreach($descrArray as $word): ?>
+                                                <?php if($word[0] == "#"): ?>
+                                                    <a href="results.php?tag=<?php echo str_replace("#", "", $word); ?>" name="tag" class="tags-post"><?php echo  $word;?></a>
+                                                <?php else: ?>
+                                                    <?php echo  $word; ?>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+
+                                        </div>
                                     </div>
-                                    <div class="col-7">
-                                        <a href="#"><span class="profile-name"><?php echo $key['username']; ?></span></a><br>
-                                        <a href="#" class="profile-location"><?php echo $key['location']; ?></a>
-                                        <br>
-                                        <p class="profile-description"><?php echo $key['description']; ?></p>
-                                        <img src="<?php echo  $key['photo'];?>" class="picture-feed">
-                                        
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+            <?php endif; ?>
+
+    <!-- RESULTS TAGS -->
+            <?php if(isset($_GET['tag'])):?>
+                <?php $hashtag = $_GET['tag'];
+                    $searchTag = new classes\Search();
+                    $resultsTags = $searchTag->searchTags($hashtag);?>
+
+                            <div class="container-fluid tags-results">
+                                <div class="row">
+                                <div><?php echo "#" . $_GET['tag']; ?></div> <!-- ANDERS HTML/CSS? -->
+
+                                <?php foreach($resultsTags as $tagResults):?>
+                                    <div class="col-4">
+                                        <a href="#"><img class="img-thumbnail"src="<?php echo $tagResults['photo'];?>" ></a>
                                     </div>
+                                    <?php endforeach; ?>
                                 </div>
-                        </div>
-                    <?php endforeach; ?>
+                            </div>
 
-                </div>
-
-        <?php endif; ?>
-                
-
-                <!-- RESULTS TAGS -->
-
-                <!-- <div class="container-fluid tags-results">
-                    <div class="row">
-                        <div class="col-4">
-                            <img class="img-thumbnail"src="https://images.pexels.com/photos/583791/pexels-photo-583791.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" >
-                        </div>
-
-                        <div class="col-4 ">
-                            <img class="img-thumbnail" src="https://images.pexels.com/photos/3673763/pexels-photo-3673763.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" class="img-responsive">
-                        </div>
-
-                        <div class="col-4 ">
-                            <img class="img-thumbnail" src="https://images.pexels.com/photos/4019666/pexels-photo-4019666.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" class="img-responsive">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-4">
-                            <img class="img-thumbnail "src="https://images.pexels.com/photos/3255246/pexels-photo-3255246.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" >
-                        </div>
-
-                        <div class="col-4 ">
-                            <img class="img-thumbnail" src="https://images.pexels.com/photos/3817847/pexels-photo-3817847.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" class="img-responsive">
-                        </div>
-
-                        <div class="col-4 ">
-                            <img class="img-thumbnail" src="https://images.pexels.com/photos/355279/pexels-photo-355279.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" class="img-responsive">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-4 square">
-                            <img class="img-thumbnail"src="https://images.pexels.com/photos/771319/pexels-photo-771319.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" >
-                        </div>
-
-                        <div class="col-4 ">
-                            <img class="img-thumbnail" src="https://images.pexels.com/photos/4894423/pexels-photo-4894423.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" class="img-responsive">
-                        </div>
-
-                        <div class="col-4 ">
-                            <img class="img-thumbnail" src="https://images.pexels.com/photos/5720091/pexels-photo-5720091.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" class="img-responsive">
-                        </div>
-                    </div>
-                </div> -->
+            <?php endif; ?>
         </main>
     </body>
 </html>
