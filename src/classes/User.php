@@ -63,6 +63,43 @@ class User {
         return $this;
     }
 
+    public function getFullName()
+    {
+        return $this->fullName;
+    }
+ 
+    public function setFullName($fullName)
+    {
+        $this->fullName = $fullName;
+
+        return $this;
+    }
+
+    public function getBio()
+    {
+        return $this->bio;
+    }
+
+    
+    public function setBio($bio)
+    {
+        $this->bio = $bio;
+
+        return $this;
+    }
+
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
     public function canLogin() {
         $db = new Db();
         $conn = $db->getInstance();
