@@ -1,5 +1,5 @@
 <?php
-include_once(__DIR__ . "../Db.php");
+namespace src\classes;
 class Follower{
 // have to get a better idea
     

@@ -1,5 +1,10 @@
 <?php 
+    namespace src;
+    spl_autoload_register();
+    include_once("./header.inc.php");
 
+    $security = new classes\User();
+    $security->onlyLoggedInUsers();
 
 ?>
 <!DOCTYPE html>
@@ -12,6 +17,7 @@
     <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style-feed.css"> 
     <link rel="stylesheet" href="css/style-profile.css"> 
+
     <script src="https://kit.fontawesome.com/a7dc01cef9.js" crossorigin="anonymous"></script>
 
     <title>Profile</title>
@@ -19,47 +25,14 @@
 </head>
 
 <body>
-    <header>
-        <div class="container-fluid feed-header">
-            <div class="row ">
-                <div class="col-sm-12  text-center ">
-                    <img src="img/plantstagram-logo.png" class="plant-logo ">
-                </div>
-            </div>
-        </div>
 
-        <div class="navigation ">
-            <div class="row ">
-                <div class="col-7 col-lg-6 ">
-                    <div class="menu-links">
-                        <a href="profile.php">
-                            <img src="https://images.pexels.com/photos/3101767/pexels-photo-3101767.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" class="profile-pic">
-                        </a>
-                        <a href="feed.php">
-                            <img src="./img/icons/home.svg" class="icon-nav">
-                        </a>
-                        <a href="#">
-                            <img src="./img/icons/+.svg" class="icon-nav">
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-5 col-lg-3 ">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control search-input" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
-                        <!-- <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button> -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
 
     <main>
         <div class="container container-profile clearfix">
             <!-- EDIT BTN WEG WANNEER IK KIJK NAAR ANDER PROFIEL -->
             <div class="row flex-row-reverse">
                 <div class="col-5 col-lg-4">
-                    <a href="#" class="btn edit-btn">Edit profile</a>
+                    <a href="profileEdit.php" class="btn edit-btn">Edit profile</a>
                 </div>
             </div>
 

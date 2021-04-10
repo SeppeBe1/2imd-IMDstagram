@@ -1,34 +1,40 @@
 <?php
+    namespace src;
+    include_once("./header.inc.php");
+    spl_autoload_register(); 
 
-    // echo "Hello World";
+    $security = new classes\User();
+    $security->onlyLoggedInUsers();
 
-?>
+    // LOOP FOR POSTS
+    $posts = new classes\Post();
+    $resultsPosts = $posts->getAllPosts();
+    // FOR DATE TO STRING "**AGO" -> https://stackoverflow.com/questions/1416697/converting-timestamp-to-time-ago-in-php-e-g-1-day-ago-2-days-ago
 
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="css/style-feed.css">     
+    <link rel="stylesheet" href="css/style-feed.css">
+
     <script src="https://kit.fontawesome.com/a7dc01cef9.js" crossorigin="anonymous"></script>
     <title>Plantstagram - feed</title>
 </head>
 <body>
 
-
-    <header>
+    <!-- <header>
         <div class="container-fluid feed-header">
             <div class="row justify-content-center">
                 <img src="img/plantstagram-logo.png" class="plant-logo justify-content-center">
             </div>
         </div>
 
-        <div class="container-fluid navigation">
+        <div class="container-fluid navigation sticky-top">
             <div class="row">
                 <div class="col-7">
                     <a href="profile.php">
@@ -45,18 +51,116 @@
                     
                     <div class="input-group mb-3">
                         <input type="text" class="form-control search-input" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
-                        <!-- <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button> -->
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
                     </div>
                 </div>
                 
             </div>
         </div>
 
-    </header>
+    </header> -->
+    
 
     <main>
 
+    <!-- START VAN LOOP-->
+
+    <?php foreach($resultsPosts as $post): ?>
+
+    <div class="container post-post">
+                <div class="row row-first">
+                    <div class="col-2">
+                        <a href="#">
+                            <img src="<?php echo $post['avatar']?>" class="profile-pic-feed">
+                        </a>
+                    </div>
+                    <div class="col-7">
+                        <a href="#"><span class="profile-name"><?php echo $post['username']?></span></a><br>
+                        <a href="#" class="profile-location"><?php echo $post['location']?></a>
+                    </div>
+                    <div class="col-1">
+                        <a href="#" class="unfollow-button">Unfollow</a>
+                    </div>
+                </div>
+
+                <div class="row row-second">
+                    <div class="col-12">
+                        <img src="<?php echo  $post['photo'];?>" class="picture-feed">
+                    </div>
+                </div>
+
+                <div class="row row-third">
+                    <div class="col-1">
+                        <a href="#"><img src="./img/icons/heart.svg" class="icon-feed"></a>
+                    </div>
+                    <div class="col-1">
+                        <p class="number-feed">91</p>
+                    </div>
+                    <div class="col-1">
+                        <a href="#"><img src="./img/icons/chat.svg" class="icon-feed"></a>
+                    </div>
+                    <div class="col-1">
+                        <p class="number-feed">1</p>
+                    </div>
+
+                    <div class="col-6">
+
+                    </div>
+
+                    <div class="col-1">
+                        <a href="#"><img src="./img/icons/flag.svg" class="icon-feed"></a>
+                    </div>
+
+                </div>
+
+                <div class="row row-fourth">
+                    <div class="col-12">
+                        <p><span class="profile-name"><?php echo $post['username'];?></span>
+                            <!--DESCRIPTION + HASHTAGS -->
+                            <?php $descrArray = explode(" ", $post['description']);?>
+                            <?php foreach($descrArray as $word): ?>
+                                <?php if($word[0] == "#"): ?>
+                                    <a href="results.php?tag=<?php echo str_replace("#", "", $word); ?>" name="tag" class="tags-post"><?php echo  $word;?></a>
+                                <?php else: ?>
+                                    <?php echo  $word; ?>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row row-sixth">
+                    <div class="col-12">
+                        <p class="timing-feed"><?php echo $post['postedDate']?></p>
+                    </div>
+                </div>
+
+                    <form action="feed.php">
+                    <div class="row row-seventh">
+                        <div class="col-10">
+                            
+                                <!-- <input type="text" id="comment-input" name="comment-input" placeholder="Place a comment" size='35'> -->
+                                <textarea rows="auto" cols="45" class="comment-input" id="comment-input"  name="comment-input" placeholder="Place a comment"></textarea>
+                        </div>
+                        <div class="col-2">
+                                <a href="#" class="comment-button">Place</a>
+                        </div>
+                        </div>
+                    </form>
+                
+
+        </div>
+    <?php endforeach; ?>
+
+
+
+    <div class="row d-flex justify-content-center">
+        <a href="#" class="load-more">Load more...</a>
+    </div>
+    
+
     <!-- HIER LOOPEN DOOR VERSCHILLENDE POSTS -->
+    <!-- DIT ZIJN POSTS TER ILLSTRATIE VAN HOE ZE ERUIT MOETEN ZIEN-->
             <div class="container post-post">
                     <div class="row row-first">
                         <div class="col-2">
@@ -64,11 +168,11 @@
                                 <img src="./img/image-12.png" class="profile-pic-feed">
                             </a>
                         </div>
-                        <div class="col-6">
+                        <div class="col-7">
                             <a href="#"><span class="profile-name">James Ensor</span></a><br>
                             <a href="#" class="profile-location">Cacun, Mexico</a>
                         </div>
-                        <div class="col-2">
+                        <div class="col-1">
                             <a href="#" class="unfollow-button">Unfollow</a>
                         </div>
                     </div>
@@ -94,11 +198,24 @@
                             <p class="number-feed">1</p>
                         </div>
 
+                        <div class="col-6">
+
+                        </div>
+
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/flag.svg" class="icon-feed"></a>
+                        </div>
+
                     </div>
 
                     <div class="row row-fourth">
                         <div class="col-12">
-                            <p><span class="profile-name">James Ensor</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis justo sit amet augue tristique viverra quis sit amet tortor. Nulla justo elit, dictum vitae magna consectetur, ultricies ultricies velit. Pellentesque leo odio, egestas sit amet elementum et, consectetur ut ipsum. #kitchen #home #lovemyplants</p>
+                            <p><span class="profile-name">James Ensor</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis justo sit amet augue tristique viverra quis sit amet tortor. Nulla justo elit, dictum vitae magna consectetur, ultricies ultricies velit. Pellentesque leo odio, egestas sit amet elementum et, consectetur ut ipsum. 
+                                <a href="#">#kitchen </a>
+                                <a href="#">#home</a>
+                                <a href="#">#lovemyplants</a>
+                            </p>
+                            
                         </div>
                     </div>
 
@@ -114,11 +231,22 @@
                         </div>
                     </div>
 
+                    <div class="row row-seventh">
+                        <div class="col-10">
+                            <form action="feed.php">
+                                <input type="text" id="comment-input" name="comment-input" placeholder="Place a comment" size='35'>
+                            </form>
+                        </div>
+                        <div class="col-2">
+                                <a href="#" class="comment-button">Place</a>
+                        </div>
+
+                    </div>
 
             </div>
 
 
-            <!-- HIER IS EEN TWEEDE SOORT VERISE VAN EEN POST-->
+            <!-- HIER IS EEN TWEEDE SOORT VERSIE VAN EEN POST-->
 
             <div class="container post-post">
                     <div class="row row-first">
@@ -127,11 +255,11 @@
                                 <img src="./img/image-7.png" class="profile-pic-feed">
                             </a>
                         </div>
-                        <div class="col-6">
+                        <div class="col-7">
                             <a href="#"><span class="profile-name">Claude Monet</span></a><br>
                             <a href="#" class="profile-location">Lyon, France</a>
                         </div>
-                        <div class="col-2">
+                        <div class="col-1">
                             <a href="#" class="follow-button">Follow</a>
                         </div>
                     </div>
@@ -157,11 +285,24 @@
                             <p class="number-feed">1</p>
                         </div>
 
+                        <div class="col-6">
+
+                        </div>
+
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/flag.svg" class="icon-feed"></a>
+                        </div>
+
                     </div>
 
                     <div class="row row-fourth">
                         <div class="col-12">
-                            <p><span class="profile-name">Claude Monet</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis justo sit amet augue tristique viverra quis sit amet tortor. Nulla justo elit, dictum vitae magna consectetur, ultricies ultricies velit. Pellentesque leo odio, egestas sit amet elementum et, consectetur ut ipsum. #kitchen #home #lovemyplants</p>
+                            <p><span class="profile-name">Claude Monet</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis justo sit amet augue tristique viverra quis sit amet tortor. Nulla justo elit, dictum vitae magna consectetur, ultricies ultricies velit. Pellentesque leo odio, egestas sit amet elementum et, consectetur ut ipsum.
+                                <a href="#">#kitchen </a>
+                                <a href="#">#home</a>
+                                <a href="#">#lovemyplants</a>
+                            </p>
+
                         </div>
                     </div>
 
@@ -177,8 +318,8 @@
                         </div>
                     </div>
 
-
             </div>
+
 
     </main>
     

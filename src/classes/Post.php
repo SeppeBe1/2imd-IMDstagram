@@ -1,8 +1,8 @@
 <?php
-include_once(__DIR__ . "../Db.php");
+namespace src\classes;
+spl_autoload_register();
 
-class Post 
-{
+class Post  {
     protected $image;
     protected $description;
     protected $location;
@@ -96,5 +96,15 @@ class Post
         return $this->filters;
     }
 
+    public static function getAllPosts(){
+        $db = new Db();
+        $conn = $db->getInstance();
+        $statement = $conn->prepare("select * from posts INNER JOIN users ON posts.user_id = users.id ORDER BY postedDate DESC LIMIT 20");
+        $statement->execute();
+        
+        $posts = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        return $posts;
+
+    }
 }
 ?>

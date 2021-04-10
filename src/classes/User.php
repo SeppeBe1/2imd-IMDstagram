@@ -1,5 +1,6 @@
 <?php 
-include_once(__DIR__ . "../Db.php");
+namespace src\classes;
+spl_autoload_register();
 
 class User {
     protected $username; 
@@ -24,7 +25,7 @@ class User {
     public function setPassword($password)
     {
         if(strlen($password) < 5){
-            throw new Exception("Passwords must be longer than 5 characters.");
+            throw new \Exception("Passwords must be longer than 5 characters.");
         }
 
         $this->password = $password;
@@ -59,13 +60,14 @@ class User {
     }
 
     public function canLogin() {
-        $conn = Db::getInstance();
+        $db = new Db();
+        $conn = $db->getInstance();
         $options = parse_ini_file("settings/cost.ini"); //cost 15 - returns an array
         
         $statement = $conn->prepare("select * from users where username = :username");
         $statement->bindValue(":username", $this->username);
         $statement->execute();
-        $user = $statement->fetch(PDO::FETCH_ASSOC);
+        $user = $statement->fetch(\PDO::FETCH_ASSOC);
 
         $hash = $user['password'];
 
@@ -80,13 +82,14 @@ class User {
     }
 
     public function emailExists() {
-        $conn = Db::getInstance();
+        $db = new Db();
+        $conn = $db->getInstance();
 
         $statement = $conn->prepare("select email from users where email = :email");
         $email = $this->getEmail();
         $statement->bindValue(":email", $email);
         $results = $statement->execute();
-        $exists = $statement->fetch(PDO::FETCH_ASSOC);
+        $exists = $statement->fetch(\PDO::FETCH_ASSOC);
 
         if($exists["email"] == null){
             return true;
@@ -96,13 +99,14 @@ class User {
     }
 
     public function usernameExists() {
-        $conn = Db::getInstance();
+        $db = new Db();
+        $conn = $db->getInstance();
 
         $statement = $conn->prepare("select username from users where username = :username");
         $username = $this->getUsername();
         $statement->bindValue(":username", $username);
         $results = $statement->execute();
-        $usernameExists = $statement->fetch(PDO::FETCH_ASSOC);
+        $usernameExists = $statement->fetch(\PDO::FETCH_ASSOC);
 
         if($usernameExists["username"] == null){
             return true;
@@ -112,7 +116,8 @@ class User {
     }
 
     public function registerUser() {
-        $conn = Db::getInstance();
+        $db = new Db();
+        $conn = $db->getInstance();
         $options = parse_ini_file("settings/cost.ini"); //cost 15 - returns an array
 
         $statement = $conn->prepare("insert into users (username, email, password) values (:username, :email, :password)");
@@ -127,12 +132,41 @@ class User {
             $results = $statement->execute();
 
             session_start(); 
-            setcookie("loggedIn", $this->getUsername(), time() + 60 * 60 * 24 * 7);
-            $_SESSION['email'] = $this->getUsername();
+            setcookie("loggedIn", "dareal" . $this->getUsername() . "748", time() + 60 * 60 * 24 * 7);
+            $_SESSION['user'] = "";
             header("Location: feed.php"); 
         }else {
             return false;
         }
+        return $results;
+    }
+
+    // public static function getAvatar(){
+    //     $conn = Db::getInstance();
+    //     $statement = $conn->prepare("select avatar from users");
+    //     $result = $statement->execute();
+    //     var_dump($result);
+
+    //     $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+    //     return $users;
+    // }
+
+    public function onlyLoggedInUsers() {
+        session_start();
+        if(!isset($_SESSION['user'])){
+            header("Location: login.php");
+        }
+    }
+
+    public function changeEmail($email,$username){
+        $db = new Db();
+        $conn = $db->getInstance();
+
+        $statement = $conn->prepare("UPDATE users SET email = :email WHERE username = :user ");
+        $statement->bindValue(":email", $email);
+        $statement->bindValue(":user", $username);
+        $results = $statement->execute();
+        
         return $results;
     }
 }

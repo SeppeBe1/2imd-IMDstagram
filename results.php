@@ -2,21 +2,22 @@
     namespace src;
     spl_autoload_register();
     include_once("./header.inc.php");
-    spl_autoload_register(); 
 
     $security = new classes\User();
     $security->onlyLoggedInUsers();
 
-    if(isset($_POST['keyword'])) {
+   /* if(isset($_POST['keyword'])) { IS OK TO PUT IN HTML?
         $keyword = $_POST['keyword'];
         $search = new classes\Search();
-        $results = $search->searchParam($keyword);
-        /* foreach($results as $key) {
-            echo $key['username'] . " " . $key['description'] . '<br>'; //nog aan te passen voor resultaten weer te geven
-        } */
-    }
+        $resultsSearch = $search->searchParam($keyword);
+    } */
 
-    // TAG RESULTS
+    /* if(isset($_GET['tag'])) {
+        $hashtag = $_GET['tag'];
+        $searchTag = new classes\Search();
+        $resultsTags = $searchTag->searchTags($hashtag);
+        var_dump($resultsTags);
+    } */
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -28,28 +29,81 @@
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="css/style-feed.css">
+    <link rel="stylesheet" href="css/style-results.css">
+
 
     <script src="https://kit.fontawesome.com/a7dc01cef9.js" crossorigin="anonymous"></script>
     <title>Plantstagram - feed</title>
 </head>
 <body>
 
-    <main>
-    <!-- HIER RESULTS PRINTEN - NEEDS TWEAKING WITH HTML/CSS -->
-            <div class="container post-post">
-                <?php foreach($results as $key): ?>
-                        <div class="row row-first">
-                            <div class="col-2">
-                                <a href="#">
-                                    <img src="<?php echo $key['avatar']; ?>" class="profile-pic-feed">
-                                </a>
+        <main>
+        <!-- HIER RESULTS PRINTEN - NEEDS TWEAKING WITH HTML/CSS -->
+            <?php if(isset($_POST['keyword'])): ?>
+                <?php $keyword = $_POST['keyword'];
+                    $search = new classes\Search();
+                    $resultsSearch = $search->searchParam($keyword);?>
+            
+                    <div class="container search-results-con">
+                        <h3>Search results for <span class="bold">"<?php echo $_POST['keyword'] ?>"</span>:</h3><br>
+
+                        <!--  <p class="search-results-p">Accounts</p> -->
+                        <!-- if clause (if keyword == username) -->
+                        
+                        <!-- <p class="search-results-p">Posts</p> -->
+                        <!-- else -->
+
+                        <?php foreach($resultsSearch as $key): ?>
+                            <div class="container post-post">
+                                    <div class="row row-first">
+                                        <div class="col-2">
+                                            <a href="#">
+                                                <img src="<?php echo $key['avatar']; ?>" class="profile-pic-feed">
+                                            </a>
+                                        </div>
+                                        <div class="col-7">
+                                            <a href="#"><span class="profile-name"><?php echo $key['username']; ?></span></a><br>
+                                            <a href="#" class="profile-location"><?php echo $key['location']; ?></a>
+                                            <br>
+                                            <a href="#"><img src="<?php echo  $key['photo'];?>" class="picture-feed"></a><br><!--a href aanpassen param meegeven naar de detailpg van de foto-->
+                                            <br>
+
+                                            <?php $descrArray = explode(" ", $key['description']);?>
+                                            <?php foreach($descrArray as $word): ?>
+                                                <?php if($word[0] == "#"): ?>
+                                                    <a href="results.php?tag=<?php echo str_replace("#", "", $word); ?>" name="tag" class="tags-post"><?php echo  $word;?></a>
+                                                <?php else: ?>
+                                                    <?php echo  $word; ?>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+
+                                        </div>
+                                    </div>
                             </div>
-                            <div class="col-7">
-                                <a href="#"><span class="profile-name"><?php echo $key['username']; ?></span></a><br>
-                                <a href="#" class="profile-location"><?php echo $key['location']; ?></a>
-                                <a href="#" class="profile-description"><?php echo $key['description']; ?></a>
+                        <?php endforeach; ?>
+                    </div>
+            <?php endif; ?>
+
+    <!-- RESULTS TAGS -->
+            <?php if(isset($_GET['tag'])):?>
+                <?php $hashtag = $_GET['tag'];
+                    $searchTag = new classes\Search();
+                    $resultsTags = $searchTag->searchTags($hashtag);?>
+
+                            <div class="container-fluid tags-results">
+                                <div class="row">
+                                <div><?php echo "#" . $_GET['tag']; ?></div> <!-- ANDERS HTML/CSS? -->
+
+                                <?php foreach($resultsTags as $tagResults):?>
+                                    <div class="col-4">
+                                        <a href="#"><img class="img-thumbnail"src="<?php echo $tagResults['photo'];?>" ></a>
+                                    </div>
+                                    <?php endforeach; ?>
+                                </div>
                             </div>
-                        </div>
-                <?php endforeach; ?>
-            </div>
+
+            <?php endif; ?>
+        </main>
+    </body>
+</html>
 

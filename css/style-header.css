@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body{
+    font-family: 'Montserrat', sans-serif;
+
+}
+/* NAVIGATION */
+.navigation{
+    padding: 15px;
+    margin-bottom: 3px;
+    box-shadow: 10px 5px 5px rgb(219, 219, 219);
+    overflow: hidden;
+    display: block;
+    
+}
+
+.navigation .row {
+    width:95%;
+    margin:auto
+}
+
+.header-logo {
+    background-color:#F1C8BF;
+}
+
+.profile-pic{
+    border-radius: 50%;
+    width: 40px;
+    margin-right: 10px;
+}
+
+.icon-nav{
+    margin-right: 10px;
+    width: 30px;
+}
+
+.icon-logout{
+    margin-left: -10px;
+    margin-top: 2px;
+    width: 32px;
+}
+
+.input-group .form-control  {
+    border-radius: 30px ;
+    
+}
+
+#search-input{
+    border-radius: 30px ;
+}
+
+#search-input::placeholder{
+    color: gainsboro;
+}
+
+#search-input:focus{
+    box-shadow: 0 0 7px #E9C9C1;
+    border: 1px solid #E9C9C1;
+    color: #5A5A5A;
+}
+
+
+a{
+    text-decoration: none;
+}
+
+/* LOGO */
+.plant-logo{
+    width: 40%;
+    
+}
+
+
+
+@media(min-width: 750px){
+    .navigation .row{
+        max-width: 700px;
+        justify-content: center;
+        margin: auto;
+    } 
+
+    
+}
+
+@media(min-width: 1000px){
+    .plant-logo{
+        width: 18%;
+        
+    }
+}
+
