@@ -169,4 +169,18 @@ class User {
         
         return $results;
     }
+
+    public function getUsernameFrom($id){
+
+        $db = new Db();
+        $conn = $db->getInstance();
+    
+        $statement = $conn->prepare("select * from users where id = :id");
+        $statement->bindValue(":id", $id);
+        $results = $statement->execute();
+        // var_dump($results);
+        $correctUsers = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $correctUsers;
+    }
 }

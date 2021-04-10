@@ -10,7 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style-header.css">
-    <title>Header</title>
+    <link rel="shortcut icon" type="image/png" href="./img/__favi-plant.png">
+    <title>Plantstagram </title>
 </head>
 <body>
 

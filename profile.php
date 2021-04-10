@@ -5,6 +5,21 @@
 
     $security = new classes\User();
     $security->onlyLoggedInUsers();
+    
+
+    // $users = new classes\User();
+    // $users->getUsernameFrom();
+    // var_dump($users);
+
+    // $user_id = $_GET["id"];
+    // var_dump($user_id);
+
+    if(!empty($_GET["id"])){
+        $user_id = $_GET["id"];
+        // var_dump($user_id);
+        $getUser = new classes\User();
+        $users = $getUser->getUsernameFrom($user_id);
+    }
 
 ?>
 <!DOCTYPE html>
@@ -28,6 +43,7 @@
 
 
     <main>
+    <?php foreach($users as $user): ?>
         <div class="container container-profile clearfix">
             <!-- EDIT BTN WEG WANNEER IK KIJK NAAR ANDER PROFIEL -->
             <div class="row flex-row-reverse">
@@ -36,16 +52,17 @@
                 </div>
             </div>
 
+
             <div class="row row-first">
                 <div class="col-3">
                     <a href="#">
-                        <img src="https://images.pexels.com/photos/3101767/pexels-photo-3101767.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" class="profile-pic-profile">
+                        <img src="<?php echo $user["avatar"]?>" class="profile-pic-profile">
                     </a>
                 </div>
 
                 <div class="col-9 profile-about">
-                    <p><span class="profile-name">James Ensor</span></p><br>
-                    <p class="bio">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor soluta fugit nulla sint in natus inventore debitis exercitationem enim! Sapiente tenetur accusamus doloribus consequatur ut sequi voluptatibus nostrum consectetur deleniti.</p>
+                    <p><span class="profile-name"><?php echo $user["username"]?></span></p><br>
+                    <p class="bio"><?php echo $user["bio"]?></p>
                 </div>
             </div>
             
@@ -75,6 +92,7 @@
                 </div>
             </div>     
         </div>
+        <?php endforeach ;?>
 
         <!-- LOOPEN OVER POSTS !-->
 
