@@ -6,20 +6,62 @@
     $security = new classes\User();
     $security->onlyLoggedInUsers();
 
-    if(isset($_POST['email'])){
-        $email = $_POST['email'];
-        $username = $_SESSION['user'];
+    if (!empty($_POST['save'])){
 
-        try{
-            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if (!empty($_POST['save'])){
+            try {
                 $user = new classes\User();
-                $user->changeEmail($email, $username);
-                    
-            } else{
-                echo "geen bestaande email";
+                $user->Avatar();
+            } catch (\Throwable $th) {
+                //throw $th;
             }
-        }catch(\Throwable $error) {
-            $error = $error->getMessage();
+        }
+    
+        if(!empty($_POST['fullName'])){
+            $fullName = $_POST['fullName'];
+            $username = $_SESSION['user'];
+    
+            try{
+                {
+                    $user = new classes\User();
+                    $user->changefullName($fullName, $username);
+                        
+                } 
+                
+            }catch(\Throwable $error) {
+                $error = $error->getMessage();
+            }
+        }
+    
+        if(!empty($_POST['bio'])){
+            $bio = $_POST['bio'];
+            $username = $_SESSION['user'];
+            try{
+                {
+                    $user = new classes\User();
+                    $user->changeBio($bio, $username);       
+                } 
+                
+            }catch(\Throwable $error) {
+                $error = $error->getMessage();
+            }
+        }
+    
+        if(!empty($_POST['email'])){
+            $email = $_POST['email'];
+            $username = $_SESSION['user'];
+    
+            try{
+                if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    $user = new classes\User();
+                    $user->changeEmail($email, $username);
+                        
+                } else{
+                    echo "geen bestaande email";
+                }
+            }catch(\Throwable $error) {
+                $error = $error->getMessage();
+            }
         }
     }
 
@@ -55,10 +97,18 @@
             <div class="container-fluid ">
                 
                 <div class="row ">
-                    <div class="col-12 col-md-3 text-center">
-                        <a href="#">
-                            <img src="https://images.pexels.com/photos/3101767/pexels-photo-3101767.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" class="profile-pic-profile ">
-                        </a>
+                    <div class="col-12 col-md-3 text-center ">
+                    <?php if (!isset($_SESSION['avatar'])): ?>
+                        <div class="avatar ">
+                            <img src="./img/placeholder.jpeg" class="profile-pic-profile ">
+                       </div>
+                      
+                    <?php else: ?>
+                        <div class="avatar ">
+                            <img src="<?php echo $_SESSION['avatar']?>" class="profile-pic-profile ">
+                       </div>
+                    <?php endif; ?>
+                          
                     </div>
                 </div>
 
@@ -68,7 +118,7 @@
                     <div class="col-6 col-md-3">
                     
                         <div class="file btn upload-btn"><i class="fas fa-camera"></i> Upload
-                                <input type="file" name="file"/>
+                                <input type="file" id="preview-image" name="avatar" accept=".png, .jpg, .jpeg"/>
                         </div>
                     </div>
 
@@ -81,35 +131,35 @@
             <div class="container-settings">
                 <div class="row">
 
-                    <form action="" method="post">
+                    <form action="" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="fullname">Full Name</label>
-                            <input type="text" class="form-control" id="fullname" name="fullName" placeholder="James Ensor">
+                            <input type="text" class="form-control" id="fullname" name="fullName" placeholder="<?php echo $_SESSION['fullName'] ?>">
                         </div>
 
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="jamesensor" >
+                            <input type="text" class="form-control" id="username" name="username" placeholder="<?php echo $_SESSION["user"] ?>" >
                         </div>
 
                         <div class="form-group">
                             <label for="bio">Bio</label>
-                            <textarea class="form-control" maxlength="200" id="bio" rows="3" name="bio" placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor soluta fugit nulla sint in natus inventore debitis exercitationem enim! Sapiente tenetur accusamus doloribus consequatur ut sequi voluptatibus nostrum consectetur deleniti." ></textarea>
+                            <textarea class="form-control" maxlength="200" id="bio" rows="3" name="bio" placeholder="<?php echo $_SESSION['bio'] ?>"></textarea>
                         </div>
 
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="text" class="form-control" id="email" name="email" placeholder="jamesensor@art.com">
+                            <input type="text" class="form-control" id="email" name="email" placeholder="<?php echo $_SESSION['email'] ?>">
                         </div>
 
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="...." >
+                            <input type="password" class="form-control" id="password" name="password" placeholder="● ● ● ● ●" >
                         </div>
 
                         <div class="form-group">
                             <label for="confirm-password">Confirm Password</label>
-                            <input type="password" class="form-control" id="confirm-password" name="confirmPassword" placeholder="...." >
+                            <input type="password" class="form-control" id="confirm-password" name="confirmPassword" placeholder="● ● ● ● ●" >
                         </div>
 
                         <div class=" border-bottom"> 
@@ -131,5 +181,7 @@
             </div>
         </div>
     </main>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+    <script src="script.js"></script>
 </body>
 </html>

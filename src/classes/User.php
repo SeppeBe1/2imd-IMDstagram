@@ -169,4 +169,57 @@ class User {
         
         return $results;
     }
+
+    public function changefullName($fullName,$username){
+        $db = new Db();
+        $conn = $db->getInstance();
+
+        $statement = $conn->prepare("UPDATE users SET fullName = :fullName WHERE username = :user ");
+        $statement->bindValue(":fullName", $fullName);
+        $statement->bindValue(":user", $username);
+        $results = $statement->execute();
+        
+        return $results;
+    }
+
+    public function changeBio($bio,$username){
+        $db = new Db();
+        $conn = $db->getInstance();
+
+        $statement = $conn->prepare("UPDATE users SET bio = :bio WHERE username = :user ");
+        $statement->bindValue(":bio", $bio);
+        $statement->bindValue(":user", $username);
+        $results = $statement->execute();
+        
+        return $results;
+    }
+
+    public function Avatar (){
+        //AVATAR KOMT TERECHT IN FOLDER IMG
+        $folder ="upload_avatar/"; 
+        $avatar = $_FILES['avatar']['name']; 
+        $path = $folder . $avatar ; 
+        $target_file=$folder.basename($_FILES["avatar"]["name"]);
+        $imageFileType=pathinfo($target_file,PATHINFO_EXTENSION);
+        $allowed=array('jpeg','png' ,'jpg'); $filename=$_FILES['avatar']['name']; 
+        $ext=pathinfo($filename, PATHINFO_EXTENSION); if(!in_array($ext,$allowed) ) 
+
+    { 
+        echo "Sorry, only JPG, JPEG, PNG & GIF  files are allowed.";
+
+    }
+
+    else{ 
+
+        move_uploaded_file( $_FILES['avatar'] ['tmp_name'], $path); 
+        $conn = Db::getInstance();
+        $statement=$conn->prepare("insert into users(avatar)values(:avatar) "); 
+
+        $statement->bindValue(':avatar',$avatar); 
+        $results = $statement->execute();
+        return $results;
+
+    } 
+
+    } 
 }
