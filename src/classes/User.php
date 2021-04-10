@@ -7,6 +7,10 @@ class User {
     protected $email;
     protected $password;
     protected $confirmPassword;
+    protected $avatar;
+    protected $fullName;
+    protected $bio;
+    protected $id;
     
     public function setUsername($username)
     {
