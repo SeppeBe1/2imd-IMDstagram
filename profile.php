@@ -5,15 +5,6 @@
 
     $security = new classes\User();
     $security->onlyLoggedInUsers();
-    
-
-    // $users = new classes\User();
-    // $users->getUsernameFrom();
-    // var_dump($users);
-
-    // $user_id = $_GET["id"];
-    // var_dump($user_id);
-
 
     // TO GET ID FROM URL
     if(!empty($_GET["id"])){
@@ -26,13 +17,10 @@
     $postsUser = new classes\Post();
     $postsUserResults = $postsUser->getPostsUser($user_id);
 
-
-    // STACKING OF THE BOORSTRAP DIVS IN 3 COLUMNS
+    // STACKING OF THE BOOTSTRAP DIVS IN 3 COLUMNS
     $numberOfColumns = 3;
     $bootstrapColWidth = 12 / $numberOfColumns ;
-
     $arrayChunks = array_chunk($postsUserResults, $numberOfColumns);
-
     // var_dump($arrayChunks);
 
 ?>
@@ -119,15 +107,16 @@
                     <div class="row">
                         <?php foreach($postsUserResults as $post): ?>
                             <div class="col-4">
-                                <img class="img-thumbnail"src="<?php echo $post["photo"]?>">
+                                <div class="square-image">
+                                    <img class="img-thumbnail img"src="<?php echo $post["photo"]?>">
+                                </div>
                             </div>
                         <?php endforeach ;?>
                     </div>
             <?php endforeach ;?>
         </div>
 
-        <!--https://stackoverflow.com/questions/40561301/loop-row-in-bootstrap-every-3-columns-->
-            
+
         <!-- <div class="container-fluid container-gallery">
             <div class="row">
                 <div class="col-4">
