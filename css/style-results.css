@@ -12,3 +12,34 @@
         /* background-color: brown; */
     }
 }
+
+
+/* TAGS RESULTS */
+.img-thumbnail{
+    border: none;
+}
+.square-image{
+    position:relative;
+    overflow:hidden;
+    padding-bottom:100%;
+}
+.square-image img{
+    position:absolute;
+}
+
+@media(min-width: 700px){
+    .tags-results{
+        /* background-color: aqua; */
+        width: 690px;
+    }
+}
+
+
+.tag-results{
+    font-weight: 800;
+}
+
+.results-title{
+    margin-top: 25px;
+    padding-bottom: 50px;
+}

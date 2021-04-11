@@ -115,8 +115,8 @@
 
     <div class="container post-post">
                 <div class="row row-first">
-                    <div class="col-2">
-                        <a href="#">
+                    <div class="col-2"> 
+                        <a href="profile.php?id=<?php echo $post["id"]; ?>">
                             <img src="<?php echo $post['avatar']?>" class="profile-pic-feed">
                         </a>
                     </div>

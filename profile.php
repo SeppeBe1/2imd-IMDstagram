@@ -108,7 +108,7 @@
                         <?php foreach($postsUserResults as $post): ?>
                             <div class="col-4">
                                 <div class="square-image">
-                                    <img class="img-thumbnail img"src="<?php echo $post["photo"]?>">
+                                    <a href="postDetail.php"><img class="img-thumbnail img" src="<?php echo $post["photo"]?>"></a>
                                 </div>
                             </div>
                         <?php endforeach ;?>
