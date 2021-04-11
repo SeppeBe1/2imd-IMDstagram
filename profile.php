@@ -14,12 +14,17 @@
     // $user_id = $_GET["id"];
     // var_dump($user_id);
 
+
+    // TO GET ID FROM URL
     if(!empty($_GET["id"])){
         $user_id = $_GET["id"];
         // var_dump($user_id);
         $getUser = new classes\User();
         $users = $getUser->getUsernameFrom($user_id);
     }
+
+    $postsUser = new classes\Post();
+    $postsUserResults = $postsUser->getPostsUser($user_id);
 
 ?>
 <!DOCTYPE html>
@@ -43,6 +48,7 @@
 
 
     <main>
+
     <?php foreach($users as $user): ?>
         <div class="container container-profile clearfix">
             <!-- EDIT BTN WEG WANNEER IK KIJK NAAR ANDER PROFIEL -->
@@ -94,9 +100,29 @@
         </div>
         <?php endforeach ;?>
 
+
         <!-- LOOPEN OVER POSTS !-->
 
-        <div class="container-fluid container-gallery">
+        <?php foreach($postsUserResults as $post) :?>
+            <div class="container-fluid container-gallery">
+                <div class="row">
+                    <div class="col-4">
+                        <img class="img-thumbnail"src="<?php echo $post["photo"]?>">
+                    </div>
+                    <div class="col-4">
+                        <img class="img-thumbnail"src="<?php echo $post["photo"]?>">
+                    </div>
+                    <div class="col-4">
+                        <img class="img-thumbnail"src="<?php echo $post["photo"]?>">
+                    </div>
+                </div>
+            </div>
+
+        <?php endforeach ; ?>
+
+        <!--https://stackoverflow.com/questions/40561301/loop-row-in-bootstrap-every-3-columns-->
+            
+        <!-- <div class="container-fluid container-gallery">
             <div class="row">
                 <div class="col-4">
                     <img class="img-thumbnail"src="https://images.pexels.com/photos/583791/pexels-photo-583791.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" >
@@ -137,7 +163,7 @@
                 <div class="col-4 ">
                     <img class="img-thumbnail" src="https://images.pexels.com/photos/5720091/pexels-photo-5720091.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" class="img-responsive">
                 </div>
-            </div>
+            </div> -->
             
 
     </main>

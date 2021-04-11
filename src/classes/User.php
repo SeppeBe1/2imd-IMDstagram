@@ -170,6 +170,7 @@ class User {
         return $results;
     }
 
+    // TO GET THE CORRECT USERNAME ID FOR PROFIL.PHP
     public function getUsernameFrom($id){
 
         $db = new Db();
