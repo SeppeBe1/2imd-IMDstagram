@@ -75,7 +75,7 @@
                         </a>
                     </div>
                     <div class="col-7">
-                        <a href="#"><span class="profile-name"><?php echo $post['username']?></span></a><br>
+                        <a href="profile.php?id=<?php echo $post["id"]; ?>"><span class="profile-name"><?php echo $post['username']?></span></a><br>
                         <a href="#" class="profile-location"><?php echo $post['location']?></a>
                     </div>
                     <div class="col-1">
