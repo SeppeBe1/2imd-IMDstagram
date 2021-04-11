@@ -26,6 +26,15 @@
     $postsUser = new classes\Post();
     $postsUserResults = $postsUser->getPostsUser($user_id);
 
+
+    // STACKING OF THE BOORSTRAP DIVS IN 3 COLUMNS
+    $numberOfColumns = 3;
+    $bootstrapColWidth = 12 / $numberOfColumns ;
+
+    $arrayChunks = array_chunk($postsUserResults, $numberOfColumns);
+
+    // var_dump($arrayChunks);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -103,22 +112,19 @@
 
         <!-- LOOPEN OVER POSTS !-->
 
-        <?php foreach($postsUserResults as $post) :?>
-            <div class="container-fluid container-gallery">
-                <div class="row">
-                    <div class="col-4">
-                        <img class="img-thumbnail"src="<?php echo $post["photo"]?>">
-                    </div>
-                    <div class="col-4">
-                        <img class="img-thumbnail"src="<?php echo $post["photo"]?>">
-                    </div>
-                    <div class="col-4">
-                        <img class="img-thumbnail"src="<?php echo $post["photo"]?>">
-                    </div>
-                </div>
-            </div>
 
-        <?php endforeach ; ?>
+
+        <div class="container-fluid container-gallery">
+            <?php foreach($arrayChunks as $postsUserResults) : ?>
+                    <div class="row">
+                        <?php foreach($postsUserResults as $post): ?>
+                            <div class="col-4">
+                                <img class="img-thumbnail"src="<?php echo $post["photo"]?>">
+                            </div>
+                        <?php endforeach ;?>
+                    </div>
+            <?php endforeach ;?>
+        </div>
 
         <!--https://stackoverflow.com/questions/40561301/loop-row-in-bootstrap-every-3-columns-->
             
