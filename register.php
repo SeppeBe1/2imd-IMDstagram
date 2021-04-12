@@ -32,7 +32,7 @@
                 $errorPassword = true;
             }
         }
-        catch(Throwable $error) {
+        catch(\Throwable $error) {
             $error = $error->getMessage();
         }  
     }
@@ -52,10 +52,12 @@
 </head>
 <body>
 
-    <div class="container-fluid feed-header">
-                <div class="row justify-content-center">
-                    <img src="img/plantstagram-logo.png" class="plant-logo justify-content-center">
-                </div>
+    <div class="container-fluid header-logo">
+        <div class="row">
+            <div class="col-12 text-center header-logo">
+                <img src="img/plantstagram-logo.png" class="plant-logo ">
+            </div>
+        </div>
     </div>
 
     <div class="container-fluid ">
