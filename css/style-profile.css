@@ -145,3 +145,14 @@ body {
     
     }
 }
+
+/* SQUARING IMAGE THUMBNAIL */
+
+.square-image{
+    position:relative;
+    overflow:hidden;
+    padding-bottom:100%;
+}
+.square-image img, .profile-pic-profile img{
+    position:absolute;
+}

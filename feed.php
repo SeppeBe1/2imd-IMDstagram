@@ -11,6 +11,52 @@
     $resultsPosts = $posts->getAllPosts();
     // FOR DATE TO STRING "**AGO" -> https://stackoverflow.com/questions/1416697/converting-timestamp-to-time-ago-in-php-e-g-1-day-ago-2-days-ago
 
+
+
+    // DATE CONVERSION TO ".. AGO"
+
+    $posted_ad = "2021-04-10 08:21:28";
+
+    function convertTime($value){
+        list($date, $time) = explode(' ', $value);
+        list($year, $month, $day) = explode('-', $date);
+        list($hour, $minutes, $seconds) = explode(':', $time);
+
+        // echo $year . "<br>" . $month . "<br>" . $day . "<br>";
+        // echo $hour . "<br>" . $minutes . "<br>" . $sec;
+
+        $unit_timestamp = mktime($hour, $minutes, $seconds, $month, $day, $year);
+        return $unit_timestamp;
+
+    }
+
+    function convertToAgo($timestamp){
+        date_default_timezone_set('Europe/Brussels');
+
+        $differenceTime = time() - $timestamp;
+        // Making array to display, days, hours, months etc.
+        $periodString = ["sec", "min", "hr", "day", "week", "year", "decade"];
+        $periodNumbers = ["60", "60", "24", "7", "4.35", "12", "10"];
+
+        // CURRENT TIME GREATER THAN ALL ABOVE
+        for($i = 0; $differenceTime >= $periodNumbers[$i]; $i++){
+            $differenceTime /= $periodNumbers[$i];
+            $differenceTime = round($differenceTime);
+
+            // TO MAKE IT TO SECS, MINS, HRS, ETC.
+            if($differenceTime != 1) $periodString[$i].="s";
+
+            $output = "$differenceTime $periodString[$i]";
+
+            return "Posted ". $output. " ago";
+        }
+
+    }
+
+     $unixTimestamp = convertTime($posted_ad);
+     echo convertToAgo($unixTimestamp);
+  
+
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,13 +115,13 @@
 
     <div class="container post-post">
                 <div class="row row-first">
-                    <div class="col-2">
-                        <a href="#">
+                    <div class="col-2"> 
+                        <a href="profile.php?id=<?php echo $post["id"]; ?>">
                             <img src="<?php echo $post['avatar']?>" class="profile-pic-feed">
                         </a>
                     </div>
                     <div class="col-7">
-                        <a href="#"><span class="profile-name"><?php echo $post['username']?></span></a><br>
+                        <a href="profile.php?id=<?php echo $post["id"]; ?>"><span class="profile-name"><?php echo $post['username']?></span></a><br>
                         <a href="#" class="profile-location"><?php echo $post['location']?></a>
                     </div>
                     <div class="col-1">
@@ -91,7 +137,7 @@
 
                 <div class="row row-third">
                     <div class="col-1">
-                        <a href="#"><img src="./img/icons/heart.svg" class="icon-feed"></a>
+                        <a href="#"><img src="./img/icons/heart-outlines.svg" class="icon-feed"></a>
                     </div>
                     <div class="col-1">
                         <p class="number-feed">91</p>

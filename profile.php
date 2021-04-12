@@ -6,6 +6,23 @@
     $security = new classes\User();
     $security->onlyLoggedInUsers();
 
+    // TO GET ID FROM URL
+    if(!empty($_GET["id"])){
+        $user_id = $_GET["id"];
+        // var_dump($user_id);
+        $getUser = new classes\User();
+        $users = $getUser->getUsernameFrom($user_id);
+    }
+
+    $postsUser = new classes\Post();
+    $postsUserResults = $postsUser->getPostsUser($user_id);
+
+    // STACKING OF THE BOOTSTRAP DIVS IN 3 COLUMNS
+    $numberOfColumns = 3;
+    $bootstrapColWidth = 12 / $numberOfColumns ;
+    $arrayChunks = array_chunk($postsUserResults, $numberOfColumns);
+    // var_dump($arrayChunks);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,6 +45,8 @@
 
 
     <main>
+
+    <?php foreach($users as $user): ?>
         <div class="container container-profile clearfix">
             <!-- EDIT BTN WEG WANNEER IK KIJK NAAR ANDER PROFIEL -->
             <div class="row flex-row-reverse">
@@ -36,16 +55,17 @@
                 </div>
             </div>
 
+
             <div class="row row-first">
                 <div class="col-3">
                     <a href="#">
-                        <img src="https://images.pexels.com/photos/3101767/pexels-photo-3101767.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" class="profile-pic-profile">
+                        <img src="<?php echo $user["avatar"]?>" class="profile-pic-profile">
                     </a>
                 </div>
 
                 <div class="col-9 profile-about">
-                    <p><span class="profile-name">James Ensor</span></p><br>
-                    <p class="bio">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor soluta fugit nulla sint in natus inventore debitis exercitationem enim! Sapiente tenetur accusamus doloribus consequatur ut sequi voluptatibus nostrum consectetur deleniti.</p>
+                    <p><span class="profile-name"><?php echo $user["username"]?></span></p><br>
+                    <p class="bio"><?php echo $user["bio"]?></p>
                 </div>
             </div>
             
@@ -75,10 +95,29 @@
                 </div>
             </div>     
         </div>
+        <?php endforeach ;?>
+
 
         <!-- LOOPEN OVER POSTS !-->
 
+
+
         <div class="container-fluid container-gallery">
+            <?php foreach($arrayChunks as $postsUserResults) : ?>
+                    <div class="row">
+                        <?php foreach($postsUserResults as $post): ?>
+                            <div class="col-4">
+                                <div class="square-image">
+                                    <a href="postDetail.php"><img class="img-thumbnail img" src="<?php echo $post["photo"]?>"></a>
+                                </div>
+                            </div>
+                        <?php endforeach ;?>
+                    </div>
+            <?php endforeach ;?>
+        </div>
+
+
+        <!-- <div class="container-fluid container-gallery">
             <div class="row">
                 <div class="col-4">
                     <img class="img-thumbnail"src="https://images.pexels.com/photos/583791/pexels-photo-583791.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" >
@@ -119,7 +158,7 @@
                 <div class="col-4 ">
                     <img class="img-thumbnail" src="https://images.pexels.com/photos/5720091/pexels-photo-5720091.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" class="img-responsive">
                 </div>
-            </div>
+            </div> -->
             
 
     </main>

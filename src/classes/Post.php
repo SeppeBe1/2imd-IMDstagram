@@ -96,6 +96,7 @@ class Post  {
         return $this->filters;
     }
 
+    // FUNCTION THAT PICKS UP THE POSTS FROM ALL THE USER FOR FEED.PHP
     public static function getAllPosts(){
         $db = new Db();
         $conn = $db->getInstance();
@@ -106,5 +107,23 @@ class Post  {
         return $posts;
 
     }
+
+
+
+    // FUNCTION THAT PUT THE POSTS OF THE USERS IN THE PROFILE
+    public static function getPostsUser($user_id){
+        // var_dump($user_id);
+        // echo "Test for this user";
+
+        $db = new Db();
+        $conn = $db->getInstance();
+        $statement = $conn->prepare("select * from posts WHERE user_id = :user_id ORDER BY postedDate DESC");
+        $statement->bindValue(":user_id", $user_id);
+        $statement->execute();
+        
+        $postsUser = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        return $postsUser;
+    }
 }
+
 ?>
