@@ -100,6 +100,18 @@ class User {
         return $this;
     }
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
     public function canLogin() {
         $db = new Db();
         $conn = $db->getInstance();
@@ -199,6 +211,7 @@ class User {
         }
     }
 
+//PROFILE EDIT___________//
     public function changeEmail($email,$username){
         $db = new Db();
         $conn = $db->getInstance();
@@ -248,33 +261,45 @@ class User {
     { 
         echo "Sorry, only JPG, JPEG, PNG & GIF  files are allowed.";
 
+    }else{ 
+
+            move_uploaded_file( $_FILES['avatar'] ['tmp_name'], $path); 
+            $conn = Db::getInstance();
+            $statement=$conn->prepare("insert into users(avatar)values(:avatar) "); 
+
+            $statement->bindValue(':avatar',$avatar); 
+            $results = $statement->execute();
+            return $results;
+
+        } 
     }
 
-    else{ 
-
-        move_uploaded_file( $_FILES['avatar'] ['tmp_name'], $path); 
-        $conn = Db::getInstance();
-        $statement=$conn->prepare("insert into users(avatar)values(:avatar) "); 
-
-        $statement->bindValue(':avatar',$avatar); 
-        $results = $statement->execute();
-        return $results;
-
-    } 
-
-    } 
-    // TO GET THE CORRECT USERNAME ID FOR PROFIL.PHP
-    public function getUsernameFrom($id){
-
+    public function showUser($username){
         $db = new Db();
         $conn = $db->getInstance();
-    
-        $statement = $conn->prepare("select * from users where id = :id");
-        $statement->bindValue(":id", $id);
-        $results = $statement->execute();
-        // var_dump($results);
-        $correctUsers = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        $statement = $conn->prepare("select * from users where username = :username");
+        $statement->bindValue(":username", $username);
+        $result = $statement->execute();
 
-        return $correctUsers;
-    }
+        $user = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        
+        return $user;
+
+     }
+
+    
+    // // TO GET THE CORRECT USERNAME ID FOR PROFIL.PHP
+    // public function getUsernameFrom($id){
+
+    //     $db = new Db();
+    //     $conn = $db->getInstance();
+    
+    //     $statement = $conn->prepare("select * from users where id = :id");
+    //     $statement->bindValue(":id", $id);
+    //     $results = $statement->execute();
+    //     // var_dump($results);
+    //     $correctUsers = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+    //     return $correctUsers;
+    // }
 }

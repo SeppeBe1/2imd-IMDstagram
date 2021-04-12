@@ -6,9 +6,22 @@
     $security = new classes\User();
     $security->onlyLoggedInUsers();
 
+    if(isset($_SESSION['user']) ){
+        try {
+            $user = new classes\User();
+            $username = $_SESSION["user"];
+            $usersinfo = $user->showUser($username);
+            var_dump($usersinfo);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+        
+    } 
+
+// UPDATE INFO 
     if (!empty($_POST['save'])){
 
-        if (!empty($_POST['save'])){
+        if (!empty($_POST['avatar'])){
             try {
                 $user = new classes\User();
                 $user->Avatar();
@@ -63,6 +76,7 @@
                 $error = $error->getMessage();
             }
         }
+        header("Refresh:0");
     }
 
 ?>
@@ -93,19 +107,20 @@
                 </div>
             </div>
            
+            <?php foreach($usersinfo as $user): ?>
 
             <div class="container-fluid ">
                 
                 <div class="row ">
                     <div class="col-12 col-md-3 text-center ">
-                    <?php if (!isset($_SESSION['avatar'])): ?>
+                    <?php if (!isset($user['avatar'])): ?>
                         <div class="avatar ">
                             <img src="./img/placeholder.jpeg" class="profile-pic-profile ">
                        </div>
                       
                     <?php else: ?>
                         <div class="avatar ">
-                            <img src="<?php echo $_SESSION['avatar']?>" class="profile-pic-profile ">
+                            <img src="<?php echo $user['avatar']?>" class="profile-pic-profile ">
                        </div>
                     <?php endif; ?>
                           
@@ -134,22 +149,22 @@
                     <form action="" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="fullname">Full Name</label>
-                            <input type="text" class="form-control" id="fullname" name="fullName" placeholder="<?php echo $_SESSION['fullName'] ?>">
+                            <input type="text" class="form-control" id="fullname" name="fullName" placeholder="<?php echo $user['fullName'] ?>">
                         </div>
 
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="<?php echo $_SESSION["user"]?>" >
+                            <input type="text" class="form-control" id="username" name="username" placeholder="<?php echo $user["username"]?>" >
                         </div>
 
                         <div class="form-group">
                             <label for="bio">Bio</label>
-                            <textarea class="form-control" maxlength="200" id="bio" rows="3" name="bio" placeholder="<?php echo $_SESSION['bio'] ?>"></textarea>
+                            <textarea class="form-control" maxlength="200" id="bio" rows="3" name="bio" placeholder="<?php echo $user['bio'] ?>"></textarea>
                         </div>
 
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="text" class="form-control" id="email" name="email" placeholder="<?php echo $_SESSION['email'] ?>">
+                            <input type="text" class="form-control" id="email" name="email" placeholder="<?php echo $user['email'] ?>">
                         </div>
 
                         <div class="form-group">
@@ -165,7 +180,7 @@
                         <div class=" border-bottom"> 
                             <div class="row btn-save-cancel">
                                 <div class="col-12">
-                                    <a><input  type="submit" value="Save" class="btn  btn-profileEdit"></button></a>
+                                    <a><input  type="submit" name ="save" value="Save" class="btn  btn-profileEdit"></button></a>
                                     <a href="profile.php"class="btn btn-profileEdit">Cancel</a>
 
                                 </div>
@@ -173,7 +188,7 @@
                         </div>
                     </form>
                 </div>   
-
+                <?php endforeach; ?>
                 <div class="row deactivate">
                     <p>Deactivate your account <a id="deactivate"href=""> Deactivate</a></p>
                     
