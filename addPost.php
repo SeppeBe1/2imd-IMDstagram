@@ -9,24 +9,65 @@ session_start();
 $security = new classes\User();
 $security->onlyLoggedInUsers();
 
+$username = $_SESSION['user'];
+// $id = $_SESSION['id'];
+
+
 // echo "Make a new post";
+
 
 if (isset($_POST['submit'])) {
 
-    $username = $_SESSION['user'];
-   // $id = $_SESSION['id'];
-
-    $image = $_POST['img'];
     $filter = $_POST['filter-image'];
     $description = $_POST['description'];
-    $location = $_POST['location-search"'];
+    $location = $_POST['location-search'];
+    $image = $_FILES['img'];/* 
 
-    if (!empty($_POST)) {
+    var_dump($filter);
+    var_dump($description);
+    var_dump($location);
+    var_dump($image);
+
+ */
+
+    /* $fileName = $_FILES['img']['name'];
+    $fileTmp = $_FILES['img']['tmp_name'];
+    $fileSize = $_FILES['img']['size'];
+    $fileError = $_FILES['img']['error'];
+    $fileType = $_FILES['img']['type'];
+
+    $fileExt = explode('.', $fileName);
+    $fileRealExt = strtolower(end($fileExt));
+
+    $allExtensions = array('jpeg', 'png', 'jpg', 'gif');
+
+    if (in_array($fileRealExt, $allExtensions)) {
+        if ($fileError === 0) {
+            if ($fileSize < 1000000) {
+                $uploadFileName = uniqid('', true) .  $fileRealExt;
+                $fileDestination = "uploads/" . $uploadFileName;
+
+                move_uploaded_file($fileTmp, $fileDestination);
+
+                $image =  $fileName;
+
+                $post = new classes\Post();
+                $post->createPost($username, $image, $description, $location, $filter);
+            } else {
+                echo "file is to0 big";
+            }
+        } else {
+            echo "error while uploading image";
+        }
+    } else {
+        echo "This file can't be used";
+    } */
 
     $post = new classes\Post();
     $post->createPost($username, $image, $description, $location, $filter);
-    }
 }
+
+
 
 
 
@@ -70,7 +111,7 @@ if (isset($_POST['submit'])) {
         <div class="row">
 
 
-            <form action="#" class="form-post" enctype="multipart/form-data">
+            <form action="" class="form-post" method="post" enctype="multipart/form-data">
                 <h1>Add a new post</h1>
                 <!-- Upload photo, choose photo -->
                 <label for="img" class="labels-upload">Select your image</label><br>
@@ -82,8 +123,8 @@ if (isset($_POST['submit'])) {
                 <label for="img" class="labels-upload">Select your filter</label>
                 <br>
                 <select name="filter-image" id="filter-image" class="form-control">
-                    <option value="black-white">Black-white</option>
-                    <option value="sepia">Sepia</option>
+                    <option value="blackwhite">black&white</option>
+                    <option value="sepia">sepia</option>
                 </select>
 
                 <br><br>
@@ -102,7 +143,8 @@ if (isset($_POST['submit'])) {
                 <br><br>
 
                 <!-- Submit form -->
-                <a href="#" class="load-more" type="submit" name="submit">Upload</a>
+                <input class="load-more" name="submit" type="submit" value="Submit"></button>
+
             </form>
 
         </div>

@@ -123,7 +123,10 @@ class Post  {
         //sysdate();
         $statement->bindValue(":filters", $filter);
         $statement->bindValue(":username", $username);
-        $results = $statement->execute();
+        $result = $statement->execute();
+
+    
+
 
     }
 }
