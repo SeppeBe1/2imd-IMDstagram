@@ -106,5 +106,25 @@ class Post  {
         return $posts;
 
     }
+
+    public function createPost($username,$image, $description, $location ,$filter){
+        $db = new Db();
+        $conn = $db->getInstance();
+
+        $statement = $conn->prepare("INSERT INTO posts (photo, description, location, isLiked, postedDate, filters, user_id)
+         VALUES (:photo, :description, :location, :isLiked, sysdate(), :filters, (select id from users where username = :username));");
+
+        //postdate datum + uur + sec
+
+        $statement->bindValue(":photo", $image);
+        $statement->bindValue(":description", $description);
+        $statement->bindValue(":location", $location);
+        $statement->bindValue(":isLiked", 0);
+        //sysdate();
+        $statement->bindValue(":filters", $filter);
+        $statement->bindValue(":username", $username);
+        $results = $statement->execute();
+
+    }
 }
 ?>
