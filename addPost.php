@@ -15,27 +15,31 @@ $username = $_SESSION['user'];
 
 // echo "Make a new post";
 
+$filters = new classes\Post();
+$getFilters = $filters->getAllFilters();
 
 if (isset($_POST['submit'])) {
 
-    $filter = $_POST['filter-image'];
     $description = $_POST['description'];
     $location = $_POST['location-search'];
-    $image = $_FILES['img'];/* 
+    $filter = $_POST['filter-image'];
+    $testImg = $_POST['img'];
 
+
+
+    // $post = new classes\Post();
+    // $post->createPost($username, $image, $description, $location); 
+    var_dump($testImg);
     var_dump($filter);
     var_dump($description);
     var_dump($location);
-    var_dump($image);
 
- */
-
-    /* $fileName = $_FILES['img']['name'];
+    $fileName = $_FILES['img']['name'];
     $fileTmp = $_FILES['img']['tmp_name'];
     $fileSize = $_FILES['img']['size'];
     $fileError = $_FILES['img']['error'];
     $fileType = $_FILES['img']['type'];
-
+    var_dump($fileName);
     $fileExt = explode('.', $fileName);
     $fileRealExt = strtolower(end($fileExt));
 
@@ -44,27 +48,26 @@ if (isset($_POST['submit'])) {
     if (in_array($fileRealExt, $allExtensions)) {
         if ($fileError === 0) {
             if ($fileSize < 1000000) {
-                $uploadFileName = uniqid('', true) .  $fileRealExt;
-                $fileDestination = "uploads/" . $uploadFileName;
-
-                move_uploaded_file($fileTmp, $fileDestination);
-
-                $image =  $fileName;
+                $image = uniqid(' ', true) . "." . $fileRealExt;
+                $fileDestination = "uploads/" . $image;
 
                 $post = new classes\Post();
                 $post->createPost($username, $image, $description, $location, $filter);
+
+                move_uploaded_file($fileTmp, $fileDestination);
             } else {
-                echo "file is to0 big";
+                echo "file is too big";
             }
         } else {
             echo "error while uploading image";
         }
     } else {
         echo "This file can't be used";
-    } */
+    }
 
-    $post = new classes\Post();
-    $post->createPost($username, $image, $description, $location, $filter);
+    var_dump($image);
+
+    
 }
 
 
@@ -123,8 +126,9 @@ if (isset($_POST['submit'])) {
                 <label for="img" class="labels-upload">Select your filter</label>
                 <br>
                 <select name="filter-image" id="filter-image" class="form-control">
-                    <option value="blackwhite">black&white</option>
-                    <option value="sepia">sepia</option>
+                    <?php foreach ($getFilters as $filter) : ?>
+                        <option value="<?php echo $filter['filtername']; ?>"><?php echo $filter['filtername']; ?></option>
+                    <?php endforeach; ?>
                 </select>
 
                 <br><br>

@@ -107,27 +107,33 @@ class Post  {
 
     }
 
-    public function createPost($username,$image, $description, $location ,$filter){
+    public function createPost($username, $image, $description, $location, $filter){
+
         $db = new Db();
         $conn = $db->getInstance();
 
-        $statement = $conn->prepare("INSERT INTO posts (photo, description, location, isLiked, postedDate, filters, user_id)
-         VALUES (:photo, :description, :location, :isLiked, sysdate(), :filters, (select id from users where username = :username));");
-
-        //postdate datum + uur + sec
+        $statement = $conn->prepare("INSERT INTO posts (photo, description, location, postedDate, user_id, filter_id)
+        VALUES(:photo, :description, :location, SYSDATE(),(SELECT id FROM users WHERE username = :username),
+        (SELECT id FROM filters WHERE filtername = :filter)); ");
 
         $statement->bindValue(":photo", $image);
         $statement->bindValue(":description", $description);
         $statement->bindValue(":location", $location);
-        $statement->bindValue(":isLiked", 0);
-        //sysdate();
-        $statement->bindValue(":filters", $filter);
         $statement->bindValue(":username", $username);
-        $result = $statement->execute();
+        $statement->bindValue(":filter", $filter);
+        $statement->execute();
 
-    
+    }
 
+    public static function getAllFilters() {
+        $db = new Db();
+        $conn = $db->getInstance();
+        $statement = $conn->prepare("select * from filters");
+        $statement->execute();
 
+        $getFilters = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $getFilters;
     }
 }
 ?>
