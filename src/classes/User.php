@@ -7,6 +7,10 @@ class User {
     protected $email;
     protected $password;
     protected $confirmPassword;
+    protected $avatar;
+    protected $fullName;
+    protected $bio;
+    protected $id;
     
     public function setUsername($username)
     {
@@ -55,6 +59,55 @@ class User {
     public function setConfirmPassword($confirmPassword)
     {
         $this->confirmPassword = $confirmPassword;
+
+        return $this;
+    }
+
+    public function getFullName()
+    {
+        return $this->fullName;
+    }
+ 
+    public function setFullName($fullName)
+    {
+        $this->fullName = $fullName;
+
+        return $this;
+    }
+
+    public function getBio()
+    {
+        return $this->bio;
+    }
+
+    
+    public function setBio($bio)
+    {
+        $this->bio = $bio;
+
+        return $this;
+    }
+
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
 
         return $this;
     }
@@ -158,6 +211,7 @@ class User {
         }
     }
 
+//PROFILE EDIT___________//
     public function changeEmail($email,$username){
         $db = new Db();
         $conn = $db->getInstance();
@@ -170,6 +224,57 @@ class User {
         return $results;
     }
 
+    public function changefullName($fullName,$username){
+        $db = new Db();
+        $conn = $db->getInstance();
+
+        $statement = $conn->prepare("UPDATE users SET fullName = :fullName WHERE username = :user ");
+        $statement->bindValue(":fullName", $fullName);
+        $statement->bindValue(":user", $username);
+        $results = $statement->execute();
+        
+        return $results;
+    }
+
+    public function changeBio($bio,$username){
+        $db = new Db();
+        $conn = $db->getInstance();
+
+        $statement = $conn->prepare("UPDATE users SET bio = :bio WHERE username = :user ");
+        $statement->bindValue(":bio", $bio);
+        $statement->bindValue(":user", $username);
+        $results = $statement->execute();
+        
+        return $results;
+    }
+
+    public function Avatar (){
+        //AVATAR KOMT TERECHT IN FOLDER IMG
+        $folder ="upload_avatar/"; 
+        $avatar = $_FILES['avatar']['name']; 
+        $path = $folder . $avatar ; 
+        $target_file=$folder.basename($_FILES["avatar"]["name"]);
+        $imageFileType=pathinfo($target_file,PATHINFO_EXTENSION);
+        $allowed=array('jpeg','png' ,'jpg'); $filename=$_FILES['avatar']['name']; 
+        $ext=pathinfo($filename, PATHINFO_EXTENSION); if(!in_array($ext,$allowed) ) 
+
+    { 
+        echo "Sorry, only JPG, JPEG, PNG & GIF  files are allowed.";
+
+    }else{ 
+
+            move_uploaded_file( $_FILES['avatar'] ['tmp_name'], $path); 
+            $conn = Db::getInstance();
+            $statement=$conn->prepare("insert into users(avatar)values(:avatar) "); 
+
+            $statement->bindValue(':avatar',$avatar); 
+            $results = $statement->execute();
+            return $results;
+
+        } 
+    }
+
+
     // TO GET THE CORRECT USERNAME ID FOR PROFILE.PHP
     public function getUsernameFrom($id){
         $db = new Db();
@@ -179,10 +284,38 @@ class User {
         $statement->bindValue(":id", $id);
         $statement->execute();
         $correctUsers = $statement->fetchAll(\PDO::FETCH_ASSOC);
-
         return $correctUsers;
-    }
+    } 
+    
 
+    public function showUser($username){
+        $db = new Db();
+        $conn = $db->getInstance();
+        $statement = $conn->prepare("select * from users where username = :username");
+        $statement->bindValue(":username", $username);
+        $result = $statement->execute();
+
+        $user = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        
+        return $user;
+
+     }
+
+    
+    // // TO GET THE CORRECT USERNAME ID FOR PROFIL.PHP
+    // public function getUsernameFrom($id){
+
+    //     $db = new Db();
+    //     $conn = $db->getInstance();
+    
+    //     $statement = $conn->prepare("select * from users where id = :id");
+    //     $statement->bindValue(":id", $id);
+    //     $results = $statement->execute();
+    //     // var_dump($results);
+    //     $correctUsers = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+    //     return $correctUsers;
+    // }
 
     public function checkLoggedInUsername() {
         echo $_SESSION['user'];

@@ -35,17 +35,19 @@
   </head>
   <body>
 
-    <div class="container-fluid feed-header">
-              <div class="row justify-content-center">
-                  <img src="img/plantstagram-logo.png" class="plant-logo justify-content-center">
-              </div>
+    <div class="container-fluid header-logo">
+        <div class="row">
+            <div class="col-12 text-center header-logo">
+                <img src="img/plantstagram-logo.png" class="plant-logo ">
+            </div>
+        </div>
     </div>
 
     <div class="container-fluid">
           <div class="login-form">
             <form action="" method="post">
               <div class="formLayout">
-                <h1 class="text-center form-title">Plantstagram</h2>       
+                <h1 class="text-center form-title">Log in</h2>       
                   <div class="form-group">
                       <label for="username">Username</label>
                       <input type="text" class="form-control" id="username" name="username"  required="required">
