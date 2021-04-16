@@ -6,12 +6,10 @@
 
 
     if(!empty($_GET["id"])){
-        // WE COLLECT HERE THE INFORMATION FOR THE SPECIFIC POST, WITH HIS ID
+        // WE COLLECT HERE THE INFORMATION FOR THE SPECIFIC POST, WITH THE ID
         $post_id = $_GET["id"];
-        var_dump($post_id);
         $getPost = new classes\Post();
         $postsD = $getPost->getPostDetail($post_id);
-        // var_dump($postsD);
     }
 
 ?>
@@ -32,7 +30,7 @@
 </head>
 <body>
 
-    <!-- <?php foreach($postsD as $post): ?> -->
+    <?php foreach($postsD as $post): ?>
       
         <div class="container post-post">
                     <div class="row row-first">
