@@ -136,6 +136,31 @@ class Post  {
 
         return $getFilters;
     }
+
+    // FUNCTION THAT PUT THE POSTS OF THE USERS IN THE PROFILE.PHP
+    public static function getPostsUser($user_id){
+        $db = new Db();
+        $conn = $db->getInstance();
+        $statement = $conn->prepare("select * from posts WHERE user_id = :user_id ORDER BY postedDate DESC");
+        $statement->bindValue(":user_id", $user_id);
+        $statement->execute();
+        
+        $postsUser = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        return $postsUser;
+    }
+
+    // TO GET POST IN DETAIL
+    public static function getPostDetail($post_id){
+        $db = new Db();
+        $conn = $db->getInstance();
+        $statement = $conn->prepare("select * from posts inner join users on posts.user_id = users.id where posts.id = :id");
+        $statement->bindValue(":id", $post_id);
+        $statement->execute();
+        // var_dump($results);
+        $correctUsers = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $correctUsers;
+    }
 }
 
 ?>

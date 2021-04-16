@@ -6,6 +6,7 @@
     $security = new classes\User();
     $security->onlyLoggedInUsers();
 
+
     // LOOP FOR POSTS
     $posts = new classes\Post();
     $resultsPosts = $posts->getAllPosts();
@@ -14,7 +15,6 @@
 
 
     // DATE CONVERSION TO ".. AGO"
-
     $posted_ad = "2021-04-10 08:21:28";
 
     function convertTime($value){
@@ -55,7 +55,7 @@
 
      $unixTimestamp = convertTime($posted_ad);
      echo convertToAgo($unixTimestamp);
-  
+
 
 ?><!DOCTYPE html>
 <html lang="en">

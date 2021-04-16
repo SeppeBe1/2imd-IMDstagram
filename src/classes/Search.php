@@ -20,7 +20,7 @@ class Search {
         {
             $db = new Db();
             $conn = $db->getInstance();
-            $statement = $conn->prepare("SELECT * FROM `users` INNER JOIN posts on users.id = posts.user_id 
+            $statement = $conn->prepare("SELECT *, users.id as userid FROM `users` INNER JOIN posts on users.id = posts.user_id 
             WHERE `username` LIKE :search or `description` LIKE :search or `location` LIKE :search");
             $keyword = "%".$search."%";
             $statement->bindValue(":search", $keyword, \PDO::PARAM_STR);

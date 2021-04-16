@@ -274,6 +274,20 @@ class User {
         } 
     }
 
+
+    // TO GET THE CORRECT USERNAME ID FOR PROFILE.PHP
+    public function getUsernameFrom($id){
+        $db = new Db();
+        $conn = $db->getInstance();
+    
+        $statement = $conn->prepare("select * from users where id = :id");
+        $statement->bindValue(":id", $id);
+        $statement->execute();
+        $correctUsers = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        return $correctUsers;
+    } 
+    
+
     public function showUser($username){
         $db = new Db();
         $conn = $db->getInstance();
@@ -302,4 +316,8 @@ class User {
 
     //     return $correctUsers;
     // }
+
+    public function checkLoggedInUsername() {
+        echo $_SESSION['user'];
+    }
 }

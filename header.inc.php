@@ -1,5 +1,17 @@
 <?php
-    
+
+    namespace src;
+    spl_autoload_register();
+
+    $security = new classes\User();
+    $security->onlyLoggedInUsers();
+    // $usernameCurrent = $security->checkLoggedInUsername();
+
+    // var_dump($usernameCurrent);
+
+
+
+
     
 ?>
 <!DOCTYPE html>
@@ -27,7 +39,7 @@
         <div class="container-fluid navigation sticky-top">
             <div class="row">
                 <div class="col-6 ">
-                    <a href="profile.php">
+                    <a href="profile.php?username=<?php echo $security->checkLoggedInUsername(); ?>">
                         <img src="https://images.pexels.com/photos/3101767/pexels-photo-3101767.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" class="profile-pic">
                     </a>
                     <a href="feed.php">
