@@ -12,16 +12,22 @@
         // var_dump($user_id);
         $getUser = new classes\User();
         $users = $getUser->getUsernameFrom($user_id);
+        // var_dump($users);
+        $postsUser = new classes\Post();
+        $postsUserResults = $postsUser->getPostsUser($user_id);
+
+        // STACKING OF THE BOOTSTRAP DIVS IN 3 COLUMNS
+        $numberOfColumns = 3;
+        $bootstrapColWidth = 12 / $numberOfColumns ;
+        $arrayChunks = array_chunk($postsUserResults, $numberOfColumns);
     }
+     
 
-    $postsUser = new classes\Post();
-    $postsUserResults = $postsUser->getPostsUser($user_id);
-
-    // STACKING OF THE BOOTSTRAP DIVS IN 3 COLUMNS
-    $numberOfColumns = 3;
-    $bootstrapColWidth = 12 / $numberOfColumns ;
-    $arrayChunks = array_chunk($postsUserResults, $numberOfColumns);
-    // var_dump($arrayChunks);
+    if(!empty($_GET["username"])){
+        $usernameUrl = $_GET["username"];
+        $getUserUrl = new classes\User();
+        $loggedinUser = $getUserUrl->getUsernameFrom($usernameUrl);
+    }
 
 ?>
 <!DOCTYPE html>
@@ -100,22 +106,19 @@
 
         <!-- LOOPEN OVER POSTS !-->
 
-
-
         <div class="container-fluid container-gallery">
             <?php foreach($arrayChunks as $postsUserResults) : ?>
                     <div class="row">
                         <?php foreach($postsUserResults as $post): ?>
                             <div class="col-4">
-                                <div class="square-image">
-                                    <a href="postDetail.php"><img class="img-thumbnail img" src="<?php echo $post["photo"]?>"></a>
+                                <div class="square-image">                                    
+                                    <a href="postDetail.php?id=<?php echo $post["id"]; ?>"><img class="img-thumbnail img" src="<?php echo $post["photo"]?>"></a>
                                 </div>
                             </div>
                         <?php endforeach ;?>
                     </div>
             <?php endforeach ;?>
         </div>
-
 
         <!-- <div class="container-fluid container-gallery">
             <div class="row">

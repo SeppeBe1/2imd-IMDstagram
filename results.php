@@ -19,11 +19,6 @@
         var_dump($resultsTags);
     } */
 
-    // STACKING OF THE BOOTSTRAP DIVS IN 3 COLUMNS
-    // $numberOfColumns = 3;
-    // $bootstrapColWidth = 12 / $numberOfColumns ;
-    // $arrayChunks = array_chunk($postsUserResults, $numberOfColumns);
-
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -48,7 +43,8 @@
             <?php if(isset($_POST['keyword'])): ?>
                 <?php $keyword = $_POST['keyword'];
                     $search = new classes\Search();
-                    $resultsSearch = $search->searchParam($keyword);?>
+                    $resultsSearch = $search->searchParam($keyword);
+                    ?>
             
                     <div class="container search-results-con">
                         <h3>Search results for <span class="bold">"<?php echo $_POST['keyword'] ?>"</span>:</h3><br>
@@ -68,10 +64,10 @@
                                             </a>
                                         </div>
                                         <div class="col-7">
-                                            <a href="#"><span class="profile-name"><?php echo $key['username']; ?></span></a><br>
+                                            <a href="profile.php?id=<?php echo $key["userid"]; ?>"><span class="profile-name"><?php echo $key['username']; ?></span></a><br>
                                             <a href="#" class="profile-location"><?php echo $key['location']; ?></a>
                                             <br>
-                                            <a href="#"><img src="<?php echo  $key['photo'];?>" class="picture-feed"></a><br><!--a href aanpassen param meegeven naar de detailpg van de foto-->
+                                            <a href="postDetail.php?id=<?php echo $key["id"]; ?>"><img src="<?php echo  $key['photo'];?>" class="picture-feed"></a><br><!--a href aanpassen param meegeven naar de detailpg van de foto-->
                                             <br>
 
                                             <?php $descrArray = explode(" ", $key['description']);?>
@@ -105,7 +101,7 @@
                                 <?php foreach($resultsTags as $tagResults):?>
                                     <div class="col-4">
                                         <div class="square-image">
-                                            <a href="postDetail.php"><img class="img-thumbnail img" src="<?php echo $tagResults['photo'];?>"></a>
+                                            <a href="postDetail.php?id=<?php echo $tagResults["id"]; ?>"><img class="img-thumbnail img" src="<?php echo $tagResults['photo'];?>"></a>
                                         </div>
                                     </div>
                                     <?php endforeach; ?>
