@@ -80,7 +80,6 @@ class User {
         return $this->bio;
     }
 
-    
     public function setBio($bio)
     {
         $this->bio = $bio;
@@ -117,7 +116,7 @@ class User {
         $conn = $db->getInstance();
         $options = parse_ini_file("settings/cost.ini"); //cost 15 - returns an array
         
-        $statement = $conn->prepare("select * from users where username = :username");
+        $statement = $conn->prepare("SELECT * FROM users WHERE username = :username");
         $statement->bindValue(":username", $this->username);
         $statement->execute();
         $user = $statement->fetch(\PDO::FETCH_ASSOC);
@@ -126,7 +125,7 @@ class User {
 
         if(password_verify($this->getPassword(), $hash)) {
             setcookie("loggedIn", "dareal" . $this->getUsername() . "748", time() + 60 * 60 * 24 * 7); //sets cookie for a week
-            $_SESSION["user"] = $this->getUsername();
+            $_SESSION['user'] = $this->getUsername();
             header("location: feed.php");
             return true;
         }else{
@@ -138,7 +137,7 @@ class User {
         $db = new Db();
         $conn = $db->getInstance();
 
-        $statement = $conn->prepare("select email from users where email = :email");
+        $statement = $conn->prepare("SELECT email FROM users WHERE email = :email");
         $email = $this->getEmail();
         $statement->bindValue(":email", $email);
         $results = $statement->execute();
@@ -155,7 +154,7 @@ class User {
         $db = new Db();
         $conn = $db->getInstance();
 
-        $statement = $conn->prepare("select username from users where username = :username");
+        $statement = $conn->prepare("SELECT username FROM users WHERE username = :username");
         $username = $this->getUsername();
         $statement->bindValue(":username", $username);
         $results = $statement->execute();
@@ -173,7 +172,7 @@ class User {
         $conn = $db->getInstance();
         $options = parse_ini_file("settings/cost.ini"); //cost 15 - returns an array
 
-        $statement = $conn->prepare("insert into users (username, email, password) values (:username, :email, :password)");
+        $statement = $conn->prepare("INSERT into users (username, email, password) values (:username, :email, :password)");
         $username = $this->getUsername();
         $email = $this->getEmail();
         $password = password_hash($this->getConfirmPassword(), PASSWORD_DEFAULT, $options);
@@ -206,19 +205,19 @@ class User {
 
     public function onlyLoggedInUsers() {
         session_start();
-        if(!isset($_SESSION['user'])){
-            header("Location: login.php");
-        }
+            if(!isset($_SESSION['user'])){
+                header("Location: login.php");
+            }
     }
 
-//PROFILE EDIT___________//
+//PROFILE EDIT___________ // -- moet werken met getters en setters
     public function changeEmail($email,$username){
         $db = new Db();
         $conn = $db->getInstance();
 
         $statement = $conn->prepare("UPDATE users SET email = :email WHERE username = :user ");
-        $statement->bindValue(":email", $email);
-        $statement->bindValue(":user", $username);
+        $statement->bindValue(":email", $this->getEmail());
+        $statement->bindValue(":user", $this->getUsername());
         $results = $statement->execute();
         
         return $results;
@@ -262,43 +261,40 @@ class User {
         echo "Sorry, only JPG, JPEG, PNG & GIF  files are allowed.";
 
     }else{ 
-
             move_uploaded_file( $_FILES['avatar'] ['tmp_name'], $path); 
             $conn = Db::getInstance();
-            $statement=$conn->prepare("insert into users(avatar)values(:avatar) "); 
+            $statement=$conn->prepare("INSERT INTO users(avatar)values(:avatar) "); 
 
-            $statement->bindValue(':avatar',$avatar); 
+            $statement->bindValue(':avatar', $avatar); 
             $results = $statement->execute();
-            return $results;
 
+            return $results;
         } 
     }
-
 
     // TO GET THE CORRECT USERNAME ID FOR PROFILE.PHP
     public function getUsernameFrom($id){
         $db = new Db();
         $conn = $db->getInstance();
     
-        $statement = $conn->prepare("select * from users where id = :id");
+        $statement = $conn->prepare("SELECT * FROM users WHERE id = :id");
         $statement->bindValue(":id", $id);
         $statement->execute();
         $correctUsers = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
         return $correctUsers;
     } 
-    
 
     public function showUser($username){
         $db = new Db();
         $conn = $db->getInstance();
-        $statement = $conn->prepare("select * from users where username = :username");
-        $statement->bindValue(":username", $username);
+        $statement = $conn->prepare("SELECT * FROM users WHERE username = :username");
+        $statement->bindValue(":username", $this->getUsername());
         $result = $statement->execute();
 
         $user = $statement->fetchAll(\PDO::FETCH_ASSOC);
         
         return $user;
-
      }
 
     public function checkLoggedInUsername() {

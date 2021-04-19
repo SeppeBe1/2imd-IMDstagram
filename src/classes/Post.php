@@ -97,19 +97,17 @@ class Post  {
     }
 
     // FUNCTION THAT PICKS UP THE POSTS FROM ALL THE USER FOR FEED.PHP
-    public static function getAllPosts(){
+    public function getAllPosts(){
         $db = new Db();
         $conn = $db->getInstance();
-        $statement = $conn->prepare("select * from posts INNER JOIN users ON posts.user_id = users.id ORDER BY postedDate DESC LIMIT 20");
+        $statement = $conn->prepare("SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY postedDate DESC LIMIT 20");
         $statement->execute();
-        
         $posts = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        
         return $posts;
-
     }
 
     public function createPost($username, $image, $description, $location, $filter){
-
         $db = new Db();
         $conn = $db->getInstance();
 
@@ -123,15 +121,13 @@ class Post  {
         $statement->bindValue(":username", $username);
         $statement->bindValue(":filter", $filter);
         $statement->execute();
-
     }
 
-    public static function getAllFilters() {
+    public function getAllFilters() {
         $db = new Db();
         $conn = $db->getInstance();
-        $statement = $conn->prepare("select * from filters");
+        $statement = $conn->prepare("SELECT * FROM filters");
         $statement->execute();
-
         $getFilters = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
         return $getFilters;
@@ -141,7 +137,7 @@ class Post  {
     public static function getPostsUser($user_id){
         $db = new Db();
         $conn = $db->getInstance();
-        $statement = $conn->prepare("select * from posts WHERE user_id = :user_id ORDER BY postedDate DESC");
+        $statement = $conn->prepare("SELECT * FROM posts WHERE user_id = :user_id ORDER BY postedDate DESC");
         $statement->bindValue(":user_id", $user_id);
         $statement->execute();
         
@@ -153,10 +149,9 @@ class Post  {
     public static function getPostDetail($post_id){
         $db = new Db();
         $conn = $db->getInstance();
-        $statement = $conn->prepare("select * from posts inner join users on posts.user_id = users.id where posts.id = :id");
+        $statement = $conn->prepare("SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id WHERE posts.id = :id");
         $statement->bindValue(":id", $post_id);
         $statement->execute();
-        // var_dump($results);
         $correctUsers = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
         return $correctUsers;

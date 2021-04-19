@@ -1,17 +1,12 @@
 <?php
 
 namespace src;
-
 include_once("./header.inc.php");
 spl_autoload_register();
-session_start();
 
 $security = new classes\User();
-$security->onlyLoggedInUsers();
 
 $username = $_SESSION['user'];
-// $id = $_SESSION['id'];
-
 
 // echo "Make a new post";
 
@@ -23,23 +18,21 @@ if (isset($_POST['submit'])) {
     $description = $_POST['description'];
     $location = $_POST['location-search'];
     $filter = $_POST['filter-image'];
-    $testImg = $_POST['img'];
-
-
+    $testImg = $_POST['img']; // > ziet het niet - needs fix
 
     // $post = new classes\Post();
     // $post->createPost($username, $image, $description, $location); 
-    var_dump($testImg);
+    /* var_dump($testImg);
     var_dump($filter);
     var_dump($description);
-    var_dump($location);
+    var_dump($location); */
 
     $fileName = $_FILES['img']['name'];
     $fileTmp = $_FILES['img']['tmp_name'];
     $fileSize = $_FILES['img']['size'];
     $fileError = $_FILES['img']['error'];
     $fileType = $_FILES['img']['type'];
-    var_dump($fileName);
+    //var_dump($fileName);
     $fileExt = explode('.', $fileName);
     $fileRealExt = strtolower(end($fileExt));
 
@@ -65,14 +58,8 @@ if (isset($_POST['submit'])) {
         echo "This file can't be used";
     }
 
-    var_dump($image);
-
-    
+    //var_dump($image);
 }
-
-
-
-
 
 ?>
 <!DOCTYPE html>

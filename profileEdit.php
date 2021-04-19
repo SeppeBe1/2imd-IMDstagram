@@ -4,16 +4,16 @@
     include_once("./header.inc.php");
 
     $security = new classes\User();
-    $security->onlyLoggedInUsers();
 
+    /* GETTERS SETTERS TOEVOEGEN! */
     if(isset($_SESSION['user']) ){
         try {
             $user = new classes\User();
-            $username = $_SESSION["user"];
+            $username = $_SESSION['user'];
             $usersinfo = $user->showUser($username);
             var_dump($usersinfo);
         } catch (\Throwable $th) {
-            //throw $th;
+            //throw $th; ERROR MSSG? 
         }
         
     } 

@@ -4,7 +4,6 @@
     include_once("./header.inc.php");
 
     $security = new classes\User();
-    $security->onlyLoggedInUsers();
 
     // TO GET ID FROM URL
     if(!empty($_GET["id"])){

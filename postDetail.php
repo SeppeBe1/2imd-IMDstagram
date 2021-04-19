@@ -7,8 +7,9 @@
 
     if(!empty($_GET["id"])){
         // WE COLLECT HERE THE INFORMATION FOR THE SPECIFIC POST, WITH THE ID
-        $post_id = $_GET["id"];
         $getPost = new classes\Post();
+        $post_id = $_GET["id"];
+        //setPostId -> getid;
         $postsD = $getPost->getPostDetail($post_id);
     }
 

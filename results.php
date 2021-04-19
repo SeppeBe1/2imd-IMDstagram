@@ -4,7 +4,6 @@
     include_once("./header.inc.php");
 
     $security = new classes\User();
-    $security->onlyLoggedInUsers();
 
    /* if(isset($_POST['keyword'])) { IS OK TO PUT IN HTML?
         $keyword = $_POST['keyword'];
@@ -39,21 +38,17 @@
 <body>
 
         <main>
-        <!-- HIER RESULTS PRINTEN - NEEDS TWEAKING WITH HTML/CSS -->
+        <!-- PRINT RESULTATEN AF VAN DE OPGEVRAAGDE PARAMETER -->
             <?php if(isset($_POST['keyword'])): ?>
-                <?php $keyword = $_POST['keyword'];
+                <?php 
                     $search = new classes\Search();
+                    $keyword = $_POST['keyword'];
+                    $search->setParam($keyword);
                     $resultsSearch = $search->searchParam($keyword);
-                    ?>
+                ?>
             
                     <div class="container search-results-con">
                         <h3>Search results for <span class="bold">"<?php echo $_POST['keyword'] ?>"</span>:</h3><br>
-
-                        <!--  <p class="search-results-p">Accounts</p> -->
-                        <!-- if clause (if keyword == username) -->
-                        
-                        <!-- <p class="search-results-p">Posts</p> -->
-                        <!-- else -->
 
                         <?php foreach($resultsSearch as $key): ?>
                             <div class="container post-post">
@@ -86,10 +81,12 @@
                     </div>
             <?php endif; ?>
 
-    <!-- RESULTS TAGS -->
+    <!-- RESULTATEN TAGS -->
             <?php if(isset($_GET['tag'])):?>
-                <?php $hashtag = $_GET['tag'];
+                <?php 
                     $searchTag = new classes\Search();
+                    $hashtag = $_GET['tag'];
+                    $searchTag->setTag($hashtag);
                     $resultsTags = $searchTag->searchTags($hashtag);?>
 
                             <div class="container-fluid container-gallery tags-results">

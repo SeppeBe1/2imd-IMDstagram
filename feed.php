@@ -4,15 +4,10 @@
     spl_autoload_register(); 
 
     $security = new classes\User();
-    $security->onlyLoggedInUsers();
-
-
+    
     // LOOP FOR POSTS
     $posts = new classes\Post();
     $resultsPosts = $posts->getAllPosts();
-    // FOR DATE TO STRING "**AGO" -> https://stackoverflow.com/questions/1416697/converting-timestamp-to-time-ago-in-php-e-g-1-day-ago-2-days-ago
-
-
 
     // DATE CONVERSION TO ".. AGO"
     $posted_ad = "2021-04-10 08:21:28";
@@ -131,7 +126,7 @@
 
                 <div class="row row-second">
                     <div class="col-12">
-                        <img src="<?php echo  $post['photo'];?>" class="picture-feed">
+                        <img src="<?php echo $post['photo'];?>" class="picture-feed">
                     </div>
                 </div>
 
@@ -166,9 +161,9 @@
                             <?php $descrArray = explode(" ", $post['description']);?>
                             <?php foreach($descrArray as $word): ?>
                                 <?php if($word[0] == "#"): ?>
-                                    <a href="results.php?tag=<?php echo str_replace("#", "", $word); ?>" name="tag" class="tags-post"><?php echo  $word;?></a>
+                                    <a href="results.php?tag=<?php echo str_replace("#", "", $word); ?>" name="tag" class="tags-post"><?php echo $word;?></a>
                                 <?php else: ?>
-                                    <?php echo  $word; ?>
+                                    <?php echo $word; ?>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </p>
