@@ -95,7 +95,7 @@
                 </div>
 
                 <div class="row row-second">
-                    <div class="col-12">
+                <div class="col-12">
                         <img src="<?php echo $post['photo'];?>" class="picture-feed">
                     </div>
                 </div>
@@ -138,10 +138,12 @@
                             <!--DESCRIPTION + HASHTAGS -->
                             <?php $descrArray = explode(" ", $post['description']);?>
                             <?php foreach($descrArray as $word): ?>
-                                <?php if($word[0] == "#"): ?>
-                                    <a href="results.php?tag=<?php echo str_replace("#", "", $word); ?>" name="tag" class="tags-post"><?php echo $word;?></a>
-                                <?php else: ?>
-                                    <?php echo $word; ?>
+                                <?php if(!empty($word)): ?>
+                                    <?php if($word[0] == "#"): ?>
+                                        <a href="results.php?tag=<?php echo str_replace("#", "", $word); ?>" name="tag" class="tags-post"><?php echo $word;?></a>
+                                    <?php else: ?>
+                                        <?php echo $word; ?>
+                                    <?php endif; ?>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </p>
