@@ -81,22 +81,21 @@ echo convertToAgo($unixTimestamp);
     <main>
 
         <!-- START VAN LOOP-->
-
         <?php foreach ($resultsPosts as $post) : ?>
         <?php
             $likes->setPostID($post['id']);
             $post_id = $likes->getPostID();
-            ?>
+        ?>
 
         <div class="container post-post">
             <div class="row row-first">
                 <div class="col-2">
-                    <a href="profile.php?id=<?php echo $post["id"]; ?>">
+                    <a href="profile.php?id=<?php echo $post['user_id']; ?>">
                         <img src="<?php echo $post['avatar'] ?>" class="profile-pic-feed">
                     </a>
                 </div>
                 <div class="col-7">
-                    <a href="profile.php?id=<?php echo $post["id"]; ?>"><span
+                    <a href="profile.php?id=<?php echo $post['user_id']; ?>"><span
                             class="profile-name"><?php echo $post['username'] ?></span></a><br>
                     <a href="#" class="profile-location"><?php echo $post['location'] ?></a>
                 </div>
@@ -125,16 +124,8 @@ echo convertToAgo($unixTimestamp);
             <div class="row row-third">
                 <?php $isLikedbyUser = $likes->isLiked($loggedInId, $post_id); ?>
                 <div class="col-1">
-                    <img src="./img/icons/<?php if (!empty($isLikedbyUser)) {
-                                                    echo "heart";
-                                                } else {
-                                                    echo "heart-outlines";
-                                                } ?>.svg" class="icon-feed like-status <?php if (!empty($isLikedbyUser)) {
-                                                                                            echo "unlike";
-                                                                                        } else {
-                                                                                            echo "like";
-                                                                                        } ?>"
-                        data-id=<?php echo $post['id']; ?>>
+                    <img src="./img/icons/<?php if (!empty($isLikedbyUser)) {echo "heart";} else {echo "heart-outlines";} ?>.svg" 
+                    class="icon-feed like-status <?php if (!empty($isLikedbyUser)) { echo "unlike"; } else { echo "like";} ?>" data-id=<?php echo $post['id']; ?>>
                 </div>
 
                 <!--count likes-->
@@ -171,12 +162,12 @@ echo convertToAgo($unixTimestamp);
                         <?php $descrArray = explode(" ", $post['description']); ?>
                         <?php foreach ($descrArray as $word) : ?>
                         <?php if (!empty($word)) : ?>
-                        <?php if ($word[0] == "#") : ?>
-                        <a href="results.php?tag=<?php echo str_replace("#", "", $word); ?>" name="tag"
-                            class="tags-post"><?php echo $word; ?></a>
-                        <?php else : ?>
-                        <?php echo $word; ?>
-                        <?php endif; ?>
+                            <?php if ($word[0] == "#") : ?>
+                            <a href="results.php?tag=<?php echo str_replace("#", "", $word); ?>" name="tag"
+                                class="tags-post"><?php echo $word; ?></a>
+                            <?php else : ?>
+                            <?php echo $word; ?>
+                            <?php endif; ?>
                         <?php endif; ?>
                         <?php endforeach; ?>
                     </p>
