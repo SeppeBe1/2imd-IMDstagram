@@ -1,6 +1,7 @@
 <?php
 
 namespace src;
+
 include_once("./header.inc.php");
 spl_autoload_register();
 

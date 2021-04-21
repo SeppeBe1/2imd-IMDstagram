@@ -110,9 +110,11 @@ echo convertToAgo($unixTimestamp);
                     <?php $folder = "uploads/"; ?>
                     <?php if (is_dir($folder)) {
                             if ($open = opendir($folder)) {
-                                if ($file == "." || $post['photo'] == "..") continue;
+                                    if ($file == "." || $post['photo'] == "..") continue;
+
                                 $file =  classes\Post::getPhoto($post_id);
-                                echo '<img src="' . "uploads/" . $file . '"class="picture-feed">"';
+
+                                    echo '<img src="' . "uploads/" . $file . '"class="picture-feed">"';
                                 closedir($open);
                             }
                         } ?>
@@ -123,18 +125,15 @@ echo convertToAgo($unixTimestamp);
             <div class="row row-third">
                 <?php $isLikedbyUser = $likes->isLiked($loggedInId, $post_id); ?>
                 <div class="col-1">
-                    <img src="./img/icons/
-                    <?php if (!empty($isLikedbyUser))
-                        {
-                            echo "heart";
-                        } else {
-                            echo "heart-outlines";
-                        } ?>.svg"
-                        class="icon-feed like-status <?php if (!empty($isLikedbyUser)) {
-                            echo "unlike";
-                        } else {
-                            echo "like";
-                        } ?>"
+                    <img src="./img/icons/<?php if (!empty($isLikedbyUser)) {
+                                                    echo "heart";
+                                                } else {
+                                                    echo "heart-outlines";
+                                                } ?>.svg" class="icon-feed like-status <?php if (!empty($isLikedbyUser)) {
+                                                                                            echo "unlike";
+                                                                                        } else {
+                                                                                            echo "like";
+                                                                                        } ?>"
                         data-id=<?php echo $post['id']; ?>>
                 </div>
 
