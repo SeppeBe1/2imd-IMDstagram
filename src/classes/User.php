@@ -172,8 +172,9 @@ class User {
         $conn = $db->getInstance();
         $options = parse_ini_file("settings/cost.ini"); //cost 15 - returns an array
 
-        $statement = $conn->prepare("INSERT into users (username, email, password) values (:username, :email, :password)");
+        $statement = $conn->prepare("insert into users (username, email, password) values (:username, :email, :password)");
         $username = $this->getUsername();
+        var_dump($username);
         $email = $this->getEmail();
         $password = password_hash($this->getConfirmPassword(), PASSWORD_DEFAULT, $options);
         
@@ -184,9 +185,9 @@ class User {
             $results = $statement->execute();
 
             session_start(); 
-            setcookie("loggedIn", "dareal" . $this->getUsername() . "748", time() + 60 * 60 * 24 * 7);
-            $_SESSION['user'] = "";
-            header("Location: feed.php"); 
+            setcookie("loggedIn", "dareal" . $this->getUsername() . "748", time() + 60 * 60 * 24 * 7); //sets cookie for a week
+            $_SESSION['user'] = $this->getUsername();
+            header("location: feed.php"); 
         }else {
             return false;
         }
