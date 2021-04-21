@@ -6,12 +6,12 @@
     $security = new classes\User();
 
     // TO GET ID FROM URL
-    if(!empty($_GET["id"])){
-        $user_id = $_GET["id"];
-        // var_dump($user_id);
+    if(!empty($_GET['username'])){
+        $user_id = $_GET['username'];
+
         $getUser = new classes\User();
         $users = $getUser->getUsernameFrom($user_id);
-        // var_dump($users);
+
         $postsUser = new classes\Post();
         $postsUserResults = $postsUser->getPostsUser($user_id);
 
@@ -20,7 +20,6 @@
         $bootstrapColWidth = 12 / $numberOfColumns ;
         $arrayChunks = array_chunk($postsUserResults, $numberOfColumns);
     }
-     
 
     if(!empty($_GET["username"])){
         $usernameUrl = $_GET["username"];
@@ -59,7 +58,6 @@
                     <a href="profileEdit.php" class="btn edit-btn">Edit profile</a>
                 </div>
             </div>
-
 
             <div class="row row-first">
                 <div class="col-3">

@@ -90,12 +90,12 @@ echo convertToAgo($unixTimestamp);
         <div class="container post-post">
             <div class="row row-first">
                 <div class="col-2">
-                    <a href="profile.php?id=<?php echo $post['user_id']; ?>">
+                    <a href="profile.php?username=<?php echo $post['username']; ?>">
                         <img src="<?php echo $post['avatar'] ?>" class="profile-pic-feed">
                     </a>
                 </div>
                 <div class="col-7">
-                    <a href="profile.php?id=<?php echo $post['user_id']; ?>"><span
+                    <a href="profile.php?username=<?php echo $post['username']; ?>"><span
                             class="profile-name"><?php echo $post['username'] ?></span></a><br>
                     <a href="#" class="profile-location"><?php echo $post['location'] ?></a>
                 </div>

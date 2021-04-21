@@ -274,12 +274,12 @@ class User {
     }
 
     // TO GET THE CORRECT USERNAME ID FOR PROFILE.PHP
-    public function getUsernameFrom($id){
+    public function getUsernameFrom($username){
         $db = new Db();
         $conn = $db->getInstance();
     
-        $statement = $conn->prepare("SELECT * FROM users WHERE id = :id");
-        $statement->bindValue(":id", $id);
+        $statement = $conn->prepare("SELECT * FROM users WHERE username = :username");
+        $statement->bindValue(":username", $username);
         $statement->execute();
         $correctUsers = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
