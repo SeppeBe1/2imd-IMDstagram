@@ -156,6 +156,21 @@ class Post  {
 
         return $correctUsers;
     }
+
+    public static function getPhoto($post_id){
+        $db = new Db();
+        $conn = $db->getInstance();
+        $statement = $conn->prepare("SELECT photo FROM posts WHERE id = :id");
+        $statement->bindValue(":id", $post_id);
+        $statement->execute();
+
+        $result = $statement->fetch();
+        var_dump($result);
+        return $result['photo'];
+
+    }
 }
+
+
 
 ?>
