@@ -6,14 +6,15 @@
     $security = new classes\User();
     $security->setUsername($_SESSION['user']);
     $loggedUser = $security->getUsername();
-    
+    $currentlyLoggedIn = $security->showUser($loggedUser);
+
     // LOOP FOR POSTS
     $posts = new classes\Post();
     $resultsPosts = $posts->getAllPosts();
     
     $likes = new classes\Like();
-    $currentlyLoggedIn = $security->showUser($loggedUser);
-    $loggedInId = (int)$currentlyLoggedIn[0]['id'];
+    $likes->setUserID((int)$currentlyLoggedIn[0]['id']);
+    $loggedInId = $likes->getUserID();
 
     // DATE CONVERSION TO ".. AGO"
     $posted_ad = "2021-04-10 08:21:28";

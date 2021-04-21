@@ -4,7 +4,21 @@ spl_autoload_register();
 
 class Like
 {
-    public static function countLikes($post_id) { //tellen van likes
+    protected $userID;
+
+    public function getUserID()
+    {
+        return $this->userID;
+    }
+
+    public function setUserID($userID)
+    {
+        $this->userID = $userID;
+
+        return $this;
+    }
+
+    public function countLikes($post_id) { //tellen van likes
         $db = new Db();
         $conn = $db->getInstance();
         $statement = $conn->prepare("select count(post_id) as count from likes where post_id = :post_id");
@@ -16,10 +30,12 @@ class Like
         return $likes;
     }
 
-    public static function isLiked($user_id, $post_id) { //welke post heeft de user geliked 
+    public function isLiked($user_id, $post_id) { //welke post heeft de user geliked 
         $db = new Db();
         $conn = $db->getInstance();
+
         $statement = $conn->prepare("select * from likes where user_id = :user_id and post_id= :post_id");
+        $user_id = $this->getUserID();
         $statement->bindValue(":post_id", $post_id);
         $statement->bindValue(":user_id", $user_id);
         $statement->execute();
@@ -29,7 +45,7 @@ class Like
         return $isLikedResults;
     }
 
-    public static function showLikes($post_id) {
+    public function showLikes($post_id) {
         $db = new Db();
         $conn = $db->getInstance();
         $statement = $conn->prepare("select * from likes where post_id= :post_id");
@@ -41,10 +57,12 @@ class Like
         return $resultShowlikes;
     }
 
-    public static function addLike($user_id, $post_id) {
+    public function addLike($user_id, $post_id) {
         $db = new Db();
         $conn = $db->getInstance();
+
         $statement = $conn->prepare("insert into likes (user_id, post_id) values (:user_id, :post_id)");
+        $user_id = $this->getUserID();
         $statement->bindValue(":user_id", $user_id);
         $statement->bindValue(":post_id", $post_id);
         $results = $statement->execute();
@@ -52,14 +70,17 @@ class Like
         return $results;
     }
 
-    public static function removeLike($user_id, $post_id) {
+    public function removeLike($user_id, $post_id) {
         $db = new Db();
         $conn = $db->getInstance();
+        
         $statement = $conn->prepare("delete from likes where user_id = :user_id and post_id = :post_id");
+        $user_id = $this->getUserID();
         $statement->bindValue(":user_id", $user_id);
         $statement->bindValue(":post_id", $post_id);
         $results = $statement->execute();
 
         return $results;
     }
+
 }

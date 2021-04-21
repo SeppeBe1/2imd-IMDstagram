@@ -4,11 +4,13 @@
     
     $security = new classes\User();
     $security->onlyLoggedInUsers();
-
-    $currentlyLoggedIn = $security->showUser($_SESSION['user']);
+    $security->setUsername($_SESSION['user']);
+    $loggedUser = $security->getUsername();
     
-    $loggedInId = (int)$currentlyLoggedIn[0]['id'];
     $likeTest = new classes\Like();
+    $currentlyLoggedIn = $security->showUser($loggedUser);
+    $likeTest->setUserID((int)$currentlyLoggedIn[0]['id']);
+    $loggedInId = $likeTest->getUserID();
 
     if(!empty($_POST)) {
         if($_POST['like'] == 1){
