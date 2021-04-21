@@ -78,6 +78,11 @@
     <!-- START VAN LOOP-->
 
     <?php foreach($resultsPosts as $post): ?>
+        <?php 
+        $likes->setPostID($post['id']);
+        $post_id = $likes->getPostID();
+        ?>
+
     <div class="container post-post">
                 <div class="row row-first">
                     <div class="col-2"> 
@@ -102,13 +107,13 @@
 
                 <!--like/unlike-->
                 <div class="row row-third"> 
-                    <?php $isLikedbyUser = $likes->isLiked($loggedInId, $post["id"]);?>
+                    <?php $isLikedbyUser = $likes->isLiked($loggedInId, $post_id);?>
                         <div class="col-1">
                             <img src="./img/icons/<?php if(!empty($isLikedbyUser)) { echo "heart";} else { echo "heart-outlines";} ?>.svg" class="icon-feed like-status <?php if(!empty($isLikedbyUser)) { echo "unlike";} else { echo "like";} ?>" data-id=<?php echo $post['id']; ?>>
                         </div>
 
                         <!--count likes--> 
-                        <?php $countLikes = $likes->countLikes($post['id']); ?>
+                        <?php $countLikes = $likes->countLikes($post_id); ?>
                         <div class="col-1">
                             <span id="show_like"><p class="number-feed likescount" data-id="<?php echo $post['id']; ?>">
                                 <?php echo $countLikes['count']; ?>
