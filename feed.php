@@ -107,15 +107,15 @@ echo convertToAgo($unixTimestamp);
 
             <div class="row row-second">
                 <div class="col-12">
-                    <?php $folder = "uploads/"; ?>
-                    <?php if (is_dir($folder)) {
+                    <?php $folder = "uploads/";
+                    $file = "";
+                     if (is_dir($folder)) {
                             if ($open = opendir($folder)) {
-                                    if ($file == "." || $post['photo'] == "..") continue;
-
+                                if ($file == "." || $post['photo'] == "..") continue;
                                 $file =  classes\Post::getPhoto($post_id);
-
-                                    echo '<img src="' . "uploads/" . $file . '"class="picture-feed">"';
-                                closedir($open);
+                                ?>
+                                 <img src= <?php echo '"uploads/' . $file . '"'; ?> class="picture-feed">
+                                <?php closedir($open);
                             }
                         } ?>
                 </div>
