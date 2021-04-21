@@ -4,10 +4,16 @@
     spl_autoload_register(); 
 
     $security = new classes\User();
+    $security->setUsername($_SESSION['user']);
+    $loggedUser = $security->getUsername();
     
     // LOOP FOR POSTS
     $posts = new classes\Post();
     $resultsPosts = $posts->getAllPosts();
+    
+    $likes = new classes\Like();
+    $currentlyLoggedIn = $security->showUser($loggedUser);
+    $loggedInId = (int)$currentlyLoggedIn[0]['id'];
 
     // DATE CONVERSION TO ".. AGO"
     $posted_ad = "2021-04-10 08:21:28";
@@ -62,52 +68,15 @@
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="css/style-feed.css">
-
-    <script src="https://kit.fontawesome.com/a7dc01cef9.js" crossorigin="anonymous"></script>
     <title>Plantstagram - feed</title>
 </head>
-<body>
-
-    <!-- <header>
-        <div class="container-fluid feed-header">
-            <div class="row justify-content-center">
-                <img src="img/plantstagram-logo.png" class="plant-logo justify-content-center">
-            </div>
-        </div>
-
-        <div class="container-fluid navigation sticky-top">
-            <div class="row">
-                <div class="col-7">
-                    <a href="profile.php">
-                        <img src="./img/profile-pic.png" class="profile-pic">
-                    </a>
-                    <a href="feed.php">
-                        <img src="./img/icons/home.svg" class="icon-nav">
-                    </a>
-                    <a href="#">
-                        <img src="./img/icons/+.svg" class="icon-nav">
-                    </a>
-                </div>
-                <div class="col-5">
-                    
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control search-input" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-
-    </header> -->
-    
+<body>   
 
     <main>
 
     <!-- START VAN LOOP-->
 
     <?php foreach($resultsPosts as $post): ?>
-
     <div class="container post-post">
                 <div class="row row-first">
                     <div class="col-2"> 
@@ -130,28 +99,36 @@
                     </div>
                 </div>
 
-                <div class="row row-third">
-                    <div class="col-1">
-                        <a href="#"><img src="./img/icons/heart-outlines.svg" class="icon-feed"></a>
-                    </div>
-                    <div class="col-1">
-                        <p class="number-feed">91</p>
-                    </div>
-                    <div class="col-1">
-                        <a href="#"><img src="./img/icons/chat.svg" class="icon-feed"></a>
-                    </div>
-                    <div class="col-1">
-                        <p class="number-feed">1</p>
-                    </div>
+                <!--like/unlike-->
+                <div class="row row-third"> 
+                    <?php $isLikedbyUser = $likes->isLiked($loggedInId, $post["id"]);?>
+                        <div class="col-1">
+                            <img src="./img/icons/<?php if(!empty($isLikedbyUser)) { echo "heart";} else { echo "heart-outlines";} ?>.svg" class="icon-feed like-status <?php if(!empty($isLikedbyUser)) { echo "unlike";} else { echo "like";} ?>" data-id=<?php echo $post['id']; ?>>
+                        </div>
 
-                    <div class="col-6">
+                        <!--count likes--> 
+                        <?php $countLikes = $likes->countLikes($post['id']); ?>
+                        <div class="col-1">
+                            <span id="show_like"><p class="number-feed likescount" data-id="<?php echo $post['id']; ?>">
+                                <?php echo $countLikes['count']; ?>
+                            </p></span>
+                        </div>
 
-                    </div>
+                        <!--comments-->
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/chat.svg" class="icon-feed"></a>
+                        </div>
+                        <div class="col-1">
+                            <p class="number-feed">1</p>
+                        </div>
 
-                    <div class="col-1">
-                        <a href="#"><img src="./img/icons/flag.svg" class="icon-feed"></a>
-                    </div>
+                        <div class="col-6">
 
+                        </div>
+
+                        <div class="col-1">
+                            <a href="#"><img src="./img/icons/flag.svg" class="icon-feed"></a>
+                        </div>
                 </div>
 
                 <div class="row row-fourth">
@@ -188,8 +165,6 @@
                         </div>
                         </div>
                     </form>
-                
-
         </div>
     <?php endforeach; ?>
 
@@ -360,9 +335,9 @@
                     </div>
 
             </div>
-
-
     </main>
-    
+    <script src="https://kit.fontawesome.com/a7dc01cef9.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="js/feed.js"></script>
 </body>
 </html>

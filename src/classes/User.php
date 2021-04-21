@@ -285,11 +285,13 @@ class User {
         return $correctUsers;
     } 
 
-    public function showUser($username){
+    public function showUser($username){ //CURRENTUSER
         $db = new Db();
         $conn = $db->getInstance();
-        $statement = $conn->prepare("SELECT * FROM users WHERE username = :username");
-        $statement->bindValue(":username", $this->getUsername());
+
+        $statement = $conn->prepare("select * from users where username = :username");
+        $username = $this->getUsername();
+        $statement->bindValue(":username", $username);
         $result = $statement->execute();
 
         $user = $statement->fetchAll(\PDO::FETCH_ASSOC);

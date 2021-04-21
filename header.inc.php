@@ -8,10 +8,6 @@
     // $usernameCurrent = $security->checkLoggedInUsername();
 
     // var_dump($usernameCurrent);
-
-
-
-
     
 ?>
 <!DOCTYPE html>

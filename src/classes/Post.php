@@ -100,7 +100,7 @@ class Post  {
     public function getAllPosts(){
         $db = new Db();
         $conn = $db->getInstance();
-        $statement = $conn->prepare("SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY postedDate DESC LIMIT 20");
+        $statement = $conn->prepare("SELECT *, posts.id FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY postedDate DESC LIMIT 20");
         $statement->execute();
         $posts = $statement->fetchAll(\PDO::FETCH_ASSOC);
         
