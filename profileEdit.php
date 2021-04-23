@@ -206,17 +206,18 @@
             <?php foreach($usersinfo as $user): ?>
 
             <div class="container-fluid ">
-                
+                <form action="" method="POST" enctype="multipart/form-data">
+
                 <div class="row ">
                     <div class="col-12 col-md-3 text-center ">
-                    <?php if (!isset($user['avatar'])): ?>
+                    <?php if (empty($user['avatar'])): ?>
                         <div class="avatar ">
                             <img src="./img/placeholder.jpeg" class="profile-pic-profile ">
                        </div>
                       
                     <?php else: ?>
                         <div class="avatar ">
-                            <img src="<?php echo $user['avatar']?>" class="profile-pic-profile ">
+                            <img src="user_avatar/<?php echo $user['avatar']?>" class="profile-pic-profile rounded-circle">
                        </div>
                     <?php endif; ?>
                           
@@ -234,7 +235,7 @@
                     </div>
 
                     <div class="col-6 col-md-3 inline-flex">
-                        <a href="" class=" btn delete-btn"><i class="fas fa-trash"></i>  Delete</a>
+                        <button  id="placeholder-image" class=" btn delete-btn" name="deleteAvatar"><i class="fas fa-trash"></i> Delete</button>
                     </div>  
                 </div>
             </div>
@@ -242,7 +243,6 @@
             <div class="container-settings">
                 <div class="row">
 
-                    <form action="" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="fullname">Full Name</label>
                             <input type="text" class="form-control" id="fullname" name="fullName" placeholder="<?php echo $user['fullName'] ?>">
@@ -289,6 +289,20 @@
                     <p>Deactivate your account <a id="deactivate"href=""> Deactivate</a></p>
                     
                 </div>
+
+                 <!--errors-->
+                 <?php if(isset($errorUsernameExists)):?>
+                    <div class="alert alert-danger">The username you've entered is already taken.</div>
+                <?php endif; ?>
+
+                <?php if(isset($errorLengthPw)):?>
+                    <div class="alert alert-danger">Password must contain more than 5 characters.</div>
+                <?php endif; ?>
+
+                <?php if(isset($errorPassword)):?>
+                    <div class="alert alert-danger">Sorry, your password is incorrect, please try again.</div>
+                <?php endif; ?>
+                
             </div>
         </div>
     </main>
