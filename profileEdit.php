@@ -20,19 +20,12 @@
 
 // UPDATE INFO 
     if (!empty($_POST['save'])){
+        $username = $_SESSION['user'];
 
-        if (!empty($_POST['avatar'])){
-            try {
-                $user = new classes\User();
-                $user->Avatar();
-            } catch (\Throwable $th) {
-                //throw $th;
-            }
-        }
     
         if(!empty($_POST['fullName'])){
             $fullName = $_POST['fullName'];
-            $username = $_SESSION['user'];
+            
     
             try{
                 {
@@ -42,6 +35,35 @@
                 } 
                 
             }catch(\Throwable $error) {
+                $error = $error->getMessage();
+            }
+        }
+
+        if(!empty($_POST['username'])){
+            // $oldusername = $_SESSION['user'];
+
+            try{
+
+                    $user = new classes\User();
+                    $newUsername =$_POST['username'];
+                    $user->setUsername($newUsername);
+                    $getNewUsername = $user->getUsername();
+                    
+                    if ($user->usernameExists($username) == true){
+                        $user->changeUsername($getNewUsername, $username);
+
+                        $_SESSION['user'] = $_POST['username'];
+                        
+                        
+                        
+
+                    }elseif($user->usernameExists($username) == false){
+                        $errorUsernameExists = true;
+                        
+
+                    }
+
+                }catch(\Throwable $error) {
                 $error = $error->getMessage();
             }
         }

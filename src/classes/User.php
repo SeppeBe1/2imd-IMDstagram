@@ -236,6 +236,19 @@ class User {
         return $results;
     }
 
+    public function changeUsername($username,$oldusername){
+        $db = new Db();
+        $conn = $db->getInstance();
+
+        $statement = $conn->prepare("UPDATE users SET username = :username WHERE username = :user ");
+        $username = $this->getUsername();
+        $statement->bindValue(":username", $username);
+        $statement->bindValue(":user", $oldusername);
+        $results = $statement->execute();
+        
+        return $results;
+    }
+
     public function changeBio($bio,$username){
         $db = new Db();
         $conn = $db->getInstance();
