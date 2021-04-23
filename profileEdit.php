@@ -98,6 +98,31 @@
                 $error = $error->getMessage();
             }
         }
+
+        if(!empty($_POST['password']) && !empty($_POST['confirmPassword'])){
+            $lengthPassword = strlen($_POST['password']);
+            $password = $_POST['password'];
+            try {
+                    // if password equals the second input password = set password
+                    if($_POST['password'] === $_POST['confirmPassword']) {
+                        if($lengthPassword >= 6) {
+                            $user->setPassword($_POST['password']);
+                            $user->setConfirmPassword($_POST['confirmPassword']);
+                            $user->changePassword($password,$username); 
+                            
+                        }else{
+                            $errorLengthPw = true;
+
+                        }      
+                    }else{
+                        $errorPassword = true;
+                       
+                    }
+            
+                } catch (\Throwable $error) {
+                    $error = $error->getMessage();
+                }
+            }           
         header("Refresh:0");
     }
 

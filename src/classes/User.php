@@ -261,6 +261,21 @@ class User {
         return $results;
     }
 
+    public function changePassword($password,$username){
+        $db = new Db();
+        $conn = $db->getInstance();
+        $options = parse_ini_file("settings/cost.ini"); //cost 15 - returns an array
+
+        $statement = $conn->prepare("UPDATE users SET password = :password WHERE username = :user");
+        
+        $password = password_hash($this->getConfirmPassword(), PASSWORD_DEFAULT, $options);
+        $statement->bindValue(":user", $username);
+        $statement->bindValue(":password", $password);
+        $results = $statement->execute();
+        
+        return $results;
+    }
+
     public function Avatar (){
         //AVATAR KOMT TERECHT IN FOLDER IMG
         $folder ="upload_avatar/"; 
