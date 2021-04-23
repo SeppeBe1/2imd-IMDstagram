@@ -276,29 +276,58 @@ class User {
         return $results;
     }
 
-    public function Avatar (){
-        //AVATAR KOMT TERECHT IN FOLDER IMG
-        $folder ="upload_avatar/"; 
-        $avatar = $_FILES['avatar']['name']; 
-        $path = $folder . $avatar ; 
-        $target_file=$folder.basename($_FILES["avatar"]["name"]);
-        $imageFileType=pathinfo($target_file,PATHINFO_EXTENSION);
-        $allowed=array('jpeg','png' ,'jpg'); $filename=$_FILES['avatar']['name']; 
-        $ext=pathinfo($filename, PATHINFO_EXTENSION); if(!in_array($ext,$allowed) ) 
+    public function changeAvatar($avatar, $username) {
+        $db = new Db();
+        $conn = $db->getInstance();
+        $statement = $conn->prepare("SELECT avatar FROM users WHERE username = :user ");
+        $statement->bindValue(":user", $username);
+        $result = $statement->execute();
+        $avataruser = $statement->fetch();
+        //image path
+        $imageUrl = './uploads/'.$avataruser['avatar'];
+        
+        //check if image exists
+        if(file_exists($imageUrl)){
 
-    { 
-        echo "Sorry, only JPG, JPEG, PNG & GIF  files are allowed.";
+        //delete the image from folder
+        unlink($imageUrl);
+        echo"check";
+    
+        $statement = $conn->prepare("UPDATE users SET avatar = :avatar WHERE username = :user ");
+        $statement->bindValue(":avatar", $avatar);
+        $statement->bindValue(":user", $username);
+        $results = $statement->execute();
+        
+        return $results;  
+        }       
+            
+        
+    }
 
-    }else{ 
-            move_uploaded_file( $_FILES['avatar'] ['tmp_name'], $path); 
-            $conn = Db::getInstance();
-            $statement=$conn->prepare("INSERT INTO users(avatar)values(:avatar) "); 
+    public function deleteAvatar($username) {
+        $db = new Db();
+        $conn = $db->getInstance();
+        $statement = $conn->prepare("SELECT avatar FROM users WHERE username = :user ");
+        $statement->bindValue(":user", $username);
+        $result = $statement->execute();
+        $avataruser = $statement->fetch();
+        //image path
+        $imageUrl = './user_avatar/'.$avataruser['avatar'];
+        
+        //check if image exists
+        if(file_exists($imageUrl)){
 
-            $statement->bindValue(':avatar', $avatar); 
-            $results = $statement->execute();
+        //delete the image from folder
+        unlink($imageUrl);
+        echo"check";
 
-            return $results;
-        } 
+        //delete image from database
+        $result = $conn->prepare("UPDATE users SET avatar = Null");
+        $result->execute();
+        header ("Refresh:0");
+        echo"deleted";
+        }
+
     }
 
     // TO GET THE CORRECT USERNAME ID FOR PROFILE.PHP

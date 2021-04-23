@@ -10,6 +10,7 @@
         try {
             $user = new classes\User();
             $username = $_SESSION['user'];
+            $user->setUsername($username);
             $usersinfo = $user->showUser($username);
             var_dump($usersinfo);
         } catch (\Throwable $th) {
@@ -122,8 +123,56 @@
                 } catch (\Throwable $error) {
                     $error = $error->getMessage();
                 }
-            }           
+            }  
+            
+        //AVATAR
+        if(isset($_FILES["avatar"])){
+            
+            $file = $_FILES["avatar"];
+            print_r($file);
+            $fileName = $_FILES["avatar"]["name"];
+            $fileTmpName = $_FILES["avatar"]["tmp_name"];
+            $fileSize = $_FILES["avatar"]["size"];
+            $fileError = $_FILES["avatar"]["error"];
+            $fileType = $_FILES["avatar"]["type"];
+
+            $fileExt = explode(".", $fileName);
+            $fileActualExt = strtolower(end($fileExt));
+
+            $allowed = array("jpg","jpeg","png");
+            
+            if(in_array($fileActualExt,$allowed)){
+                if($fileError === 0){
+                    if ($fileSize < 2000000){
+                        $avatar = uniqid('',true).".".$fileActualExt;
+                        
+                        $fileDestination = "user_avatar/".$avatar;
+                        move_uploaded_file($fileTmpName, $fileDestination);
+                        echo 'it works!';
+                        $user = new classes\User();
+                        $user->changeAvatar($avatar, $username);
+                        header ("Refresh:0");
+                    }else{
+                        
+                        echo "your file is to big";
+                    }
+                }else {
+                    echo "error uploading your files";
+                }
+            }else{
+                echo "you cannot upload files of this type";
+            }
+        }
+
         header("Refresh:0");
+    }
+
+    if (isset($_POST['deleteAvatar'])){
+        $user = new classes\User();
+        
+        $user->deleteAvatar($username);
+        $avatar = "./img/placeholder.jpeg";
+        echo "gelukt";
     }
 
 ?>
