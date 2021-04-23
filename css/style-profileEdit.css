@@ -25,6 +25,8 @@ main{
     justify-content: center;
     margin-bottom: 20px;
     margin-top: 20px;
+    padding: 0em;
+    border: 1px solid #dee2e6
 }
 
 .container-profilePic{
@@ -139,7 +141,7 @@ textarea:focus{
 }
   
 
-@media(min-width: 700px){
+@media(min-width: 768px){
     .container-profile-edit{
         max-width: 700px;
     }
