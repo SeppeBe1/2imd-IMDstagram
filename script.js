@@ -13,7 +13,7 @@
         reader = new FileReader();
         reader.onload = function(e) {
           var $preview;
-          $('.profile-pic-profile').attr('src', e.target.result);
+          $('.preview').attr('src', e.target.result);
           $preview = $('.preview');
           if ($preview.hasClass('hide')) {
             return $preview.toggleClass('hide');

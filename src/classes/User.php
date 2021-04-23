@@ -254,6 +254,7 @@ class User {
         $conn = $db->getInstance();
 
         $statement = $conn->prepare("UPDATE users SET bio = :bio WHERE username = :user ");
+        
         $statement->bindValue(":bio", $bio);
         $statement->bindValue(":user", $username);
         $results = $statement->execute();
@@ -284,7 +285,7 @@ class User {
         $result = $statement->execute();
         $avataruser = $statement->fetch();
         //image path
-        $imageUrl = './uploads/'.$avataruser['avatar'];
+        $imageUrl = './user_avatar/'.$avataruser['avatar'];
         
         //check if image exists
         if(file_exists($imageUrl)){

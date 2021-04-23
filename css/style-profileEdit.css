@@ -19,8 +19,13 @@ main{
 }
 
 
+
+
 .profile-pic-profile{
-    width: 30%;
+    width:150px;
+    height:150px;
+    object-fit: cover;
+    
     border-radius: 100%;
     justify-content: center;
     margin-bottom: 20px;
@@ -46,6 +51,12 @@ main{
     margin-bottom: 10px;
 }
 
+
+.upload-btn:focus:active:hover{
+    background-image: none;
+    outline:none !important;
+    box-shadow: none  !important;
+}
 
 
 .delete-btn{
@@ -114,11 +125,12 @@ main{
 }
 
 input[type="file"] {
-    position: absolute;
-    font-size: 59px;
+    width: 100%;
+    position:absolute;
+    font-size: 15px;
     opacity: 0;
-    right: 0;
-    top: 0;
+    left: 0px;
+    top: 200px;
 }
 
 
@@ -154,11 +166,7 @@ textarea:focus{
         background-color: white;
 }
 
-    .profile-pic-profile{
-        width: 100%;
-        border-radius: 100%;
-        justify-content: center;
-    }
+    
 
     .container-settings{
         width:70%;
@@ -173,7 +181,7 @@ textarea:focus{
     .container-profilePic{
         width:100%;
         display: block;
-        margin-left: -10px;
+        margin-left: -12px;
         justify-content: center;
      
     

@@ -124,9 +124,11 @@
                     $error = $error->getMessage();
                 }
             }  
-            
+        }  
+        
+        
         //AVATAR
-        if(isset($_FILES["avatar"])){
+        if(isset($_FILES["avatar"]) && isset($_POST['saveAvatar'])){
             
             $file = $_FILES["avatar"];
             print_r($file);
@@ -165,7 +167,7 @@
         }
 
         // header("Refresh:0");
-    }
+    
 
     if (isset($_POST['deleteAvatar'])){
         $user = new classes\User();
@@ -224,14 +226,60 @@
                     </div>
                 </div>
 
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 ">
+                     
 
+                            <!-- Modal -->
+                            <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered ">
+                                    <div class="modal-content ">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Choose your avatar</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <div class="container-fluid ">
+                                                <div class="row ">
+                                                    <div class="col-12 text-center">
+                                                        <div >
+                                                            <img src="./img/placeholder.jpeg" class="profile-pic-profile preview rounded-circle">
+                                                        </div>
+                                                            
+                                                       
+                                                    </div> 
+                                                </div>
+
+                                                <div class="row ">   
+                                                    <div class="col-12 text-center">
+                                                        <div class="btn upload-btn "><i class="far fa-file-image"></i>
+                                                            <span> Choose file</span>
+                                                            
+                                                            <input class="form-control" type="file" id="preview-image" name="avatar" accept=".png, .jpg, .jpeg">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-profileEdit" data-bs-dismiss="modal">Close</button>
+                                            <button class="btn btn-profileEdit" type="submit" name ="saveAvatar" >Save changes</button>
+                                        </div>
+
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                       
+                    </div>
                 
                 <div class="row container-profilePic">
                     <div class="col-6 col-md-3">
-                    
-                        <div class="file btn upload-btn"><i class="fas fa-camera"></i> Upload
-                                <input type="file" id="preview-image" name="avatar" accept=".png, .jpg, .jpeg"/>
-                        </div>
+                        <button type="button" class="btn upload-btn" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-camera"></i> Upload</button>
                     </div>
 
                     <div class="col-6 col-md-3 inline-flex">
@@ -308,5 +356,7 @@
     </main>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
     <script src="script.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
 </body>
 </html>
