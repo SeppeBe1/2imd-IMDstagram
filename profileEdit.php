@@ -164,7 +164,7 @@
             }
         }
 
-        header("Refresh:0");
+        // header("Refresh:0");
     }
 
     if (isset($_POST['deleteAvatar'])){
@@ -302,7 +302,7 @@
                 <?php if(isset($errorPassword)):?>
                     <div class="alert alert-danger">Sorry, your password is incorrect, please try again.</div>
                 <?php endif; ?>
-                
+
             </div>
         </div>
     </main>
