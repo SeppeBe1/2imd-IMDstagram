@@ -306,7 +306,7 @@ class User {
             header ("Refresh:0");
             
             return $result;
-        }  
+        }
     }
 
     public function deleteAvatar($username) {

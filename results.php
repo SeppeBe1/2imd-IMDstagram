@@ -4,6 +4,7 @@
     include_once("./header.inc.php");
 
     $security = new classes\User();
+    $likes = new classes\Like();
 
    /* if(isset($_POST['keyword'])) { IS OK TO PUT IN HTML?
         $keyword = $_POST['keyword'];
@@ -51,6 +52,11 @@
                         <h3>Search results for <span class="bold">"<?php echo $_POST['keyword'] ?>"</span>:</h3><br>
 
                         <?php foreach($resultsSearch as $key): ?>
+                            <?php
+                                $likes->setPostID($key['id']);
+                                $post_id = $likes->getPostID();
+                            ?>
+
                             <div class="container post-post">
                                     <div class="row row-first">
                                         <div class="col-2">
@@ -62,7 +68,19 @@
                                             <a href="profile.php?id=<?php echo $key["userid"]; ?>"><span class="profile-name"><?php echo $key['username']; ?></span></a><br>
                                             <a href="#" class="profile-location"><?php echo $key['location']; ?></a>
                                             <br>
-                                            <a href="postDetail.php?id=<?php echo $key["id"]; ?>"><img src="<?php echo  $key['photo'];?>" class="picture-feed"></a><br><!--a href aanpassen param meegeven naar de detailpg van de foto-->
+                                            <a href="postDetail.php?id=<?php echo $key["id"]; ?>">
+                                            <?php $folder = "uploads/";
+                                            $file = "";
+                                            if (is_dir($folder)) {
+                                                    if ($open = opendir($folder)) {
+                                                        if ($file == "." || $key['photo'] == "..") continue;
+                                                        $file =  classes\Post::getPhoto($post_id);
+                                                        ?>
+                                                        <img src= <?php echo '"uploads/' . $file . '"'; ?> class="picture-feed">
+                                                        <?php closedir($open);
+                                                    }
+                                                } ?>
+                                            </a><br><!--a href aanpassen param meegeven naar de detailpg van de foto-->
                                             <br>
 
                                             <?php $descrArray = explode(" ", $key['description']);?>
@@ -96,11 +114,27 @@
                                     <div>
                                         <h3 class="results-title">Posts from <span class="tag-results"><?php echo "#" . $_GET['tag']; ?></span></h3>
                                     </div> 
-
+                                    
                                 <?php foreach($resultsTags as $tagResults):?>
+                                <?php
+                                    $likes->setPostID($tagResults['id']);
+                                    $post_id = $likes->getPostID();
+                                ?>
                                     <div class="col-4">
                                         <div class="square-image">
-                                            <a href="postDetail.php?id=<?php echo $tagResults["id"]; ?>"><img class="img-thumbnail img" src="<?php echo $tagResults['photo'];?>"></a>
+                                            <a href="postDetail.php?id=<?php echo $tagResults["id"]; ?>">
+                                            <?php $folder = "uploads/";
+                                            $file = "";
+                                            if (is_dir($folder)) {
+                                                    if ($open = opendir($folder)) {
+                                                        if ($file == "." || $tagResults['photo'] == "..") continue;
+                                                        $file =  classes\Post::getPhoto($post_id);
+                                                        ?>
+                                                        <img src= <?php echo '"uploads/' . $file . '"'; ?> class="picture-feed">
+                                                        <?php closedir($open);
+                                                    }
+                                                } ?>
+                                            </a>
                                         </div>
                                     </div>
                                     <?php endforeach; ?>

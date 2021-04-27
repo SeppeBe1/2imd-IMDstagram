@@ -1,144 +1,160 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-body{
+body {
     font-family: 'Montserrat', sans-serif;
     color: #5A5A5A;
 }
 
+
 /* IMAGES FEED */
-.post-post{
+
+.post-post {
     padding: 25px;
     border-radius: 15px;
     box-shadow: 10px 5px 15px #c2c2c2;
     margin-bottom: 30px;
 }
-main{
+
+main {
     padding: 20px;
 }
 
-.unfollow-button{
+.unfollow-button {
     border: 1px solid #CD847B;
     border-radius: 20px;
     padding: 10px;
     color: #5A5A5A;
-    font-weight: 500; 
+    font-weight: 500;
 }
-.unfollow-button:hover{
+
+.unfollow-button:hover {
     text-decoration: underline;
     color: #5A5A5A;
 }
-.follow-button{
+
+.follow-button {
     background-color: #CD847B;
     border-radius: 20px;
     padding: 10px;
     color: white;
-    font-weight: 500; 
+    font-weight: 500;
 }
-.follow-button:hover{
+
+.follow-button:hover {
     text-decoration: underline;
     color: white;
 }
 
-.profile-pic-feed{
-    width: 60px;
-    border-radius: 50px;
+.profile-pic-feed {
+    width: 65px;
+    height: 65px;
+    object-fit: cover;
+    border-radius: 100%;
+    justify-content: center;
+    border: 1px solid #dee2e6
 }
-.profile-name{
+
+.profile-name {
     font-size: 20px;
     color: #5A5A5A;
     font-weight: bold;
 }
 
-.profile-location{
+.profile-location {
     color: #5A5A5A;
 }
 
-a{
+a {
     text-decoration: none;
 }
 
-
-.profile-name:hover, .profile-location:hover{
+.profile-name:hover,
+.profile-location:hover {
     text-decoration: underline;
     color: #5A5A5A;
 }
 
-.picture-feed{
+.picture-feed {
     width: 100%;
 }
 
-.icon-feed{
+.icon-feed {
     width: 30px;
 }
 
-.row-second{
+.row-second {
     margin-top: 10px;
     margin-bottom: 20px;
 }
 
-.row-third{
+.row-third {
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
-.number-feed{
+.number-feed {
     font-weight: bold;
 }
 
-.timing-feed{
+.timing-feed {
     font-size: 0.8em;
 }
 
-@media(min-width: 750px){
-    .post-post{
+@media(min-width: 750px) {
+    .post-post {
         /* background-color: hotpink ; */
         max-width: 700px;
-    }    
+    }
 }
 
+
 /* TAGS */
-.tags-post{
+
+.tags-post {
     color: #B2CB94;
     font-weight: 600;
 }
-.tags-post:hover{
-    color: #B2CB94;
 
+.tags-post:hover {
+    color: #B2CB94;
 }
 
 
 /* COMMENT PART*/
-.row-seventh{
+
+.row-seventh {
     padding: 20px;
     border-top: 1px solid #d9d9d9;
-
 }
-#comment-input{
-    border-width:0px;
-    border:none;
+
+#comment-input {
+    border-width: 0px;
+    border: none;
     resize: none;
 }
 
-
-#comment-input:focus{
+#comment-input:focus {
     outline: none;
 }
-#comment-input::placeholder{
+
+#comment-input::placeholder {
     color: gainsboro;
 }
 
-.comment-button{
+.comment-button {
     color: #CC847B;
     font-weight: 600;
 }
-.comment-button:hover{
+
+.comment-button:hover {
     color: #CC847B;
     font-weight: 600;
     text-decoration: none;
 }
 
+
 /* LOAD MORE BUTTON */
-.load-more{
+
+.load-more {
     padding: 25px;
     background-color: #B2CB94;
     width: 170px;
@@ -149,7 +165,8 @@ a{
     box-shadow: 10px 5px 15px #c2c2c2;
     margin-bottom: 30px;
 }
-.load-more:hover{
+
+.load-more:hover {
     color: white;
     /* text-decoration: underline; */
 }

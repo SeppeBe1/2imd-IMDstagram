@@ -91,7 +91,7 @@ echo convertToAgo($unixTimestamp);
             <div class="row row-first">
                 <div class="col-2">
                     <a href="profile.php?username=<?php echo $post['username']; ?>">
-                        <img src="./user_avatar/<?php echo $post['avatar'] ?>" class="profile-pic-feed"> <!--rounded maken-->
+                        <img src="./user_avatar/<?php echo $post['avatar'] ?>" class="profile-pic-feed rounded-circle"> <!--rounded maken-->
                     </a>
                 </div>
                 <div class="col-7">
