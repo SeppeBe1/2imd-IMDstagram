@@ -44,10 +44,6 @@
 </head>
 
 <body>
-<<<<<<< HEAD
-    
-=======
->>>>>>> loopposts
     <?php foreach($postsD as $post): ?>
 
     <div class="container post-post">
