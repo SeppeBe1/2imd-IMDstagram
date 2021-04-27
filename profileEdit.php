@@ -3,135 +3,100 @@
     spl_autoload_register();
     include_once("./header.inc.php");
 
-    $security = new classes\User();
+    $user = new classes\User();
+    $username = $_SESSION['user'];
 
     /* GETTERS SETTERS TOEVOEGEN! */
     if(isset($_SESSION['user']) ){
-        try {
-            $user = new classes\User();
-            $username = $_SESSION['user'];
-            $user->setUsername($username);
-            $usersinfo = $user->showUser($username);
-            var_dump($usersinfo);
-        } catch (\Throwable $th) {
-            //throw $th; ERROR MSSG? 
-        }
-        
+        $user->setUsername($username);
+        $usersinfo = $user->showUser($username);
     } 
 
 // UPDATE INFO 
     if (!empty($_POST['save'])){
-        $username = $_SESSION['user'];
-
-    
+        //change Full name
         if(!empty($_POST['fullName'])){
             $fullName = $_POST['fullName'];
-            
-    
-            try{
-                {
-                    $user = new classes\User();
-                    $user->changefullName($fullName, $username);
-                        
-                } 
-                
+            try {
+                $user->changefullName($fullName, $username);
             }catch(\Throwable $error) {
                 $error = $error->getMessage();
             }
         }
 
+        //change Username
         if(!empty($_POST['username'])){
-            // $oldusername = $_SESSION['user'];
-
-            try{
-
-                    $user = new classes\User();
+            try {
                     $newUsername =$_POST['username'];
                     $user->setUsername($newUsername);
                     $getNewUsername = $user->getUsername();
                     
                     if ($user->usernameExists($username) == true){
                         $user->changeUsername($getNewUsername, $username);
-
                         $_SESSION['user'] = $_POST['username'];
-                        
-                        
-                        
-
                     }elseif($user->usernameExists($username) == false){
                         $errorUsernameExists = true;
-                        
-
                     }
-
                 }catch(\Throwable $error) {
                 $error = $error->getMessage();
             }
         }
-    
+        
+        //change Bio
         if(!empty($_POST['bio'])){
             $bio = $_POST['bio'];
             $username = $_SESSION['user'];
             try{
-                {
-                    $user = new classes\User();
-                    $user->changeBio($bio, $username);       
-                } 
-                
+                $user->changeBio($bio, $username);
             }catch(\Throwable $error) {
                 $error = $error->getMessage();
             }
         }
     
+        //change Email
         if(!empty($_POST['email'])){
             $email = $_POST['email'];
             $username = $_SESSION['user'];
     
             try{
                 if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    $user = new classes\User();
                     $user->changeEmail($email, $username);
-                        
                 } else{
-                    echo "geen bestaande email";
+                    echo "geen bestaande email"; //naar visuele foutmelding omleiden
                 }
             }catch(\Throwable $error) {
                 $error = $error->getMessage();
             }
         }
 
+        //change Password
         if(!empty($_POST['password']) && !empty($_POST['confirmPassword'])){
             $lengthPassword = strlen($_POST['password']);
             $password = $_POST['password'];
             try {
-                    // if password equals the second input password = set password
-                    if($_POST['password'] === $_POST['confirmPassword']) {
-                        if($lengthPassword >= 6) {
-                            $user->setPassword($_POST['password']);
-                            $user->setConfirmPassword($_POST['confirmPassword']);
-                            $user->changePassword($password,$username); 
-                            
-                        }else{
-                            $errorLengthPw = true;
-
-                        }      
+                // if password equals the second input password = set password
+                if($_POST['password'] === $_POST['confirmPassword']) {
+                    if($lengthPassword >= 6) {
+                        $user->setPassword($_POST['password']);
+                        $user->setConfirmPassword($_POST['confirmPassword']);
+                        $user->changePassword($password,$username);
                     }else{
-                        $errorPassword = true;
-                       
-                    }
-            
-                } catch (\Throwable $error) {
-                    $error = $error->getMessage();
+                        $errorLengthPw = true;
+                    }      
+                }else{
+                    $errorPassword = true;
                 }
-            }  
+            } catch (\Throwable $error) {
+                $error = $error->getMessage();
+            }
         }  
+    }  
         
-        
-        //AVATAR
+        //change Avatar
         if(isset($_FILES["avatar"]) && isset($_POST['saveAvatar'])){
             
             $file = $_FILES["avatar"];
-            print_r($file);
+            //print_r($file);
             $fileName = $_FILES["avatar"]["name"];
             $fileTmpName = $_FILES["avatar"]["tmp_name"];
             $fileSize = $_FILES["avatar"]["size"];
@@ -150,13 +115,10 @@
                         
                         $fileDestination = "user_avatar/".$avatar;
                         move_uploaded_file($fileTmpName, $fileDestination);
-                        echo 'it works!';
-                        $user = new classes\User();
                         $user->changeAvatar($avatar, $username);
                         header ("Refresh:0");
                     }else{
-                        
-                        echo "your file is to big";
+                        echo "your file is to big"; // foutmeldingen display!
                     }
                 }else {
                     echo "error uploading your files";
@@ -166,15 +128,9 @@
             }
         }
 
-        // header("Refresh:0");
-    
-
+    //delete Avatar
     if (isset($_POST['deleteAvatar'])){
-        $user = new classes\User();
-        
         $user->deleteAvatar($username);
-        $avatar = "./img/placeholder.jpeg";
-        echo "gelukt";
     }
 
 ?>
@@ -206,24 +162,22 @@
             </div>
            
             <?php foreach($usersinfo as $user): ?>
-
             <div class="container-fluid ">
                 <form action="" method="POST" enctype="multipart/form-data">
-
+                
                 <div class="row ">
                     <div class="col-12 col-md-3 text-center ">
-                    <?php if (empty($user['avatar'])): ?>
-                        <div class="avatar ">
-                            <img src="./img/placeholder.jpeg" class="profile-pic-profile ">
-                       </div>
-                      
-                    <?php else: ?>
-                        <div class="avatar ">
+                    
+                    <?php $userCheck = new classes\User(); ?>
+                    <?php if(!$userCheck->checkIfImgExists($user['avatar'], $username)):?>
+                        <div class="avatar">
                             <img src="user_avatar/<?php echo $user['avatar']?>" class="profile-pic-profile rounded-circle">
                        </div>
+                    <?php else: ?>
+                        <div>
+                            <img src="user_avatar/placeholder.jpeg" class="profile-pic-profile rounded-circle">
+                        </div>
                     <?php endif; ?>
-                          
-                    </div>
                 </div>
 
                 <div class="container-fluid">

@@ -38,7 +38,7 @@
         <div class="row row-first">
             <div class="col-2">
                 <a href="#">
-                    <img src="<?php echo $post["avatar"]?>" class="profile-pic-feed">
+                    <img src="./user_avatar/<?php echo $post['avatar'] ?>" class="profile-pic-feed">
                 </a>
             </div>
             <div class="col-7">

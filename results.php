@@ -55,7 +55,7 @@
                                     <div class="row row-first">
                                         <div class="col-2">
                                             <a href="#">
-                                                <img src="<?php echo $key['avatar']; ?>" class="profile-pic-feed">
+                                                <img src="./user_avatar/<?php echo $key['avatar'] ?>" class="profile-pic-feed">
                                             </a>
                                         </div>
                                         <div class="col-7">
@@ -67,11 +67,13 @@
 
                                             <?php $descrArray = explode(" ", $key['description']);?>
                                             <?php foreach($descrArray as $word): ?>
+                                            <?php if (!empty($word)) : ?>
                                                 <?php if($word[0] == "#"): ?>
                                                     <a href="results.php?tag=<?php echo str_replace("#", "", $word); ?>" name="tag" class="tags-post"><?php echo  $word;?></a>
                                                 <?php else: ?>
                                                     <?php echo  $word; ?>
                                                 <?php endif; ?>
+                                            <?php endif; ?>
                                             <?php endforeach; ?>
 
                                         </div>

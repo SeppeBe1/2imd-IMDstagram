@@ -62,7 +62,7 @@
             <div class="row row-first">
                 <div class="col-3">
                     <a href="#">
-                        <img src="<?php echo $user["avatar"]?>" class="profile-pic-profile">
+                        <img src="./user_avatar/<?php echo $user['avatar'] ?>" class="profile-pic-profile">
                     </a>
                 </div>
 

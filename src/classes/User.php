@@ -172,9 +172,9 @@ class User {
         $conn = $db->getInstance();
         $options = parse_ini_file("settings/cost.ini"); //cost 15 - returns an array
 
-        $statement = $conn->prepare("insert into users (username, email, password) values (:username, :email, :password)");
+        $statement = $conn->prepare("insert into users (username, email, password, avatar) values (:username, :email, :password, 'placeholder.jpeg')");
         $username = $this->getUsername();
-        var_dump($username);
+        //var_dump($username);
         $email = $this->getEmail();
         $password = password_hash($this->getConfirmPassword(), PASSWORD_DEFAULT, $options);
         
@@ -268,7 +268,6 @@ class User {
         $options = parse_ini_file("settings/cost.ini"); //cost 15 - returns an array
 
         $statement = $conn->prepare("UPDATE users SET password = :password WHERE username = :user");
-        
         $password = password_hash($this->getConfirmPassword(), PASSWORD_DEFAULT, $options);
         $statement->bindValue(":user", $username);
         $statement->bindValue(":password", $password);
@@ -280,55 +279,47 @@ class User {
     public function changeAvatar($avatar, $username) {
         $db = new Db();
         $conn = $db->getInstance();
-        $statement = $conn->prepare("SELECT avatar FROM users WHERE username = :user ");
+        $statement = $conn->prepare("UPDATE users SET avatar = :avatar WHERE username = :user ");
         $statement->bindValue(":user", $username);
+        $statement->bindValue(":avatar", $avatar);
+        $result = $statement->execute();
+        $changedAvatar = $statement->fetch(); 
+        
+        return $changedAvatar;
+    }
+
+    public function checkIfImgExists($avatar, $username) {
+        $db = new Db();
+        $conn = $db->getInstance();
+        $statement = $conn->prepare("select avatar from users where avatar = :avatar");
+        $statement->bindValue(":avatar", $avatar);
         $result = $statement->execute();
         $avataruser = $statement->fetch();
-        //image path
+
         $imageUrl = './user_avatar/'.$avataruser['avatar'];
         
-        //check if image exists
-        if(file_exists($imageUrl)){
-
-        //delete the image from folder
-        unlink($imageUrl);
-        echo"check";
-    
-        $statement = $conn->prepare("UPDATE users SET avatar = :avatar WHERE username = :user ");
-        $statement->bindValue(":avatar", $avatar);
-        $statement->bindValue(":user", $username);
-        $results = $statement->execute();
-        
-        return $results;  
-        }       
+        //if file doesn't exist in folder (removed manually or whatever) - change to default placeholder
+        if(!file_exists($imageUrl)){
+            $statement = $conn->prepare("UPDATE users set avatar = 'placeholder.jpeg' where username= :user");
+            $statement->bindValue(":user", $username);
+            $result = $statement->execute();
+            header ("Refresh:0");
             
-        
+            return $result;
+        }  
     }
 
     public function deleteAvatar($username) {
         $db = new Db();
         $conn = $db->getInstance();
-        $statement = $conn->prepare("SELECT avatar FROM users WHERE username = :user ");
+        $statement = $conn->prepare("UPDATE users set avatar = 'placeholder.jpeg' where username= :user");
         $statement->bindValue(":user", $username);
         $result = $statement->execute();
-        $avataruser = $statement->fetch();
-        //image path
-        $imageUrl = './user_avatar/'.$avataruser['avatar'];
         
-        //check if image exists
-        if(file_exists($imageUrl)){
-
-        //delete the image from folder
-        unlink($imageUrl);
-        echo"check";
-
-        //delete image from database
-        $result = $conn->prepare("UPDATE users SET avatar = Null");
-        $result->execute();
         header ("Refresh:0");
-        echo"deleted";
-        }
+        $avataruser = $statement->fetch();
 
+        return $avataruser;
     }
 
     // TO GET THE CORRECT USERNAME ID FOR PROFILE.PHP
