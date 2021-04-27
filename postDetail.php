@@ -4,16 +4,26 @@
     spl_autoload_register();
     include_once("./header.inc.php");
 
+    $security = new classes\User();
+    $security->setUsername($_SESSION['user']);
+    $loggedUser = $security->getUsername();
+    $currentlyLoggedIn = $security->showUser($loggedUser);
 
-    if(!empty($_GET['post_id'])){
+    $likes = new classes\Like();
+    $likes->setUserID((int)$currentlyLoggedIn[0]['id']);
+    $loggedInId = $likes->getUserID();
+
+    if(!empty($_GET['id'])){
         var_dump($_GET);
         // WE COLLECT HERE THE INFORMATION FOR THE SPECIFIC POST, WITH THE ID
-        $post_id = $_GET['post_id'];
+        $post_id = $_GET['id'];
         $getPost = new classes\Post();
 
         $postsD = $getPost->getPostDetail($post_id);
-        //var_dump($postsD);
+        // var_dump($postsD);
     }
+
+
 
 ?>
 
@@ -34,7 +44,10 @@
 </head>
 
 <body>
+<<<<<<< HEAD
     
+=======
+>>>>>>> loopposts
     <?php foreach($postsD as $post): ?>
 
     <div class="container post-post">
@@ -56,7 +69,20 @@
 
         <div class="row row-second">
             <div class="col-12">
-                <img src="<?php echo $post["photo"]?>" class="picture-feed">
+
+                    <?php $folder = "uploads/";
+                        $file = "";
+                        if (is_dir($folder)) {
+                                if ($open = opendir($folder)) {
+                                    if ($file == "." || $post['photo'] == "..") continue;
+                                    $file =  classes\Post::getPhoto($post_id);
+                                    ?>
+                                    <img src= <?php echo '"uploads/' . $file . '"'; ?> class="picture-feed">
+                                    <?php closedir($open);
+                                }
+                            } ?>
+                            
+                
             </div>
         </div>
 

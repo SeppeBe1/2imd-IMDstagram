@@ -155,6 +155,7 @@ class Post  {
         $correctUsers = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
         return $correctUsers;
+        var_dump($correctUsers);
     }
 
     public static function getPhoto($post_id){
