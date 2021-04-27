@@ -3,22 +3,7 @@
     spl_autoload_register();
     include_once("./header.inc.php");
 
-    $security = new classes\User();
     $likes = new classes\Like();
-
-   /* if(isset($_POST['keyword'])) { IS OK TO PUT IN HTML?
-        $keyword = $_POST['keyword'];
-        $search = new classes\Search();
-        $resultsSearch = $search->searchParam($keyword);
-    } */
-
-    /* if(isset($_GET['tag'])) {
-        $hashtag = $_GET['tag'];
-        $searchTag = new classes\Search();
-        $resultsTags = $searchTag->searchTags($hashtag);
-        var_dump($resultsTags);
-    } */
-
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -40,11 +25,11 @@
 
         <main>
         <!-- PRINT RESULTATEN AF VAN DE OPGEVRAAGDE PARAMETER -->
-            <?php if(isset($_POST['keyword'])): ?>
+            <?php if(isset($_POST['keyword'])) : ?>
                 <?php 
                     $search = new classes\Search();
-                    $keyword = $_POST['keyword'];
-                    $search->setParam($keyword);
+                    $search->setParam($_POST['keyword']);
+                    $keyword = $search->getParam();
                     $resultsSearch = $search->searchParam($keyword);
                 ?>
             
@@ -61,12 +46,12 @@
                                     <div class="row row-first">
                                         <div class="col-2">
                                             <a href="#">
-                                                <img src="./user_avatar/<?php echo $key['avatar'] ?>" class="profile-pic-feed">
+                                                <img src="./user_avatar/<?php echo $key['avatar']; ?>" class="profile-pic-feed">
                                             </a>
                                         </div>
                                         <div class="col-7">
                                             <a href="profile.php?id=<?php echo $key["userid"]; ?>"><span class="profile-name"><?php echo $key['username']; ?></span></a><br>
-                                            <a href="#" class="profile-location"><?php echo $key['location']; ?></a>
+                                            <a href="results.php?location=<?php echo $key['location']; ?>" class="profile-location"><?php echo $key['location']; ?></a>
                                             <br>
                                             <a href="postDetail.php?id=<?php echo $key["id"]; ?>">
                                             <?php $folder = "uploads/";
@@ -105,8 +90,8 @@
             <?php if(isset($_GET['tag'])):?>
                 <?php 
                     $searchTag = new classes\Search();
-                    $hashtag = $_GET['tag'];
-                    $searchTag->setTag($hashtag);
+                    $searchTag->setTag($_GET['tag']);
+                    $hashtag = $searchTag->getTag();
                     $resultsTags = $searchTag->searchTags($hashtag);?>
 
                             <div class="container-fluid container-gallery tags-results">
@@ -140,7 +125,68 @@
                                     <?php endforeach; ?>
                                 </div>
                             </div>
+            <?php endif; ?>
 
+            <!-- RESULTATEN LOCATION -->
+            <?php if(isset($_GET['location'])) : ?>
+                <?php 
+                    $search = new classes\Search();
+                    $search->setParam($_GET['location']);
+                    $keyword = $search->getParam();
+                    $resultsSearch = $search->searchParam($keyword);
+                ?>
+            
+                    <div class="container search-results-con">
+                        <h3>Search results for <span class="bold">"<?php echo $_GET['location']; ?>"</span>:</h3><br>
+
+                        <?php foreach($resultsSearch as $key): ?>
+                            <?php
+                                $likes->setPostID($key['id']);
+                                $post_id = $likes->getPostID();
+                            ?>
+
+                            <div class="container post-post">
+                                    <div class="row row-first">
+                                        <div class="col-2">
+                                            <a href="#">
+                                                <img src="./user_avatar/<?php echo $key['avatar'] ?>" class="profile-pic-feed">
+                                            </a>
+                                        </div>
+                                        <div class="col-7">
+                                            <a href="profile.php?id=<?php echo $key["userid"]; ?>"><span class="profile-name"><?php echo $key['username']; ?></span></a><br>
+                                            <a href="results.php?location=<?php echo $key['location']; ?>" class="profile-location"><?php echo $key['location']; ?></a>
+                                            <br>
+                                            <a href="postDetail.php?id=<?php echo $key["id"]; ?>">
+                                            <?php $folder = "uploads/";
+                                            $file = "";
+                                            if (is_dir($folder)) {
+                                                    if ($open = opendir($folder)) {
+                                                        if ($file == "." || $key['photo'] == "..") continue;
+                                                        $file =  classes\Post::getPhoto($post_id);
+                                                        ?>
+                                                        <img src= <?php echo '"uploads/' . $file . '"'; ?> class="picture-feed">
+                                                        <?php closedir($open);
+                                                    }
+                                                } ?>
+                                            </a><br><!--a href aanpassen param meegeven naar de detailpg van de foto-->
+                                            <br>
+
+                                            <?php $descrArray = explode(" ", $key['description']);?>
+                                            <?php foreach($descrArray as $word): ?>
+                                            <?php if (!empty($word)) : ?>
+                                                <?php if($word[0] == "#"): ?>
+                                                    <a href="results.php?tag=<?php echo str_replace("#", "", $word); ?>" name="tag" class="tags-post"><?php echo  $word;?></a>
+                                                <?php else: ?>
+                                                    <?php echo  $word; ?>
+                                                <?php endif; ?>
+                                            <?php endif; ?>
+                                            <?php endforeach; ?>
+
+                                        </div>
+                                    </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
             <?php endif; ?>
         </main>
     </body>

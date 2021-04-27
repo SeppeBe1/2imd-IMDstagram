@@ -97,7 +97,7 @@ echo convertToAgo($unixTimestamp);
                 <div class="col-7">
                     <a href="profile.php?username=<?php echo $post['username']; ?>"><span
                             class="profile-name"><?php echo $post['username'] ?></span></a><br>
-                    <a href="#" class="profile-location"><?php echo $post['location'] ?></a>
+                    <a href="results.php?location=<?php echo $post['location']; ?>" class="profile-location" name="location"><?php echo $post['location'] ?></a>
                 </div>
                 <div class="col-1">
                     <a href="#" class="unfollow-button">Unfollow</a>
