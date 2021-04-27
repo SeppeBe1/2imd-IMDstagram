@@ -3,18 +3,17 @@
     spl_autoload_register();
     include_once("./header.inc.php");
 
-    $security = new classes\User();
+    $user = new classes\User();
+    $post = new classes\Post();
 
     // TO GET ID FROM URL
     if(!empty($_GET['username'])){
-        $user_id = $_GET['username'];
+        $username = $_GET['username'];
 
-        $getUser = new classes\User();
-        $users = $getUser->getUsernameFrom($user_id);
-
-        $postsUser = new classes\Post();
-        $postsUserResults = $postsUser->getPostsUser($user_id);
-
+        $users = $user->getUsernameFrom($username);
+        $user_id = $users[0]['id'];
+        $postsUserResults = $post->getPostsUser($user_id);
+        
         // STACKING OF THE BOOTSTRAP DIVS IN 3 COLUMNS
         $numberOfColumns = 3;
         $bootstrapColWidth = 12 / $numberOfColumns ;
@@ -23,8 +22,7 @@
 
     if(!empty($_GET["username"])){
         $usernameUrl = $_GET["username"];
-        $getUserUrl = new classes\User();
-        $loggedinUser = $getUserUrl->getUsernameFrom($usernameUrl);
+        $loggedinUser = $user->getUsernameFrom($usernameUrl);
     }
 
 ?>
@@ -46,18 +44,17 @@
 </head>
 
 <body>
-
-
     <main>
-
     <?php foreach($users as $user): ?>
         <div class="container container-profile clearfix">
-            <!-- EDIT BTN WEG WANNEER IK KIJK NAAR ANDER PROFIEL -->
-            <div class="row flex-row-reverse">
-                <div class="col-5 col-lg-4">
-                    <a href="profileEdit.php" class="btn edit-btn">Edit profile</a>
+            
+            <?php if($_SESSION['user'] == $_GET['username']): ?>
+                <div class="row flex-row-reverse">
+                    <div class="col-5 col-lg-4">
+                        <a href="profileEdit.php" class="btn edit-btn">Edit profile</a>
+                    </div>
                 </div>
-            </div>
+            <?php endif; ?>
 
             <div class="row row-first">
                 <div class="col-3">
@@ -109,7 +106,20 @@
                         <?php foreach($postsUserResults as $post): ?>
                             <div class="col-4">
                                 <div class="square-image">                                    
-                                    <a href="postDetail.php?id=<?php echo $post["id"]; ?>"><img class="img-thumbnail img" src="<?php echo $post["photo"]?>"></a>
+                                    <a href="postDetail.php?id=<?php echo $post['id']; ?>" class="img-thumbnail img picture-feed">
+                                    <?php 
+                                    $folder = "uploads/";
+                                    $file = "";
+                                    if (is_dir($folder)) {
+                                            if ($open = opendir($folder)) {
+                                                if ($file == "." || $post['photo'] == "..") continue;
+                                                $file =  classes\Post::getPhoto($post['id']);
+                                                ?>
+                                                <img src= <?php echo '"uploads/' . $file . '"'; ?>>
+                                                <?php closedir($open);
+                                            }
+                                        } ?>
+                                    </a>
                                 </div>
                             </div>
                         <?php endforeach ;?>

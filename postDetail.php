@@ -11,7 +11,7 @@
         $post_id = $_GET['post_id'];
         $getPost = new classes\Post();
 
-        //$postsD = $getPost->getPostDetail($post_id);
+        $postsD = $getPost->getPostDetail($post_id);
         //var_dump($postsD);
     }
 
@@ -34,7 +34,7 @@
 </head>
 
 <body>
-    <?php $postsD = $getPost->getPostDetail($post_id); ?>
+    
     <?php foreach($postsD as $post): ?>
 
     <div class="container post-post">
