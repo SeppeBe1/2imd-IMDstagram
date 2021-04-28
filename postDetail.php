@@ -14,7 +14,7 @@
     $loggedInId = $likes->getUserID();
 
     if(!empty($_GET['id'])){
-        var_dump($_GET);
+
         // WE COLLECT HERE THE INFORMATION FOR THE SPECIFIC POST, WITH THE ID
         $post_id = $_GET['id'];
         $getPost = new classes\Post();
@@ -44,6 +44,7 @@
 </head>
 
 <body>
+
     <?php foreach($postsD as $post): ?>
 
     <div class="container post-post">
@@ -53,15 +54,38 @@
                     <img src="./user_avatar/<?php echo $post['avatar'] ?>" class="profile-pic-feed">
                 </a>
             </div>
-            <div class="col-7">
+            <div class="col-6">
                 <a href="profile.php?id=<?php echo $post["id"]; ?>"><span
                         class="profile-name"><?php echo $post["username"]?></span></a><br>
                 <a href="#" class="profile-location"><?php echo $post["location"]?></a>
             </div>
-            <div class="col-1">
-                <a href="#" class="follow-button">Follow</a>
+            <div class="col-3">
+                <div class="row">
+                    <a href="#" class="follow-button">Follow</a>
+                </div>
             </div>
-        </div>
+            <div class="col-1">
+
+                    <nav class="navbar navbar-expand">
+                            <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item ">
+                                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+                                            <img src="../2imd-IMDstagram/img/icons/nav-circle.png" class="toggler">
+                                        </a>
+                                        <div class="dropdown-menu dropdown-left-manual" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="#">Copy link</a>
+                                            <a class="dropdown-item" href="#">Share</a>
+                                            <a class="dropdown-item" href="#">Delete post</a>
+                                            <a class="dropdown-item" href="#">Report</a>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                        </nav>
+                                        
+                </div>
+            </div>
 
         <div class="row row-second">
             <div class="col-12">
@@ -155,6 +179,11 @@
         </div>
 
     </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 
 </body>

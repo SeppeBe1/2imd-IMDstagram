@@ -51,14 +51,41 @@ $loggedInId = $likes->getUserID();
                         <img src="./user_avatar/<?php echo $post['avatar'] ?>" class="profile-pic-feed rounded-circle"> <!--rounded maken-->
                     </a>
                 </div>
-                <div class="col-7">
+                <div class="col-6">
                     <a href="profile.php?username=<?php echo $post['username']; ?>"><span
                             class="profile-name"><?php echo $post['username'] ?></span></a><br>
                     <a href="results.php?location=<?php echo $post['location']; ?>" class="profile-location" name="location"><?php echo $post['location'] ?></a>
                 </div>
-                <div class="col-1">
-                    <a href="#" class="unfollow-button">Unfollow</a>
+                <div class="col-3">
+                    <div class="row">
+                        <a href="#" class="unfollow-button">Unfollow</a>
+                    </div>
                 </div>
+
+
+                <div class="col-1">
+
+                    <nav class="navbar navbar-expand">
+                            <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item ">
+                                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+                                            <img src="../2imd-IMDstagram/img/icons/nav-circle.png" class="toggler">
+                                        </a>
+                                        <div class="dropdown-menu dropdown-left-manual" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="#">Copy link</a>
+                                            <a class="dropdown-item" href="#">Share</a>
+                                            <a class="dropdown-item" href="#">Delete post</a>
+                                            <a class="dropdown-item" href="#">Report</a>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                        </nav>
+                                        
+                </div>
+                
+
             </div>
 
             <div class="row row-second">
@@ -159,8 +186,6 @@ $loggedInId = $likes->getUserID();
             <a href="#" class="load-more">Load more...</a>
         </div>
 
-
-        <!-- HIER LOOPEN DOOR VERSCHILLENDE POSTS -->
         <!-- DIT ZIJN POSTS TER ILLSTRATIE VAN HOE ZE ERUIT MOETEN ZIEN-->
         <div class="container post-post">
             <div class="row row-first">
@@ -335,6 +360,10 @@ $loggedInId = $likes->getUserID();
     <script src="https://kit.fontawesome.com/a7dc01cef9.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="js/feed.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
 </body>
 
 </html>
