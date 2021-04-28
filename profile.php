@@ -114,26 +114,11 @@
                                                 if ($file == "." || $post['photo'] == "..") continue;
                                                 $file =  classes\Post::getPhoto($post['id']);
                                                 ?>
-                                                <img src= <?php echo '"uploads/' . $file . '"'; ?> class="imgs-feed">
+                                                <img src= <?php echo '"uploads/' . $file . '"'; ?> class="imgs-profile">
                                                 <?php closedir($open);
                                             }
                                         } ?>
                                     </a>
-                                </div>
-                            </div>
-                        <?php endforeach ;?>
-                    </div>
-            <?php endforeach ;?>
-        </div>
-
-
-        <div class="container-fluid container-gallery">
-            <?php foreach($arrayChunks as $postsUserResults) : ?>
-                    <div class="row">
-                        <?php foreach($postsUserResults as $post): ?>
-                            <div class="col-4">
-                                <div class="square-image">                                    
-                                    <a href="postDetail.php?id=<?php echo $post["id"]; ?>"><img class="img-thumbnail img" src="<?php echo $post["photo"]?>"></a>
                                 </div>
                             </div>
                         <?php endforeach ;?>

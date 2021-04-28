@@ -96,11 +96,13 @@ body {
     border-radius: 0;
 }
 
-.imgs-feed{
+.imgs-profile{
     object-fit: cover;
     width:170px;
     height:170px;
     padding-left: 4px;
+    position: absolute;
+    display: block;
 }
 
 @media(min-width: 700px) {
@@ -145,10 +147,10 @@ body {
         padding: 10px;
         border-radius: 0;
     }
-    .imgs-feed{
+    .imgs-profile{
         object-fit: cover;
-        width:270px;
-        height:270px;
+        width:240px;
+        height:240px;
         padding-left: 15px;
     }
 }
