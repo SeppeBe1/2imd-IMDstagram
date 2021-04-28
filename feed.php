@@ -18,49 +18,6 @@ $likes = new classes\Like();
 $likes->setUserID((int)$currentlyLoggedIn[0]['id']);
 $loggedInId = $likes->getUserID();
 
-// DATE CONVERSION TO ".. AGO"
-$posted_ad = "2021-04-10 08:21:28";
-
-function convertTime($value)
-{
-    list($date, $time) = explode(' ', $value);
-    list($year, $month, $day) = explode('-', $date);
-    list($hour, $minutes, $seconds) = explode(':', $time);
-
-    // echo $year . "<br>" . $month . "<br>" . $day . "<br>";
-    // echo $hour . "<br>" . $minutes . "<br>" . $sec;
-
-    $unit_timestamp = mktime($hour, $minutes, $seconds, $month, $day, $year);
-    return $unit_timestamp;
-}
-
-function convertToAgo($timestamp)
-{
-    date_default_timezone_set('Europe/Brussels');
-
-    $differenceTime = time() - $timestamp;
-    // Making array to display, days, hours, months etc.
-    $periodString = ["sec", "min", "hr", "day", "week", "year", "decade"];
-    $periodNumbers = ["60", "60", "24", "7", "4.35", "12", "10"];
-
-    // CURRENT TIME GREATER THAN ALL ABOVE
-    for ($i = 0; $differenceTime >= $periodNumbers[$i]; $i++) {
-        $differenceTime /= $periodNumbers[$i];
-        $differenceTime = round($differenceTime);
-
-        // TO MAKE IT TO SECS, MINS, HRS, ETC.
-        if ($differenceTime != 1) $periodString[$i] .= "s";
-
-        $output = "$differenceTime $periodString[$i]";
-
-        return "Posted " . $output . " ago";
-    }
-}
-
-$unixTimestamp = convertTime($posted_ad);
-echo convertToAgo($unixTimestamp);
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

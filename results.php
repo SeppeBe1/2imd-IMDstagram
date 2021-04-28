@@ -115,7 +115,7 @@
                                                         if ($file == "." || $tagResults['photo'] == "..") continue;
                                                         $file =  classes\Post::getPhoto($post_id);
                                                         ?>
-                                                        <img src= <?php echo '"uploads/' . $file . '"'; ?> class="picture-feed">
+                                                        <img src= <?php echo '"uploads/' . $file . '"'; ?> class="tags-result-img">
                                                         <?php closedir($open);
                                                     }
                                                 } ?>

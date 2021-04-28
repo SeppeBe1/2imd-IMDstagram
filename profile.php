@@ -52,12 +52,7 @@
 
     <?php foreach($users as $user): ?>
         <div class="container container-profile clearfix">
-            <!-- EDIT BTN WEG WANNEER IK KIJK NAAR ANDER PROFIEL -->
-            <div class="row flex-row-reverse">
-                <div class="col-5 col-lg-4">
-                    <a href="profileEdit.php" class="btn edit-btn">Edit profile</a>
-                </div>
-            </div>
+           
 
             <div class="row row-first">
                 <div class="col-3">
@@ -66,9 +61,14 @@
                     </a>
                 </div>
 
-                <div class="col-9 profile-about">
+                <div class="col-6 profile-about">
                     <p><span class="profile-name"><?php echo $user["username"]?></span></p><br>
                     <p class="bio"><?php echo $user["bio"]?></p>
+                </div>
+
+                <!-- EDIT BTN WEG WANNEER IK KIJK NAAR ANDER PROFIEL -->
+                <div class="col-3 col-lg-3">
+                    <a href="profileEdit.php" class="btn edit-btn">Edit profile</a>
                 </div>
             </div>
             
