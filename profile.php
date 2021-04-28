@@ -48,14 +48,6 @@
     <?php foreach($users as $user): ?>
         <div class="container container-profile clearfix">
             
-            <?php if($_SESSION['user'] == $_GET['username']): ?>
-                <div class="row flex-row-reverse">
-                    <div class="col-5 col-lg-4">
-                        <a href="profileEdit.php" class="btn edit-btn">Edit profile</a>
-                    </div>
-                </div>
-            <?php endif; ?>
-
             <div class="row row-first">
                 <div class="col-3">
                     <a href="#">
@@ -69,9 +61,11 @@
                 </div>
 
                 <!-- EDIT BTN WEG WANNEER IK KIJK NAAR ANDER PROFIEL -->
-                <div class="col-3 col-lg-3">
-                    <a href="profileEdit.php" class="btn edit-btn">Edit profile</a>
-                </div>
+                <?php if($_SESSION['user'] == $_GET['username']): ?>
+                    <div class="col-3 col-lg-3">
+                        <a href="profileEdit.php" class="btn edit-btn">Edit profile</a>
+                    </div>
+                <?php endif; ?>
             </div>
             
 
