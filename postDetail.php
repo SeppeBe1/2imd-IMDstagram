@@ -132,14 +132,6 @@
                 <p class="number-feed">1</p>
             </div>
 
-            <div class="col-6">
-
-            </div>
-
-            <div class="col-1">
-                <a href="#"><img src="./img/icons/flag.svg" class="icon-feed"></a>
-            </div>
-
         </div>
 
         <div class="row row-fourth">
