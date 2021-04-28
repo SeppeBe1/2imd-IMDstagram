@@ -105,7 +105,7 @@
                         <?php foreach($postsUserResults as $post): ?>
                             <div class="col-4">
                                 <div class="square-image">                                    
-                                    <a href="postDetail.php?id=<?php echo $post['id']; ?>" class="img-thumbnail img picture-feed">
+                                    <a href="postDetail.php?id=<?php echo $post['id']; ?>">
                                     <?php 
                                     $folder = "uploads/";
                                     $file = "";
@@ -114,7 +114,7 @@
                                                 if ($file == "." || $post['photo'] == "..") continue;
                                                 $file =  classes\Post::getPhoto($post['id']);
                                                 ?>
-                                                <img src= <?php echo '"uploads/' . $file . '"'; ?>>
+                                                <img src= <?php echo '"uploads/' . $file . '"'; ?> class="imgs-feed">
                                                 <?php closedir($open);
                                             }
                                         } ?>
@@ -126,48 +126,20 @@
             <?php endforeach ;?>
         </div>
 
-        <!-- <div class="container-fluid container-gallery">
-            <div class="row">
-                <div class="col-4">
-                    <img class="img-thumbnail"src="https://images.pexels.com/photos/583791/pexels-photo-583791.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" >
-                </div>
 
-                <div class="col-4 ">
-                    <img class="img-thumbnail" src="https://images.pexels.com/photos/3673763/pexels-photo-3673763.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" class="img-responsive">
-                </div>
-
-                <div class="col-4 ">
-                    <img class="img-thumbnail" src="https://images.pexels.com/photos/4019666/pexels-photo-4019666.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" class="img-responsive">
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-4">
-                    <img class="img-thumbnail "src="https://images.pexels.com/photos/3255246/pexels-photo-3255246.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" >
-                </div>
-
-                <div class="col-4 ">
-                    <img class="img-thumbnail" src="https://images.pexels.com/photos/3817847/pexels-photo-3817847.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" class="img-responsive">
-                </div>
-
-                <div class="col-4 ">
-                    <img class="img-thumbnail" src="https://images.pexels.com/photos/355279/pexels-photo-355279.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" class="img-responsive">
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-4 square">
-                    <img class="img-thumbnail"src="https://images.pexels.com/photos/771319/pexels-photo-771319.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" >
-                </div>
-
-                <div class="col-4 ">
-                    <img class="img-thumbnail" src="https://images.pexels.com/photos/4894423/pexels-photo-4894423.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" class="img-responsive">
-                </div>
-
-                <div class="col-4 ">
-                    <img class="img-thumbnail" src="https://images.pexels.com/photos/5720091/pexels-photo-5720091.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" class="img-responsive">
-                </div>
-            </div> -->
+        <div class="container-fluid container-gallery">
+            <?php foreach($arrayChunks as $postsUserResults) : ?>
+                    <div class="row">
+                        <?php foreach($postsUserResults as $post): ?>
+                            <div class="col-4">
+                                <div class="square-image">                                    
+                                    <a href="postDetail.php?id=<?php echo $post["id"]; ?>"><img class="img-thumbnail img" src="<?php echo $post["photo"]?>"></a>
+                                </div>
+                            </div>
+                        <?php endforeach ;?>
+                    </div>
+            <?php endforeach ;?>
+        </div>
             
 
     </main>

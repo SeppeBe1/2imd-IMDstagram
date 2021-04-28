@@ -96,6 +96,13 @@ body {
     border-radius: 0;
 }
 
+.imgs-feed{
+    object-fit: cover;
+    width:170px;
+    height:170px;
+    padding-left: 4px;
+}
+
 @media(min-width: 700px) {
     .container-profile {
         max-width: 700px;
@@ -137,6 +144,12 @@ body {
         width: 100%;
         padding: 10px;
         border-radius: 0;
+    }
+    .imgs-feed{
+        object-fit: cover;
+        width:270px;
+        height:270px;
+        padding-left: 15px;
     }
 }
 
