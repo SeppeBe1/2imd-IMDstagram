@@ -168,6 +168,18 @@ class Post  {
         
         return $result['photo'];
     }
+
+    public function deletePost($id){
+        $db = new Db();
+        $conn = $db->getInstance();
+        
+        $statement = $conn->prepare("DELETE FROM posts WHERE id = :id");
+        $statement->bindValue(":id", $id);
+        $statement->execute();
+        $result = $statement->fetch();
+        header ("Refresh:0");
+        return $result;
+    }
 }
 
 
