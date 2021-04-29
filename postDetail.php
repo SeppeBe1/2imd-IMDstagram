@@ -76,8 +76,11 @@
                                         <div class="dropdown-menu dropdown-left-manual" aria-labelledby="navbarDropdown">
                                             <a class="dropdown-item" href="#">Copy link</a>
                                             <a class="dropdown-item" href="#">Share</a>
-                                            <a class="dropdown-item" href="#">Delete post</a>
-                                            <a class="dropdown-item" href="#">Report</a>
+                                            <?php if($loggedUser == $post['username']): ?>
+                                                <a class="dropdown-item" href="#">Delete post</a>
+                                            <?php elseif($loggedUser != $post['username']): ?>
+                                                <a class="dropdown-item" href="#">Report</a>
+                                            <?php endif; ?>
                                         </div>
                                     </li>
                                 </ul>

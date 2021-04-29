@@ -18,6 +18,23 @@ $likes = new classes\Like();
 $likes->setUserID((int)$currentlyLoggedIn[0]['id']);
 $loggedInId = $likes->getUserID();
 
+if(!empty($_POST['copyPost'])){
+    echo "copy" . $_POST['post-id'];
+}
+
+if(!empty($_POST['sharePost'])){
+    echo "share" . $_POST['post-id'];
+}
+
+if(!empty($_POST['deletePost'])){
+    $post = new classes\Post();
+    $post->deletePost($_POST['post-id']);
+}
+
+if(!empty($_POST['reportPost'])){
+    echo "report" . $_POST['post-id'];
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +57,7 @@ $loggedInId = $likes->getUserID();
         <!-- START VAN LOOP-->
         <?php foreach ($resultsPosts as $post) : ?>
         <?php
-            $likes->setPostID($post['id']);
+            $test = $likes->setPostID($post['id']);
             $post_id = $likes->getPostID();
         ?>
 
@@ -72,12 +89,23 @@ $loggedInId = $likes->getUserID();
                                         <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
                                             <img src="../2imd-IMDstagram/img/icons/nav-circle.png" class="toggler">
                                         </a>
-                                        <div class="dropdown-menu dropdown-left-manual" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="#">Copy link</a>
-                                            <a class="dropdown-item" href="#">Share</a>
-                                            <a class="dropdown-item" href="#">Delete post</a>
-                                            <a class="dropdown-item" href="#">Report</a>
-                                        </div>
+                                        
+                                        <form method="post">
+                                        <input type="text" hidden value="<?php echo $post['id']; ?>" name="post-id">
+                                            <div class="dropdown-menu dropdown-left-manual" aria-labelledby="navbarDropdown">
+                                                
+                                                <input class="dropdown-item" type="submit" name="copyPost" value="Copy link">
+                                                
+                                                <input class="dropdown-item" type="submit" name="sharePost" value="Share">
+                                                <?php if($loggedUser == $post['username']): ?>
+                                
+                                                    <input class="dropdown-item" type="submit" name="deletePost" value="Delete">
+                                                <?php elseif($loggedUser != $post['username']): ?>
+                                                    
+                                                    <input class="dropdown-item" type="submit" name="reportPost" value="Report">
+                                                <?php endif; ?>
+                                            </div>
+                                        </form>
                                     </li>
                                 </ul>
 

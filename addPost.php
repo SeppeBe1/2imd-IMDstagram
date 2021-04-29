@@ -70,7 +70,7 @@ if (isset($_POST['submit'])) {
     <title>Make new post</title>
 </head>
 
-<body>
+<body onload="getLocation()">
 
     <!--
 
@@ -95,7 +95,7 @@ if (isset($_POST['submit'])) {
     <div class="container add-post">
         <div class="row">
 
-
+    
             <form action="" class="form-post" method="post" enctype="multipart/form-data">
                 <h1>Add a new post</h1>
                 <!-- Upload photo, choose photo -->
@@ -125,9 +125,10 @@ if (isset($_POST['submit'])) {
                 <!-- Location -->
                 <label for="gsearch" class="labels-upload">Add location</label>
                 <br>
-                <input type="search" id="location-search" class="form-control" name="location-search">
+                <input type="search" id="location-search" class="form-control" name="location-search" readonly>
+                <!-- <button type="button" onclick="getLocation()">Try It</button> -->
+                <p id="demo"></p>
                 <br><br>
-
                 <!-- Submit form -->
                 <input class="load-more" name="submit" type="submit" value="Submit"></button>
 
@@ -135,7 +136,7 @@ if (isset($_POST['submit'])) {
 
         </div>
     </div>
-
+<script src="js/location.js"></script>
 </body>
 
 </html>
