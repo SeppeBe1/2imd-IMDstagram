@@ -4,10 +4,9 @@
     spl_autoload_register();
     include_once("./header.inc.php");
 
-    $security = new classes\User();
-    $security->setUsername($_SESSION['user']);
-    $loggedUser = $security->getUsername();
-    $currentlyLoggedIn = $security->showUser($loggedUser);
+    $user = new classes\User();
+    $user->setUsername($_SESSION['user']);
+    $currentlyLoggedIn = $user->showUser();
 
     $likes = new classes\Like();
     $likes->setUserID((int)$currentlyLoggedIn[0]['id']);
@@ -21,6 +20,23 @@
 
         $postsD = $getPost->getPostDetail($post_id);
         // var_dump($postsD);
+    }
+
+    if(!empty($_POST['copyPost'])){
+        echo "copy" . $_POST['post-id'];  // TEST
+    }
+    
+    if(!empty($_POST['sharePost'])){
+        echo "share" . $_POST['post-id']; // TEST
+    }
+    
+    if(!empty($_POST['deletePost'])){
+        $post = new classes\Post();
+        $post->deletePost($_POST['post-id']);
+    }
+    
+    if(!empty($_POST['reportPost'])){
+        echo "report" . $_POST['post-id']; // TEST
     }
 
 
@@ -73,15 +89,19 @@
                                         <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
                                             <img src="../2imd-IMDstagram/img/icons/nav-circle.png" class="toggler">
                                         </a>
-                                        <div class="dropdown-menu dropdown-left-manual" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="#">Copy link</a>
-                                            <a class="dropdown-item" href="#">Share</a>
-                                            <?php if($loggedUser == $post['username']): ?>
-                                                <a class="dropdown-item" href="#">Delete post</a>
-                                            <?php elseif($loggedUser != $post['username']): ?>
-                                                <a class="dropdown-item" href="#">Report</a>
+                                        <form method="post">
+                                        <input type="text" hidden value="<?php echo $post['id']; ?>" name="post-id"><!-- hidden for submit (passing value) -->
+                                        <div class="dropdown-menu dropdown-left-manual"
+                                            aria-labelledby="navbarDropdown">
+                                            <input class="dropdown-item" type="submit" name="copyPost" value="Copy link">
+                                            <input class="dropdown-item" type="submit" name="sharePost" value="Share">
+                                            <?php if($user->getUsername() == $post['username']): ?>
+                                            <input class="dropdown-item" type="submit" name="deletePost" value="Delete">
+                                            <?php elseif($user->getUsername() != $post['username']): ?>
+                                            <input class="dropdown-item" type="submit" name="reportPost" value="Report">
                                             <?php endif; ?>
                                         </div>
+                                    </form>
                                     </li>
                                 </ul>
 
@@ -179,7 +199,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
+    <script src="js/feed.js"></script>
 
 </body>
 

@@ -5,21 +5,16 @@ namespace src;
 include_once("./header.inc.php");
 spl_autoload_register();
 
-$security = new classes\User();
-
 $username = $_SESSION['user'];
 
-// echo "Make a new post";
-
-$filters = new classes\Post();
-$getFilters = $filters->getAllFilters();
+$post = new classes\Post();
+$filters = $post->getAllFilters();
 
 if (isset($_POST['submit'])) {
 
     $description = $_POST['description'];
     $location = $_POST['location-search'];
     $filter = $_POST['filter-image'];
-
 
     $fileName = $_FILES['img']['name'];
     $fileTmp = $_FILES['img']['tmp_name'];
@@ -38,7 +33,6 @@ if (isset($_POST['submit'])) {
                 $image = uniqid(' ', true) . "." . $fileRealExt;
                 $fileDestination = "uploads/" . $image;
 
-                $post = new classes\Post();
                 $post->createPost($username, $image, $description, $location, $filter);
 
                 move_uploaded_file($fileTmp, $fileDestination);
@@ -52,8 +46,6 @@ if (isset($_POST['submit'])) {
     } else {
         echo "This file can't be used";
     }
-
-    //var_dump($image);
 }
 
 ?>
@@ -95,7 +87,6 @@ if (isset($_POST['submit'])) {
     <div class="container add-post">
         <div class="row">
 
-    
             <form action="" class="form-post" method="post" enctype="multipart/form-data">
                 <h1>Add a new post</h1>
                 <!-- Upload photo, choose photo -->
@@ -103,13 +94,12 @@ if (isset($_POST['submit'])) {
                 <input type="file" id="img" name="img" class="form-control" accept="image/*">
                 <br><br>
 
-
                 <!--Choose filter-->
                 <label for="img" class="labels-upload">Select your filter</label>
                 <br>
                 <select name="filter-image" id="filter-image" class="form-control">
-                    <?php foreach ($getFilters as $filter) : ?>
-                        <option value="<?php echo $filter['filtername']; ?>"><?php echo $filter['filtername']; ?></option>
+                    <?php foreach ($filters as $filter) : ?>
+                    <option value="<?php echo $filter['filtername']; ?>"><?php echo $filter['filtername']; ?></option>
                     <?php endforeach; ?>
                 </select>
 
@@ -118,8 +108,8 @@ if (isset($_POST['submit'])) {
                 <!-- Description + tags (placeholder van textarea) -->
                 <label for="img" class="labels-upload">Write your description</label>
                 <br>
-                <textarea rows="4" cols="45" class="form-control" name="description" placeholder="Write description"> </textarea>
-
+                <textarea rows="4" cols="45" class="form-control" name="description"
+                    placeholder="Write description"> </textarea>
                 <br><br>
 
                 <!-- Location -->
@@ -127,7 +117,7 @@ if (isset($_POST['submit'])) {
                 <br>
                 <input type="search" id="location-search" class="form-control" name="location-search" readonly>
                 <!-- <button type="button" onclick="getLocation()">Try It</button> -->
-                <p id="demo"></p>
+                <p id="currentLocation"></p>
                 <br><br>
                 <!-- Submit form -->
                 <input class="load-more" name="submit" type="submit" value="Submit"></button>
@@ -136,7 +126,7 @@ if (isset($_POST['submit'])) {
 
         </div>
     </div>
-<script src="js/location.js"></script>
+    <script src="js/location.js"></script>
 </body>
 
 </html>

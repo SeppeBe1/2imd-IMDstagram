@@ -2,6 +2,7 @@
 namespace src\classes;
 
 class Comment{
+    //veranderen naar private
     protected $totalLikes;
     protected $commentDate;
     protected $text;
@@ -41,8 +42,6 @@ class Comment{
     {
         return $this->text;
     }
-
-
 }
 
 ?>

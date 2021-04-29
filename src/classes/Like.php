@@ -4,8 +4,8 @@ spl_autoload_register();
 
 class Like
 {
-    protected $userID;
-    protected $postID;
+    private $userID;
+    private $postID;
     
     public function getUserID()
     {
@@ -31,7 +31,7 @@ class Like
         return $this;
     }
 
-    public function countLikes($post_id) { //tellen van likes
+    public function countLikes() { //tellen van likes
         $db = new Db();
         $conn = $db->getInstance();
 
@@ -45,7 +45,7 @@ class Like
         return $likes;
     }
 
-    public function isLiked($user_id, $post_id) { //welke post heeft de user geliked 
+    public function isLiked() { //welke post heeft de user geliked 
         $db = new Db();
         $conn = $db->getInstance();
 
@@ -61,7 +61,7 @@ class Like
         return $isLikedResults;
     }
 
-    public function showLikes($post_id) {
+    public function showLikes() {
         $db = new Db();
         $conn = $db->getInstance();
 
@@ -75,7 +75,7 @@ class Like
         return $resultShowlikes;
     }
 
-    public function addLike($user_id, $post_id) {
+    public function addLike() {
         $db = new Db();
         $conn = $db->getInstance();
 
@@ -89,7 +89,7 @@ class Like
         return $results;
     }
 
-    public function removeLike($user_id, $post_id) {
+    public function removeLike() {
         $db = new Db();
         $conn = $db->getInstance();
 

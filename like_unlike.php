@@ -2,33 +2,29 @@
     namespace src;
     spl_autoload_register(); 
     
-    $security = new classes\User();
-    $security->onlyLoggedInUsers();
-    $security->setUsername($_SESSION['user']);
-    $loggedUser = $security->getUsername();
+    $user = new classes\User();
+    $user->onlyLoggedInUsers();
+    $user->setUsername($_SESSION['user']);
     
-    $likeTest = new classes\Like();
-    $currentlyLoggedIn = $security->showUser($loggedUser);
+    $like = new classes\Like();
+    $currentlyLoggedIn = $user->showUser();
+
     //SET user_id
-    $likeTest->setUserID((int)$currentlyLoggedIn[0]['id']);
-    $loggedInId = $likeTest->getUserID();
+    $like->setUserID((int)$currentlyLoggedIn[0]['id']);
 
     //SET post_id
-    $likeTest->setPostID($_POST['id']);
-    $post_id = $likeTest->getPostID();
-
-
+    $like->setPostID($_POST['id']);
 
     if(!empty($_POST)) {
         if($_POST['like'] == 1){
-            $likeTest->addLike($loggedInId, $post_id);
+            $like->addLike();
         }
 
         if($_POST['like'] == 0){
-            $likeTest->removeLike($loggedInId, $post_id);
+            $like->removeLike();
         }
 
-        $counterLikes = $likeTest->countLikes($post_id);
+        $counterLikes = $like->countLikes();
         echo $counterLikes['count'];
     }
 

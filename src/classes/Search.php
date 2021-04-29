@@ -2,8 +2,8 @@
 namespace src\classes;
 
 class Search {
-    protected $param;
-    protected $tag;
+    private $param;
+    private $tag;
         
         public function getParam()
         {

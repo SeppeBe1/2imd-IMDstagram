@@ -3,6 +3,7 @@ namespace src\classes;
 spl_autoload_register();
 
 class Post  {
+    //veranderen naar private
     protected $image;
     protected $description;
     protected $location;

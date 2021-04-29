@@ -3,6 +3,7 @@ namespace src\classes;
 spl_autoload_register();
 
 class User {
+    //protected voor inheritance (extends -> admin)
     protected $username; 
     protected $email;
     protected $password;
@@ -11,7 +12,7 @@ class User {
     protected $fullName;
     protected $bio;
     protected $id;
-    
+
     public function setUsername($username)
     {
         $this->username = $username;
@@ -194,16 +195,6 @@ class User {
         return $results;
     }
 
-    // public static function getAvatar(){
-    //     $conn = Db::getInstance();
-    //     $statement = $conn->prepare("select avatar from users");
-    //     $result = $statement->execute();
-    //     var_dump($result);
-
-    //     $users = $statement->fetchAll(PDO::FETCH_ASSOC);
-    //     return $users;
-    // }
-
     public function onlyLoggedInUsers() {
         session_start();
             if(!isset($_SESSION['user'])){
@@ -335,7 +326,7 @@ class User {
         return $correctUsers;
     } 
 
-    public function showUser($username){ //CURRENTUSER
+    public function showUser(){ //CURRENTUSER
         $db = new Db();
         $conn = $db->getInstance();
 
