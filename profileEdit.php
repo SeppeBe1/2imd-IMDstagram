@@ -17,8 +17,10 @@
         //change Full name
         if(!empty($_POST['fullName'])){
             $fullName = $_POST['fullName'];
+            $user->setFullName($fullName);
+            $getNewfullName = $user->getFullName();
             try {
-                $user->changefullName($fullName, $username);
+                $user->changefullName($getNewfullName, $username);
             }catch(\Throwable $error) {
                 $error = $error->getMessage();
             }
@@ -31,11 +33,13 @@
                     $user->setUsername($newUsername);
                     $getNewUsername = $user->getUsername();
                     
-                    if ($user->usernameExists($username) == true){
-                        $user->changeUsername($getNewUsername, $username);
-                        $_SESSION['user'] = $_POST['username'];
-                    }elseif($user->usernameExists($username) == false){
-                        $errorUsernameExists = true;
+                    if ($newUsername != $_SESSION['user']){
+                        if ($user->usernameExists($username) == true){
+                            $user->changeUsername($getNewUsername, $username);
+                            $_SESSION['user'] = $_POST['username'];
+                        }elseif($user->usernameExists($username) == false){
+                            $errorUsernameExists = true;
+                        }
                     }
                 }catch(\Throwable $error) {
                 $error = $error->getMessage();
@@ -247,32 +251,32 @@
 
                         <div class="form-group">
                             <label for="fullname">Full Name</label>
-                            <input type="text" class="form-control" id="fullname" name="fullName" placeholder="<?php echo $user['fullName'] ?>">
+                            <input type="text" class="form-control" id="fullname" name="fullName" placeholder="Full Name" value="<?php echo htmlspecialchars($user['fullName']) ?>">
                         </div>
 
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="<?php echo $user["username"]?>" >
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="<?php echo htmlspecialchars($user["username"])?>">
                         </div>
 
                         <div class="form-group">
                             <label for="bio">Bio</label>
-                            <textarea class="form-control" maxlength="200" id="bio" rows="3" name="bio" placeholder="<?php echo $user['bio'] ?>"></textarea>
+                            <textarea class="form-control" maxlength="200" id="bio" rows="3" name="bio" value="<?php echo htmlspecialchars($user['bio']) ?>"></textarea>
                         </div>
 
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="text" class="form-control" id="email" name="email" placeholder="<?php echo $user['email'] ?>">
+                            <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="<?php echo htmlspecialchars($user['email']) ?>">
                         </div>
 
                         <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="● ● ● ● ●" >
+                            <label for="password">New Password</label>
+                            <input type="password" class="form-control" id="password" name="password"  placeholder="••••••••" >
                         </div>
 
                         <div class="form-group">
                             <label for="confirm-password">Confirm Password</label>
-                            <input type="password" class="form-control" id="confirm-password" name="confirmPassword" placeholder="● ● ● ● ●" >
+                            <input type="password" class="form-control" id="confirm-password" name="confirmPassword"  placeholder="••••••••" >
                         </div>
 
                         <div class=" border-bottom"> 
@@ -309,7 +313,7 @@
         </div>
     </main>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
-    <script src="script.js"></script>
+    <script src="js/avatar.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
 </body>
