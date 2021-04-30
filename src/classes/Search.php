@@ -1,7 +1,8 @@
 <?php 
 namespace src\classes;
 
-class Search {
+class Search 
+{
     private $param;
     private $tag;
         
@@ -29,10 +30,9 @@ class Search {
             return $this;
         }
 
-        public function searchParam($search)
-        {
-            $db = new Db();
-            $conn = $db->getInstance();
+        public function searchParam() {
+            $conn = Db::getInstance();
+            
             $statement = $conn->prepare("SELECT *, users.id AS userid FROM `users` INNER JOIN posts ON users.id = posts.user_id 
             WHERE `username` LIKE :search OR `description` LIKE :search OR `location` LIKE :search");
             $keyword = "%".$this->getParam()."%";
@@ -43,9 +43,8 @@ class Search {
             return $results;
         }
 
-        public function searchTags($tag){
-            $db = new Db();
-            $conn = $db->getInstance();
+        public function searchTags(){
+            $conn = Db::getInstance();
         
             $statement = $conn->prepare("SELECT * FROM posts WHERE description LIKE :tag");
             $searchTag = "%#".$this->getTag()."%";
@@ -56,5 +55,3 @@ class Search {
             return $resultsTag;
         }
 }
-
-?>

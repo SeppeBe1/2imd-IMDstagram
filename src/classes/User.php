@@ -113,8 +113,7 @@ class User {
     }
 
     public function canLogin() {
-        $db = new Db();
-        $conn = $db->getInstance();
+        $conn = Db::getInstance();
         $options = parse_ini_file("settings/cost.ini"); //cost 15 - returns an array
         
         $statement = $conn->prepare("SELECT * FROM users WHERE username = :username");
@@ -135,8 +134,7 @@ class User {
     }
 
     public function emailExists() {
-        $db = new Db();
-        $conn = $db->getInstance();
+        $conn = Db::getInstance();
 
         $statement = $conn->prepare("SELECT email FROM users WHERE email = :email");
         $email = $this->getEmail();
@@ -152,8 +150,7 @@ class User {
     }
 
     public function usernameExists() {
-        $db = new Db();
-        $conn = $db->getInstance();
+        $conn = Db::getInstance();
 
         $statement = $conn->prepare("SELECT username FROM users WHERE username = :username");
         $username = $this->getUsername();
@@ -169,15 +166,14 @@ class User {
     }
 
     public function registerUser() {
-        $db = new Db();
-        $conn = $db->getInstance();
+        $conn = Db::getInstance();
         $options = parse_ini_file("settings/cost.ini"); //cost 15 - returns an array
 
         $statement = $conn->prepare("insert into users (username, email, password, avatar) values (:username, :email, :password, 'placeholder.jpeg')");
-        $username = $this->getUsername();
+        $username = htmlspecialchars($this->getUsername());
         //var_dump($username);
         $email = $this->getEmail();
-        $password = password_hash($this->getConfirmPassword(), PASSWORD_DEFAULT, $options);
+        $password = password_hash(htmlspecialchars($this->getConfirmPassword()), PASSWORD_DEFAULT, $options);
         
         if($password == true) {
             $statement->bindValue(":username", $username);
@@ -204,8 +200,7 @@ class User {
 
 //PROFILE EDIT___________ // -- moet werken met getters en setters
     public function changeEmail($email,$username){
-        $db = new Db();
-        $conn = $db->getInstance();
+        $conn = Db::getInstance();
 
         $statement = $conn->prepare("UPDATE users SET email = :email WHERE username = :user ");
         $statement->bindValue(":email", $this->getEmail());
@@ -215,13 +210,10 @@ class User {
         return $results;
     }
 
-    public function changefullName(){
-        $db = new Db();
-        $conn = $db->getInstance();
+    public function changefullName($fullName,$username){
+        $conn = Db::getInstance();
 
         $statement = $conn->prepare("UPDATE users SET fullName = :fullName WHERE username = :user ");
-        $fullName = $this->getFullName();
-        $username = $this->getUsername();
         $statement->bindValue(":fullName", $fullName);
         $statement->bindValue(":user", $username);
         $results = $statement->execute();
@@ -230,11 +222,10 @@ class User {
     }
 
     public function changeUsername($username,$oldusername){
-        $db = new Db();
-        $conn = $db->getInstance();
+        $conn = Db::getInstance();
 
         $statement = $conn->prepare("UPDATE users SET username = :username WHERE username = :user ");
-        $username = $this->getUsername();
+        $username = htmlspecialchars($this->getUsername());
         $statement->bindValue(":username", $username);
         $statement->bindValue(":user", $oldusername);
         $results = $statement->execute();
@@ -242,12 +233,11 @@ class User {
         return $results;
     }
 
-    public function changeBio(){
-        $db = new Db();
-        $conn = $db->getInstance();
+    public function changeBio($bio,$username){
+        $conn = Db::getInstance();
+
         $statement = $conn->prepare("UPDATE users SET bio = :bio WHERE username = :user ");
-        $bio = $this->getBio();
-        $username = $this->getUsername();
+        
         $statement->bindValue(":bio", $bio);
         $statement->bindValue(":user", $username);
         $results = $statement->execute();
@@ -256,12 +246,11 @@ class User {
     }
 
     public function changePassword($password,$username){
-        $db = new Db();
-        $conn = $db->getInstance();
+        $conn = Db::getInstance();
         $options = parse_ini_file("settings/cost.ini"); //cost 15 - returns an array
 
         $statement = $conn->prepare("UPDATE users SET password = :password WHERE username = :user");
-        $password = password_hash($this->getConfirmPassword(), PASSWORD_DEFAULT, $options);
+        $password = password_hash(htmlspecialchars($this->getConfirmPassword()), PASSWORD_DEFAULT, $options);
         $statement->bindValue(":user", $username);
         $statement->bindValue(":password", $password);
         $results = $statement->execute();
@@ -270,8 +259,7 @@ class User {
     }
 
     public function changeAvatar($avatar, $username) {
-        $db = new Db();
-        $conn = $db->getInstance();
+        $conn = Db::getInstance();
         $statement = $conn->prepare("UPDATE users SET avatar = :avatar WHERE username = :user ");
         $statement->bindValue(":user", $username);
         $statement->bindValue(":avatar", $avatar);
@@ -282,8 +270,7 @@ class User {
     }
 
     public function checkIfImgExists($avatar, $username) {
-        $db = new Db();
-        $conn = $db->getInstance();
+        $conn = Db::getInstance();
         $statement = $conn->prepare("select avatar from users where avatar = :avatar");
         $statement->bindValue(":avatar", $avatar);
         $result = $statement->execute();
@@ -303,8 +290,7 @@ class User {
     }
 
     public function deleteAvatar($username) {
-        $db = new Db();
-        $conn = $db->getInstance();
+        $conn = Db::getInstance();
         $statement = $conn->prepare("UPDATE users set avatar = 'placeholder.jpeg' where username= :user");
         $statement->bindValue(":user", $username);
         $result = $statement->execute();
@@ -317,8 +303,7 @@ class User {
 
     // TO GET THE CORRECT USERNAME ID FOR PROFILE.PHP
     public function getUsernameFrom($username){
-        $db = new Db();
-        $conn = $db->getInstance();
+        $conn = Db::getInstance();
     
         $statement = $conn->prepare("SELECT * FROM users WHERE username = :username");
         $statement->bindValue(":username", $username);
@@ -329,8 +314,7 @@ class User {
     } 
 
     public function showUser(){ //CURRENTUSER
-        $db = new Db();
-        $conn = $db->getInstance();
+        $conn = Db::getInstance();
 
         $statement = $conn->prepare("select * from users where username = :username");
         $username = $this->getUsername();

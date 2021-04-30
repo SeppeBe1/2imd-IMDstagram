@@ -32,10 +32,9 @@ class Like
     }
 
     public function countLikes() { //tellen van likes
-        $db = new Db();
-        $conn = $db->getInstance();
+        $conn = Db::getInstance();
 
-        $statement = $conn->prepare("select count(post_id) as count from likes where post_id = :post_id");
+        $statement = $conn->prepare("SELECT count(post_id) as count FROM likes WHERE post_id = :post_id");
         $post_id = $this->getPostID();
         $statement->bindValue(":post_id", $post_id);
         $result = $statement->execute();
@@ -46,10 +45,9 @@ class Like
     }
 
     public function isLiked() { //welke post heeft de user geliked 
-        $db = new Db();
-        $conn = $db->getInstance();
+        $conn = Db::getInstance();
 
-        $statement = $conn->prepare("select * from likes where user_id = :user_id and post_id= :post_id");
+        $statement = $conn->prepare("SELECT * FROM likes WHERE user_id = :user_id AND post_id= :post_id");
         $user_id = $this->getUserID();
         $post_id = $this->getPostID();
         $statement->bindValue(":post_id", $post_id);
@@ -62,10 +60,9 @@ class Like
     }
 
     public function showLikes() {
-        $db = new Db();
-        $conn = $db->getInstance();
+        $conn = Db::getInstance();
 
-        $statement = $conn->prepare("select * from likes where post_id= :post_id");
+        $statement = $conn->prepare("SELECT * FROM likes WHERE post_id= :post_id");
         $post_id = $this->getPostID();
         $statement->bindValue(":post_id", $post_id);
         $results = $statement->execute();
@@ -76,10 +73,9 @@ class Like
     }
 
     public function addLike() {
-        $db = new Db();
-        $conn = $db->getInstance();
+        $conn = Db::getInstance();
 
-        $statement = $conn->prepare("insert into likes (user_id, post_id) values (:user_id, :post_id)");
+        $statement = $conn->prepare("INSERT INTO likes (user_id, post_id) VALUES (:user_id, :post_id)");
         $user_id = $this->getUserID();
         $post_id = $this->getPostID();
         $statement->bindValue(":user_id", $user_id);
@@ -90,10 +86,9 @@ class Like
     }
 
     public function removeLike() {
-        $db = new Db();
-        $conn = $db->getInstance();
+        $conn = Db::getInstance();
 
-        $statement = $conn->prepare("delete from likes where user_id = :user_id and post_id = :post_id");
+        $statement = $conn->prepare("DELETE FROM likes WHERE user_id = :user_id AND post_id = :post_id");
         $user_id = $this->getUserID();
         $post_id = $this->getPostID();
         $statement->bindValue(":user_id", $user_id);

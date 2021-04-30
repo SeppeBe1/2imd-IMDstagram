@@ -99,8 +99,8 @@ class Post  {
 
     // FUNCTION THAT PICKS UP THE POSTS FROM ALL THE USER FOR FEED.PHP
     public function getAllPosts(){
-        $db = new Db();
-        $conn = $db->getInstance();
+        $conn = Db::getInstance();
+
         $statement = $conn->prepare("SELECT *, posts.id FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY postedDate DESC LIMIT 20");
         $statement->execute();
         $posts = $statement->fetchAll(\PDO::FETCH_ASSOC);
@@ -109,13 +109,12 @@ class Post  {
     }
 
     public function createPost($username, $image, $description, $location, $filter){
-        $db = new Db();
-        $conn = $db->getInstance();
+        $conn = Db::getInstance();
 
         $statement = $conn->prepare("INSERT INTO posts (photo, description, location, postedDate, user_id, filter_id)
         VALUES(:photo, :description, :location, SYSDATE(),(SELECT id FROM users WHERE username = :username),
         (SELECT id FROM filters WHERE filtername = :filter)); ");
-
+        //htmlspecialchars op description
         $statement->bindValue(":photo", $image);
         $statement->bindValue(":description", $description);
         $statement->bindValue(":location", $location);
@@ -125,8 +124,8 @@ class Post  {
     }
 
     public function getAllFilters() {
-        $db = new Db();
-        $conn = $db->getInstance();
+        $conn = Db::getInstance();
+
         $statement = $conn->prepare("SELECT * FROM filters");
         $statement->execute();
         $getFilters = $statement->fetchAll(\PDO::FETCH_ASSOC);
@@ -136,8 +135,8 @@ class Post  {
 
     // FUNCTION THAT PUT THE POSTS OF THE USERS IN THE PROFILE.PHP
     public static function getPostsUser($user_id){
-        $db = new Db();
-        $conn = $db->getInstance();
+        $conn = Db::getInstance();
+
         $statement = $conn->prepare("SELECT * FROM posts WHERE user_id = :user_id ORDER BY postedDate DESC");
         $statement->bindValue(":user_id", $user_id);
         $statement->execute();
@@ -148,8 +147,8 @@ class Post  {
 
     // TO GET POST IN DETAIL
     public static function getPostDetail($post_id){
-        $db = new Db();
-        $conn = $db->getInstance();
+        $conn = Db::getInstance();
+
         $statement = $conn->prepare("SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id WHERE posts.id = :id");
         $statement->bindValue(":id", $post_id);
         $statement->execute();
@@ -160,8 +159,8 @@ class Post  {
     }
 
     public static function getPhoto($post_id){
-        $db = new Db();
-        $conn = $db->getInstance();
+        $conn = Db::getInstance();
+
         $statement = $conn->prepare("SELECT photo FROM posts WHERE id = :id");
         $statement->bindValue(":id", $post_id);
         $statement->execute();
@@ -171,8 +170,7 @@ class Post  {
     }
 
     public function deletePost($id){
-        $db = new Db();
-        $conn = $db->getInstance();
+        $conn = Db::getInstance();
         
         $statement = $conn->prepare("DELETE FROM posts WHERE id = :id");
         $statement->bindValue(":id", $id);
@@ -182,7 +180,3 @@ class Post  {
         return $result;
     }
 }
-
-
-
-?>
