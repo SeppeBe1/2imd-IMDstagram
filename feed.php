@@ -16,14 +16,6 @@ $allPosts = $post->getAllPosts();
 $like = new classes\Like();
 $like->setUserID((int)$currentlyLoggedIn[0]['id']);
 
-if(!empty($_POST['copyPost'])){
-    echo "copy" . $_POST['post-id'];  // TEST
-}
-
-if(!empty($_POST['sharePost'])){
-    echo "share" . $_POST['post-id']; // TEST
-}
-
 if(!empty($_POST['deletePost'])){
     $post = new classes\Post();
     $post->deletePost($_POST['post-id']);
@@ -31,6 +23,10 @@ if(!empty($_POST['deletePost'])){
 
 if(!empty($_POST['reportPost'])){
     echo "report" . $_POST['post-id']; // TEST
+}
+
+if(!empty($_POST['banUser'])){
+    echo "ban" . $_POST['post-id']; //functie insteken die de user bant om in te loggen
 }
 
 ?>
@@ -86,23 +82,25 @@ if(!empty($_POST['reportPost'])){
                                         data-toggle="dropdown">
                                         <img src="../2imd-IMDstagram/img/icons/nav-circle.png" class="toggler">
                                     </a>
+
                                     <form method="post">
-                                        <input type="text" hidden value="<?php echo $post['id']; ?>" name="post-id"><!-- hidden for submit (passing value) -->
+                                        <input type="text" hidden value="<?php echo $post['id']; ?>" name="post-id">
                                         <div class="dropdown-menu dropdown-left-manual"
                                             aria-labelledby="navbarDropdown">
-                                            <input class="dropdown-item" type="submit" name="copyPost" value="Copy link">
-                                            <input class="dropdown-item" type="submit" name="sharePost" value="Share">
                                             <?php if($user->getUsername() == $post['username']): ?>
                                             <input class="dropdown-item" type="submit" name="deletePost" value="Delete">
                                             <?php elseif($user->getUsername() != $post['username']): ?>
                                             <input class="dropdown-item" type="submit" name="reportPost" value="Report">
+                                            <?php //elseif($user == admin (functie die bekijkt of de ingelogde user admin is)) ?>
+                                            <!--<input class="dropdown-item" type="submit" name="banUser" value="Ban user">-->
                                             <?php endif; ?>
                                         </div>
                                     </form>
                                 </li>
                             </ul>
-                        </div>
+
                     </nav>
+
                 </div>
             </div>
 
@@ -161,9 +159,9 @@ if(!empty($_POST['reportPost'])){
                         <?php if (!empty($word)) : ?>
                         <?php if ($word[0] == "#") : ?>
                         <a href="results.php?tag=<?php echo str_replace("#", "", $word); ?>" name="tag"
-                            class="tags-post"><?php echo $word; ?></a>
+                            class="tags-post"><?php echo htmlspecialchars($word); ?></a>
                         <?php else : ?>
-                        <?php echo $word; ?>
+                        <?php echo htmlspecialchars($word); ?>
                         <?php endif; ?>
                         <?php endif; ?>
                         <?php endforeach; ?>
