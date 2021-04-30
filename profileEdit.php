@@ -16,7 +16,7 @@
     if (!empty($_POST['save'])){
         //change Full name
         if(!empty($_POST['fullName'])){
-            $fullName = $_POST['fullName'];
+            $fullName = htmlspecialchars($_POST['fullName']);
             $user->setFullName($fullName);
             $getNewfullName = $user->getFullName();
             try {
@@ -61,7 +61,7 @@
     
         //change Email
         if(!empty($_POST['email'])){
-            $email = $_POST['email'];
+            $email = htmlspecialchars($_POST['email']);
             $username = $_SESSION['user'];
     
             try{
@@ -77,8 +77,8 @@
 
         //change Password
         if(!empty($_POST['password']) && !empty($_POST['confirmPassword'])){
-            $lengthPassword = strlen($_POST['password']);
-            $password = $_POST['password'];
+            $lengthPassword = htmlspecialchars(strlen($_POST['password']));
+            $password = htmlspecialchars($_POST['password']);
             try {
                 // if password equals the second input password = set password
                 if($_POST['password'] === $_POST['confirmPassword']) {
@@ -253,33 +253,32 @@
 
                         <div class="form-group">
                             <label for="fullname">Full Name</label>
-                            <input type="text" class="form-control" id="fullname" name="fullName" placeholder="Full Name" value="<?php echo htmlspecialchars($user['fullName']) ?>">
+                            <input type="text" class="form-control" id="fullname" name="fullName" placeholder="<?php echo htmlspecialchars($user['fullName']); ?>">
                         </div>
 
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="<?php echo htmlspecialchars($user["username"])?>">
+                            <input type="text" class="form-control" id="username" name="username" placeholder="<?php echo htmlspecialchars($user["username"]);?>" >
                         </div>
 
                         <div class="form-group">
                             <label for="bio">Bio</label>
-                            <textarea class="form-control" maxlength="200" id="bio" rows="3" name="bio" ><?php echo htmlspecialchars($user['bio']) ?></textarea>
+                            <textarea class="form-control" maxlength="200" id="bio" rows="3" name="bio" placeholder="<?php echo htmlspecialchars($user['bio']); ?>"></textarea>
                         </div>
 
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="<?php echo htmlspecialchars($user['email']) ?>">
+                            <input type="text" class="form-control" id="email" name="email" placeholder="<?php echo htmlspecialchars($user['email']); ?>">
                         </div>
 
                         <div class="form-group">
-                            <label for="password">New Password</label><br>
-                            <small >Must have at least 6 characters.</small>
-                            <input type="password" class="form-control" id="password" name="password"  placeholder="••••••••" >
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="● ● ● ● ●" >
                         </div>
 
                         <div class="form-group">
                             <label for="confirm-password">Confirm Password</label>
-                            <input type="password" class="form-control" id="confirm-password" name="confirmPassword"  placeholder="••••••••" >
+                            <input type="password" class="form-control" id="confirm-password" name="confirmPassword" placeholder="● ● ● ● ●" >
                         </div>
 
                         <div class=" border-bottom"> 
@@ -316,7 +315,7 @@
         </div>
     </main>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
-    <script src="js/avatar.js"></script>
+    <script src="script.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
 </body>
