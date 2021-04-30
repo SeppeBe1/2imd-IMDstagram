@@ -22,14 +22,6 @@
         // var_dump($postsD);
     }
 
-    if(!empty($_POST['copyPost'])){
-        echo "copy" . $_POST['post-id'];  // TEST
-    }
-    
-    if(!empty($_POST['sharePost'])){
-        echo "share" . $_POST['post-id']; // TEST
-    }
-    
     if(!empty($_POST['deletePost'])){
         $post = new classes\Post();
         $post->deletePost($_POST['post-id']);
@@ -38,9 +30,10 @@
     if(!empty($_POST['reportPost'])){
         echo "report" . $_POST['post-id']; // TEST
     }
-
-
-
+    
+    if(!empty($_POST['banUser'])){
+        echo "ban" . $_POST['post-id']; //functie insteken die de user bant om in te loggen
+    }
 ?>
 
 <!DOCTYPE html>
@@ -71,9 +64,9 @@
                 </a>
             </div>
             <div class="col-6">
-                <a href="profile.php?id=<?php echo $post["id"]; ?>"><span
-                        class="profile-name"><?php echo $post["username"]?></span></a><br>
-                <a href="#" class="profile-location"><?php echo $post["location"]?></a>
+                <a href="profile.php?username=<?php echo $post["username"]; ?>"><span
+                        class="profile-name"><?php echo htmlspecialchars($post["username"]); ?></span></a><br>
+                <a href="#" class="profile-location"><?php echo htmlspecialchars($post["location"]); ?></a>
             </div>
             <div class="col-3">
                 <div class="row">
@@ -82,50 +75,46 @@
             </div>
             <div class="col-1">
 
-                    <nav class="navbar navbar-expand">
-                            <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-                                <ul class="navbar-nav">
-                                    <li class="nav-item ">
-                                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
-                                            <img src="../2imd-IMDstagram/img/icons/nav-circle.png" class="toggler">
-                                        </a>
-                                        <form method="post">
-                                        <input type="text" hidden value="<?php echo $post['id']; ?>" name="post-id"><!-- hidden for submit (passing value) -->
-                                        <div class="dropdown-menu dropdown-left-manual"
-                                            aria-labelledby="navbarDropdown">
-                                            <input class="dropdown-item" type="submit" name="copyPost" value="Copy link">
-                                            <input class="dropdown-item" type="submit" name="sharePost" value="Share">
-                                            <?php if($user->getUsername() == $post['username']): ?>
-                                            <input class="dropdown-item" type="submit" name="deletePost" value="Delete">
-                                            <?php elseif($user->getUsername() != $post['username']): ?>
-                                            <input class="dropdown-item" type="submit" name="reportPost" value="Report">
-                                            <?php endif; ?>
-                                        </div>
-                                    </form>
-                                    </li>
-                                </ul>
+                <nav class="navbar navbar-expand">
+                    <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                        <ul class="navbar-nav">
+                            <li class="nav-item ">
+                                <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+                                    <img src="../2imd-IMDstagram/img/icons/nav-circle.png" class="toggler">
+                                </a>
+                                <form method="post">
+                                    <input type="text" hidden value="<?php echo $_GET['id']; ?>" name="post-id">
+                                    <div class="dropdown-menu dropdown-left-manual" aria-labelledby="navbarDropdown">
+                                        <?php if($user->getUsername() == $post['username']): ?>
+                                        <input class="dropdown-item" type="submit" name="deletePost" value="Delete">
+                                        <?php elseif($user->getUsername() != $post['username']): ?>
+                                        <input class="dropdown-item" type="submit" name="reportPost" value="Report">
+                                        <?php //elseif($user == admin (functie die bekijkt of de ingelogde user admin is)) ?>
+                                        <!--<input class="dropdown-item" type="submit" name="banUser" value="Ban user">-->
+                                        <?php endif; ?>
+                                    </div>
+                                </form>
+                            </li>
+                        </ul>
+                </nav>
 
-                        </nav>
-                                        
-                </div>
             </div>
+        </div>
 
         <div class="row row-second">
             <div class="col-12">
 
-                    <?php $folder = "uploads/";
+                <?php $folder = "uploads/";
                         $file = "";
                         if (is_dir($folder)) {
-                                if ($open = opendir($folder)) {
-                                    if ($file == "." || $post['photo'] == "..") continue;
-                                    $file =  classes\Post::getPhoto($post_id);
-                                    ?>
-                                    <img src= <?php echo '"uploads/' . $file . '"'; ?> class="picture-feed">
-                                    <?php closedir($open);
-                                }
-                            } ?>
-                            
-                
+                            if ($open = opendir($folder)) {
+                                if ($file == "." || $post['photo'] == "..") continue;
+                                $file =  classes\Post::getPhoto($post_id);
+                                ?>
+                <img src=<?php echo '"uploads/' . $file . '"'; ?> class="picture-feed">
+                <?php closedir($open);
+                            }
+                        } ?>
             </div>
         </div>
 
@@ -147,7 +136,7 @@
                     </p>
                 </span>
             </div>
-            
+
             <div class="col-1">
                 <a href="#"><img src="./img/icons/chat.svg" class="icon-feed"></a>
             </div>
@@ -163,19 +152,16 @@
                     <?php $descrArray = explode(" ", $post['description']);?>
                     <?php foreach($descrArray as $word): ?>
                     <?php if (!empty($word)) : ?>
-                        <?php if($word[0] == "#"): ?>
-                        <a href="results.php?tag=<?php echo str_replace("#", "", $word); ?>" name="tag"
-                            class="tags-post"><?php echo  $word;?></a>
-                        <?php else: ?>
-                        <?php echo  $word; ?>
-                        <?php endif; ?>
+                    <?php if($word[0] == "#"): ?>
+                    <a href="results.php?tag=<?php echo str_replace("#", "", $word); ?>" name="tag"
+                        class="tags-post"><?php echo htmlspecialchars($word);?></a>
+                    <?php else: ?>
+                    <?php echo htmlspecialchars($word); ?>
+                    <?php endif; ?>
                     <?php endif; ?>
                     <?php endforeach; ?>
                 </p>
-
-                <?php endforeach; ?>
                 </p>
-
             </div>
         </div>
 
@@ -194,11 +180,12 @@
         </div>
 
     </div>
+    <?php endforeach; ?>
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="js/feed.js"></script>
 
 </body>
