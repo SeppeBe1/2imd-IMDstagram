@@ -215,11 +215,13 @@ class User {
         return $results;
     }
 
-    public function changefullName($fullName,$username){
+    public function changefullName(){
         $db = new Db();
         $conn = $db->getInstance();
 
         $statement = $conn->prepare("UPDATE users SET fullName = :fullName WHERE username = :user ");
+        $fullName = $this->getFullName();
+        $username = $this->getUsername();
         $statement->bindValue(":fullName", $fullName);
         $statement->bindValue(":user", $username);
         $results = $statement->execute();
@@ -240,12 +242,12 @@ class User {
         return $results;
     }
 
-    public function changeBio($bio,$username){
+    public function changeBio(){
         $db = new Db();
         $conn = $db->getInstance();
-
         $statement = $conn->prepare("UPDATE users SET bio = :bio WHERE username = :user ");
-        
+        $bio = $this->getBio();
+        $username = $this->getUsername();
         $statement->bindValue(":bio", $bio);
         $statement->bindValue(":user", $username);
         $results = $statement->execute();

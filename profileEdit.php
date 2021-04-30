@@ -49,9 +49,11 @@
         //change Bio
         if(!empty($_POST['bio'])){
             $bio = $_POST['bio'];
+            $user->setBio($bio);
+            $getBio = $user->getBio();
             $username = $_SESSION['user'];
             try{
-                $user->changeBio($bio, $username);
+                $user->changeBio();
             }catch(\Throwable $error) {
                 $error = $error->getMessage();
             }
@@ -261,7 +263,7 @@
 
                         <div class="form-group">
                             <label for="bio">Bio</label>
-                            <textarea class="form-control" maxlength="200" id="bio" rows="3" name="bio" value="<?php echo htmlspecialchars($user['bio']) ?>"></textarea>
+                            <textarea class="form-control" maxlength="200" id="bio" rows="3" name="bio" ><?php echo htmlspecialchars($user['bio']) ?></textarea>
                         </div>
 
                         <div class="form-group">
@@ -270,7 +272,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password">New Password</label>
+                            <label for="password">New Password</label><br>
+                            <small >Must have at least 6 characters.</small>
                             <input type="password" class="form-control" id="password" name="password"  placeholder="••••••••" >
                         </div>
 
