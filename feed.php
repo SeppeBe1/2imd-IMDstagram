@@ -18,10 +18,6 @@ $likes = new classes\Like();
 $likes->setUserID((int)$currentlyLoggedIn[0]['id']);
 $loggedInId = $likes->getUserID();
 
-if(!empty($_POST['banUser'])){
-    echo "copy" . $_POST['post-id'];
-}
-
 if(!empty($_POST['deletePost'])){
     $post = new classes\Post();
     $post->deletePost($_POST['post-id']);
@@ -93,9 +89,9 @@ if(!empty($_POST['banUser'])){
                                         <form method="post">
                                         <input type="text" hidden value="<?php echo $post['id']; ?>" name="post-id">
                                             <div class="dropdown-menu dropdown-left-manual" aria-labelledby="navbarDropdown">
-                                                <?php if($loggedUser == $post['username']): ?>
+                                                <?php if($user->getUsername() == $post['username']): ?>
                                                     <input class="dropdown-item" type="submit" name="deletePost" value="Delete">
-                                                <?php elseif($loggedUser != $post['username']): ?>
+                                                <?php elseif($user->getUsername() != $post['username']): ?>
                                                     <input class="dropdown-item" type="submit" name="reportPost" value="Report">
                                                 <?php //elseif($user == admin (functie die bekijkt of de ingelogde user admin is)) ?>
                                                 <!--<input class="dropdown-item" type="submit" name="banUser" value="Ban user">-->
