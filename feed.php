@@ -61,7 +61,7 @@ if(!empty($_POST['banUser'])){
                 </div>
                 <div class="col-6">
                     <a href="profile.php?username=<?php echo $post['username']; ?>"><span
-                            class="profile-name"><?php echo $post['username'] ?></span></a><br>
+                            class="profile-name"><?php echo htmlspecialchars($post['username']); ?></span></a><br>
                     <a href="results.php?location=<?php echo $post['location']; ?>" class="profile-location"
                         name="location"><?php echo $post['location'] ?></a>
                 </div>

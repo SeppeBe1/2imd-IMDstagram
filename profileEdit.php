@@ -253,7 +253,7 @@
 
                         <div class="form-group">
                             <label for="fullname">Full Name</label>
-                            <input type="text" class="form-control" id="fullname" name="fullName" placeholder="Full Name" value="<?php echo ($user['fullName']) ?>">
+                            <input type="text" class="form-control" id="fullname" name="fullName" placeholder="Full Name" value="<?php echo htmlspecialchars($user['fullName']) ?>">
                         </div>
 
                         <div class="form-group">

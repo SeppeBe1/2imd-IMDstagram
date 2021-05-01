@@ -64,7 +64,7 @@
                 </a>
             </div>
             <div class="col-6">
-                <a href="profile.php?username=<?php echo $post["username"]; ?>"><span
+                <a href="profile.php?username=<?php echo htmlspecialchars($post["username"]); ?>"><span
                         class="profile-name"><?php echo htmlspecialchars($post["username"]); ?></span></a><br>
                 <a href="#" class="profile-location"><?php echo htmlspecialchars($post["location"]); ?></a>
             </div>
@@ -148,7 +148,7 @@
 
         <div class="row row-fourth">
             <div class="col-12">
-                <p><span class="profile-name"><?php echo $post["username"]?></span>
+                <p><span class="profile-name"><?php echo htmlspecialchars($post["username"]);?></span>
                     <?php $descrArray = explode(" ", $post['description']);?>
                     <?php foreach($descrArray as $word): ?>
                     <?php if (!empty($word)) : ?>

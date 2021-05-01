@@ -5,18 +5,17 @@ namespace src;
 include_once("./header.inc.php");
 spl_autoload_register();
 
-$security = new classes\User();
-$security->setUsername($_SESSION['user']);
-$loggedUser = $security->getUsername();
-$currentlyLoggedIn = $security->showUser($loggedUser);
+$user = new classes\User();
+$user->setUsername($_SESSION['user']);
+$currentlyLoggedIn = $user->showUser();
 
 // LOOP FOR POSTS
 $posts = new classes\Post();
 $resultsPosts = $posts->getAllPosts();
 
-$likes = new classes\Like();
-$likes->setUserID((int)$currentlyLoggedIn[0]['id']);
-$loggedInId = $likes->getUserID();
+$like = new classes\Like();
+$like->setUserID((int)$currentlyLoggedIn[0]['id']);
+$loggedInId = $like->getUserID();
 
 
 ?>
@@ -49,8 +48,8 @@ $loggedInId = $likes->getUserID();
             <!-- START VAN LOOP-->
             <?php foreach ($resultsPosts as $post) : ?>
             <?php
-                $likes->setPostID($post['id']);
-                $post_id = $likes->getPostID();
+                $like->setPostID($post['id']);
+                $post_id = $like->getPostID();
             ?>
 
             <div class="container-fluid post-post  ">
