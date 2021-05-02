@@ -210,10 +210,11 @@ class User {
         return $results;
     }
 
-    public function changefullName($fullName,$username){
+    public function changefullName(){
         $conn = Db::getInstance();
-
         $statement = $conn->prepare("UPDATE users SET fullName = :fullName WHERE username = :user ");
+        $fullName = $this->getFullName();
+        $username = $this->getUsername();
         $statement->bindValue(":fullName", $fullName);
         $statement->bindValue(":user", $username);
         $results = $statement->execute();
@@ -225,7 +226,7 @@ class User {
         $conn = Db::getInstance();
 
         $statement = $conn->prepare("UPDATE users SET username = :username WHERE username = :user ");
-        $username = htmlspecialchars($this->getUsername());
+        $username = $this->getUsername();
         $statement->bindValue(":username", $username);
         $statement->bindValue(":user", $oldusername);
         $results = $statement->execute();
@@ -250,7 +251,7 @@ class User {
         $options = parse_ini_file("settings/cost.ini"); //cost 15 - returns an array
 
         $statement = $conn->prepare("UPDATE users SET password = :password WHERE username = :user");
-        $password = password_hash(htmlspecialchars($this->getConfirmPassword()), PASSWORD_DEFAULT, $options);
+        $password = password_hash($this->getConfirmPassword(), PASSWORD_DEFAULT, $options);
         $statement->bindValue(":user", $username);
         $statement->bindValue(":password", $password);
         $results = $statement->execute();
