@@ -11,7 +11,7 @@
         $user->setUsername($username);
         $user->setPassword($password);
         
-          if($user->canLogin($username, $password)){
+          if($user->canLogin()){
             return true;
           } else {
             $error = true;

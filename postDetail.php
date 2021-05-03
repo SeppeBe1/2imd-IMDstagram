@@ -10,10 +10,8 @@
 
     $likes = new classes\Like();
     $likes->setUserID((int)$currentlyLoggedIn[0]['id']);
-    $loggedInId = $likes->getUserID();
 
     if(!empty($_GET['id'])){
-
         // WE COLLECT HERE THE INFORMATION FOR THE SPECIFIC POST, WITH THE ID
         $post_id = $_GET['id'];
         $getPost = new classes\Post();
@@ -66,7 +64,8 @@
             <div class="col-6">
                 <a href="profile.php?username=<?php echo $post["username"]; ?>"><span
                         class="profile-name"><?php echo htmlspecialchars($post["username"]); ?></span></a><br>
-                <a href="#" class="profile-location"><?php echo htmlspecialchars($post["location"]); ?></a>
+                        <a href="results.php?location=<?php echo htmlspecialchars($post['location']); ?>" class="profile-location"
+                        name="location"><?php echo $post['location'] ?></a>
             </div>
             <div class="col-3">
                 <div class="row">
@@ -86,11 +85,11 @@
                                     <input type="text" hidden value="<?php echo $_GET['id']; ?>" name="post-id">
                                     <div class="dropdown-menu dropdown-left-manual" aria-labelledby="navbarDropdown">
                                         <?php if($user->getUsername() == $post['username']): ?>
-                                        <input class="dropdown-item" type="submit" name="deletePost" value="Delete">
+                                            <input class="dropdown-item" type="submit" name="deletePost" value="Delete">
                                         <?php elseif($user->getUsername() != $post['username']): ?>
-                                        <input class="dropdown-item" type="submit" name="reportPost" value="Report">
-                                        <?php //elseif($user == admin (functie die bekijkt of de ingelogde user admin is)) ?>
-                                        <!--<input class="dropdown-item" type="submit" name="banUser" value="Ban user">-->
+                                            <input class="dropdown-item" type="submit" name="reportPost" value="Report">
+                                            <?php //elseif($user == admin (functie die bekijkt of de ingelogde user admin is)) ?>
+                                            <!--<input class="dropdown-item" type="submit" name="banUser" value="Ban user">-->
                                         <?php endif; ?>
                                     </div>
                                 </form>
@@ -111,8 +110,8 @@
                                 if ($file == "." || $post['photo'] == "..") continue;
                                 $file =  classes\Post::getPhoto($post_id);
                                 ?>
-                <img src=<?php echo '"uploads/' . $file . '"'; ?> class="picture-feed">
-                <?php closedir($open);
+                            <img src=<?php echo '"uploads/' . $file . '"'; ?> class="picture-feed">
+                            <?php closedir($open);
                             }
                         } ?>
             </div>
@@ -120,7 +119,7 @@
 
         <!--like/unlike-->
         <div class="row row-third">
-            <?php $isLikedbyUser = $likes->isLiked($loggedInId, $post_id); ?>
+            <?php $isLikedbyUser = $likes->isLiked($likes->getUserID(), $post_id); ?>
             <div class="col-1">
                 <img src="./img/icons/<?php if (!empty($isLikedbyUser)) {echo "heart";} else {echo "heart-outlines";} ?>.svg"
                     class="icon-feed like-status <?php if (!empty($isLikedbyUser)) { echo "unlike"; } else { echo "like";} ?>"
