@@ -29,7 +29,7 @@ body{
     height: 35px;
     margin-top: 2px;
     margin-right: 8px;
-    
+    object-fit: cover;
 }
 
 .icon-nav{
