@@ -101,12 +101,55 @@ class Post  {
     public function getAllPosts(){
         $conn = Db::getInstance();
 
-        $statement = $conn->prepare("SELECT *, posts.id FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY postedDate DESC LIMIT 20");
+        // VARIABLE THAT DEFINES HOW MANY POSTS WE WANT TO DISPLAY
+        $postperpage = 1;
+
+        // COUNT THE AMOUNT OF POSTS
+        $statement1 = $conn->prepare("select count(*) as totalamountposts FROM posts");
+        $statement1->execute();
+        $fetch_posts_total = $statement1->fetch(\PDO::FETCH_ASSOC);
+        $totalamountposts = $fetch_posts_total['totalamountposts'];
+        var_dump($totalamountposts);
+
+        // COLLECTING ALL THE POSTS, LIMITED BY THE AMOUNT
+        $statement = $conn->prepare("SELECT *, posts.id FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY postedDate DESC LIMIT 0,$postperpage ");
         $statement->execute();
         $posts = $statement->fetchAll(\PDO::FETCH_ASSOC);
         
         return $posts;
     }
+
+    // public function loadMore(){
+    //     $conn = Db::getInstance();
+
+    //     // Checking how many rows you have
+    //     $postperpage = 2;
+
+    //     $statement = $conn->prepare("select count(*) as totalamountposts FROM posts");
+    //     $statement->execute();
+    //     $fetch_posts_total = $statement->fetch(\PDO::FETCH_ASSOC);
+    //     $totalamountposts = $fetch_posts_total['totalamountposts'];
+    //     var_dump($totalamountposts);
+
+    //     // --> Kan ik bovenstaande code gewoon niet plaatsen bij getAllPosts?
+
+    //     // Selecting first 5 posts
+    //     $statement2 = $conn->prepare("SELECT *, posts.id FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY postedDate DESC LIMIT 0,$postperpage ");
+    //     $result = $statement2->execute();
+    //     $firstPosts = $statement2->fetchAll(\PDO::FETCH_ASSOC);
+    //     var_dump($firstPosts);
+
+    //     // while($post = $firstPosts){
+    //     //     $id = $post['id'];
+            
+    //     // }
+
+
+    //     // $firstPosts = $statement2->fetch(\PDO::FETCH_ASSOC);
+    //     // return $firstPosts;
+    //     // var_dump($firstPosts); 
+
+    // }
 
     public function createPost($username, $image, $description, $location, $filter){
         $conn = Db::getInstance();

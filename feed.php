@@ -29,6 +29,13 @@ if(!empty($_POST['banUser'])){
     echo "ban" . $_POST['post-id']; //functie insteken die de user bant om in te loggen
 }
 
+    // Load more funct.
+    // $loadpost = new classes\Post();
+    // $loadmoreposts = $loadpost->loadMore();
+    // var_dump($loadmoreposts);
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -192,12 +199,15 @@ if(!empty($_POST['banUser'])){
         <?php endforeach; ?>
 
         <div class="row d-flex justify-content-center">
-            <a href="#" class="load-more">Load more...</a>
+            <button id="loadmore" class="load-more">Load more...</button>
+            <input type="hidden" id="row" value="0">
+            <input type="hidden" id="all" value="<?php echo $totalamountposts; ?>">
         </div>
     </main>
     <script src="https://kit.fontawesome.com/a7dc01cef9.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="js/feed.js"></script>
+    <script src="js/loadmore.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
