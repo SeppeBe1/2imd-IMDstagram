@@ -101,15 +101,8 @@ class Post  {
     public function getAllPosts(){
         $conn = Db::getInstance();
 
-        // VARIABLE THAT DEFINES HOW MANY POSTS WE WANT TO DISPLAY
-        $postperpage = 1;
-
-        // COUNT THE AMOUNT OF POSTS
-        $statement1 = $conn->prepare("select count(*) as totalamountposts FROM posts");
-        $statement1->execute();
-        $fetch_posts_total = $statement1->fetch(\PDO::FETCH_ASSOC);
-        $totalamountposts = $fetch_posts_total['totalamountposts'];
-        var_dump($totalamountposts);
+        // VARIABLE THAT DEFINES HOW MANY POSTS WE WANT TO DISPLAY, TO BEGIN
+        $postperpage = 4;
 
         // COLLECTING ALL THE POSTS, LIMITED BY THE AMOUNT
         $statement = $conn->prepare("SELECT *, posts.id FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY postedDate DESC LIMIT 0,$postperpage ");
@@ -117,6 +110,19 @@ class Post  {
         $posts = $statement->fetchAll(\PDO::FETCH_ASSOC);
         
         return $posts;
+    }
+
+    public function getTotalPosts(){
+        $conn = Db::getInstance();
+        // $postperpage = 1;
+
+        // COUNT THE AMOUNT OF POSTS
+        $statement1 = $conn->prepare("select count(*) as totalamountposts FROM posts");
+        $statement1->execute();
+        $fetch_posts_total = $statement1->fetch(\PDO::FETCH_ASSOC);
+        $totalamountposts = $fetch_posts_total['totalamountposts'];
+        // var_dump($totalamountposts);
+        return $totalamountposts; 
     }
 
     // public function loadMore(){

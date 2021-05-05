@@ -12,6 +12,12 @@ $currentlyLoggedIn = $user->showUser();
 // LOOP FOR POSTS
 $post = new classes\Post();
 $allPosts = $post->getAllPosts();
+// var_dump($allPosts);
+
+$amount = new classes\Post();
+$totalamountposts = $amount->getTotalPosts();
+var_dump($totalamountposts);
+
 
 $like = new classes\Like();
 $like->setUserID((int)$currentlyLoggedIn[0]['id']);
@@ -203,6 +209,7 @@ if(!empty($_POST['banUser'])){
             <input type="hidden" id="row" value="0">
             <input type="hidden" id="all" value="<?php echo $totalamountposts; ?>">
         </div>
+
     </main>
     <script src="https://kit.fontawesome.com/a7dc01cef9.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
