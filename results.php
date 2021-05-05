@@ -65,19 +65,18 @@
                                     }
                                 } ?>
                         </a><br>
-                        <!--a href aanpassen param meegeven naar de detailpg van de foto-->
                         <br>
 
                         <?php $descrArray = explode(" ", $key['description']);?>
                         <?php foreach($descrArray as $word): ?>
-                        <?php if (!empty($word)) : ?>
-                        <?php if($word[0] == "#"): ?>
-                        <a href="results.php?tag=<?php echo str_replace("#", "", $word); ?>" name="tag"
-                            class="tags-post"><?php echo htmlspecialchars($word);?></a>
-                        <?php else: ?>
-                        <?php echo htmlspecialchars($word); ?>
-                        <?php endif; ?>
-                        <?php endif; ?>
+                            <?php if (!empty($word)) : ?>
+                                <?php if($word[0] == "#"): ?>
+                                <a href="results.php?tag=<?php echo str_replace("#", "", $word); ?>" name="tag"
+                                    class="tags-post"><?php echo htmlspecialchars($word);?></a>
+                                <?php else: ?>
+                                <?php echo htmlspecialchars($word); ?>
+                                <?php endif; ?>
+                            <?php endif; ?>
                         <?php endforeach; ?>
 
                     </div>
@@ -90,15 +89,15 @@
         <!-- RESULTATEN TAGS -->
         <?php if(isset($_GET['tag'])):?>
         <?php 
-                    $searchTag = new classes\Search();
-                    $searchTag->setTag($_GET['tag']);
-                    $resultsTags = $searchTag->searchTags();?>
+            $searchTag = new classes\Search();
+            $searchTag->setTag($_GET['tag']);
+            $resultsTags = $searchTag->searchTags();
+        ?>
 
         <div class="container-fluid container-gallery tags-results">
             <div class="row">
                 <div>
-                    <h3 class="results-title">Posts from <span
-                            class="tag-results"><?php echo "#" . htmlspecialchars($_GET['tag']); ?></span></h3>
+                    <h3 class="results-title">Tag results for <span class="tag-results"><?php echo "#" . htmlspecialchars($_GET['tag']); ?></span></h3>
                 </div>
 
                 <?php foreach($resultsTags as $tagResults):?>
@@ -112,11 +111,12 @@
                                     if ($open = opendir($folder)) {
                                         if ($file == "." || $tagResults['photo'] == "..") continue;
                                         $file =  classes\Post::getPhoto($tagResults['id']);
-                                        ?>
+                            ?>
                                         <img src=<?php echo '"uploads/' . $file . '"'; ?> class="tags-result-img">
                                         <?php closedir($open);
                                     }
-                                } ?>
+                                } 
+                            ?>
                         </a>
                     </div>
                 </div>
@@ -134,8 +134,7 @@
         ?>
 
         <div class="container search-results-con">
-            <h3>Search results for <span class="bold">"<?php echo htmlspecialchars($_GET['location']); ?>"</span>:</h3>
-            <br>
+            <h3>Search results for <span class="bold">"<?php echo htmlspecialchars($_GET['location']); ?>"</span>:</h3><br>
 
             <?php foreach($resultsSearch as $key): ?>
             <?php
@@ -157,19 +156,19 @@
                             class="profile-location"><?php echo $key['location']; ?></a>
                         <br>
                         <a href="postDetail.php?id=<?php echo $key["id"]; ?>">
-                            <?php $folder = "uploads/";
-                                            $file = "";
-                                            if (is_dir($folder)) {
-                                                    if ($open = opendir($folder)) {
-                                                        if ($file == "." || $key['photo'] == "..") continue;
-                                                        $file =  classes\Post::getPhoto($post_id);
-                                                        ?>
+                            <?php 
+                            $folder = "uploads/";
+                            $file = "";
+                            if (is_dir($folder)) {
+                                if ($open = opendir($folder)) {
+                                    if ($file == "." || $key['photo'] == "..") continue;
+                                    $file =  classes\Post::getPhoto($post_id); 
+                            ?>
                             <img src=<?php echo '"uploads/' . $file . '"'; ?> class="picture-feed">
-                            <?php closedir($open);
-                                                    }
-                                                } ?>
+                            <?php closedir($open); 
+                                }
+                            } ?>
                         </a><br>
-                        <!--a href aanpassen param meegeven naar de detailpg van de foto-->
                         <br>
 
                         <?php $descrArray = explode(" ", $key['description']);?>

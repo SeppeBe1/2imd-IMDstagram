@@ -4,7 +4,13 @@
 
     $user = new classes\User();
     $user->onlyLoggedInUsers();
-    
+    $username = $_SESSION['user'];
+
+    /* GETTERS SETTERS TOEVOEGEN! */
+    if(isset($_SESSION['user']) ){
+        $user->setUsername($username);
+        $usersinfo = $user->showUser($username);
+    } 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,13 +33,15 @@
                 </div>
             </div>
         </div>
-
+        <?php foreach ($usersinfo as $user):?>
         <div class="container-fluid navigation sticky-top">
-            <div class="row">
+            <div class="row ">
+                
                 <div class="col-6 ">
-                    <a href="profile.php?username=<?php echo $user->checkLoggedInUsername(); ?>">
-                        <img src="https://images.pexels.com/photos/3101767/pexels-photo-3101767.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" class="profile-pic">
+                    <a href="profile.php?username=<?php echo $user['username'];?>">
+                        <img src="user_avatar/<?php echo $user['avatar']?>" class=" profile-pic rounded-circle">
                     </a>
+                    
                     <a href="feed.php">
                         <img src="./img/icons/home.svg" class="icon-nav">
                     </a>
@@ -48,7 +56,7 @@
                     </div>
                 </div> -->
 
-                <div class="col-5"> 
+                <div class="col-5 search"> 
                     <form method="POST" action="results.php">
                         <div class="form-inline">
                             <input type="search" id ="search-input"class="form-control " name="keyword" value="<?php echo isset($_POST['keyword']) ? htmlspecialchars($_POST['keyword']) : '' ?>" placeholder="Search" aria-label="Search" aria-describedby="button-addon2" required=""/>
@@ -67,6 +75,7 @@
                 
             </div>
         </div>
+    <?php endforeach;?>
     </header>
     <!-- <script src="scripts/keyEnter.js"></script> -->
 </body>

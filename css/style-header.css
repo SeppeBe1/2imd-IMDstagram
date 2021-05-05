@@ -7,7 +7,7 @@ body{
 /* NAVIGATION */
 .navigation{
     padding: 15px;
-    margin-bottom: 3px;
+    
     box-shadow: 10px 5px 5px rgb(219, 219, 219);
     overflow: hidden;
     display: block;
@@ -15,7 +15,7 @@ body{
 }
 
 .navigation .row {
-    width:95%;
+    width:100%;
     margin:auto
 }
 
@@ -24,24 +24,33 @@ body{
 }
 
 .profile-pic{
+    
     border-radius: 50%;
-    width: 40px;
-    margin-right: 10px;
+    width: 35px;
+    margin-right: 8px;
 }
 
 .icon-nav{
-    margin-right: 10px;
-    width: 30px;
+    margin-right: 8px;
+    width: 28px;
 }
 
 .icon-logout{
-    margin-left: -10px;
+    
     margin-top: 2px;
-    width: 32px;
+    margin-left: -15px;
+    width: 30px;
+    
+    
 }
 
 .input-group .form-control  {
     border-radius: 30px ;
+    
+}
+
+.search{
+    margin-left: -10px;
     
 }
 
@@ -72,12 +81,16 @@ a{
 
 
 
-@media(min-width: 750px){
+@media(min-width: 768px){
     .navigation .row{
         max-width: 700px;
         justify-content: center;
         margin: auto;
     } 
+
+    .icon-logout{
+        margin-left: 0px;
+    }
 
     
 }
