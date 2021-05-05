@@ -11,12 +11,16 @@ $currentlyLoggedIn = $user->showUser();
 
 // LOOP FOR POSTS
 $post = new classes\Post();
-$allPosts = $post->getAllPosts();
+$allPosts = $post->getAllPosts(4);
 // var_dump($allPosts);
+
+// if(isset($_POST["totalPosts"])){
+//     $post->getAllPosts($_POST["totalPosts"]);
+// }
 
 $amount = new classes\Post();
 $totalamountposts = $amount->getTotalPosts();
-var_dump($totalamountposts);
+// var_dump($totalamountposts);
 
 
 $like = new classes\Like();
@@ -65,7 +69,7 @@ if(!empty($_POST['banUser'])){
             $post_id = $like->getPostID();
         ?>
 
-        <div class="container post-post">
+        <div class="container post-post post-load">
             <div class="row row-first">
                 <div class="col-2">
                     <a href="profile.php?username=<?php echo $post['username']; ?>">
@@ -205,9 +209,11 @@ if(!empty($_POST['banUser'])){
         <?php endforeach; ?>
 
         <div class="row d-flex justify-content-center">
-            <button id="loadmore" class="load-more">Load more...</button>
+            <button id="loadmore" data-totalPosts="<?php echo 4 ?>" class="load-more">Load more...</button>
+
             <input type="hidden" id="row" value="0">
             <input type="hidden" id="all" value="<?php echo $totalamountposts; ?>">
+
         </div>
 
     </main>

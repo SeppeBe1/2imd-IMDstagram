@@ -98,14 +98,13 @@ class Post  {
     }
 
     // FUNCTION THAT PICKS UP THE POSTS FROM ALL THE USER FOR FEED.PHP
-    public function getAllPosts(){
+    public function getAllPosts($limit){
         $conn = Db::getInstance();
 
         // VARIABLE THAT DEFINES HOW MANY POSTS WE WANT TO DISPLAY, TO BEGIN
-        $postperpage = 4;
 
         // COLLECTING ALL THE POSTS, LIMITED BY THE AMOUNT
-        $statement = $conn->prepare("SELECT *, posts.id FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY postedDate DESC LIMIT 0,$postperpage ");
+        $statement = $conn->prepare("SELECT *, posts.id FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY postedDate DESC LIMIT 0,$limit ");
         $statement->execute();
         $posts = $statement->fetchAll(\PDO::FETCH_ASSOC);
         
