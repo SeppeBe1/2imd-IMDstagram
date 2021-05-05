@@ -39,6 +39,11 @@ if(!empty($_POST['banUser'])){
     echo "ban" . $_POST['post-id']; //functie insteken die de user bant om in te loggen
 }
 
+if(!empty($_POST['editPost'])){
+    $post = new classes\Post();
+    $post->editPost($_POST['post-id']);
+}
+
     // Load more funct.
     // $loadpost = new classes\Post();
     // $loadmoreposts = $loadpost->loadMore();
@@ -106,6 +111,7 @@ if(!empty($_POST['banUser'])){
                                             aria-labelledby="navbarDropdown">
                                             <?php if($user->getUsername() == $post['username']): ?>
                                             <input class="dropdown-item" type="submit" name="deletePost" value="Delete">
+                                            <input class="dropdown-item" type="submit" name="editPost" value="Edit">
                                             <?php elseif($user->getUsername() != $post['username']): ?>
                                             <input class="dropdown-item" type="submit" name="reportPost" value="Report">
                                             <?php //elseif($user == admin (functie die bekijkt of de ingelogde user admin is)) ?>

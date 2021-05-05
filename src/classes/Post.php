@@ -227,4 +227,7 @@ class Post  {
         header ("Refresh:0");
         return $result;
     }
+    public function editPost($id){
+        
+    }
 }
