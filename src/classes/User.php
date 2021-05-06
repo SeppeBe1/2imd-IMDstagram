@@ -234,11 +234,12 @@ class User {
         return $results;
     }
 
-    public function changeBio($bio,$username){
+    public function changeBio(){
         $conn = Db::getInstance();
 
         $statement = $conn->prepare("UPDATE users SET bio = :bio WHERE username = :user ");
-        
+        $bio = $this->getBio();
+        $username = $this->getUsername();
         $statement->bindValue(":bio", $bio);
         $statement->bindValue(":user", $username);
         $results = $statement->execute();

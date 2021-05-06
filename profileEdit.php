@@ -16,11 +16,10 @@
     if (!empty($_POST['save'])){
         //change Full name
         if(!empty($_POST['fullName'])){
-            $fullName = ($_POST['fullName']);
-            $user->setFullName($fullName);
-            $getNewfullName = $user->getFullName();
+            $user->setFullName($_POST['fullName']);
+            $user->setUsername($_SESSION['user']);
             try {
-                $user->changefullName($getNewfullName, $username);
+                $user->changefullName();
             }catch(\Throwable $error) {
                 $error = $error->getMessage();
             }
@@ -48,12 +47,10 @@
         
         //change Bio
         if(!empty($_POST['bio'])){
-            $bio = $_POST['bio'];
-            $user->setBio($bio);
-            $getBio = $user->getBio();
-            $username = $_SESSION['user'];
+            $user->setBio($_POST['bio']);
+            $user->setUsername($_SESSION['user']);
             try{
-                $user->changeBio($bio, $username);
+                $user->changeBio();
             }catch(\Throwable $error) {
                 $error = $error->getMessage();
             }
