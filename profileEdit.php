@@ -173,7 +173,7 @@
                 <div class="alert alert-danger">Your file is too big!</div>
             <?php endif; ?>
 
-            <?php if(isset($errorFileExt)):?>
+            <?php if(isset($errorFileExt) && !isset($_POST['deleteAvatar'])):?>
                 <div class="alert alert-danger">You cannot upload files of this type!</div>
             <?php endif; ?>
            

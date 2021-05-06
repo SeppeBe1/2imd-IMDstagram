@@ -167,12 +167,9 @@ textarea:focus{
 
 
 @media(min-width: 768px){
-    .container-profile-edit{
-        max-width: 700px;
-    }
 
     .container-profile-edit{
-        width: 100%;
+        max-width: 700px;
         padding: 25px;
         border-radius: 15px;
         box-shadow: 10px 5px 15px #c2c2c2;
@@ -194,7 +191,7 @@ textarea:focus{
     .container-profilePic{
         width:100%;
         display: block;
-        margin-left: -5px;
+        margin-left: -10px;
         justify-content: center;
      
     

@@ -281,11 +281,11 @@ class User {
         $imageUrl = './user_avatar/'.$avataruser['avatar'];
         
         //if file doesn't exist in folder (removed manually or whatever) - change to default placeholder
-        if(!file_exists($imageUrl)){
+        if(!file_exists($imageUrl) ){
             $statement = $conn->prepare("UPDATE users set avatar = 'placeholder.jpeg' where username= :user");
             $statement->bindValue(":user", $username);
             $result = $statement->execute();
-            header ("Refresh:0");
+           
             
             return $result;
         }
@@ -293,14 +293,26 @@ class User {
 
     public function deleteAvatar($username) {
         $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT avatar FROM users WHERE username = :user ");
+        $statement->bindValue(":user", $username);
+        $avatar = $statement->execute();
+        $avataruser = $statement->fetch();
+        //image path
+        $imageUrl = './user_avatar/'.$avataruser['avatar'];
+        $imagePlaceholder = './user_avatar/placeholder.jpeg';
+        //check if image exists
+        if(file_exists($imageUrl) && $avataruser['avatar'] != "placeholder.jpeg"){
+
+        //delete the image from folder
+        unlink(realpath($imageUrl));
+        echo"check";
         $statement = $conn->prepare("UPDATE users set avatar = 'placeholder.jpeg' where username= :user");
         $statement->bindValue(":user", $username);
         $result = $statement->execute();
         
         header ("Refresh:0");
-        $avataruser = $statement->fetch();
-
-        return $avataruser;
+        echo "deleted";
+        }
     }
 
     // TO GET THE CORRECT USERNAME ID FOR PROFILE.PHP
