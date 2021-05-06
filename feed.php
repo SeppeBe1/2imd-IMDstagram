@@ -11,7 +11,7 @@ $currentlyLoggedIn = $user->showUser();
 
 // LOOP FOR POSTS
 $post = new classes\Post();
-$allPosts = $post->getAllPosts(4);
+$allPosts = $post->getAllPosts(1);
 // var_dump($allPosts);
 
 // if(isset($_POST["totalPosts"])){
@@ -49,6 +49,8 @@ if(!empty($_POST['editPost'])){
     // $loadmoreposts = $loadpost->loadMore();
     // var_dump($loadmoreposts);
 
+
+  
 
 
 ?>

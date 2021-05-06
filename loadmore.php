@@ -23,11 +23,15 @@
 
     // $result['id'];
 
-    foreach ($result as $post){
+    // foreach ($result as $post){
 
-        // var_dump($post['id']);
+    //     $test = array_keys($post);
+        
+    //     // $t = $test[1];
+    //     // echo $t;
 
-    }
+    //     echo $post['description']; 
+    // }
 
 
 
@@ -49,3 +53,31 @@
 
 
 ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css/style-feed.css">
+    <title>Plantstagram - feed</title>
+</head>
+
+<body>
+
+    <main>
+
+    <?php foreach ($result as $post) : ?>
+
+        <p><?php echo  $post['description'];?></p>
+
+    <?php endforeach; ?>
+
+
+
+    </main>
+
+</body>

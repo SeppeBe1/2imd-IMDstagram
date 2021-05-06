@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     
     $(document).on('click', '#loadmore', function(){
-        // alert("Load is ready");
+        // alert("Ready to load");
 
         // var ID = $(this).attr('id');
         // console.log(ID);
@@ -13,7 +13,7 @@ $(document).ready(function() {
 
         // row = row + 3;
         limit = parseInt($("#loadmore").attr("data-totalPosts"));
-        limit = limit + 4;
+        limit = limit + 1;
         $("#loadmore").attr('data-totalPosts', limit);
 
         if(limit <= allTotal){
@@ -21,8 +21,6 @@ $(document).ready(function() {
             // $("#row").val(row);
             
             // console.log(test);
-
-            
 
             // limit = limit + 4;
             // console.log(limit);
@@ -39,11 +37,11 @@ $(document).ready(function() {
                 },
                 success: function(response){
 
-                    // TIMEOUT FUNCTION
+                    // TIMEOUT FUNCTION --> NECESSARY?
                     setTimeout(function() {
                         $(".post-load:last").after(response).show().fadeIn("slow");
 
-                        var rowno = limit + 3;
+                        var rowno = limit + 1;
 
                         // CHECK IF ROWVALUE > TOTAL AMOUNT OF POSTS
                         if(rowno > allTotal){
@@ -60,18 +58,14 @@ $(document).ready(function() {
         }else{
             $('.load-more').text("Loading...");
 
-            // Setting little delay while removing contents
+            // AGAIN TIMER NECESSARY?
             setTimeout(function() {
 
-                // When row is greater than allcount then remove all class='post' element after 3 element
+                // WHEN ROW > TOTALPOSTS
                 $('.post-load:nth-child(3)').nextAll('.post-load').remove().fadeIn("slow");
 
-                // Reset the value of row
+                // VALUE ROW + 0
                 $("#row").val(0);
-
-                // Change the text and background
-                $('.load-more').text("Load more");
-                $('.load-more').css("background","#15a9ce");
 
             }, 100);
 
