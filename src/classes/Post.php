@@ -172,11 +172,23 @@ class Post  {
     public function deletePost($id){
         $conn = Db::getInstance();
         
-        $statement = $conn->prepare("DELETE FROM posts WHERE id = :id");
+        $statement = $conn->prepare("SELECT * from posts WHERE id= :id");
         $statement->bindValue(":id", $id);
         $statement->execute();
-        $result = $statement->fetch();
-        header ("Refresh:0");
-        return $result;
+        $results = $statement->fetch();
+
+         //image path
+        $imageUrl = './uploads/'. $results['photo'];
+        //check if image exists
+        if(file_exists($imageUrl)){ 
+            //delete the image from folder
+            unlink(realpath($imageUrl));
+            $statement = $conn->prepare("DELETE FROM posts WHERE id = :id");
+            $statement->bindValue(":id", $id);
+            $statement->execute();
+            $result = $statement->fetch();
+            header ("Refresh:0");
+            return $result;
+        }
     }
 }
