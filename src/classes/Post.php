@@ -133,6 +133,18 @@ class Post  {
         return $getFilters;
     }
 
+    public function getSelectedFilter($id){
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare("SELECT filtername FROM filters WHERE id = :id");
+        $statement->bindValue(":id", $id);
+        $statement->execute();
+        $selectedFilter = $statement->fetch();
+
+        return $selectedFilter["filtername"];
+
+    }
+
     // FUNCTION THAT PUT THE POSTS OF THE USERS IN THE PROFILE.PHP
     public static function getPostsUser($user_id){
         $conn = Db::getInstance();
