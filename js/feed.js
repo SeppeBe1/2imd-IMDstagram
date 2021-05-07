@@ -30,6 +30,20 @@ $(document).ready(function() {
             }
         })
     });
-    
-});
 
+
+    $('.report').on('click', function(e) {
+        e.preventDefault();
+        let id = $(this).attr("data-id");
+
+        $.ajax({
+            type: "POST",
+            url: "raport.php",
+            data: { id: id },
+            success: function() {
+                $('[data-id="' + id + '"]').hide();
+            }
+        })
+    });
+
+});

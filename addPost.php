@@ -9,8 +9,8 @@ $user = new classes\User();
 
 $username = $_SESSION['user'];
 
-    $user = new classes\User();
-    $user->setUsername($username);
+$user = new classes\User();
+$user->setUsername($username);
 
 $post = new classes\Post();
 $filters = $post->getAllFilters();
@@ -32,24 +32,29 @@ if (isset($_POST['submit'])) {
 
     $allExtensions = array('jpeg', 'png', 'jpg', 'gif');
 
-    if (in_array($fileRealExt, $allExtensions)) {
-        if ($fileError === 0) {
-            if ($fileSize < 1000000) {
-                $post->setImage(uniqid(' ', true) . "." . $fileRealExt);
-                $fileDestination = "uploads/" . $post->getImage();
+    try{
 
-                $post->createPost( $user->getUsername(), $post->getImage(), $post->getDescription(), $post->getLocation(), $post->getFilters());
+        if (in_array($fileRealExt, $allExtensions)) {
+            if ($fileError === 0) {
+                if ($fileSize < 1000000) {
+                    $post->setImage(uniqid(' ', true) . "." . $fileRealExt);
+                    $fileDestination = "uploads/" . $post->getImage();
 
-                move_uploaded_file($fileTmp, $fileDestination);
-                header("location: feed.php");
+                    $post->createPost($user->getUsername(), $post->getImage(), $post->getDescription(), $post->getLocation(), $post->getFilters());
+
+                    move_uploaded_file($fileTmp, $fileDestination);
+                    header("location: feed.php");
+                } else {
+                    $error =  "file is too big";
+                }
             } else {
-                $error = "file is too big";
+                $error = "error while uploading image";
             }
         } else {
-            $error = "error while uploading image";
+            $error = "This file can't be used";
         }
-    } else {
-        $error = "This file can't be used";
+    } catch (\Throwable $error) {
+        $error = $error->getMessage();
     }
 }
 
@@ -128,12 +133,13 @@ if (isset($_POST['submit'])) {
 
             </form>
 
+            <?php if (isset($error)) : ?>
+                <div class="alert alert-danger"><?php echo $error ?></div>
+            <?php endif; ?>
+
         </div>
     </div>
 
-    <?php if (isset($error)) : ?>
-        <div class="alert alert-danger"><?php echo $error ?></div>
-    <?php endif; ?>
     <script src="js/location.js"></script>
 </body>
 

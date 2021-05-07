@@ -179,4 +179,35 @@ class Post  {
         header ("Refresh:0");
         return $result;
     }
+
+    public function rapportPost($post_id, $username)
+    {
+        $db = new Db();
+        $conn = $db->getInstance();
+
+        $statement = $conn->prepare("INSERT INTO reports (user_id, post_id) VALUES ((SELECT id FROM users WHERE username = :username), :post_id) ");
+        $statement->bindValue(":post_id", $post_id);
+        $statement->bindValue(":username", $username);
+        $statement->execute();
+        header("Refresh:0");
+
+        $this->makeHiddenPost($post_id);
+    }
+
+    public function makeHiddenPost($post_id)
+    {
+        $db = new Db();
+        $conn = $db->getInstance();
+
+        $statement = $conn->prepare("SELECT count(*) FROM reports WHERE post_id = :post_id");
+        $statement->bindValue(":post_id", $post_id);
+        $statement->execute();
+        $result = $statement->fetchColumn();
+        var_dump($result);
+        if ($result >= 3) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
