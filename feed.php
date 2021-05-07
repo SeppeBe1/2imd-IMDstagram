@@ -88,11 +88,11 @@ if(!empty($_POST['banUser'])){
                                         <div class="dropdown-menu dropdown-left-manual"
                                             aria-labelledby="navbarDropdown">
                                             <?php if($user->getUsername() == $post['username']): ?>
-                                            <input class="dropdown-item" type="submit" name="deletePost" value="Delete">
+                                                <input class="dropdown-item" type="submit" name="deletePost" value="Delete">
                                             <?php elseif($user->getUsername() != $post['username']): ?>
-                                            <input class="dropdown-item" type="submit" name="reportPost" value="Report">
-                                            <?php //elseif($user == admin (functie die bekijkt of de ingelogde user admin is)) ?>
-                                            <!--<input class="dropdown-item" type="submit" name="banUser" value="Ban user">-->
+                                                <input class="dropdown-item" type="submit" name="reportPost" value="Report">
+                                                <?php //elseif($user == admin (functie die bekijkt of de ingelogde user admin is)) ?>
+                                                <!--<input class="dropdown-item" type="submit" name="banUser" value="Ban user">-->
                                             <?php endif; ?>
                                         </div>
                                     </form>
@@ -156,14 +156,14 @@ if(!empty($_POST['banUser'])){
                         <!--DESCRIPTION + HASHTAGS -->
                         <?php $descrArray = explode(" ", $post['description']); ?>
                         <?php foreach ($descrArray as $word) : ?>
-                        <?php if (!empty($word)) : ?>
-                        <?php if ($word[0] == "#") : ?>
-                        <a href="results.php?tag=<?php echo str_replace("#", "", $word); ?>" name="tag"
-                            class="tags-post"><?php echo htmlspecialchars($word); ?></a>
-                        <?php else : ?>
-                        <?php echo htmlspecialchars($word); ?>
-                        <?php endif; ?>
-                        <?php endif; ?>
+                            <?php if (!empty($word)) : ?>
+                                <?php if ($word[0] == "#") : ?>
+                                <a href="results.php?tag=<?php echo str_replace("#", "", $word); ?>" name="tag"
+                                    class="tags-post"><?php echo htmlspecialchars($word); ?></a>
+                                <?php else : ?>
+                                <?php echo htmlspecialchars($word); ?>
+                                <?php endif; ?>
+                            <?php endif; ?>
                         <?php endforeach; ?>
                     </p>
                 </div>
