@@ -39,7 +39,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: "POST",
-            url: "raport.php",
+            url: "report.php",
             data: { id: id, username: username },
             success: function() {
                 $('[data-id="' + id + '"]').closest(".post-post").slideUp();
