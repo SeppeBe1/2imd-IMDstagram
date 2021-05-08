@@ -52,6 +52,7 @@ $loggedInId = $likes->getUserID();
                 $likes->setPostID($post['id']);
                 $post_id = $likes->getPostID();
             ?>
+            <?php if(!$posts->makeHiddenPost($post['id'])) :?>
 
             <div class="container-fluid post-post  ">
                 <div class="row row-first">
@@ -113,6 +114,7 @@ $loggedInId = $likes->getUserID();
                     </div>
                 </div>
             </div>
+            <?php endif; ?>
         <?php endforeach; ?>
         </div>
 
