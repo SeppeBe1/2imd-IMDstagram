@@ -86,7 +86,7 @@ if (!empty($_POST['banUser'])) {
                                                 <?php if ($user->getUsername() == $post['username']) : ?>
                                                     <input class="dropdown-item" type="submit" name="deletePost" value="Delete">
                                                 <?php elseif ($user->getUsername() != $post['username']) : ?>
-                                                    <input class="dropdown-item" type="submit" name="reportPost" value="Report">
+                                                    <input class="dropdown-item report" type="submit" data-id="<?php echo $post['id'] ?>" data-user="<?php echo $user->getUsername() ?>" name="reportPost" value="Report">
                                                     <?php //elseif($user == admin (functie die bekijkt of de ingelogde user admin is)) 
                                                     ?>
                                                     <!--<input class="dropdown-item" type="submit" name="banUser" value="Ban user">-->
