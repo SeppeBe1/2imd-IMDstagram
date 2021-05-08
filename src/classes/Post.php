@@ -215,7 +215,6 @@ class Post  {
         $statement->bindValue(":post_id", $post_id);
         $statement->execute();
         $result = $statement->fetchColumn();
-        var_dump($result);
         if ($result >= 3) {
             return false;
         } else {

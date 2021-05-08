@@ -51,7 +51,7 @@ if (!empty($_POST['banUser'])) {
             $like->setPostID($post['id']);
             $post_id = $like->getPostID();
             ?>
-
+            <?php if($posts->makeHiddenPost($post['id'])) :?>
             <div class="container post-post">
                 <div class="row row-first">
                     <div class="col-2">
@@ -191,6 +191,7 @@ if (!empty($_POST['banUser'])) {
                     </div>
                 </form>
             </div>
+            <?php endif; ?>
         <?php endforeach; ?>
 
         <div class="row d-flex justify-content-center">
