@@ -30,6 +30,22 @@ $(document).ready(function() {
             }
         })
     });
-    
-});
 
+
+    $('.report').on('click', function(e) {
+        e.preventDefault();
+        let id = $(this).attr("data-id");
+        let username = $(this).attr("data-user");
+
+        $.ajax({
+            type: "POST",
+            url: "report.php",
+            data: { id: id, username: username },
+            success: function() {
+                $('[data-id="' + id + '"]').closest(".post-post").slideUp();
+
+            }
+        })
+    });
+
+});

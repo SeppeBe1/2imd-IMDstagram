@@ -199,7 +199,7 @@ class User {
     }
 
 //PROFILE EDIT___________ // -- moet werken met getters en setters
-    public function changeEmail($email,$username){
+    public function changeEmail(){
         $conn = Db::getInstance();
 
         $statement = $conn->prepare("UPDATE users SET email = :email WHERE username = :user ");
