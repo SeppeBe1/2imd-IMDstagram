@@ -202,8 +202,6 @@ class Post  {
         $statement->bindValue(":username", $username);
         $statement->execute();
         header("Refresh:0");
-
-        $this->makeHiddenPost($post_id);
     }
 
     public function makeHiddenPost($post_id)
