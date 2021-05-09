@@ -48,8 +48,8 @@ main {
 }
 
 .profile-pic-feed {
-    width: 65px;
-    height: 65px;
+    width: 55px;
+    height: 55px;
     object-fit: cover;
     border-radius: 100%;
     justify-content: center;
@@ -57,13 +57,14 @@ main {
 }
 
 .profile-name {
-    font-size: 20px;
+    font-size: 18px;
     color: #5A5A5A;
     font-weight: bold;
 }
 
 .profile-location {
     color: #5A5A5A;
+    font-size: 14px;
 }
 
 a {
@@ -102,13 +103,9 @@ a {
     font-size: 0.8em;
 }
 
-@media(min-width: 750px) {
-    .post-post {
-        /* background-color: hotpink ; */
-        max-width: 700px;
-    }
+.nav-post {
+    margin-left: -20px;
 }
-
 
 /* TAGS */
 
@@ -126,6 +123,7 @@ a {
 
 .row-seventh {
     padding: 20px;
+    padding-bottom: 0px;
     border-top: 1px solid #d9d9d9;
 }
 
@@ -152,6 +150,61 @@ a {
     color: #CC847B;
     font-weight: 600;
     text-decoration: none;
+}
+
+.profile-pic-comment {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 100%;
+    justify-content: center;
+    border: 1px solid #dee2e6;
+    
+}
+
+
+.comments{ 
+    margin-bottom: 4px;
+}
+
+.comments .row{ 
+    --bs-gutter-x: 0px;
+}
+
+
+.commenttext{
+    font-size: 13px;
+    line-height: 1.2em;
+}
+
+.commenttime{
+    font-size: 11px;
+    margin-top: -14px;
+    color:#c2c2c2
+}
+
+.card{
+    text-decoration: none;
+    border: none
+}
+
+#link-comments{
+    margin-bottom: 10px;
+}
+
+#link-c{
+    color: #B2CB94;
+    font-size: 14px;
+}
+
+#link-c::after{
+    color: #CC847B;
+    font-size: 14px;
+}
+
+#link-c:hover{
+    color: #CC847B;
+    font-size: 14px;
 }
 
 
@@ -185,3 +238,31 @@ a {
     padding-left: 1px;
     padding-right: 1px;
   }
+
+  @media(min-width: 768px) {
+    .post-post {
+        /* background-color: hotpink ; */
+        max-width: 700px;
+    }
+
+    .profile-pic-comment {
+        width: 45px;
+        height: 45px;
+        object-fit: cover;
+        border-radius: 100%;
+        justify-content: center;
+        border: 1px solid #dee2e6
+    }
+
+
+    .comment{
+        margin-top: 4px;
+    }
+
+    .commenttext{
+        font-size: 14px;
+        line-height: 1.3em;
+    }
+
+   
+}

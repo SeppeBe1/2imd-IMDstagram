@@ -29,6 +29,13 @@ if(!empty($_POST['banUser'])){
     echo "ban" . $_POST['post-id']; //functie insteken die de user bant om in te loggen
 }
 
+//COMMENTS
+
+$comments = new classes\Comment();
+$allComments = $comments->getAll();
+var_dump($allComments);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,27 +59,21 @@ if(!empty($_POST['banUser'])){
             $post_id = $like->getPostID();
         ?>
 
-        <div class="container post-post">
+        <div class="container-fluid post-post">
             <div class="row row-first">
-                <div class="col-2">
+                <div class="col-3 col-md-2">
                     <a href="profile.php?username=<?php echo $post['username']; ?>">
                         <img src="./user_avatar/<?php echo $post['avatar'] ?>" class="profile-pic-feed rounded-circle">
                     </a>
                 </div>
-                <div class="col-6">
+                <div class="col-8 col-md-9">
                     <a href="profile.php?username=<?php echo $post['username']; ?>"><span
                             class="profile-name"><?php echo $post['username'] ?></span></a><br>
                     <a href="results.php?location=<?php echo $post['location']; ?>" class="profile-location"
                         name="location"><?php echo $post['location'] ?></a>
                 </div>
-                <div class="col-3">
-                    <div class="row">
-                        <a href="#" class="unfollow-button">Unfollow</a>
-                    </div>
-                </div>
 
-
-                <div class="col-1">
+                <div class="col-1 col-md-1 nav-post">
 
                     <nav class="navbar navbar-expand">
                         <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
@@ -124,7 +125,7 @@ if(!empty($_POST['banUser'])){
             <!--like/unlike-->
             <div class="row row-third">
                 <?php $isLikedbyUser = $like->isLiked(); ?>
-                <div class="col-1">
+                <div class="col-2 col-md-1">
                     <img src="./img/icons/<?php if (!empty($isLikedbyUser)) {echo "heart";} else {echo "heart-outlines";} ?>.svg"
                         class="icon-feed like-status <?php if (!empty($isLikedbyUser)) { echo "unlike"; } else { echo "like";} ?>"
                         data-id=<?php echo $post['id']; ?>>
@@ -132,7 +133,7 @@ if(!empty($_POST['banUser'])){
 
                 <!--count like-->
                 <?php $countLikes = $like->countLikes(); ?>
-                <div class="col-1">
+                <div class="col-2 col-md-1">
                     <span id="show_like">
                         <p class="number-feed likescount" data-id="<?php echo $post['id']; ?>">
                             <?php echo $countLikes['count']; ?>
@@ -141,10 +142,10 @@ if(!empty($_POST['banUser'])){
                 </div>
 
                 <!--comments-->
-                <div class="col-1">
+                <div class="col-2 col-md-1">
                     <a href="#"><img src="./img/icons/chat.svg" class="icon-feed"></a>
                 </div>
-                <div class="col-1">
+                <div class="col-2 col-md-1">
                     <p class="number-feed">1</p>
                 </div>
 
@@ -174,8 +175,45 @@ if(!empty($_POST['banUser'])){
                     <p class="timing-feed"><?php echo $post['postedDate'] ?></p>
                 </div>
             </div>
+            
+            <!--Show comments-->
+            
+            <div id="link-comments">
+                <a id="link-c" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Show comments
+                </a>
+            </div>
+            <!-- <div class="collapse" id="collapseExample"> -->
+                <div class="card comments_list">
 
-            <form action="feed.php">
+                    <?php foreach ($allComments as $comment):?>
+                        
+                        <div class="comments ">
+                            <div class="row ">
+                            
+                                    <div class="col-2 col-sm-1 col-md-1">
+                                        <a id="userid"href="profile.php?username=<?php echo $comment['user_id']; ?>">
+                                            <img src="./user_avatar/<?php echo $comment['avatar'] ?>" class="profile-pic-comment rounded-circle"> <!--rounded maken-->
+                                        </a>
+                                    </div>
+
+                                    <div class="col-10 col-sm-11 col-md-11">
+                                        <div class="comment">
+                                        <p class="commenttext"><strong><?php echo $comment['username']; ?></strong>
+                                        <?php echo $comment['commentText']?></p>  
+                                        
+                                        <p class="commenttime"><?php echo (($comment['commentDate']))?></p> 
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                        
+                    <?php endforeach ?>
+                <!-- </div> -->
+            </div>
+
+
+            
                 <div class="row row-seventh">
                     <div class="col-10">
 
@@ -184,10 +222,10 @@ if(!empty($_POST['banUser'])){
                             placeholder="Place a comment"></textarea>
                     </div>
                     <div class="col-2">
-                        <a href="#" class="comment-button">Place</a>
+                        <a href="#" class="comment-button" id="btnAddComment" name="comment-button" data-postid="<?php echo $post['id']; ?>">Place</a>
                     </div>
                 </div>
-            </form>
+            
         </div>
         <?php endforeach; ?>
 

@@ -343,4 +343,6 @@ class User {
     public function checkLoggedInUsername() {
         echo $_SESSION['user'];
     }
+
+    
 }

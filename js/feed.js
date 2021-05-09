@@ -31,5 +31,56 @@ $(document).ready(function() {
         })
     });
     
+
+
+//COMMENTS TOGGLE
+// document .querySelector("#link-c") .addEventListener("click", toggleText);
+//    function toggleText() {
+//       var x = document.querySelector("#link-c");
+//       if (x.innerHTML === "Hide comments") {
+//          x.innerHTML = "Show comments";
+//       } else {
+//          x.innerHTML = "Hide comments";
+//       }
+//    }
+
+
+//ADD COMMENT
+document.querySelector('#btnAddComment').addEventListener("click",function(e){
+    e.preventDefault();
+    let postId = this.dataset.postid;
+    let text = document.querySelector('#comment-input').value;
+    
+    
+
+    //comment naar database
+    let formData = new FormData();
+    formData.append('text', text);
+    formData.append('postId',postId);
+    
+    
+    
+
+    fetch("saveComment.php",{
+        method: 'POST',
+        body : formData
+        })
+
+        //antwoord parsen in JSON formaat & doorgeven als resultaat
+        .then(response => response.json())
+        .then(result =>{
+            let newComment = document.createElement("div");
+            newComment.innerHTML = result.body;
+            document
+                .querySelector(".comments_list")
+                .appendChild(newComment);
+            
+            console.log("Success:", result);
+        })
+        .catch(error =>{
+            console.error("Error:", error);
+        });
+
 });
 
+});
