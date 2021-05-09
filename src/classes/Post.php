@@ -108,6 +108,17 @@ class Post  {
         return $posts;
     }
 
+    public function getAllReportedPosts()
+    {
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare("SELECT DISTINCT posts.* , users.username, users.avatar FROM posts INNER JOIN reports ON posts.id = reports.post_id INNER JOIN users ON posts.user_id= users.id group by reports.post_id  having count(*) >= 3 ");
+        $statement->execute();
+        $posts = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $posts;
+    }
+
     public function createPost($username, $image, $description, $location, $filter){
         $conn = Db::getInstance();
 
