@@ -127,17 +127,17 @@ a {
     border-top: 1px solid #d9d9d9;
 }
 
-#comment-input {
+.comment-input {
     border-width: 0px;
     border: none;
     resize: none;
 }
 
-#comment-input:focus {
+.comment-input:focus {
     outline: none;
 }
 
-#comment-input::placeholder {
+.comment-input::placeholder {
     color: gainsboro;
 }
 
@@ -150,6 +150,16 @@ a {
     color: #CC847B;
     font-weight: 600;
     text-decoration: none;
+}
+
+.comment-button:active {
+    color: #B2CB94;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.btn:focus {
+    box-shadow: none;
 }
 
 .profile-pic-comment {
@@ -173,7 +183,7 @@ a {
 
 
 .commenttext{
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.2em;
 }
 
@@ -188,24 +198,29 @@ a {
     border: none
 }
 
-#link-comments{
+.link-comments{
     margin-bottom: 10px;
 }
 
-#link-c{
+.link-c{
     color: #B2CB94;
     font-size: 14px;
 }
 
-#link-c::after{
+.link-c::after{
     color: #CC847B;
     font-size: 14px;
 }
 
-#link-c:hover{
+.link-c:hover{
     color: #CC847B;
     font-size: 14px;
 }
+
+.post__comments__form {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+  }
 
 
 /* LOAD MORE BUTTON */

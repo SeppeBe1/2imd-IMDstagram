@@ -101,6 +101,9 @@ h6 {
     /* color: red; */
 }
 
+.comments{
+    color:green;
+}
 @media(min-width: 768px){
     .form-post{
         /* background-color: aquamarine; */

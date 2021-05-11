@@ -32,9 +32,7 @@ if(!empty($_POST['banUser'])){
 //COMMENTS
 
 $comments = new classes\Comment();
-$allComments = $comments->getAll();
-var_dump($allComments);
-
+$comments->setUserId((int)$currentlyLoggedIn[0]['id']);
 
 ?>
 <!DOCTYPE html>
@@ -57,6 +55,9 @@ var_dump($allComments);
         <?php
             $like->setPostID($post['id']);
             $post_id = $like->getPostID();
+
+            $comments->setPostID($post['id']);
+            $postId = $comments->getPostID();
         ?>
 
         <div class="container-fluid post-post">
@@ -177,17 +178,21 @@ var_dump($allComments);
             </div>
             
             <!--Show comments-->
+            <?php $allComments = $comments->getAllComments($postId);?>
+            
             
             <div id="link-comments">
-                <a id="link-c" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <a class="link-c" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                     Show comments
                 </a>
             </div>
             <!-- <div class="collapse" id="collapseExample"> -->
-                <div class="card comments_list">
-
-                    <?php foreach ($allComments as $comment):?>
-                        
+                <div class="card ">
+                    <div class="comments_list">
+                    
+                            
+                        <?php foreach ($allComments as $comment):?>
+                            
                         <div class="comments ">
                             <div class="row ">
                             
@@ -199,31 +204,34 @@ var_dump($allComments);
 
                                     <div class="col-10 col-sm-11 col-md-11">
                                         <div class="comment">
-                                        <p class="commenttext"><strong><?php echo $comment['username']; ?></strong>
+                                        <p class="commenttext"><strong><?php echo $comment['user_id']; ?></strong>
                                         <?php echo $comment['commentText']?></p>  
                                         
-                                        <p class="commenttime"><?php echo (($comment['commentDate']))?></p> 
+                                        <p class="commenttime"><?php echo $comments->timeAgo(($comment['commentDate']))?></p> 
                                         </div>
                                     </div>
                             </div>
                         </div>
+                        <?php endforeach ?>
+                  
                         
-                    <?php endforeach ?>
-                <!-- </div> -->
-            </div>
+                    
+                        </div>
+                </div>
+            <!-- </div> -->
 
 
             
                 <div class="row row-seventh">
-                    <div class="col-10">
+                    
 
                         <!-- <input type="text" id="comment-input" name="comment-input" placeholder="Place a comment" size='35'> -->
-                        <textarea rows="auto" cols="45" class="comment-input" id="comment-input" name="comment-input"
-                            placeholder="Place a comment"></textarea>
-                    </div>
-                    <div class="col-2">
-                        <a href="#" class="comment-button" id="btnAddComment" name="comment-button" data-postid="<?php echo $post['id']; ?>">Place</a>
-                    </div>
+                        <div class="post__comments">
+                            <div class="post__comments__form">
+                                <input type="text"  class="commenttext comment-input" placeholder="Place a comment">
+                                <a href="#"  class="btn  comment-button  btnaddComment" data-postid="<?php echo $post['id']; ?>">Place</a>
+                            </div>  
+                        </div>  
                 </div>
             
         </div>

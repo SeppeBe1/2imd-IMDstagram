@@ -65,7 +65,7 @@
 
                 <!-- EDIT BTN WEG WANNEER IK KIJK NAAR ANDER PROFIEL -->
                 <?php if($_SESSION['user'] == $_GET['username']): ?>
-                <div class="col-4 col-lg-3">
+                <div class="col-4 col-lg-4">
                     <a href="profileEdit.php" class="btn edit-btn">Edit profile</a>
                 </div>
                 <?php endif; ?>

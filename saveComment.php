@@ -5,7 +5,8 @@
     
     $user = new classes\User();
     $user->onlyLoggedInUsers();
-    
+    $user->setUsername($_SESSION['user']);
+    $currentlyLoggedIn = $user->showUser();
  
 
     if (!empty($_POST)){
@@ -15,7 +16,7 @@
             $c = new classes\Comment();
             $c->setPostId($_POST['postId']);
             $c->setText($_POST['text']);
-            $c->setUserId(12); //$_SESSION
+            $c->setUserId((int)$currentlyLoggedIn[0]['id']); //$_SESSION
             
             date_default_timezone_set('Europe/Brussels');
             $c->setCommentDate(getdate());

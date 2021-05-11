@@ -94,19 +94,19 @@ class Comment{
         
 
     }
+ 
+    public function getAllComments($postId){
+      $conn = Db::getInstance();
+      //JOIN MET TABLE USERS OM USERNAME & AVATAR TE TONEN
+      $statement = $conn->prepare("SELECT * from comments where post_id = :postId ");
+      $statement->bindValue(":postId", $postId);
+      $result = $statement->execute();
     
+      $showAllcomments = $statement->fetchAll(\PDO::FETCH_ASSOC);
+      return $showAllcomments;
+  }
 
-    public function getAll(){
-        $conn = Db::getInstance();
-        $statement = $conn->prepare("SELECT * from comments INNER JOIN users ON comments.user_id = users.id ");
-        
-        $result = $statement->execute();
-      
-        $showAllcomments = $statement->fetchAll(\PDO::FETCH_ASSOC);
-        return $showAllcomments;
-    }
-
-   
+   // changes date in ... ago 
     public function timeAgo($timestamp){
   
         date_default_timezone_set("Europe/Brussels");         

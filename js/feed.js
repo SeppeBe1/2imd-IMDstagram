@@ -46,41 +46,71 @@ $(document).ready(function() {
 
 
 //ADD COMMENT
-document.querySelector('#btnAddComment').addEventListener("click",function(e){
-    e.preventDefault();
+    function addComment() {
+        
+        $("input").removeClass('commentText');
+    }
+    $('.btnaddComment').on('click', function(e) {
+        e.preventDefault();
+        addComment();
+        $(this).siblings('input').addClass('commentText');
+    });
+
+
+
+    let commentBtns = document.querySelectorAll(".btnaddComment");
+
+    for (let i = 0; i < commentBtns.length; i++) {
+    commentBtns[i].addEventListener("click", function () {
+    //post?
+    //comment text?
     let postId = this.dataset.postid;
-    let text = document.querySelector('#comment-input').value;
+    console.log(postId);
+    let text = document.querySelector(".commentText").value;
+        
     
-    
+        //comment naar database
+        let formData = new FormData();
+        formData.append('text', text);
+        formData.append('postId',postId);
 
-    //comment naar database
-    let formData = new FormData();
-    formData.append('text', text);
-    formData.append('postId',postId);
-    
-    
-    
-
-    fetch("saveComment.php",{
-        method: 'POST',
-        body : formData
-        })
-
-        //antwoord parsen in JSON formaat & doorgeven als resultaat
-        .then(response => response.json())
-        .then(result =>{
-            let newComment = document.createElement("div");
-            newComment.innerHTML = result.body;
-            document
-                .querySelector(".comments_list")
-                .appendChild(newComment);
+        
+        fetch("saveComment.php",{
+            method: 'POST',
+            body : formData
             
-            console.log("Success:", result);
-        })
-        .catch(error =>{
-            console.error("Error:", error);
-        });
+            })
+            
+    
+            //antwoord parsen in JSON formaat & doorgeven als resultaat
+            .then(response => response.json())
+            .then(result =>{
+                let newComment = document.createElement("div");
+                
+                newComment.innerHTML = result.body;
+                document
+                    .querySelector(".comments_list")
+                    .appendChild(newComment);
+                
+                console.log("Success:", result);
+            })
+            .catch(error =>{
+                console.error("Error:", error);
+            });
+    });
+}
 
-});
-
+//HIDE AND SHOW COMMENTS WHEN LINK CLICKED
+    // let linkComment = document.querySelectorAll(".link-c");
+    // for (let l = 0; l <  linkComment.length; l++) {
+    //     linkComment[l].addEventListener("click", toggleText);
+    //     function toggleText() {
+    //     var x = document.querySelector(".link-c");
+    //     if (x.innerHTML === "Hide comments") {
+    //         x.innerHTML = "Show comments";
+    //     } else {
+    //         x.innerHTML = "Hide comments";
+    //     }
+    // }
+    // }
 });
