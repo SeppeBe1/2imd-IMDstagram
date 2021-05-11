@@ -98,7 +98,7 @@ class Comment{
     public function getAllComments($postId){
       $conn = Db::getInstance();
       //JOIN MET TABLE USERS OM USERNAME & AVATAR TE TONEN
-      $statement = $conn->prepare("SELECT * from comments where post_id = :postId ");
+      $statement = $conn->prepare("select *, post_id from comments inner join users on comments.user_id = users.id where post_id = :postId" );
       $statement->bindValue(":postId", $postId);
       $result = $statement->execute();
     
