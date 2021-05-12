@@ -180,7 +180,7 @@ $comments->setUserId((int)$currentlyLoggedIn[0]['id']);
                         <p class="timing-feed"><?php echo $post['postedDate'] ?></p>
                     </div>
                 </div>
-            </div>
+           
             
             <!--Show comments-->
             <?php $allComments = $comments->getAllComments($postId);?>
@@ -215,13 +215,10 @@ $comments->setUserId((int)$currentlyLoggedIn[0]['id']);
                                         <p class="commenttime"><?php echo $comments->timeAgo(($comment['commentDate']))?></p> 
                                         </div>
                                     </div>
+                                </div>
                             </div>
-                        </div>
                         <?php endforeach ?>
-                  
-                        
-                    
-                        </div>
+                    </div>
                 </div>
             <!-- </div> -->
 
@@ -240,7 +237,9 @@ $comments->setUserId((int)$currentlyLoggedIn[0]['id']);
                 </div>
             
         </div>
+        
         <?php endif; ?>
+                        
         <?php endforeach; ?>
 
         <div class="row d-flex justify-content-center">
