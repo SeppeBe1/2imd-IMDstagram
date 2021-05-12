@@ -215,6 +215,14 @@ class Post  {
         }
     }
 
+    public function deleteAllReports($id){
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare("DELETE FROM reports WHERE post_id = :id");
+        $statement->bindValue(":id", $id);
+        $statement->execute();
+    }
+
     public function rapportPost($post_id, $username)
     {
         $db = new Db();

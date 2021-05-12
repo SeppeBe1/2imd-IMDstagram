@@ -181,7 +181,6 @@ if (!empty($_POST['banUser'])) {
                 <form action="feed.php">
                     <div class="row row-seventh">
                         <div class="col-10">
-
                             <!-- <input type="text" id="comment-input" name="comment-input" placeholder="Place a comment" size='35'> -->
                             <textarea rows="auto" cols="45" class="comment-input" id="comment-input" name="comment-input" placeholder="Place a comment"></textarea>
                         </div>

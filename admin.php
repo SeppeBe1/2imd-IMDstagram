@@ -75,9 +75,9 @@ $like->setUserID((int)$currentlyLoggedIn[0]['id']);
                                                 <form method="post">
                                                     <input type="text" hidden value="<?php echo $post['id']; ?>" name="post-id">
                                                     <div class="dropdown-menu dropdown-left-manual" aria-labelledby="navbarDropdown">
-                                                        <input class="dropdown-item" type="submit" name="setPost" value="Set post back">
-                                                        <input class="dropdown-item" type="submit" name="deletePost" value="Delete post">
-                                                        <input class="dropdown-item" type="submit" name="banUser" value="Ban user">
+                                                        <input class="dropdown-item setPost" type="submit" name="setPost" data-id="<?php echo $post['id'] ?>" value="Set post back">
+                                                        <input class="dropdown-item deletePost" type="submit" name="deletePost" data-id="<?php echo $post['id'] ?>" value="Delete post">
+                                                        <input class="dropdown-item banUser" type="submit" data-userId="<?php echo $post['user_id'] ?>" data-postId="<?php echo $post['id'] ?>" name=" banUser" value="Ban user">
                                                     </div>
                                                 </form>
                                             </li>
@@ -85,6 +85,7 @@ $like->setUserID((int)$currentlyLoggedIn[0]['id']);
                                 </nav>
                             </div>
                         </div>
+                        <?php var_dump($post['user_id']) ?>"
 
                         <div class="row row-second">
                             <div class="col-12">
@@ -135,8 +136,7 @@ $like->setUserID((int)$currentlyLoggedIn[0]['id']);
 
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="js/feed.js"></script>
-
+    <script src="js/admin.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

@@ -43,7 +43,6 @@ $(document).ready(function() {
             data: { id: id, username: username },
             success: function() {
                 $('[data-id="' + id + '"]').closest(".post-post").slideUp();
-
             }
         })
     });
