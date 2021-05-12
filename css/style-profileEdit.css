@@ -164,6 +164,29 @@ textarea:focus{
     color: #5A5A5A !important;
 }
 
+/* PRIVATE BUTTON*/
+.private-text{
+    margin-bottom: 22px;
+}
+
+.form-check-input:active{
+    box-shadow: none;
+
+}
+
+.form-check-input[type=checkbox]{
+    box-shadow: none;
+    border:1px solid #CD847B;
+}
+
+.form-check-input:checked{
+    box-shadow: none;
+    background-color: #CD847B;
+    border:1px solid #CD847B;
+}
+
+
+  
 
 
 @media(min-width: 768px){
