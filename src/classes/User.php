@@ -112,6 +112,18 @@ class User {
         return $this;
     }
 
+    public function getAdmin(){
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare("SELECT isAdmin FROM users WHERE username = :username");
+        $statement->bindValue(":username", $this->username);
+        $statement->execute();
+        $result = $statement->fetch();
+
+        return $result["isAdmin"];
+
+    }
+
     public function canLogin() {
         $conn = Db::getInstance();
         $options = parse_ini_file("settings/cost.ini"); //cost 15 - returns an array
@@ -126,7 +138,12 @@ class User {
         if(password_verify($this->getPassword(), $hash)) {
             setcookie("loggedIn", "dareal" . $this->getUsername() . "748", time() + 60 * 60 * 24 * 7); //sets cookie for a week
             $_SESSION['user'] = $this->getUsername();
-            header("location: feed.php");
+            if($this->getAdmin()== NULL){
+                header("location: feed.php"); 
+            } else{
+                header("location: admin.php");
+            }
+
             return true;
         }else{
             return false;
@@ -199,7 +216,7 @@ class User {
     }
 
 //PROFILE EDIT___________ // -- moet werken met getters en setters
-    public function changeEmail($email,$username){
+    public function changeEmail(){
         $conn = Db::getInstance();
 
         $statement = $conn->prepare("UPDATE users SET email = :email WHERE username = :user ");

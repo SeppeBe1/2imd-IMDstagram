@@ -56,22 +56,21 @@
                 $error = $error->getMessage();
             }
         }
-    
+
+    try {
         //change Email
-        if(!empty($_POST['email'])){
-            $email = ($_POST['email']);
-            $username = $_SESSION['user'];
-    
-            try{
-                if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    $user->changeEmail($email, $username);
-                } else{
-                    echo "geen bestaande email"; //naar visuele foutmelding omleiden
-                }
-            }catch(\Throwable $error) {
-                $error = $error->getMessage();
-            }
+        if(!empty($_POST['email']) && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+            $user->setEmail($_POST['email']);
+            $user->changeEmail();
+        }else{
+            $error = "No valid email";
         }
+    
+     
+        }catch(\Throwable $error) {
+             $error = $error->getMessage();
+        }
+
 
         //change Password
         if(!empty($_POST['password']) && !empty($_POST['confirmPassword'])){
@@ -260,6 +259,18 @@
             </div>
 
             <div class="container-settings">
+                <div class="row">
+
+                    <label  class="switch" for="private">
+                        <input type="checkbox" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <span class="slider round"></span>Private account
+                    </label>
+                    <br>
+                    <small class="private-text" >When your account is private, only people you approve can see your photos.</small>
+                    
+
+                </div>
+
                 <div class="row">
                     <form action="" method="POST" >
                         <div class="form-group">

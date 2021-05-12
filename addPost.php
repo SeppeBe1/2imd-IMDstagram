@@ -5,16 +5,21 @@ namespace src;
 include_once("./header.inc.php");
 spl_autoload_register();
 
+$user = new classes\User();
+
 $username = $_SESSION['user'];
+
+$user = new classes\User();
+$user->setUsername($username);
 
 $post = new classes\Post();
 $filters = $post->getAllFilters();
 
 if (isset($_POST['submit'])) {
 
-    $description = $_POST['description'];
-    $location = $_POST['location-search'];
-    $filter = $_POST['filter-image'];
+    $post->setDescription($_POST['description']);
+    $post->setLocation($_POST['location-search']);
+    $post->setfilters($_POST['filter-image']);
 
     $fileName = $_FILES['img']['name'];
     $fileTmp = $_FILES['img']['tmp_name'];
@@ -27,24 +32,29 @@ if (isset($_POST['submit'])) {
 
     $allExtensions = array('jpeg', 'png', 'jpg', 'gif');
 
-    if (in_array($fileRealExt, $allExtensions)) {
-        if ($fileError === 0) {
-            if ($fileSize < 1000000) {
-                $image = uniqid(' ', true) . "." . $fileRealExt;
-                $fileDestination = "uploads/" . $image;
+    try{
 
-                $post->createPost($username, $image, $description, $location, $filter);
+        if (in_array($fileRealExt, $allExtensions)) {
+            if ($fileError === 0) {
+                if ($fileSize < 2097152) {
+                    $post->setImage(uniqid(' ', true) . "." . $fileRealExt);
+                    $fileDestination = "uploads/" . $post->getImage();
 
-                move_uploaded_file($fileTmp, $fileDestination);
-                header("location: feed.php");
+                    $post->createPost($user->getUsername(), $post->getImage(), $post->getDescription(), $post->getLocation(), $post->getFilters());
+
+                    move_uploaded_file($fileTmp, $fileDestination);
+                    header("location: feed.php");
+                } else {
+                    $error =  "file is too big";
+                }
             } else {
-                echo "file is too big";
+                $error = "error while uploading image";
             }
         } else {
-            echo "error while uploading image";
+            $error = "This file can't be used";
         }
-    } else {
-        echo "This file can't be used";
+    } catch (\Throwable $error) {
+        $error = $error->getMessage();
     }
 }
 
@@ -99,7 +109,7 @@ if (isset($_POST['submit'])) {
                 <br>
                 <select name="filter-image" id="filter-image" class="form-control">
                     <?php foreach ($filters as $filter) : ?>
-                    <option value="<?php echo $filter['filtername']; ?>"><?php echo $filter['filtername']; ?></option>
+                        <option value="<?php echo $filter['filtername']; ?>"><?php echo $filter['filtername']; ?></option>
                     <?php endforeach; ?>
                 </select>
 
@@ -108,8 +118,7 @@ if (isset($_POST['submit'])) {
                 <!-- Description + tags (placeholder van textarea) -->
                 <label for="img" class="labels-upload">Write your description</label>
                 <br>
-                <textarea rows="4" cols="45" class="form-control" name="description"
-                    placeholder="Write description"> </textarea>
+                <textarea rows="4" cols="45" class="form-control" name="description" placeholder="Write description"> </textarea>
                 <br><br>
 
                 <!-- Location -->
@@ -124,8 +133,13 @@ if (isset($_POST['submit'])) {
 
             </form>
 
+            <?php if (isset($error)) : ?>
+                <div class="alert alert-danger"><?php echo $error ?></div>
+            <?php endif; ?>
+
         </div>
     </div>
+
     <script src="js/location.js"></script>
 </body>
 
