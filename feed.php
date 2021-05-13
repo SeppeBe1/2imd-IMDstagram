@@ -193,7 +193,7 @@ $comments->setUserId((int)$currentlyLoggedIn[0]['id']);
             </div>
             <!-- <div class="collapse" id="collapseExample"> -->
                 <div class="card ">
-                    <div class="comments_list">
+                    <div class="comments_list_<?php echo $postId; ?>">
                     
                             
                         <?php foreach ($allComments as $comment):?>

@@ -89,7 +89,7 @@ $(document).ready(function() {
                 
                 newComment.innerHTML = result.body;
                 document
-                    .querySelector(".comments_list")
+                    .querySelector(".comments_list_" + postId)
                     .appendChild(newComment);
                 
                 console.log("Success:", result);
