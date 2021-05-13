@@ -25,15 +25,6 @@
         $loggedinUser = $user->getUsernameFrom($usernameUrl);
     }
 
-    $user = new classes\User();
-    $user->setUsername($_SESSION['user']);
-    $currentlyLoggedIn = $user->showUser();
-
-    //FOLLOW
-
-    $f = new classes\Follow();
-    $f->setIsFollower((int)$currentlyLoggedIn[0]['id']);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +37,6 @@
     <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style-feed.css">
     <link rel="stylesheet" href="css/style-profile.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cssgram/0.1.10/cssgram.min.css">
 
     <script src="https://kit.fontawesome.com/a7dc01cef9.js" crossorigin="anonymous"></script>
 
@@ -103,7 +93,7 @@
                     <?php if($_SESSION['user'] != $_GET['username']): ?>
                         <div class="col-sm-12  text-center follow">
                             <!-- FOLLOW BTN WEG WANNEER IK KIJK NAAR EIGEN PROFIEL -->
-                            <a href="#" class="float-left btn btn-follow followBtn" data-followid="<?php echo $user_id?>">Follow</a>
+                            <a href="#" class="float-left btn btn-follow ">Follow</a>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -143,10 +133,7 @@
 
 
     </main>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="js/follow.js"></script>
-    
+
 </body>
 
 </html>
