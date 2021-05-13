@@ -9,7 +9,7 @@
     $currentlyLoggedIn = $user->showUser();
  
 
-    if (!empty($_POST)){
+    if (!empty($_POST['text'])){
         
        
             //new comment
@@ -36,6 +36,6 @@
         
                 header('Content-Type: application/json');
                 echo json_encode($response);
-            }
+            } 
             ?>
    
