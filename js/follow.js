@@ -57,9 +57,49 @@ $(document).ready(function() {
                    
 
             }
+<<<<<<< HEAD
     });
 
     
+=======
+    
+
+       
+            
+        
+    });
+
+    // //UNFOLLOW
+    // document.querySelector(".btn-unfollow").addEventListener("click", function (){
+    //     $(".followBtn").removeClass( "btn-unfollow" ).addClass( "btn-follow" );
+    //     $(".followBtn").html("Follow")
+
+    //     console.log("unfollow");
+    //     let isFollowing = this.dataset.followid;
+    //     console.log(isFollowing);
+
+    //     //follower naar database
+    //     let formData = new FormData();
+    //     formData.append('isFollowing', isFollowing);
+
+    //     fetch("ajax_follow.php",{
+    //         method: 'POST',
+    //         body : formData
+            
+    //         })
+    //         //antwoord parsen in JSON formaat & doorgeven als resultaat
+    //         .then(response => response.json())
+    //         .then(result =>{
+                
+    //             console.log("Success:", result);
+    //         })
+    //         .catch(error =>{
+    //             console.error("Error:", error);
+    //         });
+        
+    // });
+
+>>>>>>> parent of 1e6673c (Revert "working follow/unfollow btn (error in page refresh)")
 });
 
 
