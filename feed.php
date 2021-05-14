@@ -10,8 +10,8 @@ $user->setUsername($_SESSION['user']);
 $currentlyLoggedIn = $user->showUser();
 
 // LOOP FOR POSTS
-$post = new classes\Post();
-$allPosts = $post->getAllPosts(2);
+// $post = new classes\Post();
+// $allPosts = $post->getAllPosts(10);
 // var_dump($allPosts);
 
 // if(isset($_POST["totalPosts"])){
@@ -23,7 +23,7 @@ $totalamountposts = $amount->getTotalPosts();
 // var_dump($totalamountposts);
 
 $posts = new classes\Post();
-$allPosts = $posts->getAllPosts(2);
+$allPosts = $posts->getAllPosts(12);
 
 $like = new classes\Like();
 $like->setUserID((int)$currentlyLoggedIn[0]['id']);
@@ -202,7 +202,7 @@ $comments->setUserId((int)$currentlyLoggedIn[0]['id']);
 
                 <div class="row row-sixth">
                     <div class="col-12">
-                        <p class="timing-feed"><?php echo $post['postedDate'] ?></p>
+                        <p class="timing-feed"><?php echo $posts->humanTiming($post["id"]); ?> ago</p>
                     </div>
                 </div>
            

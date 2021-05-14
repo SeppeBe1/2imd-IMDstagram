@@ -293,4 +293,39 @@ class Post  {
     public function editPost($id){
         
     }
+
+        // Source of function: https://stackoverflow.com/questions/1416697/converting-timestamp-to-time-ago-in-php-e-g-1-day-ago-2-days-ago
+        public function humanTiming($post_id){
+
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("SELECT postedDate FROM posts WHERE id = :post_id");
+            $statement->bindValue(":post_id", $post_id);
+            $statement->execute();
+    
+            date_default_timezone_set('Europe/Brussels');
+
+            $timeCurrent = $statement->fetchAll(\PDO::FETCH_ASSOC)[0]["postedDate"];
+
+            $time54 = strtotime(($timeCurrent));
+            $time = (int)$time54;
+
+            
+            $time = time() - $time;
+            $time = ($time<1)? 1 : $time;
+            $tokens = array (
+                31536000 => 'year',
+                2592000 => 'month',
+                604800 => 'week',
+                86400 => 'day',
+                3600 => 'hour',
+                60 => 'minute',
+                1 => 'second'
+            );
+    
+            foreach ($tokens as $unit => $text) {
+                if ($time < $unit) continue;
+                $numberOfUnits = floor($time / $unit);
+                return $numberOfUnits.' '.$text.(($numberOfUnits>1)?'s':'');
+            }
+        }
 }
