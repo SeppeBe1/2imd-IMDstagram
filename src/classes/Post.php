@@ -156,6 +156,16 @@ class Post  {
     //     // var_dump($firstPosts); 
 
     // }
+    public function getAllReportedPosts()
+    {
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare("SELECT DISTINCT posts.* , users.username, users.avatar FROM posts INNER JOIN reports ON posts.id = reports.post_id INNER JOIN users ON posts.user_id= users.id group by reports.post_id  having count(*) >= 3 ");
+        $statement->execute();
+        $posts = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $posts;
+    }
 
     public function createPost($username, $image, $description, $location, $filter){
         $conn = Db::getInstance();
@@ -180,6 +190,18 @@ class Post  {
         $getFilters = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
         return $getFilters;
+    }
+
+    public function getSelectedFilter($id){
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare("SELECT filtername FROM filters WHERE id = :id");
+        $statement->bindValue(":id", $id);
+        $statement->execute();
+        $selectedFilter = $statement->fetch();
+
+        return $selectedFilter["filtername"];
+
     }
 
     // FUNCTION THAT PUT THE POSTS OF THE USERS IN THE PROFILE.PHP
@@ -221,12 +243,52 @@ class Post  {
     public function deletePost($id){
         $conn = Db::getInstance();
         
-        $statement = $conn->prepare("DELETE FROM posts WHERE id = :id");
+        $statement = $conn->prepare("SELECT * from posts WHERE id= :id");
         $statement->bindValue(":id", $id);
         $statement->execute();
-        $result = $statement->fetch();
-        header ("Refresh:0");
-        return $result;
+        $results = $statement->fetch();
+
+         //image path
+        $imageUrl = './uploads/'. $results['photo'];
+        //check if image exists
+        if(file_exists($imageUrl)){ 
+            //delete the image from folder
+            unlink(realpath($imageUrl));
+            $statement = $conn->prepare("DELETE FROM posts WHERE id = :id");
+            $statement->bindValue(":id", $id);
+            $statement->execute();
+            $result = $statement->fetch();
+            header ("Refresh:0");
+            return $result;
+        }
+    }
+
+    public function rapportPost($post_id, $username)
+    {
+        $db = new Db();
+        $conn = $db->getInstance();
+
+        $statement = $conn->prepare("INSERT INTO reports (user_id, post_id) VALUES ((SELECT id FROM users WHERE username = :username), :post_id) ");
+        $statement->bindValue(":post_id", $post_id);
+        $statement->bindValue(":username", $username);
+        $statement->execute();
+        header("Refresh:0");
+    }
+
+    public function makeHiddenPost($post_id)
+    {
+        $db = new Db();
+        $conn = $db->getInstance();
+
+        $statement = $conn->prepare("SELECT count(*) FROM reports WHERE post_id = :post_id");
+        $statement->bindValue(":post_id", $post_id);
+        $statement->execute();
+        $result = $statement->fetchColumn();
+        if ($result >= 3) {
+            return false;
+        } else {
+            return true;
+        }
     }
     public function editPost($id){
         

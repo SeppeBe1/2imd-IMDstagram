@@ -112,6 +112,18 @@ class User {
         return $this;
     }
 
+    public function getAdmin(){
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare("SELECT isAdmin FROM users WHERE username = :username");
+        $statement->bindValue(":username", $this->username);
+        $statement->execute();
+        $result = $statement->fetch();
+
+        return $result["isAdmin"];
+
+    }
+
     public function canLogin() {
         $conn = Db::getInstance();
         $options = parse_ini_file("settings/cost.ini"); //cost 15 - returns an array
@@ -126,7 +138,12 @@ class User {
         if(password_verify($this->getPassword(), $hash)) {
             setcookie("loggedIn", "dareal" . $this->getUsername() . "748", time() + 60 * 60 * 24 * 7); //sets cookie for a week
             $_SESSION['user'] = $this->getUsername();
-            header("location: feed.php");
+            if($this->getAdmin()== NULL){
+                header("location: feed.php"); 
+            } else{
+                header("location: admin.php");
+            }
+
             return true;
         }else{
             return false;
@@ -199,7 +216,7 @@ class User {
     }
 
 //PROFILE EDIT___________ // -- moet werken met getters en setters
-    public function changeEmail($email,$username){
+    public function changeEmail(){
         $conn = Db::getInstance();
 
         $statement = $conn->prepare("UPDATE users SET email = :email WHERE username = :user ");
@@ -234,11 +251,12 @@ class User {
         return $results;
     }
 
-    public function changeBio($bio,$username){
+    public function changeBio(){
         $conn = Db::getInstance();
 
         $statement = $conn->prepare("UPDATE users SET bio = :bio WHERE username = :user ");
-        
+        $bio = $this->getBio();
+        $username = $this->getUsername();
         $statement->bindValue(":bio", $bio);
         $statement->bindValue(":user", $username);
         $results = $statement->execute();
@@ -280,11 +298,11 @@ class User {
         $imageUrl = './user_avatar/'.$avataruser['avatar'];
         
         //if file doesn't exist in folder (removed manually or whatever) - change to default placeholder
-        if(!file_exists($imageUrl)){
+        if(!file_exists($imageUrl) ){
             $statement = $conn->prepare("UPDATE users set avatar = 'placeholder.jpeg' where username= :user");
             $statement->bindValue(":user", $username);
             $result = $statement->execute();
-            header ("Refresh:0");
+           
             
             return $result;
         }
@@ -292,14 +310,26 @@ class User {
 
     public function deleteAvatar($username) {
         $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT avatar FROM users WHERE username = :user ");
+        $statement->bindValue(":user", $username);
+        $avatar = $statement->execute();
+        $avataruser = $statement->fetch();
+        //image path
+        $imageUrl = './user_avatar/'.$avataruser['avatar'];
+        $imagePlaceholder = './user_avatar/placeholder.jpeg';
+        //check if image exists
+        if(file_exists($imageUrl) && $avataruser['avatar'] != "placeholder.jpeg"){
+
+        //delete the image from folder
+        unlink(realpath($imageUrl));
+        echo"check";
         $statement = $conn->prepare("UPDATE users set avatar = 'placeholder.jpeg' where username= :user");
         $statement->bindValue(":user", $username);
         $result = $statement->execute();
         
         header ("Refresh:0");
-        $avataruser = $statement->fetch();
-
-        return $avataruser;
+        echo "deleted";
+        }
     }
 
     // TO GET THE CORRECT USERNAME ID FOR PROFILE.PHP
@@ -330,4 +360,6 @@ class User {
     public function checkLoggedInUsername() {
         echo $_SESSION['user'];
     }
+
+    
 }

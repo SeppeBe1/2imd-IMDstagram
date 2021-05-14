@@ -24,10 +24,13 @@ body{
 }
 
 .profile-pic{
-    
     border-radius: 50%;
     width: 35px;
+    height: 35px;
     margin-right: 8px;
+    object-fit: cover;
+    padding: 0em;
+    border: 1px solid #dee2e6
 }
 
 .icon-nav{
@@ -36,12 +39,9 @@ body{
 }
 
 .icon-logout{
-    
     margin-top: 2px;
     margin-left: -15px;
     width: 30px;
-    
-    
 }
 
 .input-group .form-control  {

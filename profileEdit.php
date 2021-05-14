@@ -16,11 +16,10 @@
     if (!empty($_POST['save'])){
         //change Full name
         if(!empty($_POST['fullName'])){
-            $fullName = ($_POST['fullName']);
-            $user->setFullName($fullName);
-            $getNewfullName = $user->getFullName();
+            $user->setFullName($_POST['fullName']);
+            $user->setUsername($_SESSION['user']);
             try {
-                $user->changefullName($getNewfullName, $username);
+                $user->changefullName();
             }catch(\Throwable $error) {
                 $error = $error->getMessage();
             }
@@ -37,6 +36,7 @@
                         if ($user->usernameExists($username) == true){
                             $user->changeUsername($getNewUsername, $username);
                             $_SESSION['user'] = $_POST['username'];
+                            header ("Refresh:0");
                         }elseif($user->usernameExists($username) == false){
                             $errorUsernameExists = true;
                         }
@@ -48,32 +48,29 @@
         
         //change Bio
         if(!empty($_POST['bio'])){
-            $bio = $_POST['bio'];
-            $user->setBio($bio);
-            $getBio = $user->getBio();
-            $username = $_SESSION['user'];
+            $user->setBio($_POST['bio']);
+            $user->setUsername($_SESSION['user']);
             try{
-                $user->changeBio($bio, $username);
+                $user->changeBio();
             }catch(\Throwable $error) {
                 $error = $error->getMessage();
             }
         }
-    
+
+    try {
         //change Email
-        if(!empty($_POST['email'])){
-            $email = ($_POST['email']);
-            $username = $_SESSION['user'];
-    
-            try{
-                if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    $user->changeEmail($email, $username);
-                } else{
-                    echo "geen bestaande email"; //naar visuele foutmelding omleiden
-                }
-            }catch(\Throwable $error) {
-                $error = $error->getMessage();
-            }
+        if(!empty($_POST['email']) && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+            $user->setEmail($_POST['email']);
+            $user->changeEmail();
+        }else{
+            $error = "No valid email";
         }
+    
+     
+        }catch(\Throwable $error) {
+             $error = $error->getMessage();
+        }
+
 
         //change Password
         if(!empty($_POST['password']) && !empty($_POST['confirmPassword'])){
@@ -86,6 +83,7 @@
                         $user->setPassword($_POST['password']);
                         $user->setConfirmPassword($_POST['confirmPassword']);
                         $user->changePassword($password,$username);
+                        header ("Refresh:0");
                     }else{
                         $errorLengthPw = true;
                     }      
@@ -99,40 +97,42 @@
     }  
         
         //change Avatar
-        if(isset($_FILES["avatar"]) && isset($_POST['saveAvatar'])){
-            
-            $file = $_FILES["avatar"];
-            //print_r($file);
-            $fileName = $_FILES["avatar"]["name"];
-            $fileTmpName = $_FILES["avatar"]["tmp_name"];
-            $fileSize = $_FILES["avatar"]["size"];
-            $fileError = $_FILES["avatar"]["error"];
-            $fileType = $_FILES["avatar"]["type"];
+        if (isset($_FILES["avatar"])) {
+            try {
+                $file = $_FILES["avatar"];
+                
+                $fileName = $_FILES["avatar"]["name"];
+                $fileTmpName = $_FILES["avatar"]["tmp_name"];
+                $fileSize = $_FILES["avatar"]["size"];
+                $fileError = $_FILES["avatar"]["error"];
+                $fileType = $_FILES["avatar"]["type"];
 
-            $fileExt = explode(".", $fileName);
-            $fileActualExt = strtolower(end($fileExt));
+                $fileExt = explode(".", $fileName);
+                $fileActualExt = strtolower(end($fileExt));
 
-            $allowed = array("jpg","jpeg","png");
-            
-            if(in_array($fileActualExt,$allowed)){
-                if($fileError === 0){
-                    if ($fileSize < 2000000){
-                        $avatar = uniqid('',true).".".$fileActualExt;
-                        
-                        $fileDestination = "user_avatar/".$avatar;
-                        move_uploaded_file($fileTmpName, $fileDestination);
-                        $user->changeAvatar($avatar, $username);
-                        header ("Refresh:0");
-                    }else{
-                        echo "your file is to big"; // foutmeldingen display!
+                $allowed = array("jpg","jpeg","png");
+                
+                if(in_array($fileActualExt,$allowed)){
+                        if ($fileSize < 2000000){
+                            $avatar = uniqid('',true).".".$fileActualExt;
+                            
+                            $fileDestination = "user_avatar/".$avatar;
+                            move_uploaded_file($fileTmpName, $fileDestination);
+                            $user->changeAvatar($avatar, $username);
+                            header ("Refresh:0");
+                      
+                    }else {
+                        $errorFileSize = true;;
                     }
-                }else {
-                    echo "error uploading your files";
+                }else{
+                    $errorFileExt = true;
                 }
-            }else{
-                echo "you cannot upload files of this type";
+            
+            } catch (\Throwable $th) {
+                //throw $th;
             }
         }
+            
 
     //delete Avatar
     if (isset($_POST['deleteAvatar'])){
@@ -166,6 +166,15 @@
                     <span class="border-bottom "></span>
                 </div>
             </div>
+
+            <!-- Errors avatar -->
+            <?php if(isset($errorFileSize)):?>
+                <div class="alert alert-danger">Your file is too big!</div>
+            <?php endif; ?>
+
+            <?php if(isset($errorFileExt) && !isset($_POST['deleteAvatar'])):?>
+                <div class="alert alert-danger">You cannot upload files of this type!</div>
+            <?php endif; ?>
            
             <?php foreach($usersinfo as $user): ?>
             <div class="container-fluid ">
@@ -246,11 +255,24 @@
                         <button  id="placeholder-image" class=" btn delete-btn" name="deleteAvatar"><i class="fas fa-trash"></i> Delete</button>
                     </div>  
                 </div>
+                </form>
             </div>
 
             <div class="container-settings">
                 <div class="row">
 
+                    <label  class="switch" for="private">
+                        <input type="checkbox" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <span class="slider round"></span>Private account
+                    </label>
+                    <br>
+                    <small class="private-text" >When your account is private, only people you approve can see your photos.</small>
+                    
+
+                </div>
+
+                <div class="row">
+                    <form action="" method="POST" >
                         <div class="form-group">
                             <label for="fullname">Full Name</label>
                             <input type="text" class="form-control" id="fullname" name="fullName" placeholder="Full Name" value="<?php echo ($user['fullName']) ?>">
@@ -306,7 +328,7 @@
                 <?php endif; ?>
 
                 <?php if(isset($errorLengthPw)):?>
-                    <div class="alert alert-danger">Password must contain more than 5 characters.</div>
+                    <div class="alert alert-danger">Password must contain more than 6 characters.</div>
                 <?php endif; ?>
 
                 <?php if(isset($errorPassword)):?>

@@ -82,6 +82,16 @@ body {
     margin-top: 12px;
 }
 
+.btn-unfollow {
+    border: 1pt solid #CD847B;
+    border-radius: 40px;
+    padding: 10px;
+    color: #CD847B;
+    font-weight: 500;
+    font-size: 12px;
+    margin-top: 12px;
+}
+
 .number-profile {
     font-weight: bold;
 }
