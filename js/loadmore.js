@@ -25,6 +25,9 @@ $(document).ready(function() {
             // limit = limit + 4;
             // console.log(limit);
 
+            var postItems = $('.post-load').length;
+            console.log(postItems);
+
 
             $.ajax({
                 url: 'loadmore.php',
@@ -62,7 +65,7 @@ $(document).ready(function() {
             setTimeout(function() {
 
                 // WHEN ROW > TOTALPOSTS
-                $('.post-load:nth-child(3)').nextAll('.post-load').remove().fadeIn("slow");
+                // $('.post-load:nth-child(3)').nextAll('.post-load').remove().fadeIn("slow");
 
                 // VALUE ROW + 0
                 $("#row").val(0);

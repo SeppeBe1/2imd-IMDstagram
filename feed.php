@@ -11,7 +11,7 @@ $currentlyLoggedIn = $user->showUser();
 
 // LOOP FOR POSTS
 $post = new classes\Post();
-$allPosts = $post->getAllPosts(1);
+$allPosts = $post->getAllPosts(2);
 // var_dump($allPosts);
 
 // if(isset($_POST["totalPosts"])){
@@ -217,7 +217,7 @@ if(!empty($_POST['editPost'])){
         <?php endforeach; ?>
 
         <div class="row d-flex justify-content-center">
-            <button id="loadmore" data-totalPosts="<?php echo 4 ?>" class="load-more">Load more...</button>
+            <button id="loadmore" data-totalPosts="<?php echo 1 ?>" class="load-more">Load more...</button>
 
             <input type="hidden" id="row" value="0">
             <input type="hidden" id="all" value="<?php echo $totalamountposts; ?>">
