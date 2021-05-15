@@ -75,7 +75,7 @@ $(document).ready(function() {
         formData.append('postId',postId);
 
         
-        fetch("saveComment.php",{
+        fetch("ajax_saveComment.php",{
             method: 'POST',
             body : formData
             
@@ -89,7 +89,7 @@ $(document).ready(function() {
                 
                 newComment.innerHTML = result.body;
                 document
-                    .querySelector(".comments_list_" + postId)
+                    .querySelector(".newComment_" + postId)
                     .appendChild(newComment);
                 
                 console.log("Success:", result);
@@ -101,18 +101,27 @@ $(document).ready(function() {
 }
 
 //HIDE AND SHOW COMMENTS WHEN LINK CLICKED
-    // let linkComment = document.querySelectorAll(".link-c");
-    // for (let l = 0; l <  linkComment.length; l++) {
-    //     linkComment[l].addEventListener("click", toggleText);
-    //     function toggleText() {
-    //     var x = document.querySelector(".link-c");
-    //     if (x.innerHTML === "Hide comments") {
-    //         x.innerHTML = "Show comments";
-    //     } else {
-    //         x.innerHTML = "Hide comments";
-    //     }
-    // }
-    // }
+    
+    let linkComment = document.querySelectorAll(".link-c");
+    $(".list").hide();
+    for (let l = 0; l <  linkComment.length; l++) {
+        
+        linkComment[l].addEventListener("click", toggleText);
+        function toggleText() {
+            let postId = this.dataset.postid;
+            console.log(postId);
+    
+        $('Comments_list_'+ postId).removeClass("hide");
+        let link = document.querySelector(".linkComments_"+postId);
+        if (link.innerHTML === "Hide comments") {
+            link.innerHTML = "Show comments";
+            $(".comments_list_"+postId).hide();
+        } else {
+            link.innerHTML = "Hide comments";
+            $(".comments_list_"+postId).show();
+        }
+        }
+    }
 
 
 

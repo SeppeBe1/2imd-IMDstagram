@@ -212,13 +212,13 @@ $comments->setUserId((int)$currentlyLoggedIn[0]['id']);
             
             
             <div id="link-comments">
-                <a class="link-c" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <a class="link-c linkComments_<?php echo $postId; ?>" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" data-postid="<?php echo $post['id']; ?>">
                     Show comments
                 </a>
             </div>
             <!-- <div class="collapse" id="collapseExample"> -->
                 <div class="card ">
-                    <div class="comments_list_<?php echo $postId; ?>">
+                    <div class="list comments_list_<?php echo $postId; ?> ">
                     
                             
                         <?php foreach ($allComments as $comment):?>
@@ -243,9 +243,14 @@ $comments->setUserId((int)$currentlyLoggedIn[0]['id']);
                                 </div>
                             </div>
                         <?php endforeach ?>
+                       
                     </div>
+                    
                 </div>
             <!-- </div> -->
+            <div class="newComment_<?php echo $postId; ?> ">
+
+</div>
 
 
             
