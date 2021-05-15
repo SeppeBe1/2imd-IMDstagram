@@ -144,6 +144,32 @@ a:hover{
     margin-bottom:10px ;
 }
 
+.btn-confirm{
+    border: 1pt solid #CD847B;
+    border-radius: 40px;
+    padding: 5px;
+    color: #CD847B;
+    font-weight: 500;
+    font-size: 12px;
+    margin-top: 8px;
+    display: inline-block;
+}
+
+.btn-confirm:hover{
+    color: #5A5A5A;
+    
+    
+    
+}
+
+.btn-delete{
+    color: #CD847B;
+    font-weight: 700;
+    font-size: 12px;
+    margin-top: 15px;
+    float: right;
+}
+
 @media(min-width: 768px){
     .form-post{
         /* background-color: aquamarine; */
@@ -175,4 +201,16 @@ a:hover{
         font-size: 12px;
         margin-top: 14px;
     }
+
+    .btn-confirm{
+        float: right;
+        width: 50%;
+        text-align:center;  
+    }
+    .btn-delete{
+        float: left;
+        margin-left: -5px;
+    }
+    
+    
 }

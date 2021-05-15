@@ -1,41 +1,41 @@
-<?php
+<?php 
+    namespace src;
+    spl_autoload_register();
+    include_once("./header.inc.php");
 
-namespace src;
+    $user = new classes\User();
+    $post = new classes\Post();
 
-spl_autoload_register();
-include_once("./header.inc.php");
+    // TO GET ID FROM URL
+    if(!empty($_GET['username'])){
+        $username = $_GET['username'];
 
-$user = new classes\User();
-$posts = new classes\Post();
+        $users = $user->getUsernameFrom($username);
+        $user_id = $users[0]['id'];
+        $postsUserResults = $post->getPostsUser($user_id);
+        
+        // STACKING OF THE BOOTSTRAP DIVS IN 3 COLUMNS
+        $numberOfColumns = 3;
+        $bootstrapColWidth = 12 / $numberOfColumns ;
+        $arrayChunks = array_chunk($postsUserResults, $numberOfColumns);
+    }
 
-// TO GET ID FROM URL
-if (!empty($_GET['username'])) {
-    $username = $_GET['username'];
+    if(!empty($_GET["username"])){
+        $usernameUrl = $_GET["username"];
+        $loggedinUser = $user->getUsernameFrom($usernameUrl);
+    }
 
-    $users = $user->getUsernameFrom($username);
-    $user_id = $users[0]['id'];
-    $postsUserResults = $posts->getPostsUser($user_id);
+    $user = new classes\User();
+    $user->setUsername($_SESSION['user']);
+    $currentlyLoggedIn = $user->showUser();
 
-    // STACKING OF THE BOOTSTRAP DIVS IN 3 COLUMNS
-    $numberOfColumns = 3;
-    $bootstrapColWidth = 12 / $numberOfColumns;
-    $arrayChunks = array_chunk($postsUserResults, $numberOfColumns);
-}
+    //FOLLOW
 
-if (!empty($_GET["username"])) {
-    $usernameUrl = $_GET["username"];
-    $loggedinUser = $user->getUsernameFrom($usernameUrl);
-}
-
-$user = new classes\User();
-$user->setUsername($_SESSION['user']);
-$currentlyLoggedIn = $user->showUser();
-
-//FOLLOW
-
-$f = new classes\Follow();
-$f->setIsFollower((int)$currentlyLoggedIn[0]['id']);
-
+    $follow = new classes\Follow();
+    $follow->setIsFollower((int)$currentlyLoggedIn[0]['id']);
+    $follow = $follow->getallFollowing();
+   
+    var_dump($follow);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -114,6 +114,7 @@ $f->setIsFollower((int)$currentlyLoggedIn[0]['id']);
                         <?php endif; ?>
                     </div>
                 </div>
+
             </div>
         <?php endforeach; ?>
 
@@ -128,16 +129,16 @@ $f->setIsFollower((int)$currentlyLoggedIn[0]['id']);
                             <div class="square-image">
                                 <a href="postDetail.php?id=<?php echo $post['id']; ?>">
                                     <?php
-                                    $folder = "uploads/";
-                                    $file = "";
-                                    if (is_dir($folder)) {
-                                        if ($open = opendir($folder)) {
-                                            if ($file == "." || $post['photo'] == "..") continue;
-                                            $file =  classes\Post::getPhoto($post['id']);
-                                    ?>
-                                            <img src=<?php echo '"uploads/' . $file . '"'; ?> class=<?php echo '" img-thumbnail img-responsive ' . $posts->getSelectedFilter($post["filter_id"]) . '"'; ?>>
-                                    <?php closedir($open);
-                                        }
+                                        $folder = "uploads/";
+                                        $file = "";
+                                        if (is_dir($folder)) {
+                                            if ($open = opendir($folder)) {
+                                                if ($file == "." || $post['photo'] == "..") continue;
+                                                $file =  classes\Post::getPhoto($post['id']);
+                                                ?>
+                                                <img src=<?php echo '"uploads/' . $file . '"'; ?> class=<?php echo '" img-thumbnail img-responsive ' . $posts->getSelectedFilter($post["filter_id"]) . '"'; ?>>
+                                        <?php closedir($open);
+                                            }
                                     } ?>
                                 </a>
                             </div>

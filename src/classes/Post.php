@@ -98,19 +98,36 @@ class Post  {
     }
 
     // FUNCTION THAT PICKS UP THE POSTS FROM ALL THE USER FOR FEED.PHP
-    public function getAllPosts($limit){
+    public function getAllPosts($limit,$following){
         $conn = Db::getInstance();
 
         // VARIABLE THAT DEFINES HOW MANY POSTS WE WANT TO DISPLAY, TO BEGIN
 
         // COLLECTING ALL THE POSTS, LIMITED BY THE AMOUNT
-        $statement = $conn->prepare("SELECT *, posts.id FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY postedDate DESC LIMIT :limit");
+        $statement = $conn->prepare("SELECT *, posts.id FROM posts INNER JOIN users ON posts.user_id = users.id where user_id = :userid ORDER BY postedDate DESC LIMIT :limit");
+        
+        $statement->bindValue(":userid", $following);
         $statement->bindValue(':limit', $limit, \PDO::PARAM_INT);
         $statement->execute();
         $posts = $statement->fetchAll(\PDO::FETCH_ASSOC);
         
+        
         return $posts;
     }
+
+    public function getAllfollowers($follower){
+        $conn = Db::getInstance();
+        // $statement = $conn->prepare("SELECT *, isFollowing from followers where isFollower = :userid inner join posts");
+        $statement = $conn->prepare("SELECT *, posts.id FROM posts INNER JOIN followers ON posts.user_id = followers.isFollower INNER JOIN users ON followers.isFollowing = users.id where user_id = :userid ");
+
+        $statement->bindValue(":userid", $follower);
+        $statement->execute();
+        $followers = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $followers;
+       
+    }
+
 
     public function getTotalPosts(){
         $conn = Db::getInstance();

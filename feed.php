@@ -22,7 +22,18 @@ $posts = new classes\Post();
 $totalamountposts = $posts->getTotalPosts();
 // var_dump($totalamountposts);
 
-$allPosts = $posts->getAllPosts(12);
+$posts = new classes\Post();
+$follow = new classes\Follow();
+$follow->setIsFollower((int)$currentlyLoggedIn[0]['id']);
+$following = $follow->getallFollowing();
+// var_dump($following[0]['id']);
+
+$allPosts = $posts->getAllPosts(20,$following[0]['id']);
+// var_dump($allPosts);
+$follower = (int)$currentlyLoggedIn[0]['id'];
+// var_dump($follower);
+$followers = $posts->getAllfollowers($follower);
+var_dump($followers);
 
 $like = new classes\Like();
 $like->setUserID((int)$currentlyLoggedIn[0]['id']);
@@ -73,7 +84,7 @@ $comments->setUserId((int)$currentlyLoggedIn[0]['id']);
 <body>
     <main>
         <!-- START VAN LOOP-->
-        <?php foreach ($allPosts as $post) : ?>
+        <?php foreach ($followers as $post) : ?>
             <?php
             $like->setPostID($post['id']);
             $post_id = $like->getPostID();
