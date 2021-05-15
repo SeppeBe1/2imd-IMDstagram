@@ -11,13 +11,14 @@
     $likes = new classes\Like();
     $likes->setUserID((int)$currentlyLoggedIn[0]['id']);
 
+    $posts = new classes\Post();
+  
     if(!empty($_GET['id'])){
         // WE COLLECT HERE THE INFORMATION FOR THE SPECIFIC POST, WITH THE ID
         $post_id = $_GET['id'];
         $getPost = new classes\Post();
 
         $postsD = $getPost->getPostDetail($post_id);
-        // var_dump($postsD);
     }
 
     if(!empty($_POST['deletePost'])){
@@ -177,9 +178,11 @@
             </div>
         </div>
 
+
         <div class="row row-sixth">
             <div class="col-12">
                 <p class="timing-feed"><?php echo $post["postedDate"]?></p>
+                <p class="timing-feed"><?php echo $posts->humanTiming($post["id"]); ?> ago</p>
             </div>
         </div>
 
