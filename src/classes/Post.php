@@ -98,16 +98,64 @@ class Post  {
     }
 
     // FUNCTION THAT PICKS UP THE POSTS FROM ALL THE USER FOR FEED.PHP
-    public function getAllPosts(){
+    public function getAllPosts($limit){
         $conn = Db::getInstance();
 
-        $statement = $conn->prepare("SELECT *, posts.id FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY postedDate DESC LIMIT 20");
+        // VARIABLE THAT DEFINES HOW MANY POSTS WE WANT TO DISPLAY, TO BEGIN
+
+        // COLLECTING ALL THE POSTS, LIMITED BY THE AMOUNT
+        $statement = $conn->prepare("SELECT *, posts.id FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY postedDate DESC LIMIT :limit");
+        $statement->bindValue(':limit', $limit, \PDO::PARAM_INT);
         $statement->execute();
         $posts = $statement->fetchAll(\PDO::FETCH_ASSOC);
         
         return $posts;
     }
 
+    public function getTotalPosts(){
+        $conn = Db::getInstance();
+        // $postperpage = 1;
+
+        // COUNT THE AMOUNT OF POSTS
+        $statement1 = $conn->prepare("select count(*) as totalamountposts FROM posts");
+        $statement1->execute();
+        $fetch_posts_total = $statement1->fetch(\PDO::FETCH_ASSOC);
+        $totalamountposts = $fetch_posts_total['totalamountposts'];
+        // var_dump($totalamountposts);
+        return $totalamountposts; 
+    }
+
+    // public function loadMore(){
+    //     $conn = Db::getInstance();
+
+    //     // Checking how many rows you have
+    //     $postperpage = 2;
+
+    //     $statement = $conn->prepare("select count(*) as totalamountposts FROM posts");
+    //     $statement->execute();
+    //     $fetch_posts_total = $statement->fetch(\PDO::FETCH_ASSOC);
+    //     $totalamountposts = $fetch_posts_total['totalamountposts'];
+    //     var_dump($totalamountposts);
+
+    //     // --> Kan ik bovenstaande code gewoon niet plaatsen bij getAllPosts?
+
+    //     // Selecting first 5 posts
+    //     $statement2 = $conn->prepare("SELECT *, posts.id FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY postedDate DESC LIMIT 0,$postperpage ");
+    //     $result = $statement2->execute();
+    //     $firstPosts = $statement2->fetchAll(\PDO::FETCH_ASSOC);
+    //     var_dump($firstPosts);
+
+    //     // while($post = $firstPosts){
+    //     //     $id = $post['id'];
+            
+    //     // }
+
+
+    //     // $firstPosts = $statement2->fetch(\PDO::FETCH_ASSOC);
+    //     // return $firstPosts;
+    //     // var_dump($firstPosts); 
+
+    // }
     public function getAllReportedPosts()
     {
         $conn = Db::getInstance();
@@ -250,4 +298,42 @@ class Post  {
             return true;
         }
     }
+    public function editPost($id){
+        
+    }
+
+        // Source of function: https://stackoverflow.com/questions/1416697/converting-timestamp-to-time-ago-in-php-e-g-1-day-ago-2-days-ago
+        public function humanTiming($post_id){
+
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("SELECT postedDate FROM posts WHERE id = :post_id");
+            $statement->bindValue(":post_id", $post_id);
+            $statement->execute();
+    
+            date_default_timezone_set('Europe/Brussels');
+
+            $timeCurrent = $statement->fetchAll(\PDO::FETCH_ASSOC)[0]["postedDate"];
+
+            $time54 = strtotime(($timeCurrent));
+            $time = (int)$time54;
+
+            
+            $time = time() - $time;
+            $time = ($time<1)? 1 : $time;
+            $tokens = array (
+                31536000 => 'year',
+                2592000 => 'month',
+                604800 => 'week',
+                86400 => 'day',
+                3600 => 'hour',
+                60 => 'minute',
+                1 => 'second'
+            );
+    
+            foreach ($tokens as $unit => $text) {
+                if ($time < $unit) continue;
+                $numberOfUnits = floor($time / $unit);
+                return $numberOfUnits.' '.$text.(($numberOfUnits>1)?'s':'');
+            }
+        }
 }

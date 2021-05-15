@@ -260,6 +260,18 @@
 
             <div class="container-settings">
                 <div class="row">
+
+                    <label  class="switch" for="private">
+                        <input type="checkbox" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <span class="slider round"></span>Private account
+                    </label>
+                    <br>
+                    <small class="private-text" >When your account is private, only people you approve can see your photos.</small>
+                    
+
+                </div>
+
+                <div class="row">
                     <form action="" method="POST" >
                         <div class="form-group">
                             <label for="fullname">Full Name</label>

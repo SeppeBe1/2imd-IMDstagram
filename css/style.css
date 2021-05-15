@@ -6,6 +6,10 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
+main {
+    padding: 20px;
+}
+
 
 /* LOGIN/REGISTER PAGE */
 .form-title {
@@ -101,6 +105,45 @@ h6 {
     /* color: red; */
 }
 
+.profile-pic-follow{
+    width:50px;
+    height:50px;
+    object-fit: cover;
+    border-radius: 100%;
+    justify-content: center;
+    padding: 0em;
+    border: 1px solid #dee2e6
+}
+
+.btn-following {
+    border: 1pt solid #CD847B;
+    border-radius: 40px;
+    padding: 10px;
+    color: #CD847B;
+    font-weight: 500;
+    font-size: 11px;
+    margin-top: 4px;
+   
+}
+a{
+    text-decoration: none;
+    color: #5A5A5A;;
+}
+
+a:hover{
+    text-decoration: none;
+    color: #5A5A5A;;
+}
+.username {
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+.follow-bottom{
+    border-bottom: 0.1px solid #eeeeee;
+    margin-bottom:10px ;
+}
+
 @media(min-width: 768px){
     .form-post{
         /* background-color: aquamarine; */
@@ -111,5 +154,25 @@ h6 {
 
     .container-profile-edit{
         max-width: 700px;
+    }
+
+    .profile-pic-follow{
+        width:65px;
+        height:65px;
+        object-fit: cover;
+        border-radius: 100%;
+        justify-content: center;
+        padding: 0em;
+        border: 1px solid #dee2e6
+    }
+
+    .username{
+        font-size: 16px;
+        margin-top: 16px;
+    }
+
+    .btn-following {
+        font-size: 12px;
+        margin-top: 14px;
     }
 }

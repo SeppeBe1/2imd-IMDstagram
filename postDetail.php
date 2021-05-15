@@ -11,13 +11,14 @@
     $likes = new classes\Like();
     $likes->setUserID((int)$currentlyLoggedIn[0]['id']);
 
+    $posts = new classes\Post();
+  
     if(!empty($_GET['id'])){
         // WE COLLECT HERE THE INFORMATION FOR THE SPECIFIC POST, WITH THE ID
         $post_id = $_GET['id'];
         $getPost = new classes\Post();
 
         $postsD = $getPost->getPostDetail($post_id);
-        // var_dump($postsD);
     }
 
     if(!empty($_POST['deletePost'])){
@@ -86,6 +87,7 @@
                                     <div class="dropdown-menu dropdown-left-manual" aria-labelledby="navbarDropdown">
                                         <?php if($user->getUsername() == $post['username']): ?>
                                             <input class="dropdown-item" type="submit" name="deletePost" value="Delete">
+                                            <input class="dropdown-item" type="submit" name="editPost" value="Edit">
                                         <?php elseif($user->getUsername() != $post['username']): ?>
                                             <input class="dropdown-item" type="submit" name="reportPost" value="Report">
                                             <?php //elseif($user == admin (functie die bekijkt of de ingelogde user admin is)) ?>
@@ -176,9 +178,11 @@
             </div>
         </div>
 
+
         <div class="row row-sixth">
             <div class="col-12">
                 <p class="timing-feed"><?php echo $post["postedDate"]?></p>
+                <p class="timing-feed"><?php echo $posts->humanTiming($post["id"]); ?> ago</p>
             </div>
         </div>
 
