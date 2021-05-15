@@ -1,38 +1,40 @@
-<?php 
-    namespace src;
-    spl_autoload_register();
-    include_once("./header.inc.php");
+<?php
 
-    $user = new classes\User();
-    $post = new classes\Post();
+namespace src;
 
-    // TO GET ID FROM URL
-    if(!empty($_GET['username'])){
-        $username = $_GET['username'];
+spl_autoload_register();
+include_once("./header.inc.php");
 
-        $users = $user->getUsernameFrom($username);
-        $user_id = $users[0]['id'];
-        $postsUserResults = $post->getPostsUser($user_id);
-        
-        // STACKING OF THE BOOTSTRAP DIVS IN 3 COLUMNS
-        $numberOfColumns = 3;
-        $bootstrapColWidth = 12 / $numberOfColumns ;
-        $arrayChunks = array_chunk($postsUserResults, $numberOfColumns);
-    }
+$user = new classes\User();
+$posts = new classes\Post();
 
-    if(!empty($_GET["username"])){
-        $usernameUrl = $_GET["username"];
-        $loggedinUser = $user->getUsernameFrom($usernameUrl);
-    }
+// TO GET ID FROM URL
+if (!empty($_GET['username'])) {
+    $username = $_GET['username'];
 
-    $user = new classes\User();
-    $user->setUsername($_SESSION['user']);
-    $currentlyLoggedIn = $user->showUser();
+    $users = $user->getUsernameFrom($username);
+    $user_id = $users[0]['id'];
+    $postsUserResults = $posts->getPostsUser($user_id);
 
-    //FOLLOW
+    // STACKING OF THE BOOTSTRAP DIVS IN 3 COLUMNS
+    $numberOfColumns = 3;
+    $bootstrapColWidth = 12 / $numberOfColumns;
+    $arrayChunks = array_chunk($postsUserResults, $numberOfColumns);
+}
 
-    $f = new classes\Follow();
-    $f->setIsFollower((int)$currentlyLoggedIn[0]['id']);
+if (!empty($_GET["username"])) {
+    $usernameUrl = $_GET["username"];
+    $loggedinUser = $user->getUsernameFrom($usernameUrl);
+}
+
+$user = new classes\User();
+$user->setUsername($_SESSION['user']);
+$currentlyLoggedIn = $user->showUser();
+
+//FOLLOW
+
+$f = new classes\Follow();
+$f->setIsFollower((int)$currentlyLoggedIn[0]['id']);
 
 ?>
 <!DOCTYPE html>
@@ -56,89 +58,93 @@
 
 <body>
     <main>
-        <?php foreach($users as $user): ?>
-        <div class="container-fluid container-profile clearfix">
+        <?php foreach ($users as $user) : ?>
+            <div class="container-fluid container-profile clearfix">
 
-            <div class="row row-first">
-                <div class="col-3">
-                    <div class="avatar">
-                        <a href="#">
-                            <img src="./user_avatar/<?php echo htmlspecialchars($user['avatar']); ?>" class="profile-pic-profile rounded-circle">
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-5 profile-about">
-                    <p><span class="profile-name"><?php echo htmlspecialchars($user["username"]); ?></span></p><br>
-                    <p class="bio"><?php echo htmlspecialchars($user["bio"]);?></p>
-                </div>
-
-                <!-- EDIT BTN WEG WANNEER IK KIJK NAAR ANDER PROFIEL -->
-                <?php if($_SESSION['user'] == $_GET['username']): ?>
-                <div class="col-4 col-lg-4">
-                    <a href="profileEdit.php" class="btn edit-btn">Edit profile</a>
-                </div>
-                <?php endif; ?>
-            </div>
-
-
-            <div class="container-follow ">
-                <div class="row ">
-
-                    <div class="col-4  text-center follow">
-                        <h7 class="number-profile mb-0 d-block">10</h7><small class="text-muted">
-                            Posts</small>
+                <div class="row row-first">
+                    <div class="col-3">
+                        <div class="avatar">
+                            <a href="#">
+                                <img src="./user_avatar/<?php echo htmlspecialchars($user['avatar']); ?>" class="profile-pic-profile rounded-circle">
+                            </a>
+                        </div>
                     </div>
 
-                    <div class="col-4  text-center follow">
-                        <a href="followers.php"><h7 class="number-profile mb-0 d-block">182</h7><small class="text-muted">Followers</small></a>
+                    <div class="col-5 profile-about">
+                        <p><span class="profile-name"><?php echo htmlspecialchars($user["username"]); ?></span></p><br>
+                        <p class="bio"><?php echo htmlspecialchars($user["bio"]); ?></p>
                     </div>
 
-                    <div class="col-4  text-center follow">
-                        <a  href="following.php"><h7 class="number-profile mb-0 d-block">320</h7><small class="text-muted">Following</small></a>
-                    </div>
-                </div>
-
-                <div class="row ">
-                    <?php if($_SESSION['user'] != $_GET['username']): ?>
-                        <div class="col-sm-12  text-center follow">
-                            <!-- FOLLOW BTN WEG WANNEER IK KIJK NAAR EIGEN PROFIEL -->
-                            <a href="#" class="float-left btn btn-follow followBtn" data-followid="<?php echo $user_id?>">Follow</a>
+                    <!-- EDIT BTN WEG WANNEER IK KIJK NAAR ANDER PROFIEL -->
+                    <?php if ($_SESSION['user'] == $_GET['username']) : ?>
+                        <div class="col-4 col-lg-4">
+                            <a href="profileEdit.php" class="btn edit-btn">Edit profile</a>
                         </div>
                     <?php endif; ?>
                 </div>
+
+
+                <div class="container-follow ">
+                    <div class="row ">
+
+                        <div class="col-4  text-center follow">
+                            <h7 class="number-profile mb-0 d-block">10</h7><small class="text-muted">
+                                Posts</small>
+                        </div>
+
+                        <div class="col-4  text-center follow">
+                            <a href="followers.php">
+                                <h7 class="number-profile mb-0 d-block">182</h7><small class="text-muted">Followers</small>
+                            </a>
+                        </div>
+
+                        <div class="col-4  text-center follow">
+                            <a href="following.php">
+                                <h7 class="number-profile mb-0 d-block">320</h7><small class="text-muted">Following</small>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <?php if ($_SESSION['user'] != $_GET['username']) : ?>
+                            <div class="col-sm-12  text-center follow">
+                                <!-- FOLLOW BTN WEG WANNEER IK KIJK NAAR EIGEN PROFIEL -->
+                                <a href="#" class="float-left btn btn-follow followBtn" data-followid="<?php echo $user_id ?>">Follow</a>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
             </div>
-        </div>
-        <?php endforeach ;?>
+        <?php endforeach; ?>
 
 
         <!-- LOOPEN OVER POSTS !-->
 
         <div class="container-fluid container-gallery">
-            <?php foreach($arrayChunks as $postsUserResults) : ?>
-            <div class="row">
-                <?php foreach($postsUserResults as $post): ?>
-                <div class="col-4">
-                    <div class="square-image">
-                        <a href="postDetail.php?id=<?php echo $post['id']; ?>">
-                            <?php 
+            <?php foreach ($arrayChunks as $postsUserResults) : ?>
+                <div class="row">
+                    <?php foreach ($postsUserResults as $post) : ?>
+                        <div class="col-4">
+                            <div class="square-image">
+                                <a href="postDetail.php?id=<?php echo $post['id']; ?>">
+                                    <?php
                                     $folder = "uploads/";
                                     $file = "";
                                     if (is_dir($folder)) {
-                                            if ($open = opendir($folder)) {
-                                                if ($file == "." || $post['photo'] == "..") continue;
-                                                $file =  classes\Post::getPhoto($post['id']);
-                                                ?>
-                            <img src=<?php echo '"uploads/' . $file . '"'; ?> class=" img-thumbnail img-responsive">
-                            <?php closedir($open);
-                                            }
-                                        } ?>
-                        </a>
-                    </div>
+                                        if ($open = opendir($folder)) {
+                                            if ($file == "." || $post['photo'] == "..") continue;
+                                            $file =  classes\Post::getPhoto($post['id']);
+                                    ?>
+                                            <img src=<?php echo '"uploads/' . $file . '"'; ?> class=<?php echo '" img-thumbnail img-responsive ' . $posts->getSelectedFilter($post["filter_id"]) . '"'; ?>>
+                                    <?php closedir($open);
+                                        }
+                                    } ?>
+                                </a>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
-                <?php endforeach ;?>
-            </div>
-            <?php endforeach ;?>
+            <?php endforeach; ?>
         </div>
 
 
@@ -146,7 +152,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="js/follow.js"></script>
-    
+
 </body>
 
 </html>

@@ -47,9 +47,6 @@ $like->setUserID((int)$currentlyLoggedIn[0]['id']);
 
             <!-- START VAN LOOP-->
             <?php foreach ($allPosts as $post) : ?>
-                <?php
-                $post['id'];
-                ?>
                 <?php if (!$posts->makeHiddenPost($post['id'])) : ?>
                     <div class="container-fluid post-post  ">
                         <div class="row row-first">
@@ -96,7 +93,7 @@ $like->setUserID((int)$currentlyLoggedIn[0]['id']);
                                         if ($file == "." || $post['photo'] == "..") continue;
                                         $file =  classes\Post::getPhoto($post['id']);
                                 ?>
-                                        <img src=<?php echo '"uploads/' . $file . '"'; ?> class="picture-feed">
+                                        <img src=<?php echo '"uploads/' . $file . '"'; ?> class=<?php echo '" picture-feed ' . $posts->getSelectedFilter($post["filter_id"]) . '"'; ?>>
                                 <?php closedir($open);
                                     }
                                 } ?>

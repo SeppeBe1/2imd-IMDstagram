@@ -18,11 +18,10 @@ $currentlyLoggedIn = $user->showUser();
 //     $post->getAllPosts($_POST["totalPosts"]);
 // }
 
-$amount = new classes\Post();
-$totalamountposts = $amount->getTotalPosts();
+$posts = new classes\Post();
+$totalamountposts = $posts->getTotalPosts();
 // var_dump($totalamountposts);
 
-$posts = new classes\Post();
 $allPosts = $posts->getAllPosts(12);
 
 $like = new classes\Like();
@@ -41,8 +40,7 @@ if (!empty($_POST['banUser'])) {
 }
 
 if(!empty($_POST['editPost'])){
-    $post = new classes\Post();
-    $post->editPost($_POST['post-id']);
+    $posts->editPost($_POST['post-id']);
 }
 
     // Load more funct.
