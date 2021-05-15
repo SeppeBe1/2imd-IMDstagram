@@ -263,6 +263,30 @@ class Post  {
         }
     }
 
+    public function deleteAllPostUser($user_id)
+    {
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare("SELECT * from posts WHERE user_id= :user_id");
+        $statement->bindValue(":user_id", $user_id);
+        $statement->execute();
+        $results = $statement->fetch();
+
+        //image path
+        $imageUrl = './uploads/' . $results['photo'];
+        //check if image exists
+        if (file_exists($imageUrl)) {
+            //delete the image from folder
+            unlink(realpath($imageUrl));
+            $statement = $conn->prepare("DELETE FROM posts WHERE user_id= :user_id");
+            $statement->bindValue(":user_id", $user_id);
+            $statement->execute();
+            $result = $statement->fetch();
+            header("Refresh:0");
+            return $result;
+        }
+    }
+
     public function deleteAllReports($id){
         $conn = Db::getInstance();
 
