@@ -332,6 +332,21 @@ class User {
         }
     }
 
+    public function deleteUser($user_id){
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("DELETE  FROM users WHERE id = $user_id ");
+        $statement->bindValue(":user", $user_id);
+        $statement->execute();
+    }
+
+    public function deleteUserAllPosts($user_id)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("DELETE  FROM posts WHERE user_id = $user_id");
+        $statement->bindValue(":id", $user_id);
+        $statement->execute();
+    }
+
     // TO GET THE CORRECT USERNAME ID FOR PROFILE.PHP
     public function getUsernameFrom($username){
         $conn = Db::getInstance();
