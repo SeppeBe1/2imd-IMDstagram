@@ -11,13 +11,14 @@
     $likes = new classes\Like();
     $likes->setUserID((int)$currentlyLoggedIn[0]['id']);
 
+    $posts = new classes\Post();
+  
     if(!empty($_GET['id'])){
         // WE COLLECT HERE THE INFORMATION FOR THE SPECIFIC POST, WITH THE ID
         $post_id = $_GET['id'];
         $getPost = new classes\Post();
 
         $postsD = $getPost->getPostDetail($post_id);
-        // var_dump($postsD);
     }
 
     if(!empty($_POST['deletePost'])){
@@ -120,7 +121,11 @@
 
         <!--like/unlike-->
         <div class="row row-third">
-            <?php $isLikedbyUser = $likes->isLiked($likes->getUserID(), $post_id); ?>
+            <?php 
+                $likes->setPostID($post_id);
+                $likes->setUserID($post['user_id']); 
+            ?> 
+            <?php $isLikedbyUser = $likes->isLiked(); ?>
             <div class="col-1">
                 <img src="./img/icons/<?php if (!empty($isLikedbyUser)) {echo "heart";} else {echo "heart-outlines";} ?>.svg"
                     class="icon-feed like-status <?php if (!empty($isLikedbyUser)) { echo "unlike"; } else { echo "like";} ?>"
@@ -128,7 +133,7 @@
             </div>
 
             <!--count likes-->
-            <?php $countLikes = $likes->countLikes($post_id); ?>
+            <?php $countLikes = $likes->countLikes(); ?>
             <div class="col-1">
                 <span id="show_like">
                     <p class="number-feed likescount" data-id="<?php echo $post['id']; ?>">
@@ -173,9 +178,11 @@
             </div>
         </div>
 
+
         <div class="row row-sixth">
             <div class="col-12">
                 <p class="timing-feed"><?php echo $post["postedDate"]?></p>
+                <p class="timing-feed"><?php echo $posts->humanTiming($post["id"]); ?> ago</p>
             </div>
         </div>
 

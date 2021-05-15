@@ -104,7 +104,8 @@ class Post  {
         // VARIABLE THAT DEFINES HOW MANY POSTS WE WANT TO DISPLAY, TO BEGIN
 
         // COLLECTING ALL THE POSTS, LIMITED BY THE AMOUNT
-        $statement = $conn->prepare("SELECT *, posts.id FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY postedDate DESC LIMIT 0,$limit ");
+        $statement = $conn->prepare("SELECT *, posts.id FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY postedDate DESC LIMIT :limit");
+        $statement->bindValue(':limit', $limit, \PDO::PARAM_INT);
         $statement->execute();
         $posts = $statement->fetchAll(\PDO::FETCH_ASSOC);
         
@@ -155,6 +156,16 @@ class Post  {
     //     // var_dump($firstPosts); 
 
     // }
+    public function getAllReportedPosts()
+    {
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare("SELECT DISTINCT posts.* , users.username, users.avatar FROM posts INNER JOIN reports ON posts.id = reports.post_id INNER JOIN users ON posts.user_id= users.id group by reports.post_id  having count(*) >= 3 ");
+        $statement->execute();
+        $posts = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $posts;
+    }
 
     public function createPost($username, $image, $description, $location, $filter){
         $conn = Db::getInstance();
@@ -179,6 +190,18 @@ class Post  {
         $getFilters = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
         return $getFilters;
+    }
+
+    public function getSelectedFilter($id){
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare("SELECT filtername FROM filters WHERE id = :id");
+        $statement->bindValue(":id", $id);
+        $statement->execute();
+        $selectedFilter = $statement->fetch();
+
+        return $selectedFilter["filtername"];
+
     }
 
     // FUNCTION THAT PUT THE POSTS OF THE USERS IN THE PROFILE.PHP
@@ -220,14 +243,89 @@ class Post  {
     public function deletePost($id){
         $conn = Db::getInstance();
         
-        $statement = $conn->prepare("DELETE FROM posts WHERE id = :id");
+        $statement = $conn->prepare("SELECT * from posts WHERE id= :id");
         $statement->bindValue(":id", $id);
         $statement->execute();
-        $result = $statement->fetch();
-        header ("Refresh:0");
-        return $result;
+        $results = $statement->fetch();
+
+         //image path
+        $imageUrl = './uploads/'. $results['photo'];
+        //check if image exists
+        if(file_exists($imageUrl)){ 
+            //delete the image from folder
+            unlink(realpath($imageUrl));
+            $statement = $conn->prepare("DELETE FROM posts WHERE id = :id");
+            $statement->bindValue(":id", $id);
+            $statement->execute();
+            $result = $statement->fetch();
+            header ("Refresh:0");
+            return $result;
+        }
+    }
+
+    public function rapportPost($post_id, $username)
+    {
+        $db = new Db();
+        $conn = $db->getInstance();
+
+        $statement = $conn->prepare("INSERT INTO reports (user_id, post_id) VALUES ((SELECT id FROM users WHERE username = :username), :post_id) ");
+        $statement->bindValue(":post_id", $post_id);
+        $statement->bindValue(":username", $username);
+        $statement->execute();
+        header("Refresh:0");
+    }
+
+    public function makeHiddenPost($post_id)
+    {
+        $db = new Db();
+        $conn = $db->getInstance();
+
+        $statement = $conn->prepare("SELECT count(*) FROM reports WHERE post_id = :post_id");
+        $statement->bindValue(":post_id", $post_id);
+        $statement->execute();
+        $result = $statement->fetchColumn();
+        if ($result >= 3) {
+            return false;
+        } else {
+            return true;
+        }
     }
     public function editPost($id){
         
     }
+
+        // Source of function: https://stackoverflow.com/questions/1416697/converting-timestamp-to-time-ago-in-php-e-g-1-day-ago-2-days-ago
+        public function humanTiming($post_id){
+
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("SELECT postedDate FROM posts WHERE id = :post_id");
+            $statement->bindValue(":post_id", $post_id);
+            $statement->execute();
+    
+            date_default_timezone_set('Europe/Brussels');
+
+            $timeCurrent = $statement->fetchAll(\PDO::FETCH_ASSOC)[0]["postedDate"];
+
+            $time54 = strtotime(($timeCurrent));
+            $time = (int)$time54;
+
+            
+            $time = time() - $time;
+            $time = ($time<1)? 1 : $time;
+            $tokens = array (
+                31536000 => 'year',
+                2592000 => 'month',
+                604800 => 'week',
+                86400 => 'day',
+                3600 => 'hour',
+                60 => 'minute',
+                1 => 'second'
+            );
+    
+            foreach ($tokens as $unit => $text) {
+                if ($time < $unit) continue;
+                $numberOfUnits = floor($time / $unit);
+                return $numberOfUnits.' '.$text.(($numberOfUnits>1)?'s':'');
+            }
+        }
 }
