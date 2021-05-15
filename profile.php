@@ -91,11 +91,11 @@
                     </div>
 
                     <div class="col-4  text-center follow">
-                        <h7 class="number-profile mb-0 d-block">182</h7><small class="text-muted">Followers</small>
+                        <a href="followers.php"><h7 class="number-profile mb-0 d-block">182</h7><small class="text-muted">Followers</small></a>
                     </div>
 
                     <div class="col-4  text-center follow">
-                        <h7 class="number-profile mb-0 d-block">320</h7><small class="text-muted">Following</small>
+                        <a  href="following.php"><h7 class="number-profile mb-0 d-block">320</h7><small class="text-muted">Following</small></a>
                     </div>
                 </div>
 

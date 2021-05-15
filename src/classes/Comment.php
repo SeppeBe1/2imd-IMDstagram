@@ -107,6 +107,7 @@ class Comment{
   }
 
    // changes date in ... ago 
+   //SOURCE FUNCTION: https://stackoverflow.com/questions/1416697/converting-timestamp-to-time-ago-in-php-e-g-1-day-ago-2-days-ago
     public function timeAgo($timestamp){
   
         date_default_timezone_set("Europe/Brussels");         

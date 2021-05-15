@@ -121,9 +121,11 @@ a {
 
 /* COMMENT PART*/
 
+
 .row-seventh {
     padding: 20px;
     padding-bottom: 0px;
+    padding-top: 20px;
     border-top: 1px solid #d9d9d9;
 }
 
@@ -198,13 +200,14 @@ a {
     border: none
 }
 
-.link-comments{
-    margin-bottom: 10px;
+#link-comments{
+    margin-bottom: 5px;
 }
 
 .link-c{
     color: #B2CB94;
     font-size: 14px;
+   
 }
 
 .link-c::after{

@@ -67,7 +67,6 @@ $comments->setUserId((int)$currentlyLoggedIn[0]['id']);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="css/style-feed.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cssgram/0.1.10/cssgram.min.css">
     <title>Plantstagram - feed</title>
@@ -212,13 +211,13 @@ $comments->setUserId((int)$currentlyLoggedIn[0]['id']);
             
             
             <div id="link-comments">
-                <a class="link-c" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <a class="link-c linkComments_<?php echo $postId; ?>" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" data-postid="<?php echo $post['id']; ?>">
                     Show comments
                 </a>
             </div>
             <!-- <div class="collapse" id="collapseExample"> -->
                 <div class="card ">
-                    <div class="comments_list_<?php echo $postId; ?>">
+                    <div class="list comments_list_<?php echo $postId; ?> ">
                     
                             
                         <?php foreach ($allComments as $comment):?>
@@ -243,9 +242,14 @@ $comments->setUserId((int)$currentlyLoggedIn[0]['id']);
                                 </div>
                             </div>
                         <?php endforeach ?>
+                       
                     </div>
+                    
                 </div>
             <!-- </div> -->
+            <div class="newComment_<?php echo $postId; ?> ">
+
+</div>
 
 
             
