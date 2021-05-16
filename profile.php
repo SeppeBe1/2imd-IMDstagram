@@ -4,7 +4,7 @@
     include_once("./header.inc.php");
 
     $user = new classes\User();
-    $post = new classes\Post();
+    $posts = new classes\Post();
 
     // TO GET ID FROM URL
     if(!empty($_GET['username'])){
@@ -12,7 +12,7 @@
 
         $users = $user->getUsernameFrom($username);
         $user_id = $users[0]['id'];
-        $postsUserResults = $post->getPostsUser($user_id);
+        $postsUserResults = $posts->getPostsUser($user_id);
         
         // STACKING OF THE BOOTSTRAP DIVS IN 3 COLUMNS
         $numberOfColumns = 3;
