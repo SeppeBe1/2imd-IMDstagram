@@ -10,7 +10,7 @@ $currentlyLoggedIn = $user->showUser();
 
 $follow = new classes\Follow();
 $follow->setIsFollowing((int)$currentlyLoggedIn[0]['id']);
-$followers = $follow->getallFollowers();
+$followers = $follow->getallRequests();
 var_dump($followers);
 ?>
 

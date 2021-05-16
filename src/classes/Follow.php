@@ -121,7 +121,7 @@ class Follow{
 
     public function getallRequests (){
         $conn = Db::getInstance();
-        $statement = $conn->prepare("SELECT *, isFollower from followers  inner join users on followers.isFollower = users.id where isFollowing = :following AND status = 'following'");
+        $statement = $conn->prepare("SELECT *, isFollower from followers  inner join users on followers.isFollower = users.id where isFollowing = :following AND status = 'pending'");
         $isFollowing = $this->getIsFollowing();
         $statement->bindValue(":following", $isFollowing);
         $result = $statement->execute();
