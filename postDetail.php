@@ -13,6 +13,7 @@ $likes = new classes\Like();
 $likes->setUserID((int)$currentlyLoggedIn[0]['id']);
 
 $posts = new classes\Post();
+$postID = null;
 
 if (!empty($_GET['id'])) {
     // WE COLLECT HERE THE INFORMATION FOR THE SPECIFIC POST, WITH THE ID
@@ -183,8 +184,7 @@ if (!empty($_POST['banUser'])) {
 
             <div class="row row-sixth">
                 <div class="col-12">
-                    <p class="timing-feed"><?php echo $post["postedDate"] ?></p>
-                    <p class="timing-feed"><?php echo $posts->humanTiming($post["id"]); ?> ago</p>
+                    <p class="timing-feed"><?php echo $posts->humanTiming($post_id); ?> ago</p>
                 </div>
             </div>
 

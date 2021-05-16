@@ -101,7 +101,7 @@ class Follow{
 
     public function getallFollowing (){
         $conn = Db::getInstance();
-        $statement = $conn->prepare("select *, isFollowing from followers inner join users on followers.isFollowing = users.id where isFollower = :follower");
+        $statement = $conn->prepare("SELECT *, isFollowing from followers inner join users on followers.isFollowing = users.id where isFollower = :follower");
         $isFollower = $this->getIsFollower();
         $statement->bindValue(":follower", $isFollower);
         $result = $statement->execute();
@@ -111,7 +111,17 @@ class Follow{
 
     public function getallFollowers (){
         $conn = Db::getInstance();
-        $statement = $conn->prepare("select *, isFollower from followers inner join users on followers.isFollower = users.id where isFollowing = :following");
+        $statement = $conn->prepare("SELECT *, isFollower from followers  inner join users on followers.isFollower = users.id where isFollowing = :following AND status = 'following'");
+        $isFollowing = $this->getIsFollowing();
+        $statement->bindValue(":following", $isFollowing);
+        $result = $statement->execute();
+        $following = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        return $following;
+    }
+
+    public function getallRequests (){
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT *, isFollower from followers  inner join users on followers.isFollower = users.id where isFollowing = :following AND status = 'pending'");
         $isFollowing = $this->getIsFollowing();
         $statement->bindValue(":following", $isFollowing);
         $result = $statement->execute();
