@@ -87,7 +87,9 @@
                                     <div class="dropdown-menu dropdown-left-manual" aria-labelledby="navbarDropdown">
                                         <?php if($user->getUsername() == $post['username']): ?>
                                             <input class="dropdown-item" type="submit" name="deletePost" value="Delete">
-                                            <input class="dropdown-item" type="submit" name="editPost" value="Edit">
+                                            <a href="editPost.php?id=<?php echo $post['id']; ?>">
+                                                <input class="dropdown-item" type="submit" name="editPost" value="Edit">
+                                            </a>
                                         <?php elseif($user->getUsername() != $post['username']): ?>
                                             <input class="dropdown-item" type="submit" name="reportPost" value="Report">
                                             <?php //elseif($user == admin (functie die bekijkt of de ingelogde user admin is)) ?>

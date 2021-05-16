@@ -11,13 +11,13 @@
     $likes = new classes\Like();
     $likes->setUserID((int)$currentlyLoggedIn[0]['id']);
 
+    // INFORMATION OF ID TO EDIT THE POST
     if(!empty($_GET['id'])){
-        // WE COLLECT HERE THE INFORMATION FOR THE SPECIFIC POST, WITH THE ID
         $post_id = $_GET['id'];
         $getPost = new classes\Post();
 
         $postsD = $getPost->getPostDetail($post_id);
-        // var_dump($postsD);
+        var_dump($_GET['id']);
     }
 
     if(!empty($_POST['deletePost'])){
@@ -31,6 +31,19 @@
     
     if(!empty($_POST['banUser'])){
         echo "ban" . $_POST['post-id']; //functie insteken die de user bant om in te loggen
+    }
+
+    if(!empty($_POST['update'])){
+        $var = $post->setDescription($_POST['description']);
+
+        var_dump($var);
+
+        try{
+            $post->changeDescription($_POST['description'], $post_id);
+        }catch(\Throwable $error) {
+            $error = $error->getMessage();
+        }
+        echo "hallo";
     }
 ?>
 
@@ -86,7 +99,6 @@
                                     <div class="dropdown-menu dropdown-left-manual" aria-labelledby="navbarDropdown">
                                         <?php if($user->getUsername() == $post['username']): ?>
                                             <input class="dropdown-item" type="submit" name="deletePost" value="Delete">
-                                            <input class="dropdown-item" type="submit" name="editPost" value="Edit">
                                         <?php elseif($user->getUsername() != $post['username']): ?>
                                             <input class="dropdown-item" type="submit" name="reportPost" value="Report">
                                             <?php //elseif($user == admin (functie die bekijkt of de ingelogde user admin is)) ?>
@@ -151,17 +163,22 @@
                 <p><span class="profile-name"><?php echo $post["username"]?></span>
                     <?php $descrArray = explode(" ", $post['description']);?>
                     <?php foreach($descrArray as $word): ?>
-                    <?php if (!empty($word)) : ?>
-                    <?php if($word[0] == "#"): ?>
-                    <a href="results.php?tag=<?php echo str_replace("#", "", $word); ?>" name="tag"
-                        class="tags-post"><?php echo htmlspecialchars($word);?></a>
-                    <?php else: ?>
-                    <?php echo htmlspecialchars($word); ?>
-                    <?php endif; ?>
-                    <?php endif; ?>
+                        <?php if (!empty($word)) : ?>
+                            <?php if($word[0] == "#"): ?>
+                                <a href="results.php?tag=<?php echo str_replace("#", "", $word); ?>" name="tag"
+                                    class="tags-post"><?php echo htmlspecialchars($word);?></a>
+                            <?php else: ?>
+                                    <?php echo htmlspecialchars($word); ?>
+                            <?php endif; ?>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 </p>
                 </p>
+
+                <textarea rows="4" cols="70"><?php echo htmlspecialchars( $post['description']); ?></textarea>
+                <!-- <button type="submit" class="btn follow-button" name="update">Update this post</button> -->
+                <a><input  type="submit" name ="update" value="update" class="btn follow-button"></button></a>
+
             </div>
         </div>
 

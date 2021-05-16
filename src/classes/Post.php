@@ -290,9 +290,7 @@ class Post  {
             return true;
         }
     }
-    public function editPost($id){
-        
-    }
+
 
         // Source of function: https://stackoverflow.com/questions/1416697/converting-timestamp-to-time-ago-in-php-e-g-1-day-ago-2-days-ago
         public function humanTiming($post_id){
@@ -328,4 +326,28 @@ class Post  {
                 return $numberOfUnits.' '.$text.(($numberOfUnits>1)?'s':'');
             }
         }
+
+        public static function editPost($post_id){
+            $conn = Db::getInstance();
+    
+            $statement = $conn->prepare("SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id WHERE posts.id = :id");
+            $statement->bindValue(":id", $post_id);
+            $statement->execute();
+            $correctUsers = $statement->fetchAll(\PDO::FETCH_ASSOC);
+    
+            return $correctUsers;
+           
+        }
+        public function changeDescription($description, $post_id){
+            $conn = Db::getInstance();
+    
+            $statement = $conn->prepare("UPDATE users SET description = :description WHERE posts.id = :id");
+            $description = $this->getDescription();
+            $statement->bindValue(":description", $description);
+            $statement->bindValue(":id", $post_id);
+
+            $result = $statement->execute();
+            return $result;
+        }
+        
 }
