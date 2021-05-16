@@ -47,7 +47,7 @@ var_dump($following);
                         <a href="profile.php?username=<?php echo $f['username'];?>"><h6 class="fw-bold username"><?php echo $f['username'];?></h6></a>
                     </div>
                     <div class="col-5 col-md-4 ">
-                        <a href="#" class="float-left btn btn-following followBtn" data-followid="<?php echo $user_id?>">Following</a>
+                        <a href="#" class="float-left btn btn-following " data-followid="<?php echo $user_id?>">Following</a>
 
                     </div>
                 </div>

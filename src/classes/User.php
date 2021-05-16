@@ -12,6 +12,7 @@ class User {
     protected $fullName;
     protected $bio;
     protected $id;
+    protected $isPrivate;
 
     public function setUsername($username)
     {
@@ -108,6 +109,19 @@ class User {
     public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+
+    public function getIsPrivate()
+    {
+        return $this->isPrivate;
+    }
+
+    public function setIsPrivate($isPrivate)
+    {
+        $this->isPrivate = $isPrivate;
 
         return $this;
     }
@@ -375,6 +389,29 @@ class User {
     public function checkLoggedInUsername() {
         echo $_SESSION['user'];
     }
+
+    public function privateUser(){
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("update users SET private = :private where id = :user_id");
+        $id = $this->getId();
+        $private = $this->getIsPrivate();
+        $statement->bindValue(":user_id", $id);
+        $statement->bindValue(":private", $private);
+        $result = $statement->execute(); 
+        return $result;
+    }
+
+    // public function privateUser(){
+    //     $conn = Db::getInstance();
+    //     $statement = $conn->prepare("INSERT INTO users (isPrivate) VALUES (:isPrivate) where id = :user_id");
+    //     $id = $this->getId();
+    //     $private = $this->getIsPrivate();
+    //     $statement->bindValue(":isPrivate",$private);
+    //     $statement->bindValue(":user_id", $id);
+    //     $result = $statement->execute();
+    //     return $result;
+    // }
+    
 
     
 }

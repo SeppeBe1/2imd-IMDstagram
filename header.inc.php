@@ -48,6 +48,10 @@
                     <a href="addPost.php">
                         <img src="./img/icons/+.svg" class="icon-nav">
                     </a>
+                    <!-- IF status = pending in followers -->
+                    <a href="followRequest.php">
+                        <img src="./img/icons/friendrequest.svg" class="icon-nav">
+                    </a>
                 </div>
                 
                 <!--<div class="col-5"> 
