@@ -61,7 +61,7 @@ $posts = new classes\Post();
                                         if ($open = opendir($folder)) {
                                             if ($file == "." || $key['photo'] == "..") continue;
                                             $file =  classes\Post::getPhoto($key['id']); ?>
-                                            <img src=<?php echo '"uploads/' . $file . '"'; ?> class=<?php echo '" picture-feed ' . $posts->getSelectedFilter($post["filter_id"]) . '"'; ?>>
+                                            <img src=<?php echo '"uploads/' . $file . '"'; ?> class=<?php echo '" picture-feed ' . $posts->getSelectedFilter($key["filter_id"]) . '"'; ?>>
                                     <?php closedir($open);
                                         }
                                     } ?>
