@@ -138,6 +138,18 @@ class User {
 
     }
 
+    public function getAdminUser($username){
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare("SELECT isAdmin FROM users WHERE username = :username");
+        $statement->bindValue(":username", $username);
+        $statement->execute();
+        $result = $statement->fetch();
+
+        return $result["isAdmin"];
+
+    }
+
     public function canLogin() {
         $conn = Db::getInstance();
         $options = parse_ini_file("settings/cost.ini"); //cost 15 - returns an array
