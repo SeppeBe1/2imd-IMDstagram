@@ -117,7 +117,7 @@ class Post  {
 
     public function getAllfollowers($follower){
         $conn = Db::getInstance();
-        // $statement = $conn->prepare("SELECT *, isFollowing from followers where isFollower = :userid inner join posts");
+        // $statement = $conn->prepare("SELECT isFollowing from followers where isFollower = :userid INNER JOIN posts on followers.isFollowING = posts.user_id");
         $statement = $conn->prepare("SELECT *, posts.id FROM posts INNER JOIN followers ON posts.user_id = followers.isFollower INNER JOIN users ON followers.isFollowing = users.id where user_id = :userid ");
 
         $statement->bindValue(":userid", $follower);

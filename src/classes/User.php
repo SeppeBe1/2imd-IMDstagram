@@ -404,7 +404,7 @@ class User {
 
     public function privateUser(){
         $conn = Db::getInstance();
-        $statement = $conn->prepare("update users SET private = :private where id = :user_id");
+        $statement = $conn->prepare("update users SET isPrivate = :private where id = :user_id");
         $id = $this->getId();
         $private = $this->getIsPrivate();
         $statement->bindValue(":user_id", $id);

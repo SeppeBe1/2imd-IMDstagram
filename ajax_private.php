@@ -12,24 +12,11 @@
     $user->setIsPrivate(1); 
     $user->privateUser();
     
-    if ($user->privateUser()){
         $response = [
             "status" => "success",
             "body" => htmlspecialchars($user->getIsPrivate()),
             "user" => htmlspecialchars($user->getId()),
             "message" => "User private"
-
-        ];
-
-        header('Content-Type: application/json');
-        echo json_encode($response);
-    }else
-
-        $response = [
-            "status" => "error",
-            "body" => htmlspecialchars($user->getIsPrivate()),
-            "user" => htmlspecialchars($user->getId()),
-            "message" => "User not private"
 
         ];
 
