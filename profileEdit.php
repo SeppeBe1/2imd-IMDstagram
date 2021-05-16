@@ -65,7 +65,7 @@ if (!empty($_POST['save'])) {
             $user->setEmail($_POST['email']);
             $user->changeEmail();
         } else {
-            $error = "No valid email";
+            $errorEmail = true;
         }
     } catch (\Throwable $error) {
         $error = $error->getMessage();
@@ -323,8 +323,13 @@ if (isset($_POST['deleteAvatar'])) {
                 </div>
 
                 <!--errors-->
+
                 <?php if (isset($errorUsernameExists)) : ?>
                     <div class="alert alert-danger">The username you've entered is already taken.</div>
+                <?php endif; ?>
+
+                <?php if (isset($errorEmail)) : ?>
+                    <div class="alert alert-danger">Email is not valid.</div>
                 <?php endif; ?>
 
                 <?php if (isset($errorLengthPw)) : ?>
