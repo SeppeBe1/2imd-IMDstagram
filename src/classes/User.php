@@ -153,7 +153,7 @@ class User {
             setcookie("loggedIn", "dareal" . $this->getUsername() . "748", time() + 60 * 60 * 24 * 7); //sets cookie for a week
             $_SESSION['user'] = $this->getUsername();
             if($this->getAdmin()== NULL){
-                header("location: feed.php"); 
+                header("location: index.php"); 
             } else{
                 header("location: admin.php");
             }
@@ -215,7 +215,7 @@ class User {
             session_start(); 
             setcookie("loggedIn", "dareal" . $this->getUsername() . "748", time() + 60 * 60 * 24 * 7); //sets cookie for a week
             $_SESSION['user'] = $this->getUsername();
-            header("location: feed.php"); 
+            header("location: index.php"); 
         }else {
             return false;
         }

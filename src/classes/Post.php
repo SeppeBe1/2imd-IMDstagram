@@ -97,7 +97,7 @@ class Post  {
         return $this->filters;
     }
 
-    // FUNCTION THAT PICKS UP THE POSTS FROM ALL THE USER FOR FEED.PHP
+    // FUNCTION THAT PICKS UP THE POSTS FROM ALL THE USER FOR index.PHP
     public function getAllPosts($limit,$following){
         $conn = Db::getInstance();
 

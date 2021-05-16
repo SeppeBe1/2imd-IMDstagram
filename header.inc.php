@@ -42,7 +42,7 @@
                         <img src="user_avatar/<?php echo $user['avatar']?>" class=" profile-pic rounded-circle">
                     </a>
                     
-                    <a href="feed.php">
+                    <a href="index.php">
                         <img src="./img/icons/home.svg" class="icon-nav">
                     </a>
                     <a href="addPost.php">

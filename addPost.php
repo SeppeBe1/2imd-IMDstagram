@@ -43,7 +43,7 @@ if (isset($_POST['submit'])) {
                     $post->createPost($user->getUsername(), $post->getImage(), $post->getDescription(), $post->getLocation(), $post->getFilters());
 
                     move_uploaded_file($fileTmp, $fileDestination);
-                    header("location: feed.php");
+                    header("location: index.php");
                 } else {
                     $error =  "file is too big";
                 }
