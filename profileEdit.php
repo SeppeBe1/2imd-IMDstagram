@@ -6,12 +6,16 @@ spl_autoload_register();
 include_once("./header.inc.php");
 
 $user = new classes\User();
+
 $username = $_SESSION['user'];
+$user->setUsername($_SESSION['user']);
+
 
 /* GETTERS SETTERS TOEVOEGEN! */
 if (isset($_SESSION['user'])) {
     $user->setUsername($username);
     $usersinfo = $user->showUser($username);
+    // var_dump($usersinfo);
 }
 
 // UPDATE INFO 
@@ -180,7 +184,10 @@ if (isset($_POST['deleteAvatar'])) {
                 <div class="alert alert-danger">You cannot upload files of this type!</div>
             <?php endif; ?>
 
-            <?php foreach ($usersinfo as $user) : ?>
+            <?php foreach ($usersinfo as $u) : ?>
+             
+                
+
                 <div class="container-fluid ">
                     <form action="" method="POST" enctype="multipart/form-data">
 
@@ -188,9 +195,9 @@ if (isset($_POST['deleteAvatar'])) {
                             <div class="col-12 col-md-3 text-center ">
 
                                 <?php $userCheck = new classes\User(); ?>
-                                <?php if (!$userCheck->checkIfImgExists($user['avatar'], $username)) : ?>
+                                <?php if (!$userCheck->checkIfImgExists($u['avatar'], $username)) : ?>
                                     <div class="avatar">
-                                        <img src="user_avatar/<?php echo htmlspecialchars($user['avatar']) ?>" class="profile-pic-profile rounded-circle">
+                                        <img src="user_avatar/<?php echo htmlspecialchars($u['avatar']) ?>" class="profile-pic-profile rounded-circle">
                                     </div>
                                 <?php else : ?>
                                     <div>
@@ -261,17 +268,25 @@ if (isset($_POST['deleteAvatar'])) {
                                     </div>
                     </form>
                 </div>
-
+                
                 <div class="container-settings">
                     <div class="row">
 
-                        <label class="switch" for="private">
-                            <input class="form-check-input private private-unchecked" type="checkbox" value="">
-                            Private account
-                        </label>
+                        <?php if (!empty ($u['isPrivate'])):?>
+                            <label  for="private">
+                                <input class="form-check-input private private-check" type="checkbox" value=""  checked>
+                                Private account
+                            </label>
+
+                        <?php else :?> 
+                            <label  for="private">
+                                <input class="form-check-input private private-unchecked" type="checkbox" value="" >
+                                Private account
+                            </label>
+                        <?php endif ;?>
+
                         <br>
                         <small class="private-text">When your account is private, only people you approve can see your photos.</small>
-
 
                     </div>
 
@@ -279,23 +294,23 @@ if (isset($_POST['deleteAvatar'])) {
                         <form action="" method="POST">
                             <div class="form-group">
                                 <label for="fullname">Full Name</label>
-                                <input type="text" class="form-control" id="fullname" name="fullName" placeholder="Full Name" value="<?php echo ($user['fullName']) ?>">
+                                <input type="text" class="form-control" id="fullname" name="fullName" placeholder="Full Name" value="<?php echo htmlspecialchars($u['fullName']) ?>">
                             </div>
 
                             <div class="form-group">
                                 <label for="username">Username</label>
-                                <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="<?php echo htmlspecialchars($user["username"]) ?>">
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="<?php echo htmlspecialchars($u["username"]) ?>">
                             </div>
 
                             <div class="form-group">
                                 <label for="bio">Bio</label>
-                                <textarea class="form-control" maxlength="200" id="bio" rows="3" name="bio"><?php echo htmlspecialchars($user['bio']) ?></textarea>
+                                <textarea class="form-control" maxlength="200" id="bio" rows="3" name="bio"><?php echo htmlspecialchars($u['bio']) ?></textarea>
                             </div>
 
 
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="<?php echo htmlspecialchars($user['email']) ?>">
+                                <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="<?php echo htmlspecialchars($u['email']) ?>">
                             </div>
 
                             <div class="form-group">
@@ -322,7 +337,7 @@ if (isset($_POST['deleteAvatar'])) {
                     </div>
                 <?php endforeach; ?>
                 <div class="row deactivate">
-                    <p>Deactivate your account <a id="deactivate" href="login.php" data-userId="<?php echo $user["id"]; ?>"> Deactivate</a></p>
+                    <p>Deactivate your account <a id="deactivate" href="login.php" data-userId="<?php echo $u["id"]; ?>"> Deactivate</a></p>
 
                 </div>
 
@@ -354,10 +369,11 @@ if (isset($_POST['deleteAvatar'])) {
         </div>
     </main>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="js/private.js"></script>
     <script src="js/avatar.js"></script>
     <script src="js/deactivateAccount.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    
 
 </body>
 

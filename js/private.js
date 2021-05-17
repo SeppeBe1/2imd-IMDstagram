@@ -22,6 +22,24 @@ $(document).ready(function() {
                     console.error("Error:", error);
                 });
 
+            }else{
+                $(".private").removeClass( "private-check" ).addClass( "private-unchecked" );
+                console.log("woop");
+
+                fetch("ajax_NOTprivate.php",{
+                    method: 'POST',
+                    
+                    
+                    })
+                    //antwoord parsen in JSON formaat & doorgeven als resultaat
+                    .then(response => response.json())
+                    .then(result =>{
+                        
+                        console.log("Success:", result);
+                    })
+                    .catch(error =>{
+                        console.error("Error:", error);
+                    });
             }
     });
 
