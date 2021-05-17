@@ -37,7 +37,7 @@ if (isset($_POST['submit'])) {
         if (in_array($fileRealExt, $allExtensions)) {
             if ($fileError === 0) {
                 if ($fileSize < 2097152) {
-                    $post->setImage(uniqid(' ', true) . "." . $fileRealExt);
+                    $post->setImage(uniqid('', true) . "." . $fileRealExt);
                     $fileDestination = "uploads/" . $post->getImage();
 
                     $post->createPost($user->getUsername(), $post->getImage(), $post->getDescription(), $post->getLocation(), $post->getFilters());
