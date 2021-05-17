@@ -92,7 +92,7 @@ $like->setUserID((int)$currentlyLoggedIn[0]['id']);
                                         if ($file == "." || $post['photo'] == "..") continue;
                                         $file =  classes\Post::getPhoto($post['id']);
                                 ?>
-                                        <img src=<?php echo '"uploads/' . $file . '"'; ?> class=<?php echo '" picture-feed ' . $posts->getSelectedFilter($post["filter_id"]) . '"'; ?>>
+                                        <img src=<?php echo htmlspecialchars( '"uploads/' . $file . '"'); ?> class=<?php echo '" picture-feed ' . $posts->getSelectedFilter($post["filter_id"]) . '"'; ?>>
                                 <?php closedir($open);
                                     }
                                 } ?>
