@@ -341,8 +341,8 @@ class Post  {
         public function changeDescription($description, $post_id){
             $conn = Db::getInstance();
     
-            $statement = $conn->prepare("UPDATE users SET description = :description WHERE posts.id = :id");
-            $description = $this->getDescription();
+            $statement = $conn->prepare("UPDATE posts SET description = :description WHERE posts.id = :id");
+            // $description = $this->getDescription();
             $statement->bindValue(":description", $description);
             $statement->bindValue(":id", $post_id);
 

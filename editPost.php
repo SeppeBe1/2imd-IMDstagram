@@ -17,33 +17,22 @@
         $getPost = new classes\Post();
 
         $postsD = $getPost->getPostDetail($post_id);
-        var_dump($_GET['id']);
-    }
-
-    if(!empty($_POST['deletePost'])){
-        $post = new classes\Post();
-        $post->deletePost($_POST['post-id']);
-    }
     
-    if(!empty($_POST['reportPost'])){
-        echo "report" . $_POST['post-id']; // TEST
-    }
-    
-    if(!empty($_POST['banUser'])){
-        echo "ban" . $_POST['post-id']; //functie insteken die de user bant om in te loggen
-    }
 
-    if(!empty($_POST['update'])){
-        $var = $post->setDescription($_POST['description']);
-
-        var_dump($var);
-
-        try{
-            $post->changeDescription($_POST['description'], $post_id);
-        }catch(\Throwable $error) {
-            $error = $error->getMessage();
+        if(!empty($_POST['deletePost'])){
+            $post = new classes\Post();
+            $post->deletePost($_POST['post-id']);
         }
-        echo "hallo";
+
+        if(!empty($_POST['update'])){
+            $post = new classes\Post();
+
+            try{
+                $post->changeDescription($_POST['description'], $post_id);
+            }catch(\Throwable $error) {
+                $error = $error->getMessage();
+            }
+        }
     }
 ?>
 
@@ -157,30 +146,31 @@
             </div>
 
         </div>
-
-        <div class="row row-fourth">
-            <div class="col-12">
-                <p><span class="profile-name"><?php echo $post["username"]?></span>
-                    <?php $descrArray = explode(" ", $post['description']);?>
-                    <?php foreach($descrArray as $word): ?>
-                        <?php if (!empty($word)) : ?>
-                            <?php if($word[0] == "#"): ?>
-                                <a href="results.php?tag=<?php echo str_replace("#", "", $word); ?>" name="tag"
-                                    class="tags-post"><?php echo htmlspecialchars($word);?></a>
-                            <?php else: ?>
-                                    <?php echo htmlspecialchars($word); ?>
+        <form action="" method="post">
+            <div class="row row-fourth">
+                <div class="col-12">
+                    <p><span class="profile-name"><?php echo $post["username"]?></span>
+                        <?php $descrArray = explode(" ", $post['description']);?>
+                        <?php foreach($descrArray as $word): ?>
+                            <?php if (!empty($word)) : ?>
+                                <?php if($word[0] == "#"): ?>
+                                    <a href="results.php?tag=<?php echo str_replace("#", "", $word); ?>" name="tag"
+                                        class="tags-post"><?php echo htmlspecialchars($word);?></a>
+                                <?php else: ?>
+                                        <?php echo htmlspecialchars($word); ?>
+                                <?php endif; ?>
                             <?php endif; ?>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                </p>
-                </p>
+                        <?php endforeach; ?>
+                    </p>
+                    </p>
 
-                <textarea rows="4" cols="70"><?php echo htmlspecialchars( $post['description']); ?></textarea>
-                <!-- <button type="submit" class="btn follow-button" name="update">Update this post</button> -->
-                <a><input  type="submit" name ="update" value="update" class="btn follow-button"></button></a>
+                    <textarea rows="4" cols="70" name="description"><?php echo htmlspecialchars( $post['description']); ?></textarea>
+                    <!-- <button type="submit" class="btn follow-button" name="update">Update this post</button> -->
+                    <a><input  type="submit" name ="update" value="update" class="btn follow-button"></button></a>
 
+                </div>
             </div>
-        </div>
+        </form>
 
         <div class="row row-fifth">
             <div class="col-12">
