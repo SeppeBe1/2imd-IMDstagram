@@ -40,10 +40,10 @@ var_dump($followers);
                 <?php foreach ($followers as $f):?>
                 <div class="row follow-bottom">
                     <div class="col-3 col-md-2">
-                        <a href="profile.php?username=<?php echo $f['username'];?>"><img src="./user_avatar/<?php echo $f['avatar'];?>" class="profile-pic-follow "></a>
+                        <a href="profile.php?username=<?php echo htmlspecialchars($f['username']);?>"><img src="./user_avatar/<?php echo htmlspecialchars($f['avatar']);?>" class="profile-pic-follow "></a>
                     </div>
                     <div class="col-4 col-md-5">
-                        <a href="profile.php?username=<?php echo $f['username'];?>"><h6 class="fw-bold username"><?php echo $f['username'];?></h6></a>
+                        <a href="profile.php?username=<?php echo htmlspecialchars($f['username']);?>"><h6 class="fw-bold username"><?php echo htmlspecialchars($f['username']);?></h6></a>
                     </div>
 
                    

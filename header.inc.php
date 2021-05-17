@@ -43,8 +43,8 @@ if (isset($_SESSION['user'])) {
                     <?php if (!$users->getAdmin()): ?>
 
                     <div class="col-6 ">
-                        <a href="profile.php?username=<?php echo $user['username']; ?>">
-                            <img src="user_avatar/<?php echo $user['avatar'] ?>" class=" profile-pic rounded-circle">
+                        <a href="profile.php?username=<?php echo htmlspecialchars($user['username']); ?>">
+                            <img src="user_avatar/<?php echo htmlspecialchars($user['avatar']) ?>" class=" profile-pic rounded-circle">
                         </a>
 
                         <a href="index.php">

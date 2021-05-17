@@ -58,11 +58,11 @@ if (!empty($_POST['banUser'])) {
             <div class="row row-first">
                 <div class="col-2">
                     <a href="#">
-                        <img src="./user_avatar/<?php echo $post['avatar'] ?>" class="profile-pic-feed">
+                        <img src="./user_avatar/<?php echo htmlspecialchars($post['avatar']) ?>" class="profile-pic-feed">
                     </a>
                 </div>
                 <div class="col-6">
-                    <a href="profile.php?username=<?php echo $post["username"]; ?>"><span class="profile-name"><?php echo htmlspecialchars($post["username"]); ?></span></a><br>
+                    <a href="profile.php?username=<?php echo htmlspecialchars( $post["username"]); ?>"><span class="profile-name"><?php echo htmlspecialchars($post["username"]); ?></span></a><br>
                     <a href="results.php?location=<?php echo htmlspecialchars($post['location']); ?>" class="profile-location" name="location"><?php echo $post['location'] ?></a>
                 </div>
                 <div class="col-3">
@@ -110,7 +110,7 @@ if (!empty($_POST['banUser'])) {
                             if ($file == "." || $post['photo'] == "..") continue;
                             $file =  classes\Post::getPhoto($post_id);
                     ?>
-                            <img src=<?php echo '"uploads/' . $file . '"'; ?> class=<?php echo '" picture-feed ' . $posts->getSelectedFilter($post["filter_id"]) . '"'; ?>>
+                            <img src=<?php echo htmlspecialchars('"uploads/' . $file . '"'); ?> class=<?php echo '" picture-feed ' . $posts->getSelectedFilter($post["filter_id"]) . '"'; ?>>
                     <?php closedir($open);
                         }
                     } ?>
@@ -157,7 +157,7 @@ if (!empty($_POST['banUser'])) {
 
             <div class="row row-fourth">
                 <div class="col-12">
-                    <p><span class="profile-name"><?php echo $post["username"] ?></span>
+                    <p><span class="profile-name"><?php echo htmlspecialchars( $post["username"]) ?></span>
                         <?php $descrArray = explode(" ", $post['description']); ?>
                         <?php foreach ($descrArray as $word) : ?>
                             <?php if (!empty($word)) : ?>

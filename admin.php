@@ -100,7 +100,7 @@ $like->setUserID((int)$currentlyLoggedIn[0]['id']);
                         </div>
 
                         <div class="col-12">
-                            <p><span class="profile-name"><?php echo $post['username']; ?></span>
+                            <p><span class="profile-name"><?php echo htmlspecialchars($post['username']); ?></span>
                                 <!--DESCRIPTION + HASHTAGS -->
                                 <?php $descrArray = explode(" ", $post['description']); ?>
                                 <?php foreach ($descrArray as $word) : ?>

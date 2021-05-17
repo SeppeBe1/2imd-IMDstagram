@@ -186,7 +186,7 @@ if (isset($_POST['deleteAvatar'])) {
                                 <?php $userCheck = new classes\User(); ?>
                                 <?php if (!$userCheck->checkIfImgExists($user['avatar'], $username)) : ?>
                                     <div class="avatar">
-                                        <img src="user_avatar/<?php echo $user['avatar'] ?>" class="profile-pic-profile rounded-circle">
+                                        <img src="user_avatar/<?php echo htmlspecialchars($user['avatar']) ?>" class="profile-pic-profile rounded-circle">
                                     </div>
                                 <?php else : ?>
                                     <div>
