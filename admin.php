@@ -82,7 +82,6 @@ $like->setUserID((int)$currentlyLoggedIn[0]['id']);
                                 </nav>
                             </div>
                         </div>
-                        <?php var_dump($post['user_id']) ?>"
 
                         <div class="row row-second">
                             <div class="col-12">
