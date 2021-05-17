@@ -97,34 +97,22 @@ class Post  {
         return $this->filters;
     }
 
-    // FUNCTION THAT PICKS UP THE POSTS FROM ALL THE USER FOR index.PHP
-    public function getAllPosts($limit,$following){
+    // FUNCTION THAT PICKS UP THE POSTS FROM ALL THE PEOPLE FOLLOWING FOR index.PHP
+
+    public function getAllPosts($limit,$follower){
         $conn = Db::getInstance();
-
-        // VARIABLE THAT DEFINES HOW MANY POSTS WE WANT TO DISPLAY, TO BEGIN
-
-        // COLLECTING ALL THE POSTS, LIMITED BY THE AMOUNT
-        $statement = $conn->prepare("SELECT *, posts.id FROM posts INNER JOIN users ON posts.user_id = users.id where user_id = :userid ORDER BY postedDate DESC LIMIT :limit");
-        
-        $statement->bindValue(":userid", $following);
+        // $statement = $conn->prepare("SELECT isFollowing from followers where isFollower = :userid INNER JOIN posts on followers.isFollowING = posts.user_id");
+        // $statement = $conn->prepare("SELECT *, posts.id FROM posts INNER JOIN followers ON posts.user_id = followers.isFollower INNER JOIN users ON followers.isFollowing = users.id where user_id = :userid ");
+        $statement = $conn->prepare("SELECT *, posts.id FROM posts JOIN followers ON (
+            followers.isFollowing = posts.user_id AND
+            followers.isFollower = :userid AND status = 'following'
+        )JOIN users where posts.user_id = users.id ORDER BY postedDate DESC LIMIT :limit");
+        $statement->bindValue(":userid", $follower);
         $statement->bindValue(':limit', $limit, \PDO::PARAM_INT);
         $statement->execute();
         $posts = $statement->fetchAll(\PDO::FETCH_ASSOC);
-        
-        
+
         return $posts;
-    }
-
-    public function getAllfollowers($follower){
-        $conn = Db::getInstance();
-        // $statement = $conn->prepare("SELECT isFollowing from followers where isFollower = :userid INNER JOIN posts on followers.isFollowING = posts.user_id");
-        $statement = $conn->prepare("SELECT *, posts.id FROM posts INNER JOIN followers ON posts.user_id = followers.isFollower INNER JOIN users ON followers.isFollowing = users.id where user_id = :userid ");
-
-        $statement->bindValue(":userid", $follower);
-        $statement->execute();
-        $followers = $statement->fetchAll(\PDO::FETCH_ASSOC);
-
-        return $followers;
        
     }
 

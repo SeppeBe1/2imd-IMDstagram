@@ -48,11 +48,11 @@ var_dump($followers);
 
                    
                         <div class="col-3 col-md-4 ">
-                            <a href="#" class=" btn-confirm followBtn" data-followid="<?php echo $user_id?>">Confirm</a>
+                            <a href="#" class=" btn-confirm followBtn confirm" data-followid="<?php echo $f['id']?>">Confirm</a>
                         </div>
 
                         <div class="col-2 col-md-1 ">
-                            <a href="#" class="  btn-delete followBtn" data-followid="<?php echo $user_id?>">X</a>
+                            <a href="#" class="  btn-delete followBtn delete" data-followid="<?php echo $f['id']?>">X</a>
                         </div>
 
                        
@@ -63,5 +63,8 @@ var_dump($followers);
             </div>
 
     </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/follow.js"></script>
 </body>
 </html>

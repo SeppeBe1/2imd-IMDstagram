@@ -11,6 +11,7 @@
         $username = $_GET['username'];
 
         $users = $user->getUsernameFrom($username);
+        var_dump($users);
         $user_id = $users[0]['id'];
         $postsUserResults = $posts->getPostsUser($user_id);
         
@@ -33,9 +34,12 @@
 
     $follow = new classes\Follow();
     $follow->setIsFollower((int)$currentlyLoggedIn[0]['id']);
-    $follow = $follow->getallFollowing();
-   
-    var_dump($follow);
+    // $follow = $follow->getallFollowing();
+    // var_dump($follow);
+    $following = $follow->isFollowing();
+    var_dump($following);
+    $requested = $follow->isRequested();
+    var_dump($requested);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,6 +63,12 @@
 <body>
     <main>
         <?php foreach ($users as $user) : ?>
+            <?php
+            $follow->setIsFollowing($user['id']);
+            $userid = $follow->getIsFollowing();
+            var_dump($userid);
+            ?>
+
             <div class="container-fluid container-profile clearfix">
 
                 <div class="row row-first">
@@ -107,10 +117,28 @@
 
                     <div class="row ">
                         <?php if ($_SESSION['user'] != $_GET['username']) : ?>
-                            <div class="col-sm-12  text-center follow">
-                                <!-- FOLLOW BTN WEG WANNEER IK KIJK NAAR EIGEN PROFIEL -->
-                                <a href="#" class="float-left btn btn-follow followBtn" data-followid="<?php echo $user_id ?>">Follow</a>
-                            </div>
+                            <?php $isFollowing = $follow->isFollowing(); ?>
+                            <?php $isRequested = $follow->isRequested(); ?>
+                            <?php var_dump($isRequested)  ?>
+                            
+                                <?php if (!empty($isFollowing)):?>
+                                    <div class="col-sm-12  text-center follow">
+                                    <!-- FOLLOW BTN WEG WANNEER IK KIJK NAAR EIGEN PROFIEL -->
+                                    <a href="#" class="float-left btn btn-unfollow followBtn" data-followid="<?php echo $user_id ?>">Unfollow</a>
+                                    </div>
+                                
+                                <?php elseif (!empty($isRequested)):?>
+                                    <div class="col-sm-12  text-center follow">
+                                        <!-- Unfollow -->
+                                        <a href="#" class="float-left btn btn-unfollow followBtn" data-followid="<?php echo $user_id ?>">Requested</a>
+                                    </div>
+
+                                <?php else:?> 
+                                    <div class="col-sm-12  text-center follow">
+                                        <!-- Unfollow -->
+                                        <a href="#" class="float-left btn btn-follow followBtn" data-followid="<?php echo $user_id ?>">Follow</a>
+                                    </div>  
+                                <?php endif; ?>
                         <?php endif; ?>
                     </div>
                 </div>

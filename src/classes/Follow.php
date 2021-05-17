@@ -128,6 +128,48 @@ class Follow{
         $following = $statement->fetchAll(\PDO::FETCH_ASSOC);
         return $following;
     }
+
+    public function isFollowing() { //which profile is user following 
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare("SELECT * FROM followers WHERE isFollower = :user_id AND isFollowing = :following AND status = 'following' ");
+        $user_id = $this->getIsFollower();
+        $following = $this->getIsFollowing();
+        $statement->bindValue(":following", $following);
+        $statement->bindValue(":user_id", $user_id);
+        $statement->execute();
+
+        $isFollowing = $statement->fetch(\PDO::FETCH_ASSOC);
+        
+        return $isFollowing;
+    }
+
+    public function isRequested() { //which profile is user following 
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare("SELECT * FROM followers WHERE isFollower = :user_id AND isFollowing = :following AND status = 'pending' ");
+        $user_id = $this->getIsFollower();
+        $following = $this->getIsFollowing();
+        $statement->bindValue(":following", $following);
+        $statement->bindValue(":user_id", $user_id);
+        $statement->execute();
+
+        $isRequested = $statement->fetch(\PDO::FETCH_ASSOC);
+        
+        return $isRequested;
+    }
+
+    public function updateFollowing(){
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("UPDATE followers SET status = :status where isFollower = :users.id )");
+        $isFollowing = $this->getIsFollowing();
+        $status = $this->getStatus();
+        $statement->bindValue(":following", $isFollowing);
+        $statement->bindValue(":status", $status);
+
+        $result = $statement->execute();
+        return $result;
+    }
 }
 
 
