@@ -63,7 +63,11 @@ if (!empty($_POST['save'])) {
         //change Email
         if (!empty($_POST['email']) && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
             $user->setEmail($_POST['email']);
-            $user->changeEmail();
+            if ($user->emailExists() == true) {
+                $user->changeEmail();
+            } else {
+                $emailExists = true;
+            }
         } else {
             $errorEmail = true;
         }
@@ -262,7 +266,7 @@ if (isset($_POST['deleteAvatar'])) {
                     <div class="row">
 
                         <label class="switch" for="private">
-                            <input class="form-check-input private private-unchecked" type="checkbox" value="" >
+                            <input class="form-check-input private private-unchecked" type="checkbox" value="">
                             Private account
                         </label>
                         <br>
@@ -323,9 +327,15 @@ if (isset($_POST['deleteAvatar'])) {
                 </div>
 
                 <!--errors-->
+                
+
 
                 <?php if (isset($errorUsernameExists)) : ?>
                     <div class="alert alert-danger">The username you've entered is already taken.</div>
+                <?php endif; ?>
+
+                <?php if (isset($emailExists)) : ?>
+                    <div class="alert alert-danger">Email already exists.</div>
                 <?php endif; ?>
 
                 <?php if (isset($errorEmail)) : ?>
