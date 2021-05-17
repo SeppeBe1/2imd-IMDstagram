@@ -95,10 +95,24 @@ if (isset($_POST['submit'])) {
 -->
 
     <div class="container add-post">
+
         <div class="row">
 
             <form action="" class="form-post" method="post" enctype="multipart/form-data">
                 <h1>Add a new post</h1>
+
+                <?php if (isset($errorToBig)) : ?>
+                    <div class="alert alert-danger">File is too big.</div>
+                <?php endif; ?>
+
+                <?php if (isset($ErrorUpload)) : ?>
+                    <div class="alert alert-danger">Error while uploading image.</div>
+                <?php endif; ?>
+
+                <?php if (isset($errorNotUse)) : ?>
+                    <div class="alert alert-danger">This file can't be used.</div>
+                <?php endif; ?>
+
                 <!-- Upload photo, choose photo -->
                 <label for="img" class="labels-upload">Select your image</label><br>
                 <input type="file" id="img" name="img" class="form-control" accept="image/*">
@@ -130,25 +144,7 @@ if (isset($_POST['submit'])) {
                 <br><br>
                 <!-- Submit form -->
                 <input class="load-more" name="submit" type="submit" value="Submit"></button>
-
             </form>
-
-            <?php if (isset($error)) : ?>
-                <div class="alert alert-danger"><?php echo $error ?></div>
-            <?php endif; ?>
-
-            <?php if (isset($errorToBig)) : ?>
-                <div class="alert alert-danger">File is too big.</div>
-            <?php endif; ?>
-
-            <?php if (isset($ErrorUpload)) : ?>
-                <div class="alert alert-danger">Error while uploading image.</div>
-            <?php endif; ?>
-
-            <?php if (isset($errorNotUse)) : ?>
-                <div class="alert alert-danger">This file can't be used.</div>
-            <?php endif; ?>
-
         </div>
     </div>
 

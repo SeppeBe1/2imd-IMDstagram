@@ -110,7 +110,7 @@ if (!empty($_POST['banUser'])) {
                             if ($file == "." || $post['photo'] == "..") continue;
                             $file =  classes\Post::getPhoto($post_id);
                     ?>
-                            <img src=<?php echo htmlspecialchars('"uploads/' . $file . '"'); ?> class=<?php echo '" picture-feed ' . $posts->getSelectedFilter($post["filter_id"]) . '"'; ?>>
+                    <img src=<?php echo '"uploads/' . $file . '"'; ?> class=<?php echo '" picture-feed ' . $posts->getSelectedFilter($post["filter_id"]) . '"'; ?>>
                     <?php closedir($open);
                         }
                     } ?>
