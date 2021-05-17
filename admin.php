@@ -51,14 +51,14 @@ $like->setUserID((int)$currentlyLoggedIn[0]['id']);
                     <div class="container-fluid post-post  ">
                         <div class="row row-first">
                             <div class="col-4">
-                                <a href="profile.php?username=<?php echo $post['username']; ?>">
-                                    <img src="./user_avatar/<?php echo $post['avatar'] ?>" class="profile-pic-feed rounded-circle">
+                                <a href="profile.php?username=<?php echo htmlspecialchars( $post['username']); ?>">
+                                    <img src="./user_avatar/<?php echo htmlspecialchars( $post['avatar']); ?>" class="profile-pic-feed rounded-circle">
                                     <!--rounded maken-->
                                 </a>
                             </div>
                             <div class="col-6">
-                                <a href="profile.php?username=<?php echo $post['username']; ?>"><span class="profile-name"><?php echo $post['username'] ?></span></a><br>
-                                <a href="results.php?location=<?php echo $post['location']; ?>" class="profile-location" name="location"><?php echo $post['location'] ?></a>
+                                <a href="profile.php?username=<?php echo htmlspecialchars( $post['username']); ?>"><span class="profile-name"><?php echo htmlspecialchars( $post['username']) ?></span></a><br>
+                                <a href="results.php?location=<?php echo htmlspecialchars( $post['location']); ?>" class="profile-location" name="location"><?php echo htmlspecialchars( $post['location']) ?></a>
                             </div>
 
                             <div class="col-2">
