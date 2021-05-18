@@ -47,21 +47,18 @@ $like->setUserID((int)$currentlyLoggedIn[0]['id']);
 
             <!-- START VAN LOOP-->
             <?php foreach ($allPosts as $post) : ?>
-                <?php
-                $post['id'];
-                ?>
                 <?php if (!$posts->makeHiddenPost($post['id'])) : ?>
                     <div class="container-fluid post-post  ">
                         <div class="row row-first">
                             <div class="col-4">
-                                <a href="profile.php?username=<?php echo $post['username']; ?>">
-                                    <img src="./user_avatar/<?php echo $post['avatar'] ?>" class="profile-pic-feed rounded-circle">
+                                <a href="profile.php?username=<?php echo htmlspecialchars( $post['username']); ?>">
+                                    <img src="./user_avatar/<?php echo htmlspecialchars( $post['avatar']); ?>" class="profile-pic-feed rounded-circle">
                                     <!--rounded maken-->
                                 </a>
                             </div>
                             <div class="col-6">
-                                <a href="profile.php?username=<?php echo $post['username']; ?>"><span class="profile-name"><?php echo $post['username'] ?></span></a><br>
-                                <a href="results.php?location=<?php echo $post['location']; ?>" class="profile-location" name="location"><?php echo $post['location'] ?></a>
+                                <a href="profile.php?username=<?php echo htmlspecialchars( $post['username']); ?>"><span class="profile-name"><?php echo htmlspecialchars( $post['username']) ?></span></a><br>
+                                <a href="results.php?location=<?php echo htmlspecialchars( $post['location']); ?>" class="profile-location" name="location"><?php echo htmlspecialchars( $post['location']) ?></a>
                             </div>
 
                             <div class="col-2">
@@ -75,9 +72,9 @@ $like->setUserID((int)$currentlyLoggedIn[0]['id']);
                                                 <form method="post">
                                                     <input type="text" hidden value="<?php echo $post['id']; ?>" name="post-id">
                                                     <div class="dropdown-menu dropdown-left-manual" aria-labelledby="navbarDropdown">
-                                                        <input class="dropdown-item" type="submit" name="setPost" value="Set post back">
-                                                        <input class="dropdown-item" type="submit" name="deletePost" value="Delete post">
-                                                        <input class="dropdown-item" type="submit" name="banUser" value="Ban user">
+                                                        <input class="dropdown-item setPost" type="submit" name="setPost" data-id="<?php echo $post['id'] ?>" value="Set post back">
+                                                        <input class="dropdown-item deletePost" type="submit" name="deletePost" data-id="<?php echo $post['id'] ?>" value="Delete post">
+                                                        <input class="dropdown-item banUser" type="submit" data-userId="<?php echo $post['user_id'] ?>" data-postId="<?php echo $post['id'] ?>" name=" banUser" value="Ban user">
                                                     </div>
                                                 </form>
                                             </li>
@@ -95,7 +92,7 @@ $like->setUserID((int)$currentlyLoggedIn[0]['id']);
                                         if ($file == "." || $post['photo'] == "..") continue;
                                         $file =  classes\Post::getPhoto($post['id']);
                                 ?>
-                                        <img src=<?php echo '"uploads/' . $file . '"'; ?> class="picture-feed">
+                                        <img src=<?php echo htmlspecialchars( '"uploads/' . $file . '"'); ?> class=<?php echo '" picture-feed ' . $posts->getSelectedFilter($post["filter_id"]) . '"'; ?>>
                                 <?php closedir($open);
                                     }
                                 } ?>
@@ -103,7 +100,7 @@ $like->setUserID((int)$currentlyLoggedIn[0]['id']);
                         </div>
 
                         <div class="col-12">
-                            <p><span class="profile-name"><?php echo $post['username']; ?></span>
+                            <p><span class="profile-name"><?php echo htmlspecialchars($post['username']); ?></span>
                                 <!--DESCRIPTION + HASHTAGS -->
                                 <?php $descrArray = explode(" ", $post['description']); ?>
                                 <?php foreach ($descrArray as $word) : ?>
@@ -135,8 +132,7 @@ $like->setUserID((int)$currentlyLoggedIn[0]['id']);
 
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="js/feed.js"></script>
-
+    <script src="js/admin.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

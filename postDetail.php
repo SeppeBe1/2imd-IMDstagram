@@ -1,38 +1,37 @@
 <?php
 
-    namespace src;
-    spl_autoload_register();
-    include_once("./header.inc.php");
+namespace src;
 
-    $user = new classes\User();
-    $user->setUsername($_SESSION['user']);
-    $currentlyLoggedIn = $user->showUser();
+spl_autoload_register();
+include_once("./header.inc.php");
 
-    $likes = new classes\Like();
-    $likes->setUserID((int)$currentlyLoggedIn[0]['id']);
+$user = new classes\User();
+$user->setUsername($_SESSION['user']);
+$currentlyLoggedIn = $user->showUser();
 
-    $posts = new classes\Post();
-  
-    if(!empty($_GET['id'])){
-        // WE COLLECT HERE THE INFORMATION FOR THE SPECIFIC POST, WITH THE ID
-        $post_id = $_GET['id'];
-        $getPost = new classes\Post();
+$likes = new classes\Like();
+$likes->setUserID((int)$currentlyLoggedIn[0]['id']);
 
-        $postsD = $getPost->getPostDetail($post_id);
-    }
+$posts = new classes\Post();
+$postID = null;
 
-    if(!empty($_POST['deletePost'])){
-        $post = new classes\Post();
-        $post->deletePost($_POST['post-id']);
-    }
-    
-    if(!empty($_POST['reportPost'])){
-        echo "report" . $_POST['post-id']; // TEST
-    }
-    
-    if(!empty($_POST['banUser'])){
-        echo "ban" . $_POST['post-id']; //functie insteken die de user bant om in te loggen
-    }
+if (!empty($_GET['id'])) {
+    // WE COLLECT HERE THE INFORMATION FOR THE SPECIFIC POST, WITH THE ID
+    $post_id = $_GET['id'];
+    $postsD = $posts->getPostDetail($post_id);
+}
+
+if (!empty($_POST['deletePost'])) {
+    $posts->deletePost($_POST['post-id']);
+}
+
+if (!empty($_POST['reportPost'])) {
+    echo "report" . $_POST['post-id']; // TEST
+}
+
+if (!empty($_POST['banUser'])) {
+    echo "ban" . $_POST['post-id']; //functie insteken die de user bant om in te loggen
+}
 ?>
 
 <!DOCTYPE html>
@@ -53,25 +52,23 @@
 
 <body>
 
-    <?php foreach($postsD as $post): ?>
+    <?php foreach ($postsD as $post) : ?>
 
-    <div class="container post-post">
-        <div class="row row-first">
-            <div class="col-2">
-                <a href="#">
-                    <img src="./user_avatar/<?php echo $post['avatar'] ?>" class="profile-pic-feed">
-                </a>
-            </div>
-            <div class="col-6">
-                <a href="profile.php?username=<?php echo $post["username"]; ?>"><span
-                        class="profile-name"><?php echo htmlspecialchars($post["username"]); ?></span></a><br>
-                        <a href="results.php?location=<?php echo htmlspecialchars($post['location']); ?>" class="profile-location"
-                        name="location"><?php echo $post['location'] ?></a>
-            </div>
-            <div class="col-3">
-                <div class="row">
-                    <a href="#" class="follow-button">Follow</a>
+        <div class="container post-post">
+            <div class="row row-first">
+                <div class="col-2">
+                    <a href="#">
+                        <img src="./user_avatar/<?php echo htmlspecialchars($post['avatar']) ?>" class="profile-pic-feed">
+                    </a>
                 </div>
+                <div class="col-6">
+                    <a href="profile.php?username=<?php echo htmlspecialchars( $post["username"]); ?>"><span class="profile-name"><?php echo htmlspecialchars($post["username"]); ?></span></a><br>
+                    <a href="results.php?location=<?php echo htmlspecialchars($post['location']); ?>" class="profile-location" name="location"><?php echo $post['location'] ?></a>
+                </div>
+                <div class="col-3">
+                    <div class="row">
+                        <a href="#" class="follow-button">Follow</a>
+                    </div>
             </div>
             <div class="col-1">
 
@@ -102,94 +99,98 @@
                         </ul>
                 </nav>
 
+                </div>
             </div>
-        </div>
 
-        <div class="row row-second">
-            <div class="col-12">
+            <div class="row row-second">
+                <div class="col-12">
 
-                <?php $folder = "uploads/";
-                        $file = "";
-                        if (is_dir($folder)) {
-                            if ($open = opendir($folder)) {
-                                if ($file == "." || $post['photo'] == "..") continue;
-                                $file =  classes\Post::getPhoto($post_id);
-                                ?>
-                            <img src=<?php echo '"uploads/' . $file . '"'; ?> class="picture-feed">
-                            <?php closedir($open);
-                            }
-                        } ?>
+                    <?php $folder = "uploads/";
+                    $file = "";
+                    if (is_dir($folder)) {
+                        if ($open = opendir($folder)) {
+                            if ($file == "." || $post['photo'] == "..") continue;
+                            $file =  classes\Post::getPhoto($post_id);
+                    ?>
+                    <img src=<?php echo '"uploads/' . $file . '"'; ?> class=<?php echo '" picture-feed ' . $posts->getSelectedFilter($post["filter_id"]) . '"'; ?>>
+                    <?php closedir($open);
+                        }
+                    } ?>
+                </div>
             </div>
-        </div>
 
-        <!--like/unlike-->
-        <div class="row row-third">
-            <?php 
+            <!--like/unlike-->
+            <div class="row row-third">
+                <?php
                 $likes->setPostID($post_id);
-                $likes->setUserID($post['user_id']); 
-            ?> 
-            <?php $isLikedbyUser = $likes->isLiked(); ?>
-            <div class="col-1">
-                <img src="./img/icons/<?php if (!empty($isLikedbyUser)) {echo "heart";} else {echo "heart-outlines";} ?>.svg"
-                    class="icon-feed like-status <?php if (!empty($isLikedbyUser)) { echo "unlike"; } else { echo "like";} ?>"
-                    data-id=<?php echo $post['id']; ?>>
+                $likes->setUserID($post['user_id']);
+                ?>
+                <?php $isLikedbyUser = $likes->isLiked(); ?>
+                <div class="col-1">
+                    <img src="./img/icons/<?php if (!empty($isLikedbyUser)) {
+                                                echo "heart";
+                                            } else {
+                                                echo "heart-outlines";
+                                            } ?>.svg" class="icon-feed like-status <?php if (!empty($isLikedbyUser)) {
+                                                                                                                                                                    echo "unlike";
+                                                                                                                                                                } else {
+                                                                                                                                                                    echo "like";
+                                                                                                                                                                } ?>" data-id=<?php echo $post['id']; ?>>
+                </div>
+
+                <!--count likes-->
+                <?php $countLikes = $likes->countLikes(); ?>
+                <div class="col-1">
+                    <span id="show_like">
+                        <p class="number-feed likescount" data-id="<?php echo $post['id']; ?>">
+                            <?php echo $countLikes['count']; ?>
+                        </p>
+                    </span>
+                </div>
+
+                <div class="col-1">
+                    <a href="#"><img src="./img/icons/chat.svg" class="icon-feed"></a>
+                </div>
+                <div class="col-1">
+                    <p class="number-feed">1</p>
+                </div>
+
             </div>
 
-            <!--count likes-->
-            <?php $countLikes = $likes->countLikes(); ?>
-            <div class="col-1">
-                <span id="show_like">
-                    <p class="number-feed likescount" data-id="<?php echo $post['id']; ?>">
-                        <?php echo $countLikes['count']; ?>
+            <div class="row row-fourth">
+                <div class="col-12">
+                    <p><span class="profile-name"><?php echo htmlspecialchars( $post["username"]) ?></span>
+                        <?php $descrArray = explode(" ", $post['description']); ?>
+                        <?php foreach ($descrArray as $word) : ?>
+                            <?php if (!empty($word)) : ?>
+                                <?php if ($word[0] == "#") : ?>
+                                    <a href="results.php?tag=<?php echo str_replace("#", "", $word); ?>" name="tag" class="tags-post"><?php echo htmlspecialchars($word); ?></a>
+                                <?php else : ?>
+                                    <?php echo htmlspecialchars($word); ?>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
                     </p>
-                </span>
+                    </p>
+                </div>
             </div>
 
-            <div class="col-1">
-                <a href="#"><img src="./img/icons/chat.svg" class="icon-feed"></a>
+            <div class="row row-fifth">
+                <div class="col-12">
+                    <p class="reaction"><span class="profile-name">Eduard Manet </span>Proin ullamcorper feugiat eros, sit
+                        amet accumsan tellus cursus vitae. Etiam feugiat tristique ante, luctus feugiat risus ultrices ut!
+                    </p>
+                </div>
             </div>
-            <div class="col-1">
-                <p class="number-feed">1</p>
+
+
+            <div class="row row-sixth">
+                <div class="col-12">
+                    <p class="timing-feed"><?php echo $posts->humanTiming($post_id); ?> ago</p>
+                </div>
             </div>
 
         </div>
-
-        <div class="row row-fourth">
-            <div class="col-12">
-                <p><span class="profile-name"><?php echo $post["username"]?></span>
-                    <?php $descrArray = explode(" ", $post['description']);?>
-                    <?php foreach($descrArray as $word): ?>
-                    <?php if (!empty($word)) : ?>
-                    <?php if($word[0] == "#"): ?>
-                    <a href="results.php?tag=<?php echo str_replace("#", "", $word); ?>" name="tag"
-                        class="tags-post"><?php echo htmlspecialchars($word);?></a>
-                    <?php else: ?>
-                    <?php echo htmlspecialchars($word); ?>
-                    <?php endif; ?>
-                    <?php endif; ?>
-                    <?php endforeach; ?>
-                </p>
-                </p>
-            </div>
-        </div>
-
-        <div class="row row-fifth">
-            <div class="col-12">
-                <p class="reaction"><span class="profile-name">Eduard Manet </span>Proin ullamcorper feugiat eros, sit
-                    amet accumsan tellus cursus vitae. Etiam feugiat tristique ante, luctus feugiat risus ultrices ut!
-                </p>
-            </div>
-        </div>
-
-
-        <div class="row row-sixth">
-            <div class="col-12">
-                <p class="timing-feed"><?php echo $post["postedDate"]?></p>
-                <p class="timing-feed"><?php echo $posts->humanTiming($post["id"]); ?> ago</p>
-            </div>
-        </div>
-
-    </div>
     <?php endforeach; ?>
 
 

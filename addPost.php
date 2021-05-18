@@ -32,26 +32,26 @@ if (isset($_POST['submit'])) {
 
     $allExtensions = array('jpeg', 'png', 'jpg', 'gif');
 
-    try{
+    try {
 
         if (in_array($fileRealExt, $allExtensions)) {
             if ($fileError === 0) {
                 if ($fileSize < 2097152) {
-                    $post->setImage(uniqid(' ', true) . "." . $fileRealExt);
+                    $post->setImage(uniqid('', true) . "." . $fileRealExt);
                     $fileDestination = "uploads/" . $post->getImage();
 
                     $post->createPost($user->getUsername(), $post->getImage(), $post->getDescription(), $post->getLocation(), $post->getFilters());
 
                     move_uploaded_file($fileTmp, $fileDestination);
-                    header("location: feed.php");
+                    header("location: index.php");
                 } else {
-                    $error =  "file is too big";
+                    $errorToBig = true;
                 }
             } else {
-                $error = "error while uploading image";
+                $ErrorUpload = true;
             }
         } else {
-            $error = "This file can't be used";
+            $errorNotUse = true;
         }
     } catch (\Throwable $error) {
         $error = $error->getMessage();
@@ -95,10 +95,24 @@ if (isset($_POST['submit'])) {
 -->
 
     <div class="container add-post">
+
         <div class="row">
 
             <form action="" class="form-post" method="post" enctype="multipart/form-data">
                 <h1>Add a new post</h1>
+
+                <?php if (isset($errorToBig)) : ?>
+                    <div class="alert alert-danger">File is too big.</div>
+                <?php endif; ?>
+
+                <?php if (isset($ErrorUpload)) : ?>
+                    <div class="alert alert-danger">Error while uploading image.</div>
+                <?php endif; ?>
+
+                <?php if (isset($errorNotUse)) : ?>
+                    <div class="alert alert-danger">This file can't be used.</div>
+                <?php endif; ?>
+
                 <!-- Upload photo, choose photo -->
                 <label for="img" class="labels-upload">Select your image</label><br>
                 <input type="file" id="img" name="img" class="form-control" accept="image/*">
@@ -130,13 +144,7 @@ if (isset($_POST['submit'])) {
                 <br><br>
                 <!-- Submit form -->
                 <input class="load-more" name="submit" type="submit" value="Submit"></button>
-
             </form>
-
-            <?php if (isset($error)) : ?>
-                <div class="alert alert-danger"><?php echo $error ?></div>
-            <?php endif; ?>
-
         </div>
     </div>
 

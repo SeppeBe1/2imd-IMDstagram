@@ -97,20 +97,25 @@ class Post  {
         return $this->filters;
     }
 
-    // FUNCTION THAT PICKS UP THE POSTS FROM ALL THE USER FOR FEED.PHP
-    public function getAllPosts($limit){
+    // FUNCTION THAT PICKS UP THE POSTS FROM ALL THE PEOPLE FOLLOWING FOR index.PHP
+
+    public function getAllPosts($limit,$follower){
         $conn = Db::getInstance();
-
-        // VARIABLE THAT DEFINES HOW MANY POSTS WE WANT TO DISPLAY, TO BEGIN
-
-        // COLLECTING ALL THE POSTS, LIMITED BY THE AMOUNT
-        $statement = $conn->prepare("SELECT *, posts.id FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY postedDate DESC LIMIT :limit");
+        // $statement = $conn->prepare("SELECT isFollowing from followers where isFollower = :userid INNER JOIN posts on followers.isFollowING = posts.user_id");
+        // $statement = $conn->prepare("SELECT *, posts.id FROM posts INNER JOIN followers ON posts.user_id = followers.isFollower INNER JOIN users ON followers.isFollowing = users.id where user_id = :userid ");
+        $statement = $conn->prepare("SELECT *, posts.id FROM posts JOIN followers ON (
+            followers.isFollowing = posts.user_id AND
+            followers.isFollower = :userid AND status = 'following'
+        )JOIN users where posts.user_id = users.id ORDER BY postedDate DESC LIMIT :limit");
+        $statement->bindValue(":userid", $follower);
         $statement->bindValue(':limit', $limit, \PDO::PARAM_INT);
         $statement->execute();
         $posts = $statement->fetchAll(\PDO::FETCH_ASSOC);
-        
+
         return $posts;
+       
     }
+
 
     public function getTotalPosts(){
         $conn = Db::getInstance();
@@ -261,6 +266,38 @@ class Post  {
             header ("Refresh:0");
             return $result;
         }
+    }
+
+    public function deleteAllPostUser($user_id)
+    {
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare("SELECT * from posts WHERE user_id= :user_id");
+        $statement->bindValue(":user_id", $user_id);
+        $statement->execute();
+        $results = $statement->fetch();
+
+        //image path
+        $imageUrl = './uploads/' . $results['photo'];
+        //check if image exists
+        if (file_exists($imageUrl)) {
+            //delete the image from folder
+            unlink(realpath($imageUrl));
+            $statement = $conn->prepare("DELETE FROM posts WHERE user_id= :user_id");
+            $statement->bindValue(":user_id", $user_id);
+            $statement->execute();
+            $result = $statement->fetch();
+            header("Refresh:0");
+            return $result;
+        }
+    }
+
+    public function deleteAllReports($id){
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare("DELETE FROM reports WHERE post_id = :id");
+        $statement->bindValue(":id", $id);
+        $statement->execute();
     }
 
     public function rapportPost($post_id, $username)

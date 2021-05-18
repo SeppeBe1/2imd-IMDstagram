@@ -12,6 +12,7 @@ class User {
     protected $fullName;
     protected $bio;
     protected $id;
+    protected $isPrivate;
 
     public function setUsername($username)
     {
@@ -112,11 +113,36 @@ class User {
         return $this;
     }
 
+
+    public function getIsPrivate()
+    {
+        return $this->isPrivate;
+    }
+
+    public function setIsPrivate($isPrivate)
+    {
+        $this->isPrivate = $isPrivate;
+
+        return $this;
+    }
+
     public function getAdmin(){
         $conn = Db::getInstance();
 
         $statement = $conn->prepare("SELECT isAdmin FROM users WHERE username = :username");
         $statement->bindValue(":username", $this->username);
+        $statement->execute();
+        $result = $statement->fetch();
+
+        return $result["isAdmin"];
+
+    }
+
+    public function getAdminUser($username){
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare("SELECT isAdmin FROM users WHERE username = :username");
+        $statement->bindValue(":username", $username);
         $statement->execute();
         $result = $statement->fetch();
 
@@ -139,7 +165,7 @@ class User {
             setcookie("loggedIn", "dareal" . $this->getUsername() . "748", time() + 60 * 60 * 24 * 7); //sets cookie for a week
             $_SESSION['user'] = $this->getUsername();
             if($this->getAdmin()== NULL){
-                header("location: feed.php"); 
+                header("location: index.php"); 
             } else{
                 header("location: admin.php");
             }
@@ -201,7 +227,7 @@ class User {
             session_start(); 
             setcookie("loggedIn", "dareal" . $this->getUsername() . "748", time() + 60 * 60 * 24 * 7); //sets cookie for a week
             $_SESSION['user'] = $this->getUsername();
-            header("location: feed.php"); 
+            header("location: index.php"); 
         }else {
             return false;
         }
@@ -332,6 +358,21 @@ class User {
         }
     }
 
+    public function deleteUser($user_id){
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("DELETE  FROM users WHERE id = $user_id ");
+        $statement->bindValue(":user", $user_id);
+        $statement->execute();
+    }
+
+    public function deleteUserAllPosts($user_id)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("DELETE  FROM posts WHERE user_id = $user_id");
+        $statement->bindValue(":id", $user_id);
+        $statement->execute();
+    }
+
     // TO GET THE CORRECT USERNAME ID FOR PROFILE.PHP
     public function getUsernameFrom($username){
         $conn = Db::getInstance();
@@ -360,6 +401,29 @@ class User {
     public function checkLoggedInUsername() {
         echo $_SESSION['user'];
     }
+
+    public function privateUser(){
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("update users SET isPrivate = :private where id = :user_id");
+        $id = $this->getId();
+        $private = $this->getIsPrivate();
+        $statement->bindValue(":user_id", $id);
+        $statement->bindValue(":private", $private);
+        $result = $statement->execute(); 
+        return $result;
+    }
+
+    // public function privateUser(){
+    //     $conn = Db::getInstance();
+    //     $statement = $conn->prepare("INSERT INTO users (isPrivate) VALUES (:isPrivate) where id = :user_id");
+    //     $id = $this->getId();
+    //     $private = $this->getIsPrivate();
+    //     $statement->bindValue(":isPrivate",$private);
+    //     $statement->bindValue(":user_id", $id);
+    //     $result = $statement->execute();
+    //     return $result;
+    // }
+    
 
     
 }

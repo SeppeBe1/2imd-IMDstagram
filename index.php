@@ -18,12 +18,19 @@ $currentlyLoggedIn = $user->showUser();
 //     $post->getAllPosts($_POST["totalPosts"]);
 // }
 
-$amount = new classes\Post();
-$totalamountposts = $amount->getTotalPosts();
+$posts = new classes\Post();
+$totalamountposts = $posts->getTotalPosts();
 // var_dump($totalamountposts);
 
 $posts = new classes\Post();
-$allPosts = $posts->getAllPosts(12);
+$follow = new classes\Follow();
+$follow->setIsFollower((int)$currentlyLoggedIn[0]['id']);
+$following = $follow->getallFollowing();
+
+// GET POSTS FROM PEOPLE I'M FOLLOWING
+$follower = (int)$currentlyLoggedIn[0]['id'];
+$allPosts = $posts->getAllPosts(20,$follower);
+
 
 $like = new classes\Like();
 $like->setUserID((int)$currentlyLoggedIn[0]['id']);
@@ -41,8 +48,7 @@ if (!empty($_POST['banUser'])) {
 }
 
 if(!empty($_POST['editPost'])){
-    $post = new classes\Post();
-    $post->editPost($_POST['post-id']);
+    $posts->editPost($_POST['post-id']);
 }
 
     // Load more funct.
@@ -88,12 +94,12 @@ $comments->setUserId((int)$currentlyLoggedIn[0]['id']);
             <div class="container post-post">
                 <div class="row row-first">
                     <div class="col-3 col-md-2">
-                        <a href="profile.php?username=<?php echo $post['username']; ?>">
-                            <img src="./user_avatar/<?php echo $post['avatar'] ?>" class="profile-pic-feed rounded-circle">
+                        <a href="profile.php?username=<?php echo htmlspecialchars($post['username']); ?>">
+                            <img src="./user_avatar/<?php echo htmlspecialchars($post['avatar']) ?>" class="profile-pic-feed rounded-circle">
                         </a>
                     </div>
                     <div class="col-8 col-md-9">
-                        <a href="profile.php?username=<?php echo $post['username']; ?>"><span class="profile-name"><?php echo $post['username'] ?></span></a><br>
+                        <a href="profile.php?username=<?php echo htmlspecialchars($post['username']); ?>"><span class="profile-name"><?php echo htmlspecialchars($post['username']) ?></span></a><br>
                         <a href="results.php?location=<?php echo $post['location']; ?>" class="profile-location" name="location"><?php echo $post['location'] ?></a>
                     </div>
 
@@ -183,7 +189,7 @@ $comments->setUserId((int)$currentlyLoggedIn[0]['id']);
 
                 <div class="row row-fourth">
                     <div class="col-12">
-                        <p><span class="profile-name"><?php echo $post['username']; ?></span>
+                        <p><span class="profile-name"><?php echo htmlspecialchars($post['username']); ?></span>
                             <!--DESCRIPTION + HASHTAGS -->
                             <?php $descrArray = explode(" ", $post['description']); ?>
                             <?php foreach ($descrArray as $word) : ?>
@@ -227,13 +233,13 @@ $comments->setUserId((int)$currentlyLoggedIn[0]['id']);
                             
                                     <div class="col-2 col-sm-1 col-md-1">
                                         <a id="userid"href="profile.php?username=<?php echo $comment['user_id']; ?>">
-                                            <img src="./user_avatar/<?php echo $comment['avatar'] ?>" class="profile-pic-comment rounded-circle"> <!--rounded maken-->
+                                            <img src="./user_avatar/<?php echo htmlspecialchars($comment['avatar']) ?>" class="profile-pic-comment rounded-circle"> <!--rounded maken-->
                                         </a>
                                     </div>
 
                                     <div class="col-10 col-sm-11 col-md-11">
                                         <div class="comment">
-                                        <p class="commenttext"><strong><?php echo $comment['username']; ?></strong>
+                                        <p class="commenttext"><strong><?php echo htmlspecialchars($comment['username']); ?></strong>
                                         <?php echo $comment['commentText']?></p>  
                                         
                                         <p class="commenttime"><?php echo $comments->timeAgo(($comment['commentDate']))?></p> 
