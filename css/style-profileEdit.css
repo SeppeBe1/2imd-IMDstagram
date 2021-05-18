@@ -174,16 +174,17 @@ textarea:focus{
 
 }
 
-/* .form-check-input[type=checkbox]{
+.form-check-input:focus{
     box-shadow: none;
-    border:1px solid #CD847B;
-} */
+    border-color:rgba(0,0,0,.25);
+}
 
-/* .form-check-input:checked{
+.form-check-input:checked{
     box-shadow: none;
     background-color: #CD847B;
     border:1px solid #CD847B;
-} */
+}
+
 .private-check:focus{
     box-shadow: none;
     background-color: #CD847B;
@@ -194,6 +195,8 @@ textarea:focus{
     box-shadow: none;
     border:1px solid #CD847B;
 }
+
+
 
 
   

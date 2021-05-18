@@ -39,6 +39,7 @@ var_dump($followers);
 
                 <?php foreach ($followers as $f):?>
                 <div class="row follow-bottom">
+                
                     <div class="col-3 col-md-2">
                         <a href="profile.php?username=<?php echo htmlspecialchars($f['username']);?>"><img src="./user_avatar/<?php echo htmlspecialchars($f['avatar']);?>" class="profile-pic-follow "></a>
                     </div>
@@ -48,23 +49,27 @@ var_dump($followers);
 
                    
                         <div class="col-3 col-md-4 ">
-                            <a href="#" class=" btn-confirm followBtn confirm" data-followid="<?php echo $f['id']?>">Confirm</a>
+                            <a href="#" class=" btn-confirm  confirm" data-followid="<?php echo $f['id']?>">Confirm</a>
                         </div>
 
                         <div class="col-2 col-md-1 ">
-                            <a href="#" class="  btn-delete followBtn delete" data-followid="<?php echo $f['id']?>">X</a>
+                            <a href="#" class="  btn-delete delete" data-followid="<?php echo $f['id']?>">X</a>
                         </div>
 
                        
                     </div>
-                </div>
+                    <?php endforeach ;?>
+               
                 
-                <?php endforeach ;?>
+                
             </div>
+              
+            
 
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="js/follow.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/request.js"></script>
 </body>
 </html>

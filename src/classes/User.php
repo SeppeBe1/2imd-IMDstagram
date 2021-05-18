@@ -413,16 +413,16 @@ class User {
         return $result;
     }
 
-    // public function privateUser(){
-    //     $conn = Db::getInstance();
-    //     $statement = $conn->prepare("INSERT INTO users (isPrivate) VALUES (:isPrivate) where id = :user_id");
-    //     $id = $this->getId();
-    //     $private = $this->getIsPrivate();
-    //     $statement->bindValue(":isPrivate",$private);
-    //     $statement->bindValue(":user_id", $id);
-    //     $result = $statement->execute();
-    //     return $result;
-    // }
+    public function privateUserDelete(){
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("update users SET isPrivate = :private where id = :user_id");
+        $id = $this->getId();
+        $private = $this->getIsPrivate();
+        $statement->bindValue(":user_id", $id);
+        $statement->bindValue(":private", $private);
+        $result = $statement->execute(); 
+        return $result;
+    }
     
 
     

@@ -60,9 +60,6 @@ $(document).ready(function() {
             }
     });
 
-    document.querySelector(".confirm").addEventListener("click", function() {  
-        console.log("confirm");
-    });
 
     
 });
