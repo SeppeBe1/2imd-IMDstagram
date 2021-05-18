@@ -53,6 +53,7 @@ $posts = new classes\Post();
                                 <a href="profile.php?username=<?php echo $key["username"]; ?>"><span class="profile-name"><?php echo $key['username']; ?></span></a><br>
                                 <a href="results.php?location=<?php echo $key['location']; ?>" class="profile-location"><?php echo $key['location']; ?></a>
                                 <br>
+                                <?php if(!empty($key['photo'])): ?>
                                 <a href="postDetail.php?id=<?php echo $key["id"]; ?>">
                                     <?php
                                     $folder = "uploads/";
@@ -66,6 +67,7 @@ $posts = new classes\Post();
                                         }
                                     } ?>
                                 </a><br>
+                                <?php endif; ?>
                                 <br>
 
                                 <?php $descrArray = explode(" ", $key['description']); ?>

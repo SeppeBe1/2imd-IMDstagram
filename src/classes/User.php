@@ -162,7 +162,7 @@ class User {
         $hash = $user['password'];
 
         if(password_verify($this->getPassword(), $hash)) {
-            setcookie("loggedIn", "dareal" . $this->getUsername() . "748", time() + 60 * 60 * 24 * 7); //sets cookie for a week
+            setcookie("loggedIn", "dareal" . $this->getUsername() . rand(0,10000), time() + 60 * 60 * 24 * 7); //sets cookie for a week
             $_SESSION['user'] = $this->getUsername();
             if($this->getAdmin()== NULL){
                 header("location: index.php"); 

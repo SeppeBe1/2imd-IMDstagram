@@ -33,7 +33,7 @@ class Search
         public function searchParam() {
             $conn = Db::getInstance();
             
-            $statement = $conn->prepare("SELECT *, users.id AS userid FROM `users` INNER JOIN posts ON users.id = posts.user_id 
+            $statement = $conn->prepare("SELECT *, users.id AS userid FROM `users` LEFT JOIN posts ON users.id = posts.user_id 
             WHERE `username` LIKE :search OR `description` LIKE :search OR `location` LIKE :search");
             $keyword = "%".$this->getParam()."%";
             $statement->bindValue(":search", $keyword, \PDO::PARAM_STR);
