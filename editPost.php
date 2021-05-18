@@ -11,6 +11,8 @@
     $likes = new classes\Like();
     $likes->setUserID((int)$currentlyLoggedIn[0]['id']);
 
+    $posts = new classes\Post();
+
     // INFORMATION OF ID TO EDIT THE POST
     if(!empty($_GET['id'])){
         $post_id = $_GET['id'];
@@ -29,8 +31,12 @@
 
             try{
                 $post->changeDescription($_POST['description'], $post_id);
+                $successMessage = true;
+                header("Refresh:3");
             }catch(\Throwable $error) {
-                $error = $error->getMessage();
+                // $error = $error->getMessage();
+                $errorMessage = true;
+
             }
         }
     }
@@ -54,9 +60,26 @@
 
 <body>
 
+
+
     <?php foreach($postsD as $post): ?>
 
+    <?php if($user->getUsername() == $post['username']) : ?>    
+
+
     <div class="container post-post">
+
+        <!-- MESSAGES ERROR / SUCCESS WHEN UPDATING POST -->
+        <?php if (isset($errorMessage)) : ?>
+            <div class="alert alert-danger">Something went wrong.</div>
+        <?php endif; ?>
+
+        <?php if (isset($successMessage)) : ?>
+            <div class="alert alert-success">Post successfully adjusted</div>
+        <?php endif; ?>
+
+
+        <!-- START OF POST CONTENT -->
         <div class="row row-first">
             <div class="col-2">
                 <a href="#">
@@ -165,7 +188,6 @@
                     </p>
 
                     <textarea rows="4" cols="70" name="description"><?php echo htmlspecialchars( $post['description']); ?></textarea>
-                    <!-- <button type="submit" class="btn follow-button" name="update">Update this post</button> -->
                     <a><input  type="submit" name ="update" value="update" class="btn follow-button"></button></a>
 
                 </div>
@@ -182,12 +204,27 @@
 
         <div class="row row-sixth">
             <div class="col-12">
-                <p class="timing-feed"><?php echo $post["postedDate"]?></p>
+                    <p class="timing-feed"><?php echo $posts->humanTiming($post_id); ?> ago</p>
             </div>
         </div>
 
     </div>
+
+    <?php else : ?>
+        <div class="container post-post">
+            <div class="alert alert-warning" role="alert">
+                Access denied to this page. You will be redirected to the feed.
+            </div>
+        </div>
+                
+        <?php header('Refresh: 3; URL=index.php');?>
+
+    <?php endif ; ?>
+
     <?php endforeach; ?>
+
+
+    
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
