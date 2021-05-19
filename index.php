@@ -56,13 +56,16 @@ if(!empty($_POST['editPost'])){
     // $loadmoreposts = $loadpost->loadMore();
     // var_dump($loadmoreposts);
 
-
-  
-
 //COMMENTS
 
 $comments = new classes\Comment();
 $comments->setUserId((int)$currentlyLoggedIn[0]['id']);
+
+
+// BOOKMARK
+$bookmark = new classes\Bookmark();
+$bookmark->setUserId((int)$currentlyLoggedIn[0]['id']);
+
 
 ?>
 <!DOCTYPE html>
@@ -185,6 +188,30 @@ $comments->setUserId((int)$currentlyLoggedIn[0]['id']);
                         <p class="number-feed">1</p>
                     </div>
 
+                    <!-- empty col for spacing-->
+                    <div class="col-2 col-md-6">
+                    </div>
+
+                    <!-- bookmark post -->
+                    <div class="col-2 col-md-1">
+                    <?php $isBookmarked = $bookmark->isBookmarked(); ?>
+                        <img src="./img/icons/<?php if(!empty($isBookmarked)){
+                                                                        echo "bookmark-fill";
+                                                                    } else{
+                                                                        echo "bookmark";
+                                                                    }
+                                                                    ?>.svg " class="icon-feed bookmark-status 
+                                                                                <?php if (!empty($isBookmarked)) {
+                                                                                            echo "unbookmark";
+                                                                                        } else {
+                                                                                            echo "bookmark";
+                                                                                        } ?>" data-id=<?php echo $post['id']; ?>
+                                
+                        
+                        >
+                    </div>
+
+
                 </div>
 
                 <div class="row row-fourth">
@@ -289,6 +316,7 @@ $comments->setUserId((int)$currentlyLoggedIn[0]['id']);
     <script src="https://kit.fontawesome.com/a7dc01cef9.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="js/feed.js"></script>
+    <script src="js/bookmark.js"></script>
     <script src="js/loadmore.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
