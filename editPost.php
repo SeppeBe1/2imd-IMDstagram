@@ -188,7 +188,7 @@
                     </p>
 
                     <textarea rows="4" cols="70" name="description"><?php echo htmlspecialchars( $post['description']); ?></textarea>
-                    <a><input  type="submit" name ="update" value="update" class="btn follow-button"></button></a>
+                    <a><input  type="submit" name ="update" value="update" class="btn follow-button"></a>
 
                 </div>
             </div>

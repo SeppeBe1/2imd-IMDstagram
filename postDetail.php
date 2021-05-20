@@ -32,6 +32,10 @@ if (!empty($_POST['reportPost'])) {
 if (!empty($_POST['banUser'])) {
     echo "ban" . $_POST['post-id']; //functie insteken die de user bant om in te loggen
 }
+
+// BOOKMARK
+$bookmark = new classes\Bookmark();
+$bookmark->setUserId((int)$currentlyLoggedIn[0]['id']);
 ?>
 
 <!DOCTYPE html>
@@ -154,6 +158,29 @@ if (!empty($_POST['banUser'])) {
                 <div class="col-1">
                     <p class="number-feed">1</p>
                 </div>
+
+                <!-- empty col for spacing-->
+                <div class="col-2 col-md-6">
+                    </div>
+
+                    <!-- bookmark post -->
+                    <div class="col-2 col-md-1">
+                    <?php $isBookmarked = $bookmark->isBookmarked(); ?>
+                        <img src="./img/icons/<?php if(!empty($isBookmarked)){
+                                                                        echo "bookmark-fill";
+                                                                    } else{
+                                                                        echo "bookmark";
+                                                                    }
+                                                                    ?>.svg " class="icon-feed bookmark-status 
+                                                                                <?php if (!empty($isBookmarked)) {
+                                                                                            echo "unbookmark";
+                                                                                        } else {
+                                                                                            echo "bookmark";
+                                                                                        } ?>" data-id=<?php echo $post['id']; ?>
+                                
+                        
+                        >
+                    </div>
 
             </div>
 
