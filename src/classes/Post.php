@@ -4,6 +4,9 @@ spl_autoload_register();
 
 class Post  {
     //veranderen naar private
+
+    private $id;
+
     protected $image;
     protected $description;
     protected $location;
@@ -12,6 +15,19 @@ class Post  {
     protected $isLiked;
     protected $innappropriate;
     protected $filters;
+
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     public function setImage($image)
     {
@@ -375,11 +391,15 @@ class Post  {
             return $correctUsers;
            
         }
-        public function changeDescription($description, $post_id){
+        public function changeDescription(){ // $description, $post_id = argumenten bij eerste versie (zonder GET en SET)
             $conn = Db::getInstance();
     
             $statement = $conn->prepare("UPDATE posts SET description = :description WHERE posts.id = :id");
-            // $description = $this->getDescription();
+            
+            // Getters implementeren - TEST
+            $post_id = $this->getId();
+            $description = $this->getDescription();
+
             $statement->bindValue(":description", $description);
             $statement->bindValue(":id", $post_id);
 
