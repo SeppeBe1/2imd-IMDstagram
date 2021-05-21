@@ -38,7 +38,7 @@ var_dump($followers);
                 </div>
 
                 <?php foreach ($followers as $f):?>
-                <div class="row follow-bottom">
+                <div class="row follow-bottom request_<?php echo $f['id']?>">
                 
                     <div class="col-3 col-md-2">
                         <a href="profile.php?username=<?php echo htmlspecialchars($f['username']);?>"><img src="./user_avatar/<?php echo htmlspecialchars($f['avatar']);?>" class="profile-pic-follow "></a>

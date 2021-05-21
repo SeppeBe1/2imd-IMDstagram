@@ -27,11 +27,20 @@
         }
 
         if(!empty($_POST['update'])){
-            $post = new classes\Post();
+            
 
             try{
-                $post->changeDescription($_POST['description'], $post_id);
+                // $post->changeDescription($_POST['description'], $post_id); --> deze argumenten dan ook terug toevoegen bij Post.php
+
+                $post = new classes\Post(); // Ofwel komt deze code net onder if statement
+
+                $post->setId($post_id);
+                $post->setDescription($_POST['description']);
+
+                $post->changeDescription();
+                
                 $successMessage = true;
+
                 header("Refresh:3");
             }catch(\Throwable $error) {
                 // $error = $error->getMessage();

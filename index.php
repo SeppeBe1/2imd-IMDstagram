@@ -269,7 +269,7 @@ $bookmark->setUserId((int)$currentlyLoggedIn[0]['id']);
                                     <div class="col-10 col-sm-11 col-md-11">
                                         <div class="comment">
                                         <p class="commenttext"><strong><?php echo htmlspecialchars($comment['username']); ?></strong>
-                                        <?php echo $comment['commentText']?></p>  
+                                        <?php echo htmlspecialchars($comment['commentText'])?></p>  
                                         
                                         <p class="commenttime"><?php echo $comments->timeAgo(($comment['commentDate']))?></p> 
                                         </div>
