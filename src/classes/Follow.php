@@ -159,15 +159,30 @@ class Follow{
         return $isRequested;
     }
 
-    public function updateFollowing(){
+    public function updateStatus(){
         $conn = Db::getInstance();
-        $statement = $conn->prepare("UPDATE followers SET status = :status where isFollower = :users.id )");
-        $isFollowing = $this->getIsFollowing();
+        $statement = $conn->prepare("UPDATE followers SET status = :status where isFollowing = :user_id AND isFollower = :follower AND status = 'pending')");
+        $user_id = $this->getIsFollower();
+        $isFollower = $this->getIsFollowing();
         $status = $this->getStatus();
-        $statement->bindValue(":following", $isFollowing);
+        $statement->bindValue(":user_id", $isFollower);
+        $statement->bindValue(":follower", $user_id);
         $statement->bindValue(":status", $status);
-
+        
         $result = $statement->execute();
+        
+        return $result;
+    }
+
+    public function deleteRequest(){
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("DELETE * from followers where isFollowing = :user_id AND isFollower = :follower AND status = 'pending')");
+        $user_id = $this->getIsFollower();
+        $isFollower = $this->getIsFollowing();
+        $statement->bindValue(":user_id", $isFollower);
+        $statement->bindValue(":follower", $user_id);
+        $result = $statement->execute();
+        
         return $result;
     }
 }
