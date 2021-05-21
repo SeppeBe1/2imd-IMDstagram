@@ -6,14 +6,16 @@ include_once("./header.inc.php");
 spl_autoload_register();
 
 $user = new classes\User();
-$user->setUsername($_SESSION['user']);
-$currentlyLoggedIn = $user->showUser();
-// var_dump($currentlyLoggedIn);
+
+if(isset($_GET['follower'])) {
+    $user->setUsername($_GET['follower']);
+    $userID = $user->showUser();
+}
 
 $follow = new classes\Follow();
-$follow->setIsFollowing((int)$currentlyLoggedIn[0]['id']);
+$follow->setIsFollowing((int)$userID[0]['id']);
 $followers = $follow->getallFollowers();
-var_dump($followers);
+
 ?>
 
 <!DOCTYPE html>

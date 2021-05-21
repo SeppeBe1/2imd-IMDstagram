@@ -103,13 +103,13 @@
                         </div>
 
                         <div class="col-4  text-center follow">
-                            <a href="followers.php">
+                            <a href="followers.php?follower=<?php echo htmlspecialchars($user['username']);?>" name="follower">
                                 <h7 class="number-profile mb-0 d-block">182</h7><small class="text-muted">Followers</small>
                             </a>
                         </div>
 
                         <div class="col-4  text-center follow">
-                            <a href="following.php">
+                            <a href="following.php?following=<?php echo htmlspecialchars($user['username']);?>" name="following">
                                 <h7 class="number-profile mb-0 d-block">320</h7><small class="text-muted">Following</small>
                             </a>
                         </div>
@@ -129,7 +129,7 @@
                                 
                                 <?php elseif (!empty($isRequested)):?>
                                     <div class="col-sm-12  text-center follow">
-                                        <!-- Unfollow -->
+                                        <!-- Requested -->
                                         <a href="#" class="float-left btn btn-unfollow followBtn" data-followid="<?php echo $user_id ?>">Requested</a>
                                     </div>
 

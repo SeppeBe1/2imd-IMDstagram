@@ -161,7 +161,7 @@ class Follow{
 
     public function updateStatus(){
         $conn = Db::getInstance();
-        $statement = $conn->prepare("UPDATE followers SET status = :status where isFollowing = :user_id AND isFollower = :follower AND status = 'pending')");
+        $statement = $conn->prepare("UPDATE followers SET status = :status where isFollowing = :user_id AND isFollower = :follower AND status = 'pending'");
         $user_id = $this->getIsFollower();
         $isFollower = $this->getIsFollowing();
         $status = $this->getStatus();
@@ -176,7 +176,7 @@ class Follow{
 
     public function deleteRequest(){
         $conn = Db::getInstance();
-        $statement = $conn->prepare("DELETE * from followers where isFollowing = :user_id AND isFollower = :follower AND status = 'pending')");
+        $statement = $conn->prepare("DELETE from followers where isFollowing = :user_id AND isFollower = :follower AND status = 'pending'");
         $user_id = $this->getIsFollower();
         $isFollower = $this->getIsFollowing();
         $statement->bindValue(":user_id", $isFollower);
