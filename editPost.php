@@ -38,10 +38,11 @@
                 $post->setDescription($_POST['description']);
 
                 $post->changeDescription();
-                
+
                 $successMessage = true;
 
-                header("Refresh:3");
+                header("location: postDetail.php?id=". $post_id);
+                
             }catch(\Throwable $error) {
                 // $error = $error->getMessage();
                 $errorMessage = true;
