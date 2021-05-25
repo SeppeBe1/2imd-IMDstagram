@@ -15,6 +15,7 @@ $user->setUsername($username);
 $post = new classes\Post();
 $filters = $post->getAllFilters();
 
+
 if (isset($_POST['submit'])) {
 
     $post->setDescription($_POST['description']);
@@ -33,10 +34,12 @@ if (isset($_POST['submit'])) {
     $allExtensions = array('jpeg', 'png', 'jpg', 'gif');
 
     try {
-
+        if ("" == trim($_POST["description"])) {
+            $ErrorDescription = true;
+        }
         if (in_array($fileRealExt, $allExtensions)) {
             if ($fileError === 0) {
-                if ($fileSize < 2097152) {
+                if ($fileSize < 2097152 && "" !== trim($_POST["description"])) {
                     $post->setImage(uniqid('', true) . "." . $fileRealExt);
                     $fileDestination = "uploads/" . $post->getImage();
 
@@ -45,7 +48,9 @@ if (isset($_POST['submit'])) {
                     move_uploaded_file($fileTmp, $fileDestination);
                     header("location: index.php");
                 } else {
+                    if($fileSize > 2097152){
                     $errorToBig = true;
+                    }
                 }
             } else {
                 $ErrorUpload = true;
@@ -111,6 +116,10 @@ if (isset($_POST['submit'])) {
 
                 <?php if (isset($errorNotUse)) : ?>
                     <div class="alert alert-danger">This file can't be used.</div>
+                <?php endif; ?>
+
+                <?php if (isset($ErrorDescription)) : ?>
+                    <div class="alert alert-danger">Description is empty.</div>
                 <?php endif; ?>
 
                 <!-- Upload photo, choose photo -->

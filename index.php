@@ -89,6 +89,8 @@ $bookmark->setUserId((int)$currentlyLoggedIn[0]['id']);
             $like->setPostID($post['id']);
             $post_id = $like->getPostID();
 
+            $bookmark->setPostId($post['id']);
+
             $comments->setPostID($post['id']);
             $postId = $comments->getPostID();
         ?>
@@ -195,7 +197,7 @@ $bookmark->setUserId((int)$currentlyLoggedIn[0]['id']);
                     <!-- bookmark post -->
                     <div class="col-2 col-md-1">
                     <?php $isBookmarked = $bookmark->isBookmarked(); ?>
-                        <img src="./img/icons/<?php if(!empty($isBookmarked)){
+                        <img src="./img/icons/<?php if (!empty($isBookmarked)){
                                                                         echo "bookmark-fill";
                                                                     } else{
                                                                         echo "bookmark";
@@ -267,7 +269,7 @@ $bookmark->setUserId((int)$currentlyLoggedIn[0]['id']);
                                     <div class="col-10 col-sm-11 col-md-11">
                                         <div class="comment">
                                         <p class="commenttext"><strong><?php echo htmlspecialchars($comment['username']); ?></strong>
-                                        <?php echo $comment['commentText']?></p>  
+                                        <?php echo htmlspecialchars($comment['commentText'])?></p>  
                                         
                                         <p class="commenttime"><?php echo $comments->timeAgo(($comment['commentDate']))?></p> 
                                         </div>
