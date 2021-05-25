@@ -11,7 +11,6 @@
         $username = $_GET['username'];
 
         $users = $user->getUsernameFrom($username);
-        var_dump($users);
         $user_id = $users[0]['id'];
         $postsUserResults = $posts->getPostsUser($user_id);
         
@@ -34,12 +33,8 @@
 
     $follow = new classes\Follow();
     $follow->setIsFollower((int)$currentlyLoggedIn[0]['id']);
-    // $follow = $follow->getallFollowing();
-    // var_dump($follow);
-    $following = $follow->isFollowing();
-    var_dump($following);
-    $requested = $follow->isRequested();
-    var_dump($requested);
+
+ 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -66,7 +61,6 @@
             <?php
             $follow->setIsFollowing($user['id']);
             $userid = $follow->getIsFollowing();
-            var_dump($userid);
             ?>
 
             <div class="container-fluid container-profile clearfix">
@@ -103,13 +97,13 @@
                         </div>
 
                         <div class="col-4  text-center follow">
-                            <a href="followers.php">
+                            <a href="followers.php?follower=<?php echo htmlspecialchars($user['username']);?>" name="follower">
                                 <h7 class="number-profile mb-0 d-block">182</h7><small class="text-muted">Followers</small>
                             </a>
                         </div>
 
                         <div class="col-4  text-center follow">
-                            <a href="following.php">
+                            <a href="following.php?following=<?php echo htmlspecialchars($user['username']);?>" name="following">
                                 <h7 class="number-profile mb-0 d-block">320</h7><small class="text-muted">Following</small>
                             </a>
                         </div>
@@ -119,7 +113,6 @@
                         <?php if ($_SESSION['user'] != $_GET['username']) : ?>
                             <?php $isFollowing = $follow->isFollowing(); ?>
                             <?php $isRequested = $follow->isRequested(); ?>
-                            <?php var_dump($isRequested)  ?>
                             
                                 <?php if (!empty($isFollowing)):?>
                                     <div class="col-sm-12  text-center follow">
@@ -129,7 +122,7 @@
                                 
                                 <?php elseif (!empty($isRequested)):?>
                                     <div class="col-sm-12  text-center follow">
-                                        <!-- Unfollow -->
+                                        <!-- Requested -->
                                         <a href="#" class="float-left btn btn-unfollow followBtn" data-followid="<?php echo $user_id ?>">Requested</a>
                                     </div>
 
