@@ -36,6 +36,7 @@ if (!empty($_POST['banUser'])) {
 // BOOKMARK
 $bookmark = new classes\Bookmark();
 $bookmark->setUserId((int)$currentlyLoggedIn[0]['id']);
+
 ?>
 
 <!DOCTYPE html>
@@ -57,6 +58,10 @@ $bookmark->setUserId((int)$currentlyLoggedIn[0]['id']);
 <body>
 
     <?php foreach ($postsD as $post) : ?>
+
+        <?php
+            $var = $bookmark->setPostId($post_id);
+        ?>
 
         <div class="container post-post">
             <div class="row row-first">
@@ -225,6 +230,7 @@ $bookmark->setUserId((int)$currentlyLoggedIn[0]['id']);
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="js/feed.js"></script>
+    <script src="js/bookmark.js"></script>
 
 </body>
 
