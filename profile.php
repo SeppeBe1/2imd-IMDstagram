@@ -91,20 +91,23 @@
                 <div class="container-follow ">
                     <div class="row ">
 
+                        <?php $countPosts = $posts->countPostsUser($user_id); ?>
                         <div class="col-4  text-center follow">
-                            <h7 class="number-profile mb-0 d-block">10</h7><small class="text-muted">
+                            <h7 class="number-profile mb-0 d-block"><?php echo $countPosts['count'] ; ?></h7><small class="text-muted">
                                 Posts</small>
                         </div>
 
+                        <?php $countFollowers = $follow->countFollowers(); ?>
                         <div class="col-4  text-center follow">
                             <a href="followers.php?follower=<?php echo htmlspecialchars($user['username']);?>" name="follower">
-                                <h7 class="number-profile mb-0 d-block">182</h7><small class="text-muted">Followers</small>
+                                <h7 class="number-profile mb-0 d-block"><?php echo $countFollowers['count'] ; ?></h7><small class="text-muted">Followers</small>
                             </a>
                         </div>
 
+                        <?php $countFollowing = $follow->countFollowing(); ?>
                         <div class="col-4  text-center follow">
                             <a href="following.php?following=<?php echo htmlspecialchars($user['username']);?>" name="following">
-                                <h7 class="number-profile mb-0 d-block">320</h7><small class="text-muted">Following</small>
+                                <h7 class="number-profile mb-0 d-block"><?php echo $countFollowing['count'] ; ?></h7><small class="text-muted">Following</small>
                             </a>
                         </div>
                     </div>

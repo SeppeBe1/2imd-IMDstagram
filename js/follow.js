@@ -3,6 +3,7 @@ $(document).ready(function() {
     document.querySelector(".followBtn").addEventListener("click", function() {  
         console.log("yay");
         if  ($(".followBtn").hasClass("btn-follow") ){
+            
                 $(".followBtn").removeClass( "btn-follow" ).addClass( "btn-unfollow" );
                 $(".followBtn").html("Unfollow");
 

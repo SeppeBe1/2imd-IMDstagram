@@ -237,6 +237,16 @@ class Post  {
         return $postsUser;
     }
 
+    // FUNCTION THAT COUNTS THE POSTS OF THE USERS IN THE PROFILE.PHP
+    public function countPostsUser($user_id){
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT count(*) as count FROM posts WHERE user_id = :user_id ORDER BY postedDate DESC");
+        $statement->bindValue(":user_id", $user_id);
+        $statement->execute();
+        $countpostsUser = $statement->fetch(\PDO::FETCH_ASSOC);
+        return $countpostsUser;
+    }
+
     // TO GET POST IN DETAIL
     public static function getPostDetail($post_id){
         $conn = Db::getInstance();
