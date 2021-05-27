@@ -186,8 +186,10 @@ $bookmark->setUserId((int)$currentlyLoggedIn[0]['id']);
                     <div class="col-2 col-md-1">
                         <a href="#"><img src="./img/icons/chat.svg" class="icon-feed"></a>
                     </div>
+
+                    <?php $countComments = $comments->countAllComments($postId); ?>
                     <div class="col-2 col-md-1">
-                        <p class="number-feed">1</p>
+                        <p class="number-feed commentCount"><?php echo $countComments['count'] ; ?></p>
                     </div>
 
                     <!-- empty col for spacing-->

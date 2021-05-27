@@ -106,6 +106,15 @@ class Comment{
       return $showAllcomments;
   }
 
+    public function countAllComments($postId){
+      $conn = Db::getInstance();
+      $statement = $conn->prepare("SELECT count(* ) as count from comments inner join users on comments.user_id = users.id where post_id = :postId" );
+      $statement->bindValue(":postId", $postId);
+      $result = $statement->execute();
+      $countAllcomments = $statement->fetch(\PDO::FETCH_ASSOC);
+      return $countAllcomments;
+  }
+
    // changes date in ... ago 
    //SOURCE FUNCTION: https://stackoverflow.com/questions/1416697/converting-timestamp-to-time-ago-in-php-e-g-1-day-ago-2-days-ago
     public function timeAgo($timestamp){
