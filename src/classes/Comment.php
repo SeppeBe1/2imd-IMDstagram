@@ -43,6 +43,10 @@ class Comment{
    
     public function setText($text)
     {
+      if(empty($text)){
+        // Comment can't be empty
+        throw new \Exception("Comment can't be empty");
+    }
         $this->text = $text;
 
         return $this;

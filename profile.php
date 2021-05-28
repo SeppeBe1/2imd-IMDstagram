@@ -148,27 +148,32 @@
         <div class="container-fluid container-gallery">
             <?php foreach ($arrayChunks as $postsUserResults) : ?>
                 <div class="row">
-                    <?php foreach ($postsUserResults as $post) : ?>
-                        <div class="col-4">
-                            <div class="square-image">
-                                <a href="postDetail.php?id=<?php echo $post['id']; ?>">
-                                    <?php
-                                        $folder = "uploads/";
-                                        $file = "";
-                                        if (is_dir($folder)) {
-                                            if ($open = opendir($folder)) {
-                                                if ($file == "." || $post['photo'] == "..") continue;
-                                                $file =  classes\Post::getPhoto($post['id']);
-                                                ?>
-                                                <img src=<?php echo '"uploads/' . $file . '"'; ?> class=<?php echo '" img-thumbnail img-responsive ' . $posts->getSelectedFilter($post["filter_id"]) . '"'; ?>>
+                    <?php if (!empty($isRequested)):?>
+                    
+                        <?php else :?>
 
-                                        <?php closedir($open);
-                                            }
-                                    } ?>
-                                </a>
+                        <?php foreach ($postsUserResults as $post) : ?>
+                            <div class="col-4">
+                                <div class="square-image">
+                                    <a href="postDetail.php?id=<?php echo $post['id']; ?>">
+                                        <?php
+                                            $folder = "uploads/";
+                                            $file = "";
+                                            if (is_dir($folder)) {
+                                                if ($open = opendir($folder)) {
+                                                    if ($file == "." || $post['photo'] == "..") continue;
+                                                    $file =  classes\Post::getPhoto($post['id']);
+                                                    ?>
+                                                    <img src=<?php echo '"uploads/' . $file . '"'; ?> class=<?php echo '" img-thumbnail img-responsive ' . $posts->getSelectedFilter($post["filter_id"]) . '"'; ?>>
+
+                                            <?php closedir($open);
+                                                }
+                                        } ?>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                    <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    <?php endif ;?>
                 </div>
             <?php endforeach; ?>
         </div>

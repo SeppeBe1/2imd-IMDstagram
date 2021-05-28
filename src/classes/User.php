@@ -16,6 +16,10 @@ class User {
 
     public function setUsername($username)
     {
+        if(empty($username)){
+            throw new \Exception("Username cannot be empty");
+        }
+
         $this->username = $username;
 
         return $this;
@@ -60,6 +64,9 @@ class User {
 
     public function setConfirmPassword($confirmPassword)
     {
+        if(empty($confirmPassword)){
+            throw new \Exception("Confirm password can't be empty");
+        }
         $this->confirmPassword = $confirmPassword;
 
         return $this;
