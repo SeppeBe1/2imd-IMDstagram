@@ -430,6 +430,22 @@ class User {
         $result = $statement->execute(); 
         return $result;
     }
+
+    public static function isPrivateUser($user_id){
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT isPrivate from users where id = :user_id");
+        $statement->bindValue(":user_id", $user_id);
+        $result = $statement->execute();
+        
+        $private = $statement->fetch();
+        
+        if ($private['isPrivate'] === "1"){
+            return true;
+        }else {
+            return false;
+        };
+        
+    }
     
 
     

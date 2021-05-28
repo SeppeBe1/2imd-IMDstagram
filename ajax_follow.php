@@ -42,7 +42,7 @@
         $f = new classes\Follow();
         $f->setIsFollowing($_POST['isFollowing']);
         $f->setIsFollower((int)$currentlyLoggedIn[0]['id']);//$_SESSION
-        $f->setStatus("pending"); 
+        $f->setStatus("following"); 
 
         $f->follow();
         

@@ -29,6 +29,8 @@
     $user->setUsername($_SESSION['user']);
     $currentlyLoggedIn = $user->showUser();
 
+    $userId = $_GET["username"];
+    
     //FOLLOW
 
     $follow = new classes\Follow();
@@ -116,6 +118,7 @@
                         <?php if ($_SESSION['user'] != $_GET['username']) : ?>
                             <?php $isFollowing = $follow->isFollowing(); ?>
                             <?php $isRequested = $follow->isRequested(); ?>
+                            <?php $isPrivate = classes\User::isPrivateUser($user_id); ?>
                             
                                 <?php if (!empty($isFollowing)):?>
                                     <div class="col-sm-12  text-center follow">
@@ -126,12 +129,18 @@
                                 <?php elseif (!empty($isRequested)):?>
                                     <div class="col-sm-12  text-center follow">
                                         <!-- Requested -->
-                                        <a href="#" class="float-left btn btn-unfollow followBtn" data-followid="<?php echo $user_id ?>">Requested</a>
+                                        <a href="#" class="float-left btn btn-requested followBtn" data-followid="<?php echo $user_id ?>">Requested</a>
+                                    </div>
+                                
+                                <?php elseif (!empty($isPrivate)):?>
+                                    <div class="col-sm-12  text-center follow">
+                                        <!-- Private-->
+                                        <a href="#" class="float-left btn btn-sendRequest followBtn" data-followid="<?php echo $user_id ?>">Send request</a>
                                     </div>
 
                                 <?php else:?> 
                                     <div class="col-sm-12  text-center follow">
-                                        <!-- Unfollow -->
+                                        
                                         <a href="#" class="float-left btn btn-follow followBtn" data-followid="<?php echo $user_id ?>">Follow</a>
                                     </div>  
                                 <?php endif; ?>
@@ -148,9 +157,9 @@
         <div class="container-fluid container-gallery">
             <?php foreach ($arrayChunks as $postsUserResults) : ?>
                 <div class="row">
-                    <?php if (!empty($isRequested)):?>
-                    
-                        <?php else :?>
+                <?php $isPrivate = classes\User::isPrivateUser($user_id); ?>
+                
+                    <?php if ( $isPrivate == false|| !empty($isFollowing) || $_SESSION['user'] == $_GET['username']):?>
 
                         <?php foreach ($postsUserResults as $post) : ?>
                             <div class="col-4">
@@ -183,6 +192,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="js/follow.js"></script>
+    <script src="js/sendRequest.js"></script>
 
 </body>
 
