@@ -6,8 +6,10 @@
             type: "POST",
             url: "adminDelete.php",
             data: { id: id },
-            success: function() {
+            success: function(response) {
                 $('[data-id="' + id + '"]').closest(".post-post").slideUp();
+                // alert(json.html);
+                alert(response.message);
             }
         })
     });
@@ -20,8 +22,9 @@
             type: "POST",
             url: "adminSetPost.php",
             data: { id: id },
-            success: function() {
+            success: function(response) {
                 $('[data-id="' + id + '"]').closest(".post-post").slideUp();
+                alert(response.message);
             }
         })
     });
@@ -31,15 +34,13 @@
         let postId = $(this).attr("data-postId");
         let userId = $(this).attr("data-userId");
 
-
-        console.log(id);
-
         $.ajax({
             type: "POST",
             url: "adminBanUser.php",
             data: { postId: postId, user_id: userId },
-            success: function() {
+            success: function(response) {
                 $('[data-postId="' + postId + '"]').closest(".post-post").slideUp();
+                alert(response.message);
             }
         })
     });
