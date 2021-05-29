@@ -4,7 +4,7 @@ $(document).ready(function() {
         console.log("yay");
         if  ($(".followBtn").hasClass("btn-follow") ){
             
-                $(".followBtn").removeClass( "btn-follow" ).addClass( "btn-unfollow" );
+                $(".followBtn").removeClass( " btn-follow btn-sendRequest" ).addClass( "btn-unfollow" );
                 $(".followBtn").html("Unfollow");
 
             console.log("follow");
@@ -31,7 +31,7 @@ $(document).ready(function() {
                 });
 
             }  else {
-                $(".followBtn").removeClass( "btn-unfollow" ).addClass( "btn-follow" );
+                $(".followBtn").removeClass( "btn-unfollow btn-requested " ).addClass( "btn-follow" );
                 $(".followBtn").html("Follow");
                 
                 console.log("unfollow");

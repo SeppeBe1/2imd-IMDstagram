@@ -130,13 +130,13 @@
                                 <?php elseif (!empty($isRequested)):?>
                                     <div class="col-sm-12  text-center follow">
                                         <!-- Requested -->
-                                        <a href="#" class="float-left btn btn-requested followBtn" data-followid="<?php echo $user_id ?>">Requested</a>
+                                        <a href="#" class="float-left btn btn-requested requestBtn followBtn " data-followid="<?php echo $user_id ?>">Requested</a>
                                     </div>
                                 
                                 <?php elseif (!empty($isPrivate)):?>
                                     <div class="col-sm-12  text-center follow">
                                         <!-- Private-->
-                                        <a href="#" class="float-left btn btn-sendRequest followBtn" data-followid="<?php echo $user_id ?>">Send request</a>
+                                        <a href="#" class="float-left btn btn-sendRequest requestBtn followBtn " data-followid="<?php echo $user_id ?>">Send request</a>
                                     </div>
 
                                 <?php else:?> 

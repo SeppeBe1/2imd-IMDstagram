@@ -1,11 +1,11 @@
 $(document).ready(function() {
     // FOLLOW
-    document.querySelector(".followBtn").addEventListener("click", function() {  
+    document.querySelector(".requestBtn").addEventListener("click", function() {  
         console.log("requested");
-        if  ($(".followBtn").hasClass("btn-sendRequest") ){
+        if  ($(".requestBtn").hasClass("btn-sendRequest") ){
             
-                $(".followBtn").removeClass( "btn-sendRequest btn-follow" ).addClass( "btn-requested" );
-                $(".followBtn").html("Requested");
+                $(".requestBtn").removeClass( "btn-sendRequest btn-follow" ).addClass( "btn-requested" );
+                $(".requestBtn").html("Requested");
 
             console.log("requested");
             let isFollowing = this.dataset.followid;
@@ -31,8 +31,8 @@ $(document).ready(function() {
                 });
 
             }  else {
-                $(".followBtn").removeClass( "btn-requested btn-follow" ).addClass( "btn-sendRequest" );
-                $(".followBtn").html("Send request");
+                $(".requestBtn").removeClass( "btn-requested btn-follow" ).addClass( "btn-sendRequest" );
+                $(".requestBtn").html("Send request");
                 
                 console.log("send request");
                 let isFollowing = this.dataset.followid;
