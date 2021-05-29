@@ -91,6 +91,14 @@ $(document).ready(function() {
                 document
                     .querySelector(".newComment_" + postId)
                     .appendChild(newComment);
+
+                //NEEMT NIET JUISTE INNER HTML
+                let number = parseInt(document
+                    .querySelector(".commentCount").innerHTML);
+                console.log(number);
+
+                // number += 1;
+                // $(".commentCount").html(number);
                 
                 console.log("Success:", result);
             })

@@ -92,6 +92,26 @@ body {
     margin-top: 12px;
 }
 
+.btn-requested{
+    border: 1pt solid #CD847B;
+    border-radius: 40px;
+    padding: 10px;
+    color: #CD847B;
+    font-weight: 500;
+    font-size: 12px;
+    margin-top: 12px;
+}
+
+.btn-sendRequest{
+    background-color: #CD847B;
+    border-radius: 40px;
+    padding: 10px;
+    color: white;
+    font-weight: 500;
+    font-size: 12px;
+    margin-top: 12px;
+}
+
 a{
     text-decoration: none;
     color: #5A5A5A;

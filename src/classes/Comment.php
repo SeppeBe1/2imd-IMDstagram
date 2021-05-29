@@ -43,6 +43,10 @@ class Comment{
    
     public function setText($text)
     {
+      if(empty($text)){
+        // Comment can't be empty
+        throw new \Exception("Comment can't be empty");
+    }
         $this->text = $text;
 
         return $this;
@@ -104,6 +108,15 @@ class Comment{
     
       $showAllcomments = $statement->fetchAll(\PDO::FETCH_ASSOC);
       return $showAllcomments;
+  }
+
+    public function countAllComments($postId){
+      $conn = Db::getInstance();
+      $statement = $conn->prepare("SELECT count(* ) as count from comments inner join users on comments.user_id = users.id where post_id = :postId" );
+      $statement->bindValue(":postId", $postId);
+      $result = $statement->execute();
+      $countAllcomments = $statement->fetch(\PDO::FETCH_ASSOC);
+      return $countAllcomments;
   }
 
    // changes date in ... ago 

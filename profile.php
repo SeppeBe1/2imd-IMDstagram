@@ -28,7 +28,9 @@
     $user = new classes\User();
     $user->setUsername($_SESSION['user']);
     $currentlyLoggedIn = $user->showUser();
-
+   
+    $userId = $_GET["username"];
+    
     //FOLLOW
 
     $follow = new classes\Follow();
@@ -95,20 +97,23 @@
                 <div class="container-follow ">
                     <div class="row ">
 
+                        <?php $countPosts = $posts->countPostsUser($user_id); ?>
                         <div class="col-4  text-center follow">
-                            <h7 class="number-profile mb-0 d-block">10</h7><small class="text-muted">
+                            <h7 class="number-profile mb-0 d-block"><?php echo $countPosts['count'] ; ?></h7><small class="text-muted">
                                 Posts</small>
                         </div>
 
+                        <?php $countFollowers = $follow->countFollowers(); ?>
                         <div class="col-4  text-center follow">
                             <a href="followers.php?follower=<?php echo htmlspecialchars($user['username']);?>" name="follower">
-                                <h7 class="number-profile mb-0 d-block">182</h7><small class="text-muted">Followers</small>
+                                <h7 class="number-profile mb-0 d-block"><?php echo $countFollowers['count'] ; ?></h7><small class="text-muted">Followers</small>
                             </a>
                         </div>
 
+                        <?php $countFollowing = $follow->countFollowing(); ?>
                         <div class="col-4  text-center follow">
                             <a href="following.php?following=<?php echo htmlspecialchars($user['username']);?>" name="following">
-                                <h7 class="number-profile mb-0 d-block">320</h7><small class="text-muted">Following</small>
+                                <h7 class="number-profile mb-0 d-block"><?php echo $countFollowing['count'] ; ?></h7><small class="text-muted">Following</small>
                             </a>
                         </div>
                     </div>
@@ -117,6 +122,8 @@
                         <?php if ($_SESSION['user'] != $_GET['username']) : ?>
                             <?php $isFollowing = $follow->isFollowing(); ?>
                             <?php $isRequested = $follow->isRequested(); ?>
+                            
+                            <?php $isPrivate = classes\User::isPrivateUser($user_id); ?>
                             
                                 <?php if (!empty($isFollowing)):?>
                                     <div class="col-sm-12  text-center follow">
@@ -127,12 +134,18 @@
                                 <?php elseif (!empty($isRequested)):?>
                                     <div class="col-sm-12  text-center follow">
                                         <!-- Requested -->
-                                        <a href="#" class="float-left btn btn-unfollow followBtn" data-followid="<?php echo $user_id ?>">Requested</a>
+                                        <a href="#" class="float-left btn btn-requested requestBtn followBtn " data-followid="<?php echo $user_id ?>">Requested</a>
+                                    </div>
+                                
+                                <?php elseif (!empty($isPrivate)):?>
+                                    <div class="col-sm-12  text-center follow">
+                                        <!-- Private-->
+                                        <a href="#" class="float-left btn btn-sendRequest requestBtn followBtn " data-followid="<?php echo $user_id ?>">Send request</a>
                                     </div>
 
                                 <?php else:?> 
                                     <div class="col-sm-12  text-center follow">
-                                        <!-- Unfollow -->
+                                        
                                         <a href="#" class="float-left btn btn-follow followBtn" data-followid="<?php echo $user_id ?>">Follow</a>
                                     </div>  
                                 <?php endif; ?>
@@ -149,27 +162,32 @@
         <div class="container-fluid container-gallery">
             <?php foreach ($arrayChunks as $postsUserResults) : ?>
                 <div class="row">
-                    <?php foreach ($postsUserResults as $post) : ?>
-                        <div class="col-4">
-                            <div class="square-image">
-                                <a href="postDetail.php?id=<?php echo $post['id']; ?>">
-                                    <?php
-                                        $folder = "uploads/";
-                                        $file = "";
-                                        if (is_dir($folder)) {
-                                            if ($open = opendir($folder)) {
-                                                if ($file == "." || $post['photo'] == "..") continue;
-                                                $file =  classes\Post::getPhoto($post['id']);
-                                                ?>
-                                                <img src=<?php echo '"uploads/' . $file . '"'; ?> class=<?php echo '" img-thumbnail img-responsive ' . $posts->getSelectedFilter($post["filter_id"]) . '"'; ?>>
+                <?php $isPrivate = classes\User::isPrivateUser($user_id); ?>
+                
+                    <?php if ( $isPrivate == false|| !empty($isFollowing) || $_SESSION['user'] == $_GET['username']):?>
 
-                                        <?php closedir($open);
-                                            }
-                                    } ?>
-                                </a>
+                        <?php foreach ($postsUserResults as $post) : ?>
+                            <div class="col-4">
+                                <div class="square-image">
+                                    <a href="postDetail.php?id=<?php echo $post['id']; ?>">
+                                        <?php
+                                            $folder = "uploads/";
+                                            $file = "";
+                                            if (is_dir($folder)) {
+                                                if ($open = opendir($folder)) {
+                                                    if ($file == "." || $post['photo'] == "..") continue;
+                                                    $file =  classes\Post::getPhoto($post['id']);
+                                                    ?>
+                                                    <img src=<?php echo '"uploads/' . $file . '"'; ?> class=<?php echo '" img-thumbnail img-responsive ' . $posts->getSelectedFilter($post["filter_id"]) . '"'; ?>>
+
+                                            <?php closedir($open);
+                                                }
+                                        } ?>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                    <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    <?php endif ;?>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -179,6 +197,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="js/follow.js"></script>
+    <script src="js/sendRequest.js"></script>
 
 </body>
 

@@ -109,6 +109,16 @@ class Follow{
         return $following;
     }
 
+    public function countFollowing() { //tellen van following
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT count(isFollowing) as count from followers  inner join users on followers.isFollowing = users.id where isFollower = :follower AND status = 'following'");
+        $isFollower = $this->getIsFollower();
+        $statement->bindValue(":follower", $isFollower);
+        $result = $statement->execute();
+        $following = $statement->fetch(\PDO::FETCH_ASSOC);
+        return $following;
+    }
+
     public function getallFollowers (){
         $conn = Db::getInstance();
         $statement = $conn->prepare("SELECT *, isFollower from followers  inner join users on followers.isFollower = users.id where isFollowing = :following AND status = 'following'");
@@ -117,6 +127,16 @@ class Follow{
         $result = $statement->execute();
         $following = $statement->fetchAll(\PDO::FETCH_ASSOC);
         return $following;
+    }
+
+    public function countFollowers() { //tellen van followers
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT count(isFollower) as count from followers  inner join users on followers.isFollower = users.id where isFollowing = :following AND status = 'following'");
+        $isFollowing = $this->getIsFollowing();
+        $statement->bindValue(":following", $isFollowing);
+        $result = $statement->execute();
+        $followers = $statement->fetch(\PDO::FETCH_ASSOC);
+        return $followers;
     }
 
     public function getallRequests (){
@@ -155,6 +175,18 @@ class Follow{
         $statement->execute();
 
         $isRequested = $statement->fetch(\PDO::FETCH_ASSOC);
+        
+        return $isRequested;
+    }
+
+    public function requests() { //which profile is user following 
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare("SELECT * FROM followers WHERE  isFollowing = :following AND status = 'pending' ");
+        $following = $this->getIsFollowing();
+        $statement->bindValue(":following", $following);
+        $statement->execute();
+        $isRequested = $statement->fetchAll(\PDO::FETCH_ASSOC);
         
         return $isRequested;
     }

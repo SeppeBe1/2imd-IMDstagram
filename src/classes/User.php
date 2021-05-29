@@ -16,6 +16,10 @@ class User {
 
     public function setUsername($username)
     {
+        if(empty($username)){
+            throw new \Exception("Username cannot be empty");
+        }
+
         $this->username = $username;
 
         return $this;
@@ -60,6 +64,9 @@ class User {
 
     public function setConfirmPassword($confirmPassword)
     {
+        if(empty($confirmPassword)){
+            throw new \Exception("Confirm password can't be empty");
+        }
         $this->confirmPassword = $confirmPassword;
 
         return $this;
@@ -422,6 +429,22 @@ class User {
         $statement->bindValue(":private", $private);
         $result = $statement->execute(); 
         return $result;
+    }
+
+    public static function isPrivateUser($user_id){
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT isPrivate from users where id = :user_id");
+        $statement->bindValue(":user_id", $user_id);
+        $result = $statement->execute();
+        
+        $private = $statement->fetch();
+        
+        if ($private['isPrivate'] === "1"){
+            return true;
+        }else {
+            return false;
+        };
+        
     }
     
 

@@ -1,13 +1,13 @@
 $(document).ready(function() {
     // FOLLOW
-    document.querySelector(".followBtn").addEventListener("click", function() {  
-        console.log("yay");
-        if  ($(".followBtn").hasClass("btn-follow") ){
+    document.querySelector(".requestBtn").addEventListener("click", function() {  
+        console.log("requested");
+        if  ($(".requestBtn").hasClass("btn-sendRequest") ){
             
-                $(".followBtn").removeClass( " btn-follow btn-sendRequest" ).addClass( "btn-unfollow" );
-                $(".followBtn").html("Unfollow");
+                $(".requestBtn").removeClass( "btn-sendRequest btn-follow" ).addClass( "btn-requested" );
+                $(".requestBtn").html("Requested");
 
-            console.log("follow");
+            console.log("requested");
             let isFollowing = this.dataset.followid;
             console.log(isFollowing);
 
@@ -15,7 +15,7 @@ $(document).ready(function() {
             let formData = new FormData();
             formData.append('isFollowing', isFollowing);
 
-            fetch("ajax_follow.php",{
+            fetch("ajax_sendRequest.php",{
                 method: 'POST',
                 body : formData
                 
@@ -31,10 +31,10 @@ $(document).ready(function() {
                 });
 
             }  else {
-                $(".followBtn").removeClass( "btn-unfollow btn-requested " ).addClass( "btn-follow" );
-                $(".followBtn").html("Follow");
+                $(".requestBtn").removeClass( "btn-requested btn-follow" ).addClass( "btn-sendRequest" );
+                $(".requestBtn").html("Send request");
                 
-                console.log("unfollow");
+                console.log("send request");
                 let isFollowing = this.dataset.followid;
                 console.log(isFollowing);
 
@@ -64,9 +64,3 @@ $(document).ready(function() {
 
     
 });
-
-
-        
-       
-    
-            

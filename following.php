@@ -11,6 +11,7 @@ $user = new classes\User();
 if(isset($_GET['following'])) {
     $user->setUsername($_GET['following']);
     $userID = $user->showUser();
+    
 }
 
 $follow = new classes\Follow();
@@ -49,10 +50,7 @@ $following = $follow->getallFollowing();
                     <div class="col-4 col-md-6">
                         <a href="profile.php?username=<?php echo htmlspecialchars($f['username']);?>"><h6 class="fw-bold username"><?php echo htmlspecialchars($f['username']);?></h6></a>
                     </div>
-                    <div class="col-5 col-md-4 ">
-                        <a href="#" class="float-left btn btn-following " data-followid="<?php echo $user_id?>">Following</a>
-
-                    </div>
+                  
                 </div>
                 
                 <?php endforeach ;?>
