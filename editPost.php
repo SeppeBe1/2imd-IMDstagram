@@ -50,6 +50,11 @@
             }
         }
     }
+
+//COMMENTS
+
+$comments = new classes\Comment();
+$comments->setUserId((int)$currentlyLoggedIn[0]['id']);
 ?>
 
 <!DOCTYPE html>
@@ -73,6 +78,13 @@
 
 
     <?php foreach($postsD as $post): ?>
+
+        <?php
+            $comments->setPostID($post['id']);
+            $postId = $comments->getPostID();
+
+            // $var = $bookmark->setPostId($post_id);
+        ?>
 
     <?php if($user->getUsername() == $post['username']) : ?>    
 
@@ -103,9 +115,7 @@
                         name="location"><?php echo $post['location'] ?></a>
             </div>
             <div class="col-3">
-                <div class="row">
-                    <a href="#" class="follow-button">Follow</a>
-                </div>
+                <!-- empty column for alignment -->
             </div>
             <div class="col-1">
 
@@ -171,12 +181,13 @@
                 </span>
             </div>
 
-            <div class="col-1">
-                <a href="#"><img src="./img/icons/chat.svg" class="icon-feed"></a>
-            </div>
-            <div class="col-1">
-                <p class="number-feed">1</p>
-            </div>
+            <!--comments-->
+            <div class="col-2 col-md-1">
+                        <a href="#"><img src="./img/icons/chat.svg" class="icon-feed"></a>
+                </div>
+                <div class="col-2 col-md-1">
+                    <p class="number-feed">1</p>
+                </div>
 
         </div>
         <form action="" method="post">
@@ -204,13 +215,61 @@
             </div>
         </form>
 
-        <div class="row row-fifth">
-            <div class="col-12">
-                <p class="reaction"><span class="profile-name">Eduard Manet </span>Proin ullamcorper feugiat eros, sit
-                    amet accumsan tellus cursus vitae. Etiam feugiat tristique ante, luctus feugiat risus ultrices ut!
-                </p>
+        <?php $allComments = $comments->getAllComments($postId);?>
+            
+            
+            <div id="link-comments">
+                <a class="link-c linkComments_<?php echo $postId; ?>" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" data-postid="<?php echo $post['id']; ?>">
+                    Show comments
+                </a>
             </div>
-        </div>
+            <!-- <div class="collapse" id="collapseExample"> -->
+                <div class="card ">
+                    <div class="list comments_list_<?php echo $postId; ?> ">
+                    
+                            
+                        <?php foreach ($allComments as $comment):?>
+                            
+                        <div class="comments ">
+                            <div class="row ">
+                            
+                                    <div class="col-2 col-sm-1 col-md-1">
+                                        <a id="userid"href="profile.php?username=<?php echo $comment['user_id']; ?>">
+                                            <img src="./user_avatar/<?php echo htmlspecialchars($comment['avatar']) ?>" class="profile-pic-comment rounded-circle"> <!--rounded maken-->
+                                        </a>
+                                    </div>
+
+                                    <div class="col-10 col-sm-11 col-md-11">
+                                        <div class="comment">
+                                        <p class="commenttext"><strong><?php echo htmlspecialchars($comment['username']); ?></strong>
+                                        <?php echo htmlspecialchars($comment['commentText'])?></p>  
+                                        
+                                        <p class="commenttime"><?php echo $comments->timeAgo(($comment['commentDate']))?></p> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach ?>
+                       
+                    </div>
+                    
+                </div>
+            <!-- </div> -->
+            <div class="newComment_<?php echo $postId; ?> "></div>
+
+
+            
+                <div class="row row-seventh">
+                    
+
+                        <!-- <input type="text" id="comment-input" name="comment-input" placeholder="Place a comment" size='35'> -->
+                        <div class="post__comments">
+                            <div class="post__comments__form">
+                                <input type="text"  class="commenttext comment-input" placeholder="Place a comment">
+                                <a href="#"  class="btn  comment-button  btnaddComment" data-postid="<?php echo $post['id']; ?>">Place</a>
+                            </div>  
+                        </div>  
+                </div>
 
         <div class="row row-sixth">
             <div class="col-12">

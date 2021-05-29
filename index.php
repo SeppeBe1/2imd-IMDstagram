@@ -282,9 +282,7 @@ $bookmark->setUserId((int)$currentlyLoggedIn[0]['id']);
                     
                 </div>
             <!-- </div> -->
-            <div class="newComment_<?php echo $postId; ?> ">
-
-</div>
+            <div class="newComment_<?php echo $postId; ?> "></div>
 
 
             

@@ -92,6 +92,33 @@
     
             return $result;
         }
+
+        public function getSavedPosts(){
+            $conn = Db::getInstance();
+
+            $statement = $conn->prepare("SELECT * FROM bookmarks");
+
+            // $statement = $conn->prepare("SELECT *, posts.id FROM posts JOIN followers ON (
+            //     followers.isFollowing = posts.user_id AND
+            //     followers.isFollower = :userid AND status = 'following'
+            // )JOIN users where posts.user_id = users.id ORDER BY postedDate DESC LIMIT :limit");
+
+            // $statement = $conn->prepare("select *, post_id from comments inner join users on comments.user_id = users.id where post_id = :postId" );
+
+
+            // $user_id = $this->getUserId();
+            // $post_id = $this->getPostId();
+            // $statement->bindValue(":user_id", $user_id);
+            // $statement->bindValue(":post_id", $post_id);
+            $result = $statement->execute();
+
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+    
+            return $result;
+            // var_dump($result);
+
+
+        }
     }
 
 
