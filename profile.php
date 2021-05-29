@@ -28,7 +28,7 @@
     $user = new classes\User();
     $user->setUsername($_SESSION['user']);
     $currentlyLoggedIn = $user->showUser();
-
+   
     $userId = $_GET["username"];
     
     //FOLLOW
@@ -118,6 +118,7 @@
                         <?php if ($_SESSION['user'] != $_GET['username']) : ?>
                             <?php $isFollowing = $follow->isFollowing(); ?>
                             <?php $isRequested = $follow->isRequested(); ?>
+                            
                             <?php $isPrivate = classes\User::isPrivateUser($user_id); ?>
                             
                                 <?php if (!empty($isFollowing)):?>

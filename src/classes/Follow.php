@@ -179,6 +179,18 @@ class Follow{
         return $isRequested;
     }
 
+    public function requests() { //which profile is user following 
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare("SELECT * FROM followers WHERE  isFollowing = :following AND status = 'pending' ");
+        $following = $this->getIsFollowing();
+        $statement->bindValue(":following", $following);
+        $statement->execute();
+        $isRequested = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        
+        return $isRequested;
+    }
+
     public function updateStatus(){
         $conn = Db::getInstance();
         $statement = $conn->prepare("UPDATE followers SET status = :status where isFollowing = :user_id AND isFollower = :follower AND status = 'pending'");

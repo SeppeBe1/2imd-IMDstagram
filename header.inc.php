@@ -8,11 +8,21 @@ $users = new classes\User();
 $users->onlyLoggedInUsers();
 $username = $_SESSION['user'];
 
+$user = new classes\User();
+$user->setUsername($_SESSION['user']);
+$currentlyLoggedIn = $user->showUser();
+
+
 /* GETTERS SETTERS TOEVOEGEN! */
 if (isset($_SESSION['user'])) {
     $users->setUsername($username);
     $usersinfo = $users->showUser($username);
 }
+
+//FOLLOW
+$follow = new classes\Follow();
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,11 +48,16 @@ if (isset($_SESSION['user'])) {
             </div>
         </div>
         <?php foreach ($usersinfo as $user) : ?>
+            <?php
+            $follow->setIsFollowing($user['id']);
+            $userid = $follow->getIsFollowing();
+            ?>
+
             <div class="container-fluid navigation sticky-top">
                 <div class="row ">
                     <?php if (!$users->getAdmin()): ?>
 
-                    <div class="col-6 ">
+                    <div class="col-8 col-md-6 ">
                         <a href="profile.php?username=<?php echo htmlspecialchars($user['username']); ?>">
                             <img src="user_avatar/<?php echo htmlspecialchars($user['avatar']) ?>" class=" profile-pic rounded-circle">
                         </a>
@@ -54,9 +69,12 @@ if (isset($_SESSION['user'])) {
                             <img src="./img/icons/+.svg" class="icon-nav">
                         </a>
                         <!-- IF status = pending in followers -->
+                        <?php $requests = $follow->requests(); ?>
+                        <?php if (!empty($requests)):?>
                         <a href="followRequest.php">
                             <img src="./img/icons/friendrequest.svg" class="icon-nav">
                         </a>
+                        <?php endif;?>
                     </div>
                     <?php endif;?>
                     <!--<div class="col-5"> 
@@ -65,7 +83,7 @@ if (isset($_SESSION['user'])) {
                     </div>
                 </div> -->
 
-                    <div class="col-5 search">
+                    <div class="col-12 col-md-5 search">
                         <form method="POST" action="results.php">
                             <div class="form-inline">
                                 <input type="search" id="search-input" class="form-control " name="keyword" value="<?php echo isset($_POST['keyword']) ? htmlspecialchars($_POST['keyword']) : '' ?>" placeholder="Search" aria-label="Search" aria-describedby="button-addon2" required="" />
@@ -74,7 +92,7 @@ if (isset($_SESSION['user'])) {
                         </form>
                     </div>
 
-                    <div class="col-1 logout-button">
+                    <div class="col-12 col-md-1 logout-button ">
                         <div>
                             <a href="logout.php">
                                 <img src="./img/icons/logout.svg" class="icon-nav icon-logout">
