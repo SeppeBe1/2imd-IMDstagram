@@ -59,9 +59,6 @@
                   <div class="form-group btn-submit">
                       <input  type="submit" value="Login"class="btn btn-primary"></button>
                   </div>
-                  <div class="text-center">
-                      <label class="checkbox-inline"><input type="checkbox"> Remember me</label>
-                  </div> 
               </div>
 
               <?php if(isset($error)):?>

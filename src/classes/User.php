@@ -192,7 +192,7 @@ class User {
         $results = $statement->execute();
         $exists = $statement->fetch(\PDO::FETCH_ASSOC);
 
-        if($exists["email"] == null){ //als email leeg is return true (dus email is beschikbaar)
+        if($exists['email'] == null){ //als email leeg is return true (dus email is beschikbaar)
             return true;
         }else{
             return false;

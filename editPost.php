@@ -214,6 +214,12 @@ $comments->setUserId((int)$currentlyLoggedIn[0]['id']);
             </div>
         </form>
 
+        <div class="row row-sixth">
+            <div class="col-12">
+                    <p class="timing-feed"><?php echo $posts->humanTiming($post_id); ?> ago</p>
+            </div>
+        </div>
+
         <?php $allComments = $comments->getAllComments($postId);?>
             
             
@@ -270,11 +276,6 @@ $comments->setUserId((int)$currentlyLoggedIn[0]['id']);
                         </div>  
                 </div>
 
-        <div class="row row-sixth">
-            <div class="col-12">
-                    <p class="timing-feed"><?php echo $posts->humanTiming($post_id); ?> ago</p>
-            </div>
-        </div>
 
     </div>
 

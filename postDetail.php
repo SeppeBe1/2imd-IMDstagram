@@ -215,6 +215,12 @@ $bookmark->setUserId((int)$currentlyLoggedIn[0]['id']);
                 </div>
             </div>
 
+            <div class="row row-sixth">
+                <div class="col-12">
+                    <p class="timing-feed"><?php echo $posts->humanTiming($post_id); ?> ago</p>
+                </div>
+            </div>
+
             <!--Show comments-->
             <?php $allComments = $comments->getAllComments($postId);?>
             
@@ -273,11 +279,7 @@ $bookmark->setUserId((int)$currentlyLoggedIn[0]['id']);
                 </div>
 
 
-            <div class="row row-sixth">
-                <div class="col-12">
-                    <p class="timing-feed"><?php echo $posts->humanTiming($post_id); ?> ago</p>
-                </div>
-            </div>
+            
 
         </div>
     <?php endforeach; ?>
