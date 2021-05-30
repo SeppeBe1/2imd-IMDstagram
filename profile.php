@@ -85,7 +85,7 @@
                     <?php if ($_SESSION['user'] == $_GET['username']) : ?>
                         <div class="col-4 col-lg-4">
                             <a href="profileEdit.php" class="btn edit-btn">Edit profile</a>
-                            <a href="savedPosts.php?id=<?php echo $user['id'];?>" class="btn edit-btn">Saved posts</a>
+                            <a href="savedPosts.php?username=<?php echo htmlspecialchars($user['username']);?>" class="btn edit-btn">Saved posts</a>
 
 
 
