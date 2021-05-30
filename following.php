@@ -6,7 +6,6 @@ include_once("./header.inc.php");
 spl_autoload_register();
 
 $user = new classes\User();
-// var_dump($currentlyLoggedIn);
 
 if(isset($_GET['following'])) {
     $user->setUsername($_GET['following']);

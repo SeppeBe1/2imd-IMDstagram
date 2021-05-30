@@ -6,7 +6,6 @@ spl_autoload_register();
 $user = new classes\User();
 $user->setUsername($_SESSION['user']);
 $currentlyLoggedIn = $user->showUser();
-// var_dump($currentlyLoggedIn);
 
 $follow = new classes\Follow();
 $follow->setIsFollowing((int)$currentlyLoggedIn[0]['id']);

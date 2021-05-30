@@ -14,19 +14,16 @@
 
     if(!empty($_GET['username'])){
         $username = $_GET['username'];
-        // var_dump($username);
-
         $users = $user->getUsernameFrom($username);
         $userId = $users[0]['id'];
-        // var_dump($userId);
-        // $postsUserResults = $posts->getPostsUser($user_id);
+
         
         // STACKING OF THE BOOTSTRAP DIVS IN 3 COLUMNS
         $numberOfColumns = 3;
         $bootstrapColWidth = 12 / $numberOfColumns;
         $bookmarks = new classes\Bookmark();
         $getAllBookmarks = $bookmarks->getSavedPosts($userId);
-        var_dump($getAllBookmarks);
+
 
         $arrayChunks = array_chunk($getAllBookmarks, $numberOfColumns);
 

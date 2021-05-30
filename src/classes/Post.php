@@ -158,7 +158,6 @@ class Post  {
     //     $totalamountposts = $fetch_posts_total['totalamountposts'];
     //     var_dump($totalamountposts);
 
-    //     // --> Kan ik bovenstaande code gewoon niet plaatsen bij getAllPosts?
 
     //     // Selecting first 5 posts
     //     $statement2 = $conn->prepare("SELECT *, posts.id FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY postedDate DESC LIMIT 0,$postperpage ");
@@ -401,12 +400,12 @@ class Post  {
             return $correctUsers;
            
         }
-        public function changeDescription(){ // $description, $post_id = argumenten bij eerste versie (zonder GET en SET)
+        public function changeDescription(){
             $conn = Db::getInstance();
     
             $statement = $conn->prepare("UPDATE posts SET description = :description WHERE posts.id = :id");
             
-            // Getters implementeren - TEST
+            // GET IMPLEMENT
             $post_id = $this->getId();
             $description = $this->getDescription();
 

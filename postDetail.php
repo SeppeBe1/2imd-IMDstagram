@@ -26,7 +26,7 @@ if (!empty($_POST['deletePost'])) {
 }
 
 if (!empty($_POST['reportPost'])) {
-    echo "report" . $_POST['post-id']; // TEST
+    echo "report" . $_POST['post-id'];
 }
 
 if (!empty($_POST['banUser'])) {
@@ -103,7 +103,6 @@ $bookmark->setUserId((int)$currentlyLoggedIn[0]['id']);
                                             <input class="dropdown-item" type="submit" name="deletePost" value="Delete">
                                             <a href="editPost.php?id=<?php echo $_GET['id'] ?>" type="submit" name="editPost" value="Edit" class="dropdown-item">Edit</a>
                                                 
-                                                <!-- <input class="dropdown-item" type="submit" name="editPost" value="Edit"> -->
                                             
                                         <?php elseif($user->getUsername() != $post['username']): ?>
                                             <input class="dropdown-item" type="submit" name="reportPost" value="Report">

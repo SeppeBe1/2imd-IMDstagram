@@ -83,7 +83,6 @@ $comments->setUserId((int)$currentlyLoggedIn[0]['id']);
             $comments->setPostID($post['id']);
             $postId = $comments->getPostID();
 
-            // $var = $bookmark->setPostId($post_id);
         ?>
 
     <?php if($user->getUsername() == $post['username']) : ?>    

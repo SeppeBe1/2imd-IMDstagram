@@ -9,18 +9,9 @@ $user = new classes\User();
 $user->setUsername($_SESSION['user']);
 $currentlyLoggedIn = $user->showUser();
 
-// LOOP FOR POSTS
-// $post = new classes\Post();
-// $allPosts = $post->getAllPosts(10);
-// var_dump($allPosts);
-
-// if(isset($_POST["totalPosts"])){
-//     $post->getAllPosts($_POST["totalPosts"]);
-// }
 
 $posts = new classes\Post();
 $totalamountposts = $posts->getTotalPosts();
-// var_dump($totalamountposts);
 
 $posts = new classes\Post();
 $follow = new classes\Follow();
@@ -51,10 +42,6 @@ if(!empty($_POST['editPost'])){
     $posts->editPost($_POST['post-id']);
 }
 
-    // Load more funct.
-    // $loadpost = new classes\Post();
-    // $loadmoreposts = $loadpost->loadMore();
-    // var_dump($loadmoreposts);
 
 //COMMENTS
 

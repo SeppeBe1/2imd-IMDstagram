@@ -13,7 +13,7 @@ $user->setUsername($_SESSION['user']);
 $currentlyLoggedIn = $user->showUser();
 
 
-/* GETTERS SETTERS TOEVOEGEN! */
+
 if (isset($_SESSION['user'])) {
     $users->setUsername($username);
     $usersinfo = $users->showUser($username);
